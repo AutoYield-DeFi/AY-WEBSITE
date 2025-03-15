@@ -9,43 +9,74 @@ type RoadmapPhase = {
   title: string;
   status: 'completed' | 'current' | 'upcoming';
   description: string;
+  details?: string[];
 };
 
 const roadmapData: RoadmapPhase[] = [
   {
     id: 'phase-1',
-    quarter: 'Q2 2024',
+    quarter: 'Q2 2025',
     title: 'Beta Launch',
     status: 'current',
-    description: 'Meteora DLMM integration, Privy auth & basic AI strategies'
+    description: 'Meteora DLMM integration & core platform development',
+    details: [
+      'Privy authentication and transaction management',
+      'Integration with Meteora DLMM pools',
+      'Basic QUANT AI monitoring capabilities',
+      'Public beta access for early users'
+    ]
   },
   {
     id: 'phase-2',
-    quarter: 'Q3 2024',
-    title: 'Advanced Strategies',
+    quarter: 'Q3 2025',
+    title: 'AI Strategy Enhancement',
     status: 'upcoming',
-    description: 'Enhanced AI algorithms & expanded pool support'
+    description: 'Advanced AI algorithms & expanded protocol support',
+    details: [
+      'Dynamic range optimization using Solana AI Agent Kit',
+      'Multiple DEX protocol support beyond Meteora',
+      'Auto-compounding automation',
+      'Risk management features'
+    ]
   },
   {
     id: 'phase-3',
-    quarter: 'Q4 2024',
+    quarter: 'Q4 2025',
     title: 'Institutional Features',
     status: 'upcoming',
-    description: 'Multi-wallet support & API access for pro users'
+    description: 'Enterprise-grade tools & API access',
+    details: [
+      'Multi-wallet dashboard for institutions',
+      'API access for programmatic liquidity management',
+      'Advanced analytics and reporting',
+      'Custom strategy builder for professional users'
+    ]
   },
   {
     id: 'phase-4',
-    quarter: 'Q1 2025',
-    title: 'Governance',
+    quarter: 'Q1 2026',
+    title: 'Governance & Tokenomics',
     status: 'upcoming',
-    description: 'Token launch, community voting & incentive programs'
+    description: 'Community ownership & protocol incentives',
+    details: [
+      'AutoYield governance token launch',
+      'DAO-based decision making for protocol upgrades',
+      'Fee-sharing mechanism for token holders',
+      'Liquidity mining incentives'
+    ]
   },
   {
     id: 'phase-5',
-    quarter: 'Q2 2025',
-    title: 'Cross-chain',
+    quarter: 'Q2 2026',
+    title: 'Ecosystem Expansion',
     status: 'upcoming',
-    description: 'Support for Ethereum L2s & mobile app launch'
+    description: 'Cross-chain support & mobile experience',
+    details: [
+      'Integration with Ethereum L2 networks',
+      'Native mobile app for iOS and Android',
+      'Cross-chain liquidity routing',
+      'Institutional partnerships program'
+    ]
   }
 ];
 
@@ -109,7 +140,18 @@ const RoadmapTimeline = () => {
                   {phase.status === 'completed' ? 'Completed' : phase.status === 'current' ? 'In Progress' : 'Upcoming'}
                 </div>
                 <h2 className="text-2xl font-bold mb-3">{phase.title}</h2>
-                <p className="text-gray-600">{phase.description}</p>
+                <p className="text-gray-600 mb-4">{phase.description}</p>
+                
+                {phase.details && (
+                  <ul className="space-y-2 text-sm text-gray-600">
+                    {phase.details.map((detail, index) => (
+                      <li key={index} className="flex items-start">
+                        <span className="mr-2 text-primary">•</span>
+                        {detail}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
           ))}

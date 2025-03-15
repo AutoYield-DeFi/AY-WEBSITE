@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Bell } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
@@ -11,19 +11,20 @@ const RoadmapCTA = () => {
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl font-bold mb-4">Join Our Journey</h2>
+          <h2 className="text-2xl font-bold mb-4">Stay Updated on Our Progress</h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Be part of building the future of automated liquidity management on Solana
+            Join our community to get early access and influence our development
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button size="lg" className="rounded-full">
-              Launch App
+              Join Waitlist
             </Button>
             
             <Button variant="outline" size="lg" className="rounded-full group" asChild>
               <Link to="/blog">
-                Read Updates
+                <Bell size={16} className="mr-2" />
+                Subscribe to Updates
                 <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
