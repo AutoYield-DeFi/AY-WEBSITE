@@ -10,6 +10,7 @@ import React from "react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Glossary from "./pages/Glossary";
+import AboutUs from "./pages/AboutUs";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => {
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/glossary" element={<Glossary />} />
+                  <Route path="/about" element={<AboutUs />} />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                   <Route path="*" element={<NotFound />} />
                 </Routes>
