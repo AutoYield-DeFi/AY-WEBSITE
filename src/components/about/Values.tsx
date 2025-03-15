@@ -1,24 +1,24 @@
 
 import React from 'react';
-import { Shield, Lightbulb, Users } from 'lucide-react';
+import { Shield, Coffee, HeartHandshake } from 'lucide-react';
 import { motion } from './MotionWrapper';
 
 const Values = () => {
   const values = [
     {
       icon: <Shield className="h-6 w-6" />,
-      title: "Security First",
-      description: "We prioritize user funds and data security above all else."
+      title: "Sleep Soundly Security",
+      description: "We protect your funds like they're our own retirement accounts. Because they literally were at one point."
     },
     {
-      icon: <Lightbulb className="h-6 w-6" />,
-      title: "Continuous Innovation",
-      description: "We constantly improve our AI algorithms based on market developments."
+      icon: <Coffee className="h-6 w-6" />,
+      title: "No More 3 AM Alerts",
+      description: "Our algorithms don't need coffee to stay up all night watching your positions. We learned this the hard way."
     },
     {
-      icon: <Users className="h-6 w-6" />,
-      title: "Community Driven",
-      description: "We build together with our users, incorporating feedback openly."
+      icon: <HeartHandshake className="h-6 w-6" />,
+      title: "Made By Users, For Users",
+      description: "Every feature exists because one of us needed it. If something doesn't make sense, we didn't build it."
     }
   ];
 
@@ -29,9 +29,10 @@ const Values = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-12">
           <div className="inline-block mb-4 px-4 py-1.5 bg-primary-muted rounded-full">
-            <span className="text-xs font-semibold tracking-wider uppercase">Our Values</span>
+            <span className="text-xs font-semibold tracking-wider uppercase">Our Principles</span>
           </div>
-          <h2 className="text-3xl font-bold mb-4">Core Principles</h2>
+          <h2 className="text-3xl font-bold mb-4">Things We Actually Believe</h2>
+          <p className="text-lg max-w-2xl mx-auto">Not the usual corporate nonsense. These are lessons we learned through trial, error, and a few choice words we can't put on this website.</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
@@ -54,9 +55,10 @@ const Values = () => {
         </div>
         
         <div className="mt-16 text-center">
-          <p className="text-muted-foreground italic max-w-2xl mx-auto">
-            "We believe that intelligent automation is the key to democratizing access to DeFi's most powerful yield strategies."
+          <p className="text-lg italic max-w-2xl mx-auto">
+            "We built AutoYield because we got tired of losing sleep—and money—trying to manage our own liquidity positions. Now we sleep like babies."
           </p>
+          <p className="mt-3 text-sm text-muted-foreground">— The entire team, in unison, after the first successful test</p>
         </div>
       </div>
     </section>

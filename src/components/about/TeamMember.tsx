@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Twitter, Globe, Github } from 'lucide-react';
+import { Linkedin, Github } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { motion } from './MotionWrapper';
 
@@ -10,8 +10,7 @@ interface TeamMemberProps {
   role: string;
   bio: string;
   imageUrl: string;
-  twitter?: string;
-  website?: string;
+  linkedin?: string;
   github?: string;
 }
 
@@ -20,8 +19,7 @@ const TeamMember = ({
   role, 
   bio, 
   imageUrl, 
-  twitter, 
-  website,
+  linkedin, 
   github
 }: TeamMemberProps) => {
   return (
@@ -42,28 +40,17 @@ const TeamMember = ({
         <CardContent className="p-0">
           <p className="text-muted-foreground text-center mb-4">{bio}</p>
           
-          {(twitter || website || github) && (
+          {(linkedin || github) && (
             <div className="flex gap-3 justify-center pt-2">
-              {twitter && (
+              {linkedin && (
                 <a 
-                  href={twitter} 
+                  href={linkedin} 
                   target="_blank" 
                   rel="noreferrer" 
                   className="text-muted-foreground hover:text-blue-500 transition-colors p-2 rounded-full hover:bg-blue-50"
-                  aria-label={`${name}'s Twitter`}
+                  aria-label={`${name}'s LinkedIn`}
                 >
-                  <Twitter size={18} />
-                </a>
-              )}
-              {website && (
-                <a 
-                  href={website} 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className="text-muted-foreground hover:text-blue-500 transition-colors p-2 rounded-full hover:bg-blue-50"
-                  aria-label={`${name}'s Website`}
-                >
-                  <Globe size={18} />
+                  <Linkedin size={18} />
                 </a>
               )}
               {github && (

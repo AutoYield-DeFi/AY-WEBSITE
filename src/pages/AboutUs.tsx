@@ -11,9 +11,9 @@ const AboutUs = () => {
   return (
     <div className="min-h-screen bg-white">
       <SEO 
-        title="About AutoYield | AI-Powered Liquidity Management"
-        description="Meet the team behind AutoYield, the innovative platform revolutionizing liquidity management on Solana through advanced AI technology."
-        keywords="AutoYield team, Solana DeFi, liquidity management, AI technology, DeFi innovation"
+        title="Our Story | AutoYield"
+        description="We built AutoYield because we were tired of losing money on liquidity pools. Meet the team that's solving DeFi's most frustrating problems."
+        keywords="AutoYield team, Solana DeFi, liquidity management, crypto founders, DeFi problems solved"
       />
       <Navbar />
       
@@ -27,13 +27,13 @@ const AboutUs = () => {
           <div className="container mx-auto px-6 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
               <div className="inline-block mb-4 px-4 py-1.5 bg-primary-muted rounded-full animate-fade-in">
-                <span className="text-xs font-semibold tracking-wider uppercase">Our Story</span>
+                <span className="text-xs font-semibold tracking-wider uppercase">Meet The Humans</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-up">
-                Revolutionizing DeFi Through Intelligent Automation
+                From Frustrated Users<br/>To Founders
               </h1>
               <p className="text-lg text-muted-foreground mb-8 animate-fade-up animation-delay-200">
-                We're a team of DeFi enthusiasts, AI specialists, and Solana developers united by a mission to make liquidity management accessible to everyone.
+                We built AutoYield after one too many 3 AM price alerts woke us up to adjust our own liquidity positions. There had to be a better way.
               </p>
             </div>
           </div>
@@ -45,7 +45,7 @@ const AboutUs = () => {
         {/* Team Section */}
         <TeamSection />
         
-        {/* Values Section with reduced content */}
+        {/* Values Section */}
         <Values />
       </main>
       
