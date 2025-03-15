@@ -45,6 +45,7 @@ const ComparisonAnimation = () => {
     }
   ];
 
+  // Create a more advanced interactive comparison with animated transitions
   return (
     <div className="w-full max-w-5xl mx-auto mt-16">
       <div className="rounded-xl overflow-hidden shadow-lg bg-white border border-gray-100">
@@ -62,8 +63,8 @@ const ComparisonAnimation = () => {
             ))}
           </div>
 
-          {/* Content area */}
-          <div className="flex flex-col md:flex-row">
+          {/* Content area with improved animations and transitions */}
+          <div className="flex flex-col md:flex-row min-h-[300px]">
             {/* Manual side */}
             <div className="w-full md:w-1/2 p-6 bg-gray-50 border-b md:border-r md:border-b-0 border-gray-100">
               <div className="h-full flex flex-col">
@@ -74,16 +75,20 @@ const ComparisonAnimation = () => {
                   <h3 className="text-lg font-semibold">Manual LP Management</h3>
                 </div>
                 
-                <div className="flex-1 flex flex-col justify-center space-y-6">
-                  <div className={`transition-all duration-500 transform ${activeStep === 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-95 absolute'}`}>
-                    <div className="aspect-video relative bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
-                      <div className="absolute inset-0 flex items-center justify-center">
+                <div className="flex-1 flex flex-col justify-center">
+                  {steps.map((step, index) => (
+                    <div 
+                      key={index}
+                      className={`transition-all duration-500 transform ${activeStep === index ? 'opacity-100 scale-100 relative' : 'opacity-0 scale-95 absolute'}`}
+                      style={{ display: activeStep === index ? 'block' : 'none' }}
+                    >
+                      <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
                         <div className="w-full h-full p-4 flex flex-col items-center justify-center">
                           <div className="w-16 h-16 mb-4 rounded-full bg-white shadow-md flex items-center justify-center">
-                            {steps[activeStep].manualIcon}
+                            {step.manualIcon}
                           </div>
-                          <p className="text-center text-gray-700 font-medium mb-2">{steps[activeStep].title}</p>
-                          <p className="text-center text-sm text-gray-500">{steps[activeStep].manualDescription}</p>
+                          <p className="text-center text-gray-700 font-medium mb-2">{step.title}</p>
+                          <p className="text-center text-sm text-gray-500">{step.manualDescription}</p>
                           
                           <div className="mt-4 w-full max-w-xs">
                             <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
@@ -97,12 +102,12 @@ const ComparisonAnimation = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
             
-            {/* AutoYield side */}
+            {/* AutoYield side with enhanced visuals */}
             <div className="w-full md:w-1/2 p-6 bg-white">
               <div className="h-full flex flex-col">
                 <div className="flex items-center mb-4">
@@ -112,16 +117,20 @@ const ComparisonAnimation = () => {
                   <h3 className="text-lg font-semibold">AutoYield Management</h3>
                 </div>
                 
-                <div className="flex-1 flex flex-col justify-center space-y-6">
-                  <div className={`transition-all duration-500 transform ${activeStep === 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-95 absolute'}`}>
-                    <div className="aspect-video relative bg-white rounded-lg overflow-hidden border border-green-100">
-                      <div className="absolute inset-0 flex items-center justify-center">
+                <div className="flex-1 flex flex-col justify-center">
+                  {steps.map((step, index) => (
+                    <div 
+                      key={index}
+                      className={`transition-all duration-500 transform ${activeStep === index ? 'opacity-100 scale-100 relative' : 'opacity-0 scale-95 absolute'}`}
+                      style={{ display: activeStep === index ? 'block' : 'none' }}
+                    >
+                      <div className="aspect-video bg-white rounded-lg overflow-hidden border border-green-100">
                         <div className="w-full h-full p-4 flex flex-col items-center justify-center">
                           <div className="w-16 h-16 mb-4 rounded-full bg-green-50 shadow-md flex items-center justify-center">
-                            {steps[activeStep].autoIcon}
+                            {step.autoIcon}
                           </div>
-                          <p className="text-center text-gray-700 font-medium mb-2">{steps[activeStep].title}</p>
-                          <p className="text-center text-sm text-gray-500">{steps[activeStep].autoDescription}</p>
+                          <p className="text-center text-gray-700 font-medium mb-2">{step.title}</p>
+                          <p className="text-center text-sm text-gray-500">{step.autoDescription}</p>
                           
                           <div className="mt-4 w-full max-w-xs">
                             <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
@@ -135,7 +144,7 @@ const ComparisonAnimation = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
