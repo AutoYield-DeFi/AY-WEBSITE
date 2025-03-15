@@ -16,6 +16,10 @@ export default defineConfig({
   // Use existing directory structures
   srcDir: './src',
   publicDir: './public',
-  // Add output configuration to ensure proper handling of routes
+  // Configure for hybrid rendering
   output: 'hybrid',
+  // Add server configuration to ensure proper routing
+  server: {
+    host: true
+  }
 });
