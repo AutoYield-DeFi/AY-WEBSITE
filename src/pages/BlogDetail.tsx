@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft, Calendar, Clock, Twitter, Facebook, Linkedin, Copy, Bookmark, Heart } from 'lucide-react';
 import Navbar from '@/components/Navbar';
@@ -16,6 +16,7 @@ import { Card, CardContent } from '@/components/ui/card';
 
 const BlogDetail = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   
   const { data: post, isLoading: isPostLoading } = useQuery({
     queryKey: ['blogPost', id],
@@ -35,6 +36,14 @@ const BlogDetail = () => {
       title: "Link copied",
       description: "Article link has been copied to clipboard",
     });
+  };
+
+  const handleBackClick = () => {
+    navigate('/blog');
+  };
+
+  const handleTagClick = (tag: string) => {
+    navigate(`/blog?tag=${tag}`);
   };
 
   if (isPostLoading) {
@@ -94,14 +103,17 @@ const BlogDetail = () => {
       />
       <Navbar />
 
-      <article className="pt-10 pb-16">
+      <article className="pt-20 pb-16">
         <div className="container mx-auto px-4">
           {/* Breadcrumb */}
           <div className="mb-6 max-w-[740px] mx-auto">
-            <Link to="/blog" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors">
+            <button 
+              onClick={handleBackClick}
+              className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
+            >
               <ArrowLeft size={16} className="mr-2" />
               Back to all posts
-            </Link>
+            </button>
           </div>
 
           {/* Article header */}
@@ -186,13 +198,13 @@ const BlogDetail = () => {
             {/* Tags */}
             <div className="flex flex-wrap gap-2 mt-10 mb-10">
               {post.tags?.map(tag => (
-                <Link 
+                <button 
                   key={tag} 
-                  to={`/blog/tag/${tag}`} 
+                  onClick={() => handleTagClick(tag)}
                   className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors"
                 >
                   #{tag}
-                </Link>
+                </button>
               ))}
             </div>
 

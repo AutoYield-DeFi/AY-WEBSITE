@@ -79,7 +79,7 @@ const Blog = () => {
       <Navbar />
 
       <div className={`sticky top-0 z-10 bg-white transition-all duration-200 ${isScrolled ? "shadow-md" : ""}`}>
-        <div className="container mx-auto px-4 py-4">
+        <div className="container mx-auto px-4 py-4 mt-16">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             {/* Search bar */}
             <div className="relative w-full md:w-64 lg:w-80">
@@ -110,7 +110,7 @@ const Blog = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-10">
+      <div className="container mx-auto px-4 py-10 pt-20">
         <header className="mb-12 text-center max-w-2xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-serif font-bold tracking-tight mb-4">AutoYield Blog</h1>
           <p className="text-xl text-muted-foreground">
