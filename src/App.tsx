@@ -6,17 +6,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import Glossary from "./pages/Glossary";
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  // Check if the URL is for an Astro page and let Astro handle it
-  const path = window.location.pathname;
-  if (path === '/glossary' || path.startsWith('/glossary/')) {
-    // Don't render React router for these paths
-    return null;
-  }
-
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -25,6 +19,7 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/glossary" element={<Glossary />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

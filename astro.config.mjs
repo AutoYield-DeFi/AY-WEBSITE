@@ -17,9 +17,5 @@ export default defineConfig({
   srcDir: './src',
   publicDir: './public',
   // Configure for server-side rendering
-  output: 'server',
-  // Make sure Astro handles the routing properly
-  server: {
-    host: true
-  }
+  output: 'static',
 });
