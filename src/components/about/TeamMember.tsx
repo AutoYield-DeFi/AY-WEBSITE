@@ -1,8 +1,9 @@
 
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Twitter, Globe } from 'lucide-react';
+import { Twitter, Globe, Github } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { motion } from './MotionWrapper';
 
 interface TeamMemberProps {
   name: string;
@@ -11,6 +12,7 @@ interface TeamMemberProps {
   imageUrl: string;
   twitter?: string;
   website?: string;
+  github?: string;
 }
 
 const TeamMember = ({ 
@@ -19,31 +21,35 @@ const TeamMember = ({
   bio, 
   imageUrl, 
   twitter, 
-  website 
+  website,
+  github
 }: TeamMemberProps) => {
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 border-transparent hover:border-blue-200">
-      <div className="p-6 flex flex-col md:flex-row gap-6 items-center md:items-start">
-        <Avatar className="h-24 w-24 rounded-full border-2 border-blue-100">
-          <AvatarImage src={imageUrl} alt={name} />
-          <AvatarFallback className="bg-blue-100 text-blue-600 text-xl">
-            {name.split(' ').map(n => n[0]).join('')}
-          </AvatarFallback>
-        </Avatar>
-        
-        <CardContent className="p-0 flex-1">
-          <h3 className="text-xl font-semibold mb-1">{name}</h3>
-          <p className="text-blue-600 font-medium mb-3">{role}</p>
-          <p className="text-muted-foreground mb-4">{bio}</p>
+    <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 border-transparent hover:border-blue-200 h-full">
+      <div className="p-6">
+        <div className="flex flex-col items-center text-center mb-4">
+          <Avatar className="h-24 w-24 rounded-full border-2 border-blue-100 mb-4">
+            <AvatarImage src={imageUrl} alt={name} className="object-cover" />
+            <AvatarFallback className="bg-primary-muted text-primary text-xl">
+              {name.split(' ').map(n => n[0]).join('')}
+            </AvatarFallback>
+          </Avatar>
           
-          {(twitter || website) && (
-            <div className="flex gap-3 pt-2">
+          <h3 className="text-xl font-semibold mb-1">{name}</h3>
+          <p className="text-primary font-medium mb-3">{role}</p>
+        </div>
+        
+        <CardContent className="p-0">
+          <p className="text-muted-foreground text-center mb-4">{bio}</p>
+          
+          {(twitter || website || github) && (
+            <div className="flex gap-3 justify-center pt-2">
               {twitter && (
                 <a 
                   href={twitter} 
                   target="_blank" 
                   rel="noreferrer" 
-                  className="text-muted-foreground hover:text-blue-500 transition-colors"
+                  className="text-muted-foreground hover:text-blue-500 transition-colors p-2 rounded-full hover:bg-blue-50"
                   aria-label={`${name}'s Twitter`}
                 >
                   <Twitter size={18} />
@@ -54,10 +60,21 @@ const TeamMember = ({
                   href={website} 
                   target="_blank" 
                   rel="noreferrer" 
-                  className="text-muted-foreground hover:text-blue-500 transition-colors"
+                  className="text-muted-foreground hover:text-blue-500 transition-colors p-2 rounded-full hover:bg-blue-50"
                   aria-label={`${name}'s Website`}
                 >
                   <Globe size={18} />
+                </a>
+              )}
+              {github && (
+                <a 
+                  href={github} 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="text-muted-foreground hover:text-blue-500 transition-colors p-2 rounded-full hover:bg-blue-50"
+                  aria-label={`${name}'s GitHub`}
+                >
+                  <Github size={18} />
                 </a>
               )}
             </div>

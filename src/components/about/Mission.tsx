@@ -5,61 +5,79 @@ import { Flag, Target, Zap } from 'lucide-react';
 
 const Mission = () => {
   return (
-    <section id="mission" className="py-12">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold mb-4">Our Mission</h2>
-      </div>
+    <section id="mission" className="py-20 bg-gradient-to-br from-white to-primary-muted/5 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNCQkRERkYiIGZpbGwtb3BhY2l0eT0iMC40Ij48cGF0aCBkPSJNMzYgMzBoLTJ2Mmgydi0yem0tNS0xMGgtMnYyaDJ2LTJ6bTUgMGgtMnYyaDJ2LTJ6TTIwIDMwaC0ydjJoMnYtMnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10"></div>
       
-      <div className="glass-panel p-8 md:p-10 rounded-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+          <div>
+            <div className="inline-block mb-4 px-4 py-1.5 bg-primary-muted rounded-full">
+              <span className="text-xs font-semibold tracking-wider uppercase">Our Mission</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Making DeFi Work For Everyone</h2>
+            <p className="text-lg text-muted-foreground mb-6">
+              We're on a mission to bridge complex DeFi protocols and everyday users through AI-powered automation.
+            </p>
+            
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <div className="mt-1 flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                  <Flag className="h-4 w-4 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg">Democratizing Access</h3>
+                  <p className="text-muted-foreground">Breaking down technical barriers to sophisticated yield strategies</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-3">
+                <div className="mt-1 flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                  <Zap className="h-4 w-4 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg">Enhancing Returns</h3>
+                  <p className="text-muted-foreground">Maximizing capital efficiency through smart automation</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
           <motion.div 
-            className="text-center p-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="relative"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-blue-100 text-blue-600 mb-4">
-              <Flag size={24} />
+            <div className="aspect-square max-w-md mx-auto relative">
+              {/* Abstract geometric decoration */}
+              <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-primary-muted/30 rounded-full blur-md animate-pulse-soft"></div>
+              
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="relative w-48 h-48 rotate-45 transform">
+                  {/* Decorative elements */}
+                  <div className="absolute top-0 left-0 right-0 bottom-0 border-2 border-primary/20 rounded-xl"></div>
+                  <div className="absolute top-4 left-4 right-4 bottom-4 border-2 border-primary/30 rounded-xl"></div>
+                  <div className="absolute top-8 left-8 right-8 bottom-8 border-2 border-primary/40 rounded-xl"></div>
+                  <div className="absolute top-12 left-12 right-12 bottom-12 bg-primary/10 rounded-xl flex items-center justify-center -rotate-45">
+                    <Target className="h-8 w-8 text-primary" />
+                  </div>
+                </div>
+              </div>
+              
+              {/* Floating elements */}
+              <div className="absolute top-10 right-10 p-2 bg-white rounded-lg shadow-md animate-float">
+                <div className="bg-blue-50 rounded-md p-2">
+                  <Zap className="h-6 w-6 text-blue-500" />
+                </div>
+              </div>
+              
+              <div className="absolute bottom-10 left-10 p-2 bg-white rounded-lg shadow-md animate-float" style={{ animationDelay: "1s" }}>
+                <div className="bg-green-50 rounded-md p-2">
+                  <Target className="h-6 w-6 text-green-500" />
+                </div>
+              </div>
             </div>
-            <h3 className="text-xl font-semibold mb-3">Vision</h3>
-            <p className="text-muted-foreground">
-              A DeFi ecosystem where intelligent automation eliminates technical barriers for everyone.
-            </p>
-          </motion.div>
-          
-          <motion.div 
-            className="text-center p-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-blue-100 text-blue-600 mb-4">
-              <Target size={24} />
-            </div>
-            <h3 className="text-xl font-semibold mb-3">Purpose</h3>
-            <p className="text-muted-foreground">
-              To bridge complex DeFi protocols and everyday users through AI-powered automation.
-            </p>
-          </motion.div>
-          
-          <motion.div 
-            className="text-center p-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-blue-100 text-blue-600 mb-4">
-              <Zap size={24} />
-            </div>
-            <h3 className="text-xl font-semibold mb-3">Promise</h3>
-            <p className="text-muted-foreground">
-              Security, transparency, and performance that maximize returns while protecting assets.
-            </p>
           </motion.div>
         </div>
       </div>
