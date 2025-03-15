@@ -2,14 +2,14 @@
 import React from 'react';
 import { motion } from './MotionWrapper';
 import TeamMember from './TeamMember';
-import { LineChart, Lightbulb, Code, Coffee } from 'lucide-react';
+import { LineChart, Lightbulb, Code, Target } from 'lucide-react';
 
 const TeamSection = () => {
   const team = [
     {
       name: "Alex Chen",
       role: "Founder & CEO",
-      bio: "Former LP who got tired of losing money to impermanent loss. Now on a mission to help others avoid the same fate. DeFi enthusiast who believes in keeping things simple.",
+      bio: "Former LP who lost a small fortune to impermanent loss. Now buildling tools to save others from the same pain. Still winces when anyone mentions the May 2021 crypto crash.",
       imageUrl: "/team/alex.jpg",
       icon: <LineChart className="h-5 w-5" />,
       linkedin: "https://linkedin.com/in/alexchen"
@@ -17,7 +17,7 @@ const TeamSection = () => {
     {
       name: "Emily Rodriguez",
       role: "Lead AI Engineer",
-      bio: "Turned her frustration with manual liquidity management into algorithms that do the work for her. Loves explaining complex concepts with simple analogies.",
+      bio: "Turned her frustration with liquidity pools into algorithms that never complain. Has a whiteboard in her shower for when inspiration strikes. Seriously.",
       imageUrl: "/team/emily.jpg",
       icon: <Lightbulb className="h-5 w-5" />,
       linkedin: "https://linkedin.com/in/emilyrodriguez"
@@ -25,7 +25,7 @@ const TeamSection = () => {
     {
       name: "Michael Park",
       role: "Lead Solana Developer",
-      bio: "The guy who actually makes everything work. Lost a small fortune on poorly managed LP positions before deciding to build something better.",
+      bio: "The guy who actually makes everything work. Survived three bull markets and still has PTSD from manually adjusting LP ranges. His rubber duck debugger has seen things.",
       imageUrl: "/team/michael.jpg",
       icon: <Code className="h-5 w-5" />,
       linkedin: "https://linkedin.com/in/michaelpark",
@@ -34,9 +34,9 @@ const TeamSection = () => {
     {
       name: "Sarah Johnson",
       role: "Head of Product",
-      bio: "Former UX designer who couldn't understand why DeFi had to be so complicated. Now ensures everything we build passes the 'my mom could use this' test.",
+      bio: "Former UX designer who couldn't understand why DeFi apps looked like they were designed by the same people who code them. Once threw her laptop after a failed transaction.",
       imageUrl: "/team/sarah.jpg",
-      icon: <Coffee className="h-5 w-5" />,
+      icon: <Target className="h-5 w-5" />,
       linkedin: "https://linkedin.com/in/sarahjohnson"
     }
   ];
@@ -56,7 +56,7 @@ const TeamSection = () => {
 
         <div className="max-w-3xl mx-auto mb-12">
           <p className="text-center text-lg">
-            We're not just another team of tech bros who spotted a market opportunity. We're actual DeFi users who got tired of waking up to impermanent loss notifications and manually adjusting our positions at 3 AM. After one too many cups of coffee and some colorful language directed at our screens, we decided there had to be a better way.
+            We're not just another team of tech enthusiasts who spotted a market opportunity. We're actual DeFi users who got liquidated, rekt, and impermanently lost more times than we care to admit. After some colorful language directed at our screens (and a few broken mice), we decided there had to be a better way.
           </p>
         </div>
         

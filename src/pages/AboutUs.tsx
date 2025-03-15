@@ -30,10 +30,10 @@ const AboutUs = () => {
                 <span className="text-xs font-semibold tracking-wider uppercase">Meet The Humans</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-up">
-                From Frustrated Users<br/>To Founders
+                From Rekt LPs<br/>To Problem Solvers
               </h1>
               <p className="text-lg text-muted-foreground mb-8 animate-fade-up animation-delay-200">
-                We built AutoYield after one too many 3 AM price alerts woke us up to adjust our own liquidity positions. There had to be a better way.
+                We built AutoYield after losing more money than we'd like to admit on poorly managed liquidity positions. Turns out the solution wasn't more coffee—it was smarter algorithms.
               </p>
             </div>
           </div>

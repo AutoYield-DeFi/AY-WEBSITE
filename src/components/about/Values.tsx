@@ -1,24 +1,24 @@
 
 import React from 'react';
-import { Shield, Coffee, HeartHandshake } from 'lucide-react';
+import { Shield, PiggyBank, HeartHandshake, PartyPopper, Laugh } from 'lucide-react';
 import { motion } from './MotionWrapper';
 
 const Values = () => {
   const values = [
     {
       icon: <Shield className="h-6 w-6" />,
-      title: "Sleep Soundly Security",
+      title: "We Don't Gamble With Your Money",
       description: "We protect your funds like they're our own retirement accounts. Because they literally were at one point."
     },
     {
-      icon: <Coffee className="h-6 w-6" />,
-      title: "No More 3 AM Alerts",
-      description: "Our algorithms don't need coffee to stay up all night watching your positions. We learned this the hard way."
+      icon: <PiggyBank className="h-6 w-6" />,
+      title: "Algorithms Don't Need Lunch Breaks",
+      description: "Our AI doesn't need sleep, food, or motivation pep talks. It just quietly makes you money while you do literally anything else."
     },
     {
       icon: <HeartHandshake className="h-6 w-6" />,
       title: "Made By Users, For Users",
-      description: "Every feature exists because one of us needed it. If something doesn't make sense, we didn't build it."
+      description: "Every feature exists because one of us needed it. If it sounds like a gimmick, we didn't build it."
     }
   ];
 
@@ -32,7 +32,7 @@ const Values = () => {
             <span className="text-xs font-semibold tracking-wider uppercase">Our Principles</span>
           </div>
           <h2 className="text-3xl font-bold mb-4">Things We Actually Believe</h2>
-          <p className="text-lg max-w-2xl mx-auto">Not the usual corporate nonsense. These are lessons we learned through trial, error, and a few choice words we can't put on this website.</p>
+          <p className="text-lg max-w-2xl mx-auto">Not the usual corporate nonsense. These are lessons we learned through trial, error, and a few crypto trading PTSD episodes.</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
@@ -55,10 +55,14 @@ const Values = () => {
         </div>
         
         <div className="mt-16 text-center">
+          <div className="flex justify-center mb-4">
+            <PartyPopper className="h-8 w-8 text-amber-500 mr-2" />
+            <Laugh className="h-8 w-8 text-amber-500" />
+          </div>
           <p className="text-lg italic max-w-2xl mx-auto">
-            "We built AutoYield because we got tired of losing sleep—and money—trying to manage our own liquidity positions. Now we sleep like babies."
+            "AutoYield is what happens when four people lose too much money and decide to fix the problem instead of just complaining about it on Twitter."
           </p>
-          <p className="mt-3 text-sm text-muted-foreground">— The entire team, in unison, after the first successful test</p>
+          <p className="mt-3 text-sm text-muted-foreground">— Overheard at our first successful liquidity deployment</p>
         </div>
       </div>
     </section>
