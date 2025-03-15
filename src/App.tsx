@@ -13,6 +13,7 @@ import Glossary from "./pages/Glossary";
 import AboutUs from "./pages/AboutUs";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
+import Roadmap from "./pages/Roadmap";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => {
                   <Route path="/" element={<Index />} />
                   <Route path="/glossary" element={<Glossary />} />
                   <Route path="/about" element={<AboutUs />} />
+                  <Route path="/roadmap" element={<Roadmap />} />
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/blog/tag/:tag" element={<Blog />} />
                   <Route path="/blog/:id" element={<BlogDetail />} />

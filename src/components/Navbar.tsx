@@ -1,96 +1,178 @@
 
 import React, { useState, useEffect } from 'react';
-import { cn } from '@/lib/utils';
-import { MenuIcon, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import Logo from '@/components/Logo';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-
+  const location = useLocation();
+  
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 20);
     };
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
 
   return (
-    <header
-      className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 md:px-8 py-4',
-        isScrolled ? 'bg-white/80 backdrop-blur-md shadow-sm' : 'bg-transparent'
-      )}
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-sm dark:bg-gray-900/95' : 'bg-transparent'
+      }`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link to="/" className="relative z-10">
-          <span className="text-xl font-semibold tracking-tight">AutoYield</span>
-        </Link>
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          {/* Logo */}
+          <Link to="/" className="flex-shrink-0">
+            <Logo variant="full" size="md" />
+          </Link>
 
-        {/* Desktop Menu */}
-        <nav className="hidden md:flex items-center space-x-8">
-          <a href="#features" className="text-sm font-medium text-foreground/80 hover:text-foreground link-underline">
-            Features
-          </a>
-          <Link to="/about" className="text-sm font-medium text-foreground/80 hover:text-foreground link-underline">
-            About Us
-          </Link>
-          <Link to="/blog" className="text-sm font-medium text-foreground/80 hover:text-foreground link-underline">
-            Blog
-          </Link>
-          <a href="#contact" className="btn-primary">
-            Get Started
-          </a>
-        </nav>
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-1">
+            <Link
+              to="/"
+              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                isActive('/')
+                  ? 'text-primary'
+                  : 'text-foreground/80 hover:text-foreground hover:bg-gray-100 dark:hover:bg-gray-800'
+              }`}
+            >
+              Home
+            </Link>
+            <Link
+              to="/about"
+              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                isActive('/about')
+                  ? 'text-primary'
+                  : 'text-foreground/80 hover:text-foreground hover:bg-gray-100 dark:hover:bg-gray-800'
+              }`}
+            >
+              About
+            </Link>
+            <Link
+              to="/roadmap"
+              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                isActive('/roadmap')
+                  ? 'text-primary'
+                  : 'text-foreground/80 hover:text-foreground hover:bg-gray-100 dark:hover:bg-gray-800'
+              }`}
+            >
+              Roadmap
+            </Link>
+            <Link
+              to="/blog"
+              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                isActive('/blog') || location.pathname.startsWith('/blog/')
+                  ? 'text-primary'
+                  : 'text-foreground/80 hover:text-foreground hover:bg-gray-100 dark:hover:bg-gray-800'
+              }`}
+            >
+              Blog
+            </Link>
+            <Link
+              to="/glossary"
+              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                isActive('/glossary')
+                  ? 'text-primary'
+                  : 'text-foreground/80 hover:text-foreground hover:bg-gray-100 dark:hover:bg-gray-800'
+              }`}
+            >
+              Glossary
+            </Link>
+          </div>
 
-        {/* Mobile menu button */}
-        <button
-          className="md:hidden relative z-10 p-2"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X size={20} /> : <MenuIcon size={20} />}
-        </button>
+          {/* Desktop CTA */}
+          <div className="hidden md:flex items-center space-x-4">
+            <Button variant="default" className="rounded-full">
+              Launch App
+            </Button>
+          </div>
 
-        {/* Mobile Menu */}
-        <div
-          className={cn(
-            'fixed inset-0 bg-white z-0 transition-all duration-300 ease-in-out flex flex-col items-center justify-center space-y-8',
-            isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-          )}
-        >
-          <a 
-            href="#features" 
-            className="text-lg font-medium hover:text-primary transition-colors"
-            onClick={() => setIsOpen(false)}
-          >
-            Features
-          </a>
-          <Link 
-            to="/about" 
-            className="text-lg font-medium hover:text-primary transition-colors"
-            onClick={() => setIsOpen(false)}
-          >
-            About Us
-          </Link>
-          <Link 
-            to="/blog" 
-            className="text-lg font-medium hover:text-primary transition-colors"
-            onClick={() => setIsOpen(false)}
-          >
-            Blog
-          </Link>
-          <a 
-            href="#contact" 
-            className="btn-primary mt-4"
-            onClick={() => setIsOpen(false)}
-          >
-            Get Started
-          </a>
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              onClick={toggleMenu}
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800 focus:outline-none"
+              aria-expanded={isOpen}
+            >
+              <span className="sr-only">Open main menu</span>
+              {isOpen ? <X className="block h-6 w-6" /> : <Menu className="block h-6 w-6" />}
+            </button>
+          </div>
         </div>
       </div>
-    </header>
+
+      {/* Mobile menu */}
+      <div className={`md:hidden ${isOpen ? 'block' : 'hidden'}`}>
+        <div className="px-2 pt-2 pb-3 space-y-1 bg-white/95 backdrop-blur-sm shadow-lg dark:bg-gray-900/95">
+          <Link
+            to="/"
+            className={`block px-3 py-2 rounded-md text-base font-medium ${
+              isActive('/') ? 'text-primary bg-primary/5' : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+            }`}
+            onClick={() => setIsOpen(false)}
+          >
+            Home
+          </Link>
+          <Link
+            to="/about"
+            className={`block px-3 py-2 rounded-md text-base font-medium ${
+              isActive('/about') ? 'text-primary bg-primary/5' : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+            }`}
+            onClick={() => setIsOpen(false)}
+          >
+            About
+          </Link>
+          <Link
+            to="/roadmap"
+            className={`block px-3 py-2 rounded-md text-base font-medium ${
+              isActive('/roadmap') ? 'text-primary bg-primary/5' : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+            }`}
+            onClick={() => setIsOpen(false)}
+          >
+            Roadmap
+          </Link>
+          <Link
+            to="/blog"
+            className={`block px-3 py-2 rounded-md text-base font-medium ${
+              isActive('/blog') || location.pathname.startsWith('/blog/')
+                ? 'text-primary bg-primary/5'
+                : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+            }`}
+            onClick={() => setIsOpen(false)}
+          >
+            Blog
+          </Link>
+          <Link
+            to="/glossary"
+            className={`block px-3 py-2 rounded-md text-base font-medium ${
+              isActive('/glossary') ? 'text-primary bg-primary/5' : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+            }`}
+            onClick={() => setIsOpen(false)}
+          >
+            Glossary
+          </Link>
+          <div className="pt-4">
+            <Button variant="default" className="w-full rounded-full">
+              Launch App
+            </Button>
+          </div>
+        </div>
+      </div>
+    </nav>
   );
 };
 
