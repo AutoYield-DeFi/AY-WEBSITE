@@ -8,22 +8,22 @@ import {
   AlertTriangle 
 } from 'lucide-react';
 
-const AIStrategies = () => {
+const AdvancedStrategies = () => {
   const strategies = [
     {
       icon: RefreshCcw,
-      title: 'Dynamic Range Rebalancing',
-      description: 'QUANT AI continuously analyzes price trends and liquidity depth to automatically rebalance when positions move outside optimal ranges.'
+      title: 'Smart Range Rebalancing',
+      description: 'Our technology continuously analyzes price trends and liquidity depth to automatically rebalance when positions move outside optimal ranges.'
     },
     {
       icon: TrendingUp,
       title: 'Market-Adaptive Deployment',
-      description: 'AI detects trading volume surges and reallocates liquidity dynamically to ensure capital is placed where fee generation is highest.'
+      description: 'Our system detects trading volume surges and reallocates liquidity dynamically to ensure capital is placed where fee generation is highest.'
     },
     {
       icon: Shield,
-      title: 'Impermanent Loss Mitigation',
-      description: 'QUANT AI monitors volatility metrics and adjusts positions preemptively, shifting liquidity to safer price bands during large price swings.'
+      title: 'Loss Protection System',
+      description: 'We monitor volatility metrics and adjust positions preemptively, shifting liquidity to safer price bands during large price swings.'
     },
     {
       icon: Sparkles,
@@ -33,7 +33,7 @@ const AIStrategies = () => {
     {
       icon: AlertTriangle,
       title: 'Smart Stop-Loss Mechanism',
-      description: 'AI sets risk thresholds based on market conditions and automatically withdraws liquidity to stable assets if volatility exceeds safe limits.'
+      description: 'Our system sets risk thresholds based on market conditions and automatically withdraws liquidity to stable assets if volatility exceeds safe limits.'
     }
   ];
 
@@ -44,9 +44,9 @@ const AIStrategies = () => {
           <div className="inline-block mb-4 px-4 py-1.5 bg-primary-muted rounded-full">
             <span className="text-xs font-semibold tracking-wider uppercase">Advanced Technology</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">QUANT AI Strategies</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Smart Strategies</h2>
           <p className="text-lg text-muted-foreground">
-            Our proprietary AI agent employs multiple strategies to enhance capital efficiency and protect against adverse market conditions.
+            Our proprietary technology employs multiple strategies to enhance capital efficiency and protect against adverse market conditions.
           </p>
         </div>
 
@@ -72,4 +72,4 @@ const AIStrategies = () => {
   );
 };
 
-export default AIStrategies;
+export default AdvancedStrategies;

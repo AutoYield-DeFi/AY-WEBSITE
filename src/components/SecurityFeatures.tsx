@@ -15,32 +15,32 @@ const SecurityFeatures = () => {
     {
       icon: Lock,
       title: 'Non-Custodial Architecture',
-      description: 'Users retain full ownership of their assets at all times, with withdrawals available instantly.'
+      description: 'You retain full ownership of your assets at all times, with withdrawals available instantly.'
     },
     {
       icon: ShieldCheck,
-      title: 'Smart Contract Audits',
+      title: 'Audited Smart Contracts',
       description: 'All code is externally audited by leading security firms to prevent vulnerabilities.'
     },
     {
       icon: Users,
-      title: 'Multi-Sig Governance',
+      title: 'Multi-Signature Controls',
       description: 'Critical platform changes require multiple signature approvals for enhanced security.'
     },
     {
       icon: AlertOctagon,
-      title: 'Emergency Stop Mechanism',
+      title: 'Emergency Protection',
       description: 'If any exploit is detected, liquidity withdrawal can be temporarily halted to protect funds.'
     },
     {
       icon: UserCheck,
-      title: 'Permissioned Operators',
-      description: 'Only pre-approved AI agents can execute rebalancing transactions on the platform.'
+      title: 'Trusted Operations',
+      description: 'Only pre-approved operations can execute rebalancing transactions on the platform.'
     },
     {
       icon: Key,
       title: 'Real-Time Monitoring',
-      description: 'AI continuously monitors for unusual pool behaviors to prevent front-running and other DeFi exploits.'
+      description: 'Continuous monitoring for unusual pool behaviors to prevent front-running and other DeFi exploits.'
     }
   ];
 
@@ -61,7 +61,7 @@ const SecurityFeatures = () => {
           {securityFeatures.map((feature, index) => (
             <Card 
               key={index}
-              className="border border-gray-100 bg-white/70 backdrop-blur-sm opacity-0 animate-fade-up"
+              className="border border-gray-100 bg-white/70 backdrop-blur-sm opacity-0 animate-fade-up hover:shadow-md transition-all duration-300"
               style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'forwards' }}
             >
               <CardHeader className="pb-2">

@@ -3,8 +3,9 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Features from '@/components/Features';
-import AIStrategies from '@/components/AIStrategies';
+import AdvancedStrategies from '@/components/AIStrategies';
 import SecurityFeatures from '@/components/SecurityFeatures';
+import Explainer from '@/components/Explainer';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -12,8 +13,9 @@ const Index = () => {
     <div className="min-h-screen overflow-hidden">
       <Navbar />
       <Hero />
+      <Explainer />
       <Features />
-      <AIStrategies />
+      <AdvancedStrategies />
       <SecurityFeatures />
       <Footer />
     </div>

@@ -2,10 +2,10 @@
 import React from 'react';
 import FeatureCard from './FeatureCard';
 import { 
-  LineChart, 
+  Sparkles, 
   ShieldCheck, 
   RefreshCw, 
-  Brain, 
+  Zap, 
   MousePointer, 
   BarChart3
 } from 'lucide-react';
@@ -13,34 +13,34 @@ import {
 const Features = () => {
   const features = [
     {
-      icon: Brain,
-      title: 'QUANT AI Agent',
-      description: 'Our advanced AI continuously analyzes market conditions to dynamically rebalance your liquidity positions.'
+      icon: Zap,
+      title: 'Smart Automation',
+      description: 'Our advanced technology continuously analyzes market conditions to optimize your liquidity positions without any manual work.'
     },
     {
       icon: ShieldCheck,
-      title: 'Risk Management',
-      description: 'Built-in impermanent loss protection and stop-loss mechanisms keep your capital safe in volatile markets.'
+      title: 'Capital Protection',
+      description: 'Built-in protection mechanisms and smart strategies keep your funds safe during market volatility.'
     },
     {
       icon: RefreshCw,
       title: 'Auto-Compounding',
-      description: 'Earned trading fees are automatically reinvested to maximize your long-term yield and efficiency.'
+      description: 'Earned trading fees are automatically reinvested to maximize your long-term returns and efficiency.'
     },
     {
-      icon: LineChart,
-      title: 'Dynamic Range Rebalancing',
-      description: 'AI detects price trends and adjusts liquidity ranges to ensure continuous fee accrual in any market.'
+      icon: Sparkles,
+      title: 'Dynamic Optimization',
+      description: 'Smart algorithms detect price trends and adjust liquidity ranges to ensure continuous fee accrual in any market.'
     },
     {
       icon: MousePointer,
       title: 'One-Click Deployment',
-      description: 'Deposit funds once and AutoYield handles all the complexity - splitting tokens, setting ranges, and optimization.'
+      description: 'Deposit funds once and AutoYield handles everything - splitting tokens, setting ranges, and optimization.'
     },
     {
       icon: BarChart3,
       title: 'Real-Time Analytics',
-      description: 'Monitor performance with detailed insights into earnings, APR, and AI rebalancing events.'
+      description: 'Monitor performance with detailed insights into earnings, APR, and rebalancing activity.'
     }
   ];
 
@@ -49,11 +49,11 @@ const Features = () => {
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <div className="inline-block mb-4 px-4 py-1.5 bg-primary-muted rounded-full">
-            <span className="text-xs font-semibold tracking-wider uppercase">AI-Powered Features</span>
+            <span className="text-xs font-semibold tracking-wider uppercase">Smart Features</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Intelligent Liquidity Management</h2>
           <p className="text-lg text-muted-foreground">
-            AutoYield combines advanced AI with Meteora's DLMM pools to deliver institutional-grade yield strategies with minimal effort.
+            AutoYield combines advanced technology with Meteora's DLMM pools to deliver institutional-grade yield strategies with minimal effort.
           </p>
         </div>
 

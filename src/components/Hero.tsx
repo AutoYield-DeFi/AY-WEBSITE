@@ -18,11 +18,11 @@ const Hero = () => {
           </div>
           
           <h1 className="animate-fade-up text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-balance mb-6">
-            AI-Powered Liquidity Management on Solana
+            Smart Liquidity Management on Solana
           </h1>
           
           <p className="animate-fade-up animation-delay-200 text-lg md:text-xl text-muted-foreground mb-10 text-balance">
-            AutoYield uses advanced AI to maximize your trading fees while mitigating impermanent loss in Meteora's DLMM pools.
+            AutoYield uses advanced technology to maximize your trading fees while protecting against impermanent loss - no complex DeFi knowledge required.
           </p>
           
           <div className="animate-fade-up animation-delay-300 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -31,23 +31,69 @@ const Hero = () => {
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
             </Button>
             <Button variant="outline" className="btn-secondary w-full sm:w-auto">
-              Learn How It Works
+              How It Works
             </Button>
           </div>
         </div>
         
-        {/* Hero image */}
+        {/* Animation comparing manual vs automated LP */}
         <div className="mt-16 md:mt-24 relative max-w-5xl mx-auto animate-fade-up animation-delay-400">
-          <div className="glass-panel p-2 md:p-4 overflow-hidden">
-            <div className="aspect-[16/9] rounded-lg bg-card flex items-center justify-center overflow-hidden">
-              <img 
-                src="/dashboard-preview.png" 
-                alt="AutoYield Dashboard"
-                className="w-full h-auto object-cover"
-                onError={(e) => {
-                  e.currentTarget.src = 'https://placehold.co/1200x675/1a1a2e/ffffff?text=AutoYield+Dashboard';
-                }}
-              />
+          <div className="glass-panel p-2 md:p-4 overflow-hidden rounded-xl">
+            <div className="aspect-[16/9] rounded-lg bg-card flex items-center justify-center overflow-hidden relative">
+              <div className="absolute inset-0 flex flex-col md:flex-row">
+                {/* Manual LP Side */}
+                <div className="w-full md:w-1/2 h-full flex flex-col p-4 md:p-8 border-b md:border-r md:border-b-0 border-gray-200 bg-gray-50">
+                  <h3 className="text-lg md:text-xl font-semibold text-center mb-4">Manual LP Management</h3>
+                  <div className="flex-1 flex flex-col justify-center space-y-4">
+                    <div className="flex items-center space-x-3 opacity-80">
+                      <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-500">✗</div>
+                      <p className="text-sm md:text-base">Constant manual rebalancing</p>
+                    </div>
+                    <div className="flex items-center space-x-3 opacity-80">
+                      <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-500">✗</div>
+                      <p className="text-sm md:text-base">High risk of impermanent loss</p>
+                    </div>
+                    <div className="flex items-center space-x-3 opacity-80">
+                      <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-500">✗</div>
+                      <p className="text-sm md:text-base">Missed optimal fee collection</p>
+                    </div>
+                    <div className="flex items-center space-x-3 opacity-80">
+                      <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-500">✗</div>
+                      <p className="text-sm md:text-base">Complex decision-making</p>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* AutoYield Side */}
+                <div className="w-full md:w-1/2 h-full flex flex-col p-4 md:p-8 bg-white">
+                  <h3 className="text-lg md:text-xl font-semibold text-center mb-4">AutoYield Management</h3>
+                  <div className="flex-1 flex flex-col justify-center space-y-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-500">✓</div>
+                      <p className="text-sm md:text-base">Set-and-forget automation</p>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-500">✓</div>
+                      <p className="text-sm md:text-base">Smart loss protection strategies</p>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-500">✓</div>
+                      <p className="text-sm md:text-base">Dynamic fee optimization</p>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-500">✓</div>
+                      <p className="text-sm md:text-base">Simple one-click deployment</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Overlay animation */}
+              <div className="absolute bottom-4 left-0 right-0 flex justify-center">
+                <div className="px-4 py-2 bg-primary/90 text-white rounded-full text-sm animate-pulse-soft">
+                  Up to 2x better returns than manual management
+                </div>
+              </div>
             </div>
           </div>
           
