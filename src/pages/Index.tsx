@@ -2,10 +2,10 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import Features from '@/components/Features';
-import AdvancedStrategies from '@/components/AIStrategies';
+import ComparisonAnimation from '@/components/ComparisonAnimation';
+import DeFiExplainer from '@/components/DeFiExplainer';
+import ConsolidatedFeatures from '@/components/ConsolidatedFeatures';
 import SecurityFeatures from '@/components/SecurityFeatures';
-import Explainer from '@/components/Explainer';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -13,9 +13,9 @@ const Index = () => {
     <div className="min-h-screen overflow-hidden">
       <Navbar />
       <Hero />
-      <Explainer />
-      <Features />
-      <AdvancedStrategies />
+      <ComparisonAnimation />
+      <DeFiExplainer />
+      <ConsolidatedFeatures />
       <SecurityFeatures />
       <Footer />
     </div>
