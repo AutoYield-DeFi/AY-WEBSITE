@@ -41,6 +41,7 @@ const Footer = () => {
               <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground">Documentation</a></li>
               <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground">API</a></li>
               <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground">Blog</a></li>
+              <li><a href="/glossary" className="text-primary-foreground/80 hover:text-primary-foreground">Glossary</a></li>
               <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground">FAQ</a></li>
             </ul>
           </div>
