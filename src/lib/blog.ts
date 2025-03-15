@@ -7,7 +7,7 @@ const blogData: BlogPost[] = [
     id: '1',
     slug: 'understanding-dlmm-solana',
     title: 'Understanding DLMM: The Future of Liquidity on Solana',
-    excerpt: 'Dynamic Liquidity Market Makers (DLMMs) are revolutionizing how liquidity works on Solana. Here's what you need to know.',
+    excerpt: "Dynamic Liquidity Market Makers (DLMMs) are revolutionizing how liquidity works on Solana. Here's what you need to know.",
     content: `
       <p>Dynamic Liquidity Market Makers (DLMMs) represent a significant evolution in decentralized exchange technology, particularly on the Solana blockchain. Unlike traditional Automated Market Makers (AMMs), DLMMs offer concentrated liquidity with dynamic range adjustments that maximize capital efficiency and reduce impermanent loss.</p>
       
@@ -203,7 +203,7 @@ const blogData: BlogPost[] = [
     id: '4',
     slug: 'quant-ai-strategies',
     title: 'How QUANT AI Optimizes Your Liquidity Positions',
-    excerpt: 'A deep dive into the proprietary AI strategies that power AutoYield's automated liquidity management system.',
+    excerpt: "A deep dive into the proprietary AI strategies that power AutoYield's automated liquidity management system.",
     content: `
       <p>At the heart of AutoYield's value proposition lies our proprietary QUANT AI system—an advanced artificial intelligence engine designed specifically for optimizing liquidity positions in DeFi markets.</p>
       
@@ -295,7 +295,7 @@ const blogData: BlogPost[] = [
       name: 'Emily Wei',
       title: 'Lead AI Researcher',
       avatar: '/team/emily.jpg',
-      bio: 'Emily leads AutoYield's AI research team, combining expertise in machine learning with deep DeFi knowledge.'
+      bio: "Emily leads AutoYield's AI research team, combining expertise in machine learning with deep DeFi knowledge."
     }
   }
 ];
