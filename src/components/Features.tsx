@@ -1,39 +1,46 @@
 
 import React from 'react';
 import FeatureCard from './FeatureCard';
-import { LineChart, ArrowUpCircle, Lock, RefreshCw, Zap, Layers } from 'lucide-react';
+import { 
+  LineChart, 
+  ShieldCheck, 
+  RefreshCw, 
+  Brain, 
+  MousePointer, 
+  BarChart3
+} from 'lucide-react';
 
 const Features = () => {
   const features = [
     {
-      icon: LineChart,
-      title: 'Optimized Yields',
-      description: 'Automatically allocate assets to the highest performing DeFi protocols in real-time.'
+      icon: Brain,
+      title: 'QUANT AI Agent',
+      description: 'Our advanced AI continuously analyzes market conditions to dynamically rebalance your liquidity positions.'
     },
     {
-      icon: Lock,
-      title: 'Enhanced Security',
-      description: 'Non-custodial architecture with multi-layered security measures to protect your assets.'
+      icon: ShieldCheck,
+      title: 'Risk Management',
+      description: 'Built-in impermanent loss protection and stop-loss mechanisms keep your capital safe in volatile markets.'
     },
     {
       icon: RefreshCw,
-      title: 'Automatic Rebalancing',
-      description: 'Smart algorithms continuously monitor and adjust your portfolio for maximum returns.'
+      title: 'Auto-Compounding',
+      description: 'Earned trading fees are automatically reinvested to maximize your long-term yield and efficiency.'
     },
     {
-      icon: Zap,
-      title: 'Instant Liquidity',
-      description: 'Access your funds whenever you need them without lengthy unstaking periods.'
+      icon: LineChart,
+      title: 'Dynamic Range Rebalancing',
+      description: 'AI detects price trends and adjusts liquidity ranges to ensure continuous fee accrual in any market.'
     },
     {
-      icon: ArrowUpCircle,
-      title: 'One-Click Deposits',
-      description: 'Simplified interface lets you deposit and start earning with just a single click.'
+      icon: MousePointer,
+      title: 'One-Click Deployment',
+      description: 'Deposit funds once and AutoYield handles all the complexity - splitting tokens, setting ranges, and optimization.'
     },
     {
-      icon: Layers,
-      title: 'Multi-Chain Support',
-      description: 'Seamlessly operate across multiple blockchains from a single dashboard.'
+      icon: BarChart3,
+      title: 'Real-Time Analytics',
+      description: 'Monitor performance with detailed insights into earnings, APR, and AI rebalancing events.'
     }
   ];
 
@@ -42,11 +49,11 @@ const Features = () => {
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <div className="inline-block mb-4 px-4 py-1.5 bg-primary-muted rounded-full">
-            <span className="text-xs font-semibold tracking-wider uppercase">Key Benefits</span>
+            <span className="text-xs font-semibold tracking-wider uppercase">AI-Powered Features</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Simplifying DeFi For Everyone</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Intelligent Liquidity Management</h2>
           <p className="text-lg text-muted-foreground">
-            Our platform combines cutting-edge technology with an intuitive interface, making DeFi accessible to all.
+            AutoYield combines advanced AI with Meteora's DLMM pools to deliver institutional-grade yield strategies with minimal effort.
           </p>
         </div>
 
