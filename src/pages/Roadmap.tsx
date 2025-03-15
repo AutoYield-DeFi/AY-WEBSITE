@@ -13,12 +13,12 @@ const Roadmap = () => {
     <div className="min-h-screen bg-white">
       <SEO 
         title="Product Roadmap | AutoYield"
-        description="Explore AutoYield's 12-month product roadmap and see how we're building the future of automated liquidity management on Solana."
-        keywords="AutoYield roadmap, Solana DeFi, product timeline, liquidity management, DLMM, development milestones"
+        description="Explore AutoYield's 12-month roadmap for automated liquidity management on Solana."
+        keywords="AutoYield roadmap, Solana DeFi, product timeline, liquidity management"
       />
       <Navbar />
       
-      <main className="pt-20">
+      <main>
         <RoadmapHeader />
         <RoadmapTimeline />
         <RoadmapStrategic />
