@@ -16,9 +16,9 @@ export default defineConfig({
   // Use existing directory structures
   srcDir: './src',
   publicDir: './public',
-  // Configure for hybrid rendering
-  output: 'hybrid',
-  // Add server configuration to ensure proper routing
+  // Configure for server-side rendering
+  output: 'server',
+  // Make sure Astro handles the routing properly
   server: {
     host: true
   }
