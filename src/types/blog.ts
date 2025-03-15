@@ -4,6 +4,7 @@ export interface Author {
   title: string;
   avatar: string;
   bio?: string;
+  twitter?: string;
 }
 
 export interface BlogPost {
@@ -19,4 +20,6 @@ export interface BlogPost {
   readingTime: number;
   coverImage: string;
   author: Author;
+  seoDescription?: string;
+  canonical?: string;
 }
