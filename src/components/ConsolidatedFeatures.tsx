@@ -1,8 +1,6 @@
 
 import React from 'react';
 import { ShieldCheck, Sparkles, RefreshCw, MousePointer, BarChart3, Zap } from 'lucide-react';
-import { Button } from './ui/button';
-import { ArrowRight } from 'lucide-react';
 
 const ConsolidatedFeatures = () => {
   const features = [
@@ -73,15 +71,15 @@ const ConsolidatedFeatures = () => {
             </div>
           ))}
         </div>
-
-        <div className="mt-16 text-center">
-          <p className="mb-6 text-lg text-muted-foreground">
-            Ready to experience hassle-free liquidity providing?
+        
+        <div className="mt-16 text-center p-6 bg-white border border-primary/10 rounded-xl max-w-3xl mx-auto">
+          <div className="flex items-center justify-center mb-4">
+            <ShieldCheck className="h-6 w-6 text-green-600 mr-3" />
+            <h3 className="text-xl font-semibold">Enterprise-Grade Security</h3>
+          </div>
+          <p className="text-muted-foreground">
+            AutoYield implements robust smart contract protections and non-custodial architecture. Your funds remain under your control, with multiple layers of security audits and real-time monitoring systems to prevent exploits.
           </p>
-          <Button className="btn-primary flex items-center justify-center gap-2 group text-lg px-8 py-6">
-            Get Started
-            <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
-          </Button>
         </div>
       </div>
     </section>

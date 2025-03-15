@@ -36,9 +36,6 @@ const Navbar = () => {
           <Link to="/about" className="text-sm font-medium text-foreground/80 hover:text-foreground link-underline">
             About Us
           </Link>
-          <Link to="/glossary" className="text-sm font-medium text-foreground/80 hover:text-foreground link-underline">
-            Glossary
-          </Link>
           <a href="#contact" className="btn-primary">
             Get Started
           </a>
@@ -73,13 +70,6 @@ const Navbar = () => {
             onClick={() => setIsOpen(false)}
           >
             About Us
-          </Link>
-          <Link 
-            to="/glossary" 
-            className="text-lg font-medium hover:text-primary transition-colors"
-            onClick={() => setIsOpen(false)}
-          >
-            Glossary
           </Link>
           <a 
             href="#contact" 
