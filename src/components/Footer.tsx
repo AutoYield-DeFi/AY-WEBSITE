@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Github, Twitter, Linkedin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -41,7 +42,7 @@ const Footer = () => {
               <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground">Documentation</a></li>
               <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground">API</a></li>
               <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground">Blog</a></li>
-              <li><a href="/glossary" className="text-primary-foreground/80 hover:text-primary-foreground">Glossary</a></li>
+              <li><Link to="/glossary" className="text-primary-foreground/80 hover:text-primary-foreground">Glossary</Link></li>
               <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground">FAQ</a></li>
             </ul>
           </div>
@@ -49,7 +50,7 @@ const Footer = () => {
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider mb-4">Company</h3>
             <ul className="space-y-3">
-              <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground">About</a></li>
+              <li><Link to="/about" className="text-primary-foreground/80 hover:text-primary-foreground">About Us</Link></li>
               <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground">Careers</a></li>
               <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground">Contact</a></li>
               <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground">Legal</a></li>

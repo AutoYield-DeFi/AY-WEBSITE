@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { MenuIcon, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,21 +24,21 @@ const Navbar = () => {
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <a href="/" className="relative z-10">
+        <Link to="/" className="relative z-10">
           <span className="text-xl font-semibold tracking-tight">AutoYield</span>
-        </a>
+        </Link>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center space-x-8">
           <a href="#features" className="text-sm font-medium text-foreground/80 hover:text-foreground link-underline">
             Features
           </a>
-          <a href="#about" className="text-sm font-medium text-foreground/80 hover:text-foreground link-underline">
-            About
-          </a>
-          <a href="#faq" className="text-sm font-medium text-foreground/80 hover:text-foreground link-underline">
-            FAQ
-          </a>
+          <Link to="/about" className="text-sm font-medium text-foreground/80 hover:text-foreground link-underline">
+            About Us
+          </Link>
+          <Link to="/glossary" className="text-sm font-medium text-foreground/80 hover:text-foreground link-underline">
+            Glossary
+          </Link>
           <a href="#contact" className="btn-primary">
             Get Started
           </a>
@@ -66,20 +67,20 @@ const Navbar = () => {
           >
             Features
           </a>
-          <a 
-            href="#about" 
+          <Link 
+            to="/about" 
             className="text-lg font-medium hover:text-primary transition-colors"
             onClick={() => setIsOpen(false)}
           >
-            About
-          </a>
-          <a 
-            href="#faq" 
+            About Us
+          </Link>
+          <Link 
+            to="/glossary" 
             className="text-lg font-medium hover:text-primary transition-colors"
             onClick={() => setIsOpen(false)}
           >
-            FAQ
-          </a>
+            Glossary
+          </Link>
           <a 
             href="#contact" 
             className="btn-primary mt-4"
