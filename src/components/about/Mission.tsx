@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from './MotionWrapper';
-import { Target, Lightbulb, PiggyBank, ArrowRight } from 'lucide-react';
+import { Target, PiggyBank, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Mission = () => {
@@ -13,42 +13,30 @@ const Mission = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
           <div>
             <div className="inline-block mb-4 px-4 py-1.5 bg-primary-muted rounded-full">
-              <span className="text-xs font-semibold tracking-wider uppercase">Our Origin Story</span>
+              <span className="text-xs font-semibold tracking-wider uppercase">How It Started</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">From Frustration to Innovation</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">The Late Night That Changed Everything</h2>
             <p className="text-lg text-muted-foreground mb-6">
-              In May 2021, our founder Alex watched helplessly as his carefully positioned liquidity pools hemorrhaged value during a market crash. The problem wasn't just volatility—it was the inability to adapt positions quickly enough.
+              In late 2022, Shuhaib lost over 40% of his liquidity position in a single night. Not because the market crashed, but because he couldn't rebalance his position fast enough.
             </p>
             
-            <div className="space-y-4">
-              <div className="flex items-start gap-3">
-                <div className="mt-1 flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-                  <Target className="h-4 w-4 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg">The Realization</h3>
-                  <p className="text-muted-foreground">After analyzing hundreds of LP positions, we discovered a pattern: the highest-performing positions weren't managed by the smartest traders—they were managed by the most <em>consistent</em> ones. The ones who could continuously optimize ranges without emotional decisions.</p>
-                </div>
-              </div>
+            <div className="space-y-6">
+              <p className="text-muted-foreground">
+                "I was manually managing seven different pools across three DEXs. I woke up at 3 AM to price alerts, but by the time I figured out what to do, the damage was done," recalls Shuhaib, now our CEO.
+              </p>
               
-              <div className="flex items-start gap-3">
-                <div className="mt-1 flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-                  <Lightbulb className="h-4 w-4 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg">The Pivot</h3>
-                  <p className="text-muted-foreground">What if algorithms could do what humans couldn't? Not just basic automations, but sophisticated position management that continuously adapted to market conditions without fear, fatigue, or that pesky need to sleep.</p>
-                </div>
-              </div>
+              <p className="text-muted-foreground">
+                That night, he called his friend Pratik, who had built trading algorithms for traditional finance. Together with YK (our anonymous quant) and Hamza, they sketched out what would become AutoYield: a system that never sleeps, never panics, and makes decisions based on data, not emotion.
+              </p>
               
-              <div className="flex items-start gap-3">
-                <div className="mt-1 flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-                  <PiggyBank className="h-4 w-4 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg">The Promise</h3>
-                  <p className="text-muted-foreground">AutoYield exists to solve the fundamental problem of liquidity provision: making it profitable without requiring you to become a full-time range manager with multiple monitors and a caffeine addiction.</p>
-                </div>
+              <div className="mt-8 pt-8 border-t border-blue-100">
+                <p className="font-medium">The simple realization that changed everything:</p>
+                <p className="text-xl font-semibold mt-2 mb-4 text-blue-600">
+                  "The best LPs aren't managed by the smartest people. They're managed by the most consistent ones."
+                </p>
+                <p className="text-muted-foreground">
+                  We built AutoYield to be that consistent presence—continuously optimizing positions without human emotion, hesitation, or the need to sleep.
+                </p>
               </div>
             </div>
             
@@ -61,50 +49,43 @@ const Mission = () => {
           </div>
           
           <motion.div 
-            className="relative"
+            className="relative hidden md:block"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
             <div className="aspect-square max-w-md mx-auto relative bg-white rounded-xl shadow-lg overflow-hidden">
-              {/* Timeline visualization with key moments */}
-              <div className="absolute inset-0 p-6 flex flex-col">
-                <h3 className="text-lg font-semibold text-center mb-4">The AutoYield Journey</h3>
-                
-                <div className="flex-1 relative">
-                  {/* Vertical timeline line */}
-                  <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-blue-100"></div>
-                  
-                  {/* Timeline events */}
-                  <div className="relative pl-16 mb-8">
-                    <div className="absolute left-7 w-3 h-3 rounded-full bg-red-500 border-2 border-white"></div>
-                    <p className="text-sm font-medium">May 2021</p>
-                    <p className="text-sm text-muted-foreground">"The Crash" - Alex loses 40% of his LP value in 3 days</p>
+              <div className="absolute inset-0 p-6">
+                <div className="h-full flex flex-col">
+                  <div className="text-center mb-6">
+                    <h3 className="text-lg font-semibold">The Problem We Solved</h3>
                   </div>
                   
-                  <div className="relative pl-16 mb-8">
-                    <div className="absolute left-7 w-3 h-3 rounded-full bg-amber-500 border-2 border-white"></div>
-                    <p className="text-sm font-medium">August 2021</p>
-                    <p className="text-sm text-muted-foreground">First prototype of automated position adjustment</p>
-                  </div>
-                  
-                  <div className="relative pl-16 mb-8">
-                    <div className="absolute left-7 w-3 h-3 rounded-full bg-green-500 border-2 border-white"></div>
-                    <p className="text-sm font-medium">January 2022</p>
-                    <p className="text-sm text-muted-foreground">Core team assembled, including Emily's AI expertise</p>
-                  </div>
-                  
-                  <div className="relative pl-16 mb-8">
-                    <div className="absolute left-7 w-3 h-3 rounded-full bg-blue-500 border-2 border-white"></div>
-                    <p className="text-sm font-medium">November 2022</p>
-                    <p className="text-sm text-muted-foreground">First private version beats manual management by 87%</p>
-                  </div>
-                  
-                  <div className="relative pl-16">
-                    <div className="absolute left-7 w-3 h-3 rounded-full bg-purple-500 border-2 border-white"></div>
-                    <p className="text-sm font-medium">Today</p>
-                    <p className="text-sm text-muted-foreground">AutoYield consistently outperforms manual LP management</p>
+                  <div className="flex-1 grid grid-cols-1 gap-6">
+                    <div className="bg-blue-50 p-4 rounded-lg">
+                      <p className="font-medium mb-2">Manual LP Management</p>
+                      <p className="text-sm text-muted-foreground">Requires constant monitoring</p>
+                      <p className="text-sm text-muted-foreground">Emotional decisions during volatility</p>
+                      <p className="text-sm text-muted-foreground">Sleep = missed opportunities</p>
+                    </div>
+                    
+                    <div className="bg-primary-muted p-4 rounded-lg relative">
+                      <div className="absolute -top-2 -right-2 bg-green-500 text-white text-xs font-bold py-1 px-2 rounded">
+                        Our Solution
+                      </div>
+                      <p className="font-medium mb-2">AutoYield</p>
+                      <p className="text-sm">24/7 algorithmic management</p>
+                      <p className="text-sm">Data-driven decision making</p>
+                      <p className="text-sm">Optimizes while you sleep</p>
+                    </div>
+                    
+                    <div className="bg-gradient-to-r from-blue-50 to-primary-muted/30 p-4 rounded-lg">
+                      <p className="font-medium mb-2">The Results</p>
+                      <p className="text-sm">Consistently outperforms manual management</p>
+                      <p className="text-sm">Adapts to market conditions in real-time</p>
+                      <p className="text-sm">Peace of mind for LPs</p>
+                    </div>
                   </div>
                 </div>
               </div>

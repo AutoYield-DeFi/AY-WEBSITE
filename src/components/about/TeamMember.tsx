@@ -1,9 +1,8 @@
 
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Linkedin, Github, Award } from 'lucide-react';
+import { Linkedin, Github } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { motion } from './MotionWrapper';
 
 interface TeamMemberProps {
   name: string;
@@ -43,8 +42,7 @@ const TeamMember = ({
           <p className="text-muted-foreground text-center mb-4">{bio}</p>
           
           {credentials && (
-            <div className="flex items-center justify-center gap-2 bg-blue-50 rounded-md py-2 px-3 mb-4 text-center">
-              <Award className="h-4 w-4 text-blue-600 flex-shrink-0" />
+            <div className="flex items-center justify-center gap-2 bg-blue-50 rounded-md py-2 px-3 mb-4">
               <span className="text-xs text-blue-800 font-medium">{credentials}</span>
             </div>
           )}

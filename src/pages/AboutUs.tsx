@@ -6,14 +6,13 @@ import SEO from '@/components/SEO';
 import TeamSection from '@/components/about/TeamSection';
 import Mission from '@/components/about/Mission';
 import Values from '@/components/about/Values';
-import Timeline from '@/components/about/Timeline';
 
 const AboutUs = () => {
   return (
     <div className="min-h-screen bg-white">
       <SEO 
         title="Our Story | AutoYield"
-        description="From frustrated LPs to DeFi innovators: Meet the team solving liquidity management's biggest challenges with AI and automation on Solana."
+        description="Founded by DeFi veterans who were tired of watching their liquidity positions drain. Meet the team solving liquidity management with AI on Solana."
         keywords="AutoYield team, Solana DeFi, liquidity management, crypto founders, DeFi solutions, AI liquidity"
       />
       <Navbar />
@@ -28,13 +27,13 @@ const AboutUs = () => {
           <div className="container mx-auto px-6 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
               <div className="inline-block mb-4 px-4 py-1.5 bg-primary-muted rounded-full animate-fade-in">
-                <span className="text-xs font-semibold tracking-wider uppercase">The Team Behind AutoYield</span>
+                <span className="text-xs font-semibold tracking-wider uppercase">Our Story</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-up">
-                When DeFi Veterans<br/>Get Tired of Losing Money
+                Four Friends, Tired of<br/>Losing Money on Solana
               </h1>
               <p className="text-lg text-muted-foreground mb-8 animate-fade-up animation-delay-200">
-                AutoYield wasn't born in a boardroom. It emerged from late nights staring at depleting LP positions and wondering why something so potentially profitable had to be so consistently frustrating.
+                AutoYield was born from frustration, built by people who were sick of watching their liquidity positions bleed out while they slept.
               </p>
             </div>
           </div>
@@ -48,9 +47,6 @@ const AboutUs = () => {
         
         {/* Values Section */}
         <Values />
-        
-        {/* Timeline Section */}
-        <Timeline />
       </main>
       
       <Footer />
