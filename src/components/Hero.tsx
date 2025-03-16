@@ -22,7 +22,7 @@ const Hero = () => {
             Smart Liquidity Management <span className="text-primary">on Solana</span>
           </h1>
           
-          {/* Added highlight banner for the 2-3x returns */}
+          {/* Subtle highlight banner for results */}
           <div className="animate-fade-up animation-delay-100 flex items-center justify-center mb-6">
             <div className="px-4 py-2 bg-green-50 border border-green-100 rounded-lg inline-flex items-center">
               <TrendingUp className="h-5 w-5 text-green-600 mr-2" />
@@ -36,7 +36,7 @@ const Hero = () => {
           
           <div className="animate-fade-up animation-delay-300 flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <Button className="btn-primary w-full sm:w-auto flex items-center justify-center gap-2 group">
-              Start Earning 2-3x More
+              Start Earning Now
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
             </Button>
             <Button variant="outline" className="btn-secondary w-full sm:w-auto">

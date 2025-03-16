@@ -13,7 +13,7 @@ const ConsolidatedFeatures = () => {
     },
     {
       icon: TrendingUp,
-      title: "2-3x Higher Returns",
+      title: "Higher Returns",
       description: "Our AI constantly optimizes positions to generate significantly higher yields than manual management.",
       color: "bg-green-50 text-green-600 border-green-100"
     },
@@ -52,8 +52,7 @@ const ConsolidatedFeatures = () => {
           </div>
           <h2 className="mb-6 text-3xl font-bold md:text-4xl">Effortless Yield Generation</h2>
           <p className="text-lg text-muted-foreground">
-            AutoYield combines cutting-edge AI technology with Meteora's DLMM pools to help you earn 
-            <span className="font-semibold text-primary"> 2-3x more</span> with less effort — whether you're new to DeFi or a seasoned pro.
+            AutoYield combines cutting-edge AI technology with Meteora's DLMM pools to help you earn more with less effort — whether you're new to DeFi or a seasoned pro.
           </p>
         </div>
 
@@ -118,15 +117,6 @@ const ConsolidatedFeatures = () => {
               Learn About Our Security
             </Button>
           </div>
-        </div>
-        
-        {/* Added CTA section */}
-        <div className="mt-20 bg-gradient-to-r from-primary-muted/30 to-primary/10 p-8 md:p-12 rounded-2xl max-w-4xl mx-auto text-center">
-          <h3 className="text-2xl md:text-3xl font-bold mb-4">Start Earning 2-3x More Today</h3>
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Join thousands of liquidity providers who are already experiencing better returns with less effort using AutoYield's AI-powered platform.
-          </p>
-          <Button className="btn-primary text-lg px-8 py-6 h-auto">Get Started Now</Button>
         </div>
       </div>
     </section>
