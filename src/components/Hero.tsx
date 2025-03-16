@@ -13,7 +13,7 @@ const Hero = () => {
         <div className="max-w-3xl mx-auto text-center">
           <div className="animate-fade-in">
             <div className="inline-block mb-4 px-4 py-1.5 bg-primary-muted rounded-full">
-              <span className="text-xs font-semibold tracking-wider uppercase">Built on Solana</span>
+              <span className="text-xs font-semibold tracking-wider uppercase">Powered by AI. Built on Solana</span>
             </div>
           </div>
           
@@ -22,7 +22,7 @@ const Hero = () => {
           </h1>
           
           <p className="animate-fade-up animation-delay-200 text-lg md:text-xl text-muted-foreground mb-10 text-balance">
-            AutoYield uses advanced AI technology to maximize your trading fees across established, mid-cap, and promising small-cap tokens - all while protecting against impermanent loss.
+            Effortlessly maximize LP fees with automated rebalancing, smart position adjustments, and real-time yield optimization—no manual management required.
           </p>
           
           <div className="animate-fade-up animation-delay-300 flex flex-col sm:flex-row items-center justify-center gap-4">
