@@ -1,32 +1,10 @@
 
-import React, { useEffect, useRef } from 'react';
-import { Check, RefreshCw, Clock, TrendingUp, Shield } from 'lucide-react';
+import React from 'react';
+import { Check, Clock, TrendingUp, Shield, X } from 'lucide-react';
 
 const ComparisonAnimation = () => {
-  const animationRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-    
-    const elements = animationRef.current?.querySelectorAll('.animate-item');
-    elements?.forEach(el => observer.observe(el));
-    
-    return () => {
-      elements?.forEach(el => observer.unobserve(el));
-    };
-  }, []);
-
   return (
-    <section ref={animationRef} className="py-16 md:py-24 bg-gradient-to-b from-white to-primary-muted/10 overflow-hidden">
+    <section className="py-16 md:py-24 bg-gradient-to-b from-white to-primary-muted/10 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <div className="inline-block px-4 py-1.5 mb-4 bg-primary-muted rounded-full">
@@ -36,145 +14,164 @@ const ComparisonAnimation = () => {
         </div>
         
         <div className="max-w-5xl mx-auto">
-          {/* Using a simpler, more reliable comparison approach */}
-          <div className="relative grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
-            {/* Center Divider with Animation */}
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary/30 to-transparent transform -translate-x-1/2"></div>
-            
-            {/* Left Side: Manual Way */}
-            <div className="animate-item opacity-0 transition-all duration-700 delay-300 -translate-x-8">
-              <div className="text-center mb-6">
-                <div className="inline-flex items-center justify-center p-3 rounded-full bg-gray-100 mb-3">
-                  <Clock className="h-6 w-6 text-gray-600" />
+          {/* Animated comparison cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-6">
+            {/* Left Column: Manual Management */}
+            <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 transform transition-all duration-500 hover:-translate-y-1">
+              <div className="flex items-center justify-center mb-6">
+                <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center">
+                  <Clock className="h-8 w-8 text-gray-600" />
                 </div>
-                <h3 className="text-xl font-semibold">Manual LP Management</h3>
-                <p className="text-sm text-gray-500 mt-2">Time-consuming & error-prone</p>
               </div>
               
-              <div className="space-y-5 mt-8">
-                <div className="flex p-4 bg-white rounded-lg shadow-sm border border-gray-100 animate-item opacity-0 transition-all duration-300 delay-500 -translate-y-4">
-                  <div className="flex-shrink-0 mr-4">
-                    <div className="flex h-8 w-8 rounded-full bg-red-100 items-center justify-center">
-                      <span className="text-red-500 text-lg">✗</span>
+              <h3 className="text-xl font-semibold text-center mb-4">Manual LP Management</h3>
+              <p className="text-gray-500 text-center mb-6">Time-consuming & requires technical expertise</p>
+              
+              <div className="space-y-4">
+                <div className="flex items-center p-3 bg-red-50 rounded-lg">
+                  <div className="flex-shrink-0 mr-3">
+                    <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
+                      <X className="h-4 w-4 text-red-500" />
                     </div>
                   </div>
                   <div>
-                    <h4 className="font-medium">Constant Monitoring</h4>
-                    <p className="text-sm text-gray-500 mt-1">Requires 24/7 attention to price movements</p>
+                    <p className="font-medium text-gray-800">24/7 Monitoring Required</p>
+                    <p className="text-sm text-gray-500">Constant price watching</p>
                   </div>
                 </div>
                 
-                <div className="flex p-4 bg-white rounded-lg shadow-sm border border-gray-100 animate-item opacity-0 transition-all duration-300 delay-600 -translate-y-4">
-                  <div className="flex-shrink-0 mr-4">
-                    <div className="flex h-8 w-8 rounded-full bg-red-100 items-center justify-center">
-                      <span className="text-red-500 text-lg">✗</span>
+                <div className="flex items-center p-3 bg-red-50 rounded-lg animate-fade-in" style={{ animationDelay: '100ms' }}>
+                  <div className="flex-shrink-0 mr-3">
+                    <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
+                      <X className="h-4 w-4 text-red-500" />
                     </div>
                   </div>
                   <div>
-                    <h4 className="font-medium">Financial Risk</h4>
-                    <p className="text-sm text-gray-500 mt-1">High impermanent loss with no automatic protection</p>
+                    <p className="font-medium text-gray-800">High Impermanent Loss Risk</p>
+                    <p className="text-sm text-gray-500">No automatic protection</p>
                   </div>
                 </div>
                 
-                <div className="flex p-4 bg-white rounded-lg shadow-sm border border-gray-100 animate-item opacity-0 transition-all duration-300 delay-700 -translate-y-4">
-                  <div className="flex-shrink-0 mr-4">
-                    <div className="flex h-8 w-8 rounded-full bg-red-100 items-center justify-center">
-                      <span className="text-red-500 text-lg">✗</span>
+                <div className="flex items-center p-3 bg-red-50 rounded-lg animate-fade-in" style={{ animationDelay: '200ms' }}>
+                  <div className="flex-shrink-0 mr-3">
+                    <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
+                      <X className="h-4 w-4 text-red-500" />
                     </div>
                   </div>
                   <div>
-                    <h4 className="font-medium">Missed Opportunities</h4>
-                    <p className="text-sm text-gray-500 mt-1">Manual rebalancing often too slow to capture optimal yields</p>
+                    <p className="font-medium text-gray-800">Missed Yield Opportunities</p>
+                    <p className="text-sm text-gray-500">Slow manual adjustments</p>
                   </div>
                 </div>
               </div>
             </div>
             
-            {/* Right Side: AutoYield */}
-            <div className="animate-item opacity-0 transition-all duration-700 delay-300 translate-x-8">
-              <div className="text-center mb-6">
-                <div className="inline-flex items-center justify-center p-3 rounded-full bg-primary-muted mb-3">
-                  <Shield className="h-6 w-6 text-primary" />
+            {/* Right Column: AutoYield */}
+            <div className="bg-white p-6 rounded-xl shadow-md border-2 border-primary/20 transform transition-all duration-500 hover:-translate-y-1">
+              <div className="flex items-center justify-center mb-6">
+                <div className="w-16 h-16 rounded-full bg-primary-muted flex items-center justify-center">
+                  <Shield className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold text-primary">AutoYield Smart Management</h3>
-                <p className="text-sm text-gray-500 mt-2">Automated & risk-optimized</p>
               </div>
               
-              <div className="space-y-5 mt-8">
-                <div className="flex p-4 bg-white rounded-lg shadow-sm border border-primary/10 animate-item opacity-0 transition-all duration-300 delay-500 translate-y-4">
-                  <div className="flex-shrink-0 mr-4">
-                    <div className="flex h-8 w-8 rounded-full bg-green-100 items-center justify-center">
+              <h3 className="text-xl font-semibold text-center text-primary mb-4">AutoYield Smart Management</h3>
+              <p className="text-gray-500 text-center mb-6">Automated & optimized for maximum returns</p>
+              
+              <div className="space-y-4">
+                <div className="flex items-center p-3 bg-green-50 rounded-lg">
+                  <div className="flex-shrink-0 mr-3">
+                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
                       <Check className="h-4 w-4 text-green-500" />
                     </div>
                   </div>
                   <div>
-                    <h4 className="font-medium">AI-Powered Automation</h4>
-                    <p className="text-sm text-gray-500 mt-1">24/7 algorithmic position optimization</p>
+                    <p className="font-medium text-gray-800">24/7 AI Monitoring</p>
+                    <p className="text-sm text-gray-500">Continuous algorithmic optimization</p>
                   </div>
                 </div>
                 
-                <div className="flex p-4 bg-white rounded-lg shadow-sm border border-primary/10 animate-item opacity-0 transition-all duration-300 delay-600 translate-y-4">
-                  <div className="flex-shrink-0 mr-4">
-                    <div className="flex h-8 w-8 rounded-full bg-green-100 items-center justify-center">
+                <div className="flex items-center p-3 bg-green-50 rounded-lg animate-fade-in" style={{ animationDelay: '100ms' }}>
+                  <div className="flex-shrink-0 mr-3">
+                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
                       <Check className="h-4 w-4 text-green-500" />
                     </div>
                   </div>
                   <div>
-                    <h4 className="font-medium">Risk Management</h4>
-                    <p className="text-sm text-gray-500 mt-1">Automatic impermanent loss protection mechanisms</p>
+                    <p className="font-medium text-gray-800">Smart Loss Protection</p>
+                    <p className="text-sm text-gray-500">Automated risk management</p>
                   </div>
                 </div>
                 
-                <div className="flex p-4 bg-white rounded-lg shadow-sm border border-primary/10 animate-item opacity-0 transition-all duration-300 delay-700 translate-y-4">
-                  <div className="flex-shrink-0 mr-4">
-                    <div className="flex h-8 w-8 rounded-full bg-green-100 items-center justify-center">
+                <div className="flex items-center p-3 bg-green-50 rounded-lg animate-fade-in" style={{ animationDelay: '200ms' }}>
+                  <div className="flex-shrink-0 mr-3">
+                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
                       <Check className="h-4 w-4 text-green-500" />
                     </div>
                   </div>
                   <div>
-                    <h4 className="font-medium">Compound Growth</h4>
-                    <p className="text-sm text-gray-500 mt-1">Automatic fee reinvestment for maximum returns</p>
+                    <p className="font-medium text-gray-800">Auto-Compounding Returns</p>
+                    <p className="text-sm text-gray-500">Reinvests profits automatically</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           
-          {/* Bottom Animation Element */}
-          <div className="flex justify-center mt-16">
-            <div className="animate-item opacity-0 delay-800 transition-all duration-700 scale-95 bg-blue-50 border border-blue-100 rounded-lg p-4 md:p-6 max-w-xl">
-              <div className="flex items-center">
-                <div className="flex-shrink-0 mr-4 hidden sm:block">
-                  <div className="p-2 rounded-full bg-blue-100">
-                    <TrendingUp className="h-6 w-6 text-blue-600" />
+          {/* Bottom result card */}
+          <div className="mt-12 text-center">
+            <div className="inline-block transform transition-all duration-500 hover:scale-105">
+              <div className="bg-gradient-to-r from-blue-50 to-primary-muted/20 p-6 rounded-xl border border-primary/10 shadow-sm max-w-2xl mx-auto">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                      <TrendingUp className="h-6 w-6 text-blue-600" />
+                    </div>
+                  </div>
+                  <div className="text-left">
+                    <h4 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-600 mb-1">2-3x Higher Returns</h4>
+                    <p className="text-gray-700">AutoYield's smart technology handles all the complex work of liquidity management so you can enjoy optimized yields without the technical complexity.</p>
                   </div>
                 </div>
-                <div>
-                  <h4 className="font-semibold text-blue-800 text-lg mb-1">The AutoYield Advantage</h4>
-                  <p className="text-blue-700">
-                    AutoYield handles all the complex work of liquidity management so you can enjoy optimized yields without the technical complexity or constant monitoring.
-                  </p>
-                </div>
               </div>
+            </div>
+          </div>
+          
+          {/* Visual indicators */}
+          <div className="mt-12 flex justify-center space-x-4">
+            <div className="flex flex-col items-center animate-bounce" style={{ animationDuration: '3s' }}>
+              <div className="w-2 h-2 rounded-full bg-primary mb-1"></div>
+              <div className="w-1 h-16 bg-gradient-to-b from-primary to-transparent rounded-full"></div>
             </div>
           </div>
         </div>
       </div>
       
-      {/* Add animation styles using CSS classes */}
       <style dangerouslySetInnerHTML={{ __html: `
-        .animate-in .animate-item {
-          opacity: 1;
-          transform: translateX(0) translateY(0) scale(1);
+        @keyframes pulse-soft {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.7; }
         }
         
-        @keyframes pulse-subtle {
-          0%, 100% { opacity: 0.8; }
-          50% { opacity: 1; }
+        .animate-pulse-soft {
+          animation: pulse-soft 2s ease-in-out infinite;
         }
         
-        .pulse-subtle {
-          animation: pulse-subtle 3s ease-in-out infinite;
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+        
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+          animation: fade-in 0.5s ease-out forwards;
         }
       `}} />
     </section>
