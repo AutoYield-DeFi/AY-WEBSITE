@@ -16,7 +16,6 @@ import BlogDetail from "./pages/BlogDetail";
 import Roadmap from "./pages/Roadmap";
 import Docs from "./pages/Docs";
 import Legal from "./pages/Legal";
-import Sitemap from "./pages/Sitemap";
 
 const queryClient = new QueryClient();
 
@@ -38,7 +37,6 @@ const App = () => {
                   <Route path="/blog/tag/:tag" element={<Blog />} />
                   <Route path="/blog/:id" element={<BlogDetail />} />
                   <Route path="/legal" element={<Legal />} />
-                  <Route path="/sitemap" element={<Sitemap />} />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                   <Route path="*" element={<NotFound />} />
                 </Routes>
