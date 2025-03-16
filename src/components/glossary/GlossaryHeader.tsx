@@ -8,11 +8,11 @@ const GlossaryHeader = () => {
       <div className="mb-4 inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-muted text-primary">
         <BookOpen size={32} />
       </div>
-      <h1 className="text-4xl font-bold mb-4">DeFi & Liquidity Glossary</h1>
+      <h1 className="text-4xl font-bold mb-4">Liquidity Provision Glossary</h1>
       <p className="text-lg text-muted-foreground mb-4">
-        Welcome to AutoYield's comprehensive glossary of decentralized finance terminology. 
-        This resource explains the key concepts behind liquidity provision, yield optimization, 
-        and automated market makers to help you navigate the DeFi ecosystem with confidence.
+        Welcome to AutoYield's focused glossary on liquidity provision terminology. 
+        This resource explains the key concepts behind automated liquidity management, 
+        helping you understand how our AI-powered solutions optimize your positions.
       </p>
       
       <div className="mt-6 p-5 rounded-lg bg-blue-50 text-blue-700 border border-blue-100 flex gap-4 text-left">
@@ -20,13 +20,13 @@ const GlossaryHeader = () => {
           <BookText size={24} />
         </div>
         <div>
-          <h3 className="font-semibold mb-1">Why Understanding DeFi Terms Matters</h3>
+          <h3 className="font-semibold mb-1">Understanding Liquidity Provision</h3>
           <p className="text-sm">
-            DeFi protocols introduce new financial concepts that can be challenging to grasp at first. By understanding
-            these terms, you'll be able to make more informed decisions about your investments, better assess risks and
-            opportunities, and maximize your potential returns with AutoYield's automated liquidity management.
-            This glossary covers everything from basic blockchain terminology to advanced concepts like
-            impermanent loss and concentrated liquidity strategies.
+            Liquidity provision introduces concepts that can significantly impact your returns.
+            By understanding these terms, you'll appreciate how AutoYield's AI-driven approach
+            optimizes liquidity positions for maximum yield while minimizing risks like
+            impermanent loss. This glossary covers everything from basic LP terminology to
+            advanced concepts like concentrated liquidity and automated positioning strategies.
           </p>
         </div>
       </div>
