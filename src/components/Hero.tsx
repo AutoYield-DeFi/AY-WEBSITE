@@ -1,11 +1,8 @@
-
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from './ui/button';
-
 const Hero = () => {
-  return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+  return <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 hero-gradient opacity-70"></div>
       
@@ -21,9 +18,7 @@ const Hero = () => {
             Smart Liquidity Management on Solana
           </h1>
           
-          <p className="animate-fade-up animation-delay-200 text-lg md:text-xl text-muted-foreground mb-10 text-balance">
-            AutoYield uses advanced AI technology to maximize your trading fees across established, mid-cap, and promising small-cap tokens - all while protecting against impermanent loss.
-          </p>
+          <p className="animate-fade-up animation-delay-200 text-lg md:text-xl text-muted-foreground mb-10 text-balance">Effortlessly maximize LP fees with automated rebalancing, smart position adjustments, and real-time yield optimization—no manual management required.</p>
           
           <div className="animate-fade-up animation-delay-300 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button className="btn-primary w-full sm:w-auto flex items-center justify-center gap-2 group">
@@ -36,8 +31,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
