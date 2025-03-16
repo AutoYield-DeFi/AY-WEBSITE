@@ -77,13 +77,6 @@ const TeamSection = () => {
             </motion.div>
           ))}
         </div>
-        
-        <div className="mt-16 text-center">
-          <blockquote className="text-xl italic max-w-3xl mx-auto">
-            "Liquidity provision is like selling shovels in a gold rush—you earn steady income regardless of market direction. Our mission is to make these strategies accessible to everyone."
-          </blockquote>
-          <p className="text-right max-w-3xl mx-auto mt-4 text-muted-foreground">— Shuhaib Shariff, CEO</p>
-        </div>
       </div>
     </section>
   );
