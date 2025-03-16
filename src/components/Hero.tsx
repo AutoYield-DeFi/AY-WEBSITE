@@ -22,7 +22,7 @@ const Hero = () => {
           </h1>
           
           <p className="animate-fade-up animation-delay-200 text-lg md:text-xl text-muted-foreground mb-10 text-balance">
-            AutoYield uses advanced technology to maximize your trading fees across a diverse portfolio of tokens - from established projects to promising small and mid-cap opportunities - all while protecting against impermanent loss.
+            AutoYield uses advanced AI technology to maximize your trading fees across established, mid-cap, and promising small-cap tokens - all while protecting against impermanent loss.
           </p>
           
           <div className="animate-fade-up animation-delay-300 flex flex-col sm:flex-row items-center justify-center gap-4">

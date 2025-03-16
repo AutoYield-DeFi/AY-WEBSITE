@@ -1,0 +1,9 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://autoyield.io/sitemap.xml
+
+# Disallow access to admin routes
+Disallow: /admin/
+Disallow: /api/
