@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Linkedin, Github } from 'lucide-react';
+import { Linkedin, Github, Award } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { motion } from './MotionWrapper';
 
@@ -12,6 +12,7 @@ interface TeamMemberProps {
   imageUrl: string;
   linkedin?: string;
   github?: string;
+  credentials?: string;
 }
 
 const TeamMember = ({ 
@@ -20,7 +21,8 @@ const TeamMember = ({
   bio, 
   imageUrl, 
   linkedin, 
-  github
+  github,
+  credentials
 }: TeamMemberProps) => {
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 border-transparent hover:border-blue-200 h-full">
@@ -39,6 +41,13 @@ const TeamMember = ({
         
         <CardContent className="p-0">
           <p className="text-muted-foreground text-center mb-4">{bio}</p>
+          
+          {credentials && (
+            <div className="flex items-center justify-center gap-2 bg-blue-50 rounded-md py-2 px-3 mb-4 text-center">
+              <Award className="h-4 w-4 text-blue-600 flex-shrink-0" />
+              <span className="text-xs text-blue-800 font-medium">{credentials}</span>
+            </div>
+          )}
           
           {(linkedin || github) && (
             <div className="flex gap-3 justify-center pt-2">

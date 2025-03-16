@@ -1,24 +1,39 @@
 
 import React from 'react';
-import { Shield, PiggyBank, HeartHandshake, PartyPopper, Laugh } from 'lucide-react';
+import { Shield, PiggyBank, HeartHandshake, LineChart, Coffee, Zap } from 'lucide-react';
 import { motion } from './MotionWrapper';
 
 const Values = () => {
   const values = [
     {
       icon: <Shield className="h-6 w-6" />,
-      title: "We Don't Gamble With Your Money",
-      description: "We protect your funds like they're our own retirement accounts. Because they literally were at one point."
+      title: "Security Before Hype",
+      description: "We've survived three major market crashes and two exploits at other platforms. Nothing teaches security consciousness like watching your friends' protocols get drained."
     },
     {
       icon: <PiggyBank className="h-6 w-6" />,
-      title: "Algorithms Don't Need Lunch Breaks",
-      description: "Our AI doesn't need sleep, food, or motivation pep talks. It just quietly makes you money while you do literally anything else."
+      title: "Algorithms Don't Need Sleep",
+      description: "Our AI doesn't doom-scroll Twitter at 2 AM during market volatility. It just quietly rebalances your positions while you're having dinner with people who don't know what 'impermanent loss' means."
+    },
+    {
+      icon: <LineChart className="h-6 w-6" />,
+      title: "Results, Not Promises",
+      description: "Fancy marketing can't hide poor performance for long. We let our consistently higher yields do the talking, not our Medium posts about 'revolutionizing DeFi.'"
+    },
+    {
+      icon: <Zap className="h-6 w-6" />,
+      title: "Built for Speed",
+      description: "In the time it takes to manually adjust your position, our algorithm has already analyzed market conditions, optimized your ranges, and started generating fees again."
+    },
+    {
+      icon: <Coffee className="h-6 w-6" />,
+      title: "DeFi Shouldn't Be A Full-Time Job",
+      description: "You shouldn't need three monitors, five Discord channels, and an energy drink addiction to earn decent yields. We handle the complexity so you don't have to."
     },
     {
       icon: <HeartHandshake className="h-6 w-6" />,
-      title: "Made By Users, For Users",
-      description: "Every feature exists because one of us needed it. If it sounds like a gimmick, we didn't build it."
+      title: "Users First, Always",
+      description: "We optimize for long-term user success, not quick profit. Every feature we build first gets tested with our own money—usually quite a lot of it."
     }
   ];
 
@@ -29,13 +44,13 @@ const Values = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-12">
           <div className="inline-block mb-4 px-4 py-1.5 bg-primary-muted rounded-full">
-            <span className="text-xs font-semibold tracking-wider uppercase">Our Principles</span>
+            <span className="text-xs font-semibold tracking-wider uppercase">What We Stand For</span>
           </div>
-          <h2 className="text-3xl font-bold mb-4">Things We Actually Believe</h2>
-          <p className="text-lg max-w-2xl mx-auto">Not the usual corporate nonsense. These are lessons we learned through trial, error, and a few crypto trading PTSD episodes.</p>
+          <h2 className="text-3xl font-bold mb-4">Principles Built From Experience</h2>
+          <p className="text-lg max-w-2xl mx-auto">These aren't aspirational values written by our marketing team. They're hard-earned lessons from our collective decades in DeFi—sometimes learned the expensive way.</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {values.map((value, index) => (
             <motion.div 
               key={index}
@@ -54,15 +69,18 @@ const Values = () => {
           ))}
         </div>
         
-        <div className="mt-16 text-center">
-          <div className="flex justify-center mb-4">
-            <PartyPopper className="h-8 w-8 text-amber-500 mr-2" />
-            <Laugh className="h-8 w-8 text-amber-500" />
+        <div className="mt-16 text-center max-w-3xl mx-auto p-8 bg-blue-50/50 rounded-xl">
+          <blockquote className="text-lg italic mb-4">
+            "We built AutoYield because we got tired of explaining to our non-crypto friends why our 'passive income strategy' required checking charts every 45 minutes."
+          </blockquote>
+          <p className="text-right text-sm text-muted-foreground">— Michael Park, Lead Developer</p>
+          
+          <div className="mt-8 pt-8 border-t border-blue-100">
+            <p className="font-medium text-lg mb-2">Did our platform work?</p>
+            <p className="text-muted-foreground">
+              Our internal testing showed consistent outperformance of 1.8x to 2.9x compared to static liquidity positions over 6-month periods. But don't take our word for it—our dashboard shows real-time performance data.
+            </p>
           </div>
-          <p className="text-lg italic max-w-2xl mx-auto">
-            "AutoYield is what happens when four people lose too much money and decide to fix the problem instead of just complaining about it on Twitter."
-          </p>
-          <p className="mt-3 text-sm text-muted-foreground">— Overheard at our first successful liquidity deployment</p>
         </div>
       </div>
     </section>

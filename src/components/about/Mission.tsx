@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { motion } from './MotionWrapper';
-import { Target, Lightbulb, Coffee, Laugh, PiggyBank } from 'lucide-react';
+import { Target, Lightbulb, PiggyBank, ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const Mission = () => {
   return (
@@ -12,21 +13,21 @@ const Mission = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
           <div>
             <div className="inline-block mb-4 px-4 py-1.5 bg-primary-muted rounded-full">
-              <span className="text-xs font-semibold tracking-wider uppercase">Our Genesis</span>
+              <span className="text-xs font-semibold tracking-wider uppercase">Our Origin Story</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">The Vision Behind AutoYield</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">From Frustration to Innovation</h2>
             <p className="text-lg text-muted-foreground mb-6">
-              AutoYield began with a complex market observation: despite the remarkable innovation in DeFi, liquidity provision remained fundamentally inefficient. The challenge wasn't merely technical—it required a methodical reconciliation of statistical models with on-chain execution.
+              In May 2021, our founder Alex watched helplessly as his carefully positioned liquidity pools hemorrhaged value during a market crash. The problem wasn't just volatility—it was the inability to adapt positions quickly enough.
             </p>
             
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <div className="mt-1 flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-                  <PiggyBank className="h-4 w-4 text-blue-600" />
+                  <Target className="h-4 w-4 text-blue-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg">The Empirical Foundation</h3>
-                  <p className="text-muted-foreground">Through quantitative analysis of hundreds of LP positions, we identified the precise inefficiencies that algorithms could solve—where human intervention was consistently outperformed by properly calibrated models.</p>
+                  <h3 className="font-semibold text-lg">The Realization</h3>
+                  <p className="text-muted-foreground">After analyzing hundreds of LP positions, we discovered a pattern: the highest-performing positions weren't managed by the smartest traders—they were managed by the most <em>consistent</em> ones. The ones who could continuously optimize ranges without emotional decisions.</p>
                 </div>
               </div>
               
@@ -35,10 +36,27 @@ const Mission = () => {
                   <Lightbulb className="h-4 w-4 text-blue-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg">The Breakthrough</h3>
-                  <p className="text-muted-foreground">The pivotal insight wasn't just that AI could manage liquidity, but that it could fundamentally transform the risk-reward equation by operating at a scale and speed beyond human capability.</p>
+                  <h3 className="font-semibold text-lg">The Pivot</h3>
+                  <p className="text-muted-foreground">What if algorithms could do what humans couldn't? Not just basic automations, but sophisticated position management that continuously adapted to market conditions without fear, fatigue, or that pesky need to sleep.</p>
                 </div>
               </div>
+              
+              <div className="flex items-start gap-3">
+                <div className="mt-1 flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                  <PiggyBank className="h-4 w-4 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg">The Promise</h3>
+                  <p className="text-muted-foreground">AutoYield exists to solve the fundamental problem of liquidity provision: making it profitable without requiring you to become a full-time range manager with multiple monitors and a caffeine addiction.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mt-8">
+              <Button className="group" variant="outline">
+                <span>See our performance stats</span>
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Button>
             </div>
           </div>
           
@@ -49,48 +67,45 @@ const Mission = () => {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <div className="aspect-square max-w-md mx-auto relative">
-              {/* Subtle background elements */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary-muted/30 rounded-full blur-sm"></div>
-              <div className="absolute bottom-0 left-0 w-40 h-40 bg-blue-100/40 rounded-full blur-md"></div>
-              
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative w-64 h-64">
-                  {/* Elegant visualization */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-full h-40 relative">
-                      {/* Data visualization representing algorithmic efficiency */}
-                      <div className="absolute bottom-0 left-0 right-0 h-2 bg-gray-200 rounded"></div>
-                      
-                      {/* Algorithmic patterns */}
-                      <div className="absolute bottom-2 left-5 h-20 w-2 bg-red-400 rounded animate-bounce-slow" style={{ animationDelay: "0.3s", height: "25%" }}></div>
-                      <div className="absolute bottom-2 left-14 h-20 w-2 bg-red-400 rounded animate-bounce-slow" style={{ animationDelay: "0.1s", height: "15%" }}></div>
-                      <div className="absolute bottom-2 left-24 h-20 w-2 bg-red-400 rounded animate-bounce-slow" style={{ animationDelay: "0.5s", height: "40%" }}></div>
-                      <div className="absolute bottom-2 left-36 h-20 w-2 bg-green-400 rounded animate-bounce-slow" style={{ animationDelay: "0.2s", height: "60%" }}></div>
-                      <div className="absolute bottom-2 left-48 h-20 w-2 bg-green-400 rounded animate-bounce-slow" style={{ animationDelay: "0.4s", height: "75%" }}></div>
-                      
-                      {/* Insight visualization */}
-                      <div className="absolute -top-10 left-1/2 transform -translate-x-1/2">
-                        <div className="relative animate-bounce-slow">
-                          <Lightbulb className="h-14 w-14 text-yellow-400 animate-pulse" />
-                        </div>
-                      </div>
-                    </div>
+            <div className="aspect-square max-w-md mx-auto relative bg-white rounded-xl shadow-lg overflow-hidden">
+              {/* Timeline visualization with key moments */}
+              <div className="absolute inset-0 p-6 flex flex-col">
+                <h3 className="text-lg font-semibold text-center mb-4">The AutoYield Journey</h3>
+                
+                <div className="flex-1 relative">
+                  {/* Vertical timeline line */}
+                  <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-blue-100"></div>
+                  
+                  {/* Timeline events */}
+                  <div className="relative pl-16 mb-8">
+                    <div className="absolute left-7 w-3 h-3 rounded-full bg-red-500 border-2 border-white"></div>
+                    <p className="text-sm font-medium">May 2021</p>
+                    <p className="text-sm text-muted-foreground">"The Crash" - Alex loses 40% of his LP value in 3 days</p>
                   </div>
-                </div>
-              </div>
-              
-              {/* Conceptual elements */}
-              <div className="absolute top-10 right-10 p-3 bg-white rounded-lg shadow-md animate-float">
-                <div className="text-xs font-mono bg-gray-100 p-2 rounded">
-                  optimizeRange(volatility, volume);
-                </div>
-              </div>
-              
-              <div className="absolute bottom-10 left-10 p-2 bg-white rounded-lg shadow-md animate-float" style={{ animationDelay: "1s" }}>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span className="text-xs font-medium">Position optimized</span>
+                  
+                  <div className="relative pl-16 mb-8">
+                    <div className="absolute left-7 w-3 h-3 rounded-full bg-amber-500 border-2 border-white"></div>
+                    <p className="text-sm font-medium">August 2021</p>
+                    <p className="text-sm text-muted-foreground">First prototype of automated position adjustment</p>
+                  </div>
+                  
+                  <div className="relative pl-16 mb-8">
+                    <div className="absolute left-7 w-3 h-3 rounded-full bg-green-500 border-2 border-white"></div>
+                    <p className="text-sm font-medium">January 2022</p>
+                    <p className="text-sm text-muted-foreground">Core team assembled, including Emily's AI expertise</p>
+                  </div>
+                  
+                  <div className="relative pl-16 mb-8">
+                    <div className="absolute left-7 w-3 h-3 rounded-full bg-blue-500 border-2 border-white"></div>
+                    <p className="text-sm font-medium">November 2022</p>
+                    <p className="text-sm text-muted-foreground">First private version beats manual management by 87%</p>
+                  </div>
+                  
+                  <div className="relative pl-16">
+                    <div className="absolute left-7 w-3 h-3 rounded-full bg-purple-500 border-2 border-white"></div>
+                    <p className="text-sm font-medium">Today</p>
+                    <p className="text-sm text-muted-foreground">AutoYield consistently outperforms manual LP management</p>
+                  </div>
                 </div>
               </div>
             </div>
