@@ -3,6 +3,7 @@ import React from 'react';
 import { motion } from './MotionWrapper';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const Mission = () => {
   return (
@@ -44,10 +45,12 @@ const Mission = () => {
             </div>
             
             <div className="mt-8">
-              <Button className="group" variant="outline">
-                <span>See our performance stats</span>
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
+              <Link to="/docs/welcome">
+                <Button className="group" variant="outline">
+                  <span>Learn how it works</span>
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
             </div>
           </div>
           
@@ -86,7 +89,7 @@ const Mission = () => {
                     
                     <div className="bg-gradient-to-r from-blue-50 to-primary-muted/30 p-4 rounded-lg">
                       <p className="font-medium mb-2">The Results</p>
-                      <p className="text-sm">Consistently outperforms manual management</p>
+                      <p className="text-sm">Automated liquidity optimization</p>
                       <p className="text-sm">Adapts to market conditions in real-time</p>
                       <p className="text-sm">Peace of mind for LPs</p>
                     </div>

@@ -2,37 +2,38 @@
 import React from 'react';
 import { ShieldCheck, Sparkles, RefreshCw, MousePointer, BarChart3, Zap, TrendingUp, Lock, AlertTriangle } from 'lucide-react';
 import { Button } from './ui/button';
+import { Link } from 'react-router-dom';
 
 const ConsolidatedFeatures = () => {
   const features = [
     {
       icon: Zap,
       title: "Smart Automation",
-      description: "Set it and forget it - our AI handles everything from range setting to rebalancing, with zero effort from you.",
+      description: "Set it and forget it - our AI handles everything from range setting to rebalancing, with minimal effort from you.",
       color: "bg-blue-50 text-blue-600 border-blue-100"
     },
     {
       icon: TrendingUp,
-      title: "Higher Returns",
-      description: "Our AI constantly optimizes positions to generate significantly higher yields than manual management.",
+      title: "Optimized Returns",
+      description: "Our AI constantly optimizes positions to help generate better yields than typical manual management.",
       color: "bg-green-50 text-green-600 border-green-100"
     },
     {
       icon: ShieldCheck,
       title: "Risk Protection",
-      description: "Advanced mechanisms shield your funds during market volatility and minimize impermanent loss.",
+      description: "Advanced mechanisms help shield your funds during market volatility and minimize impermanent loss.",
       color: "bg-indigo-50 text-indigo-600 border-indigo-100"
     },
     {
       icon: RefreshCw,
       title: "Auto-Compounding",
-      description: "Earned fees are automatically reinvested to maximize long-term growth through compound returns.",
+      description: "Earned fees are automatically reinvested to help maximize long-term growth through compound returns.",
       color: "bg-purple-50 text-purple-600 border-purple-100"
     },
     {
       icon: MousePointer,
       title: "One-Click Liquidity",
-      description: "No complex decisions or technical knowledge required - perfect for beginners and experts alike.",
+      description: "Simplified interface reduces complex decisions - designed to be accessible for beginners and experts alike.",
       color: "bg-amber-50 text-amber-600 border-amber-100"
     },
     {
@@ -52,7 +53,7 @@ const ConsolidatedFeatures = () => {
           </div>
           <h2 className="mb-6 text-3xl font-bold md:text-4xl">Effortless Yield Generation</h2>
           <p className="text-lg text-muted-foreground">
-            AutoYield combines cutting-edge AI technology with Meteora's DLMM pools to help you earn more with less effort — whether you're new to DeFi or a seasoned pro.
+            AutoYield combines AI technology with Meteora's DLMM pools to help you earn more with less effort — whether you're new to DeFi or a seasoned pro.
           </p>
         </div>
 
@@ -113,9 +114,11 @@ const ConsolidatedFeatures = () => {
           </div>
           
           <div className="mt-10">
-            <Button className="btn-primary">
-              Learn About Our Security
-            </Button>
+            <Link to="/docs/security-model">
+              <Button className="btn-primary">
+                Learn About Our Security
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

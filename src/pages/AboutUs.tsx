@@ -12,14 +12,14 @@ const AboutUs = () => {
     <div className="min-h-screen bg-white">
       <SEO 
         title="Our Story | AutoYield"
-        description="Founded by DeFi veterans who were tired of watching their liquidity positions drain. Meet the team solving liquidity management with AI on Solana."
+        description="Founded by DeFi veterans who were tired of losing money on their liquidity positions. Meet the team solving liquidity management with AI on Solana."
         keywords="AutoYield team, Solana DeFi, liquidity management, crypto founders, DeFi solutions, AI liquidity"
       />
       <Navbar />
       
       <main className="overflow-hidden">
         {/* Hero Section */}
-        <section className="pt-24 pb-16 relative overflow-hidden">
+        <section className="pt-20 md:pt-24 pb-12 md:pb-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-primary-muted/10 to-white z-0"></div>
           <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-500/5 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-primary/5 rounded-full blur-3xl"></div>

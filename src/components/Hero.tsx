@@ -2,6 +2,7 @@
 import React from 'react';
 import { ArrowRight, TrendingUp, Shield } from 'lucide-react';
 import { Button } from './ui/button';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -26,12 +27,12 @@ const Hero = () => {
           <div className="animate-fade-up animation-delay-100 flex items-center justify-center mb-6">
             <div className="px-4 py-2 bg-green-50 border border-green-100 rounded-lg inline-flex items-center">
               <TrendingUp className="h-5 w-5 text-green-600 mr-2" />
-              <span className="text-sm md:text-base font-semibold text-green-700">Earn 2-3x more than manual liquidity management</span>
+              <span className="text-sm md:text-base font-semibold text-green-700">Maximize your yield with automated management</span>
             </div>
           </div>
           
           <p className="animate-fade-up animation-delay-200 text-lg md:text-xl text-muted-foreground mb-8 text-balance">
-            Effortlessly maximize LP fees with automated rebalancing, smart position adjustments, and real-time yield optimization—no manual management required.
+            Effortlessly optimize LP positions with automated rebalancing, smart adjustments, and real-time yield optimization—no manual management required.
           </p>
           
           <div className="animate-fade-up animation-delay-300 flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
@@ -39,9 +40,11 @@ const Hero = () => {
               Start Earning Now
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button variant="outline" className="btn-secondary w-full sm:w-auto">
-              How It Works
-            </Button>
+            <Link to="/about">
+              <Button variant="outline" className="btn-secondary w-full sm:w-auto">
+                How It Works
+              </Button>
+            </Link>
           </div>
           
           {/* Added security and platform indicators */}

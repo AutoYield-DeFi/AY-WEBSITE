@@ -18,7 +18,7 @@ const Values = () => {
     {
       icon: <LineChart className="h-6 w-6" />,
       title: "Results, Not Promises",
-      description: "In DeFi, fancy marketing can't hide poor performance. We let our yields do the talking, not our Medium posts about 'revolutionizing finance.'"
+      description: "In DeFi, fancy marketing can't hide poor performance. We focus on building reliable products that solve real problems, not just claiming to 'revolutionize finance.'"
     },
     {
       icon: <HeartHandshake className="h-6 w-6" />,

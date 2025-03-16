@@ -2,7 +2,6 @@
 import React from 'react';
 import { motion } from './MotionWrapper';
 import TeamMember from './TeamMember';
-import { LineChart, Code, Target, Shield } from 'lucide-react';
 
 const TeamSection = () => {
   const team = [
@@ -10,7 +9,7 @@ const TeamSection = () => {
       name: "Shuhaib Shariff",
       role: "Founder & CEO",
       bio: "Former DeFi trader who lost enough in failed liquidity positions to finance a small yacht. Now determined to make sure no one else has to wake up at 3 AM to rebalance their positions.",
-      imageUrl: "/team/shuhaib.jpg",
+      imageUrl: "/team/anonymous.jpg", // Using placeholder image
       linkedin: "https://linkedin.com/in/shuhaibshariff",
       credentials: "6+ years in DeFi trading and development"
     },
@@ -18,7 +17,7 @@ const TeamSection = () => {
       name: "Pratik Kumar",
       role: "CTO",
       bio: "Built trading algorithms for Wall Street before finding Solana. Known for saying 'Let me write a script for that' instead of doing anything manually. Has strong opinions about code quality.",
-      imageUrl: "/team/pratik.jpg",
+      imageUrl: "/team/anonymous.jpg", // Using placeholder image
       linkedin: "https://linkedin.com/in/pratikkumar",
       github: "https://github.com/pratikkumar",
       credentials: "10+ years in financial technology and algorithmic trading"
@@ -34,7 +33,7 @@ const TeamSection = () => {
       name: "Hamza Ahmed",
       role: "Chief Product Officer",
       bio: "The user experience perfectionist who ensures our platform is intuitive even to those who think 'liquidity pool' is where you go swimming. Notorious for rejecting designs that require more than 3 clicks.",
-      imageUrl: "/team/hamza.jpg",
+      imageUrl: "/team/anonymous.jpg", // Using placeholder image
       linkedin: "https://linkedin.com/in/hamzaahmed",
       credentials: "Led product at two successful fintech startups"
     }
