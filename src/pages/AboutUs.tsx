@@ -12,8 +12,8 @@ const AboutUs = () => {
     <div className="min-h-screen bg-white">
       <SEO 
         title="Our Story | AutoYield"
-        description="Founded by DeFi veterans who were tired of losing money on their liquidity positions. Meet the team solving liquidity management with AI on Solana."
-        keywords="AutoYield team, Solana DeFi, liquidity management, crypto founders, DeFi solutions, AI liquidity"
+        description="We're a team of engineers who experienced the pain of liquidity provision firsthand and built AutoYield to make it accessible to everyone."
+        keywords="AutoYield team, Solana DeFi, liquidity management, LP automation, DeFi solutions, AI liquidity"
       />
       <Navbar />
       
@@ -30,15 +30,15 @@ const AboutUs = () => {
                 <span className="text-xs font-semibold tracking-wider uppercase text-primary">Our Story</span>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-up bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-700">
-                Four Friends, Tired of<br/>Losing Money on Solana
+                Selling Shovels in<br/>The Crypto Gold Rush
               </h1>
               <p className="text-lg text-muted-foreground mb-8 animate-fade-up animation-delay-200">
-                AutoYield was born from frustration, built by people who were sick of watching their liquidity positions bleed out while they slept.
+                While everyone focuses on trading and lending, we saw opportunity in the overlooked field of liquidity provision—where the steady returns really are.
               </p>
               <div className="animate-fade-up animation-delay-300">
                 <div className="inline-flex items-center justify-center px-4 py-1 rounded-full bg-blue-50 text-blue-700 text-sm font-medium">
                   <span className="mr-2">•</span>
-                  <span>Trading fees are great. Impermanent loss isn't.</span>
+                  <span>Making LP strategies accessible to everyone</span>
                 </div>
               </div>
             </div>

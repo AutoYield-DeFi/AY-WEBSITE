@@ -8,7 +8,7 @@ const TeamSection = () => {
     {
       name: "Shuhaib Shariff",
       role: "Founder & CEO",
-      bio: "Former DeFi trader who lost enough in failed liquidity positions to finance a small yacht. Now determined to make sure no one else has to wake up at 3 AM to rebalance their positions.",
+      bio: "Former DeFi trader who believes liquidity provision is the most underrated opportunity in crypto. Shuhaib saw firsthand how LP strategies could generate consistent returns.",
       imageUrl: "/team/anonymous.jpg", // Using placeholder image
       linkedin: "https://linkedin.com/in/shuhaibshariff",
       credentials: "6+ years in DeFi trading and development"
@@ -16,7 +16,7 @@ const TeamSection = () => {
     {
       name: "Pratik Kumar",
       role: "CTO",
-      bio: "Built trading algorithms for Wall Street before finding Solana. Known for saying 'Let me write a script for that' instead of doing anything manually. Has strong opinions about code quality.",
+      bio: "Systems architect who turned his attention to the technical challenges of LP management. Pratik's background in quantitative finance helps drive AutoYield's intelligent algorithms.",
       imageUrl: "/team/anonymous.jpg", // Using placeholder image
       linkedin: "https://linkedin.com/in/pratikkumar",
       github: "https://github.com/pratikkumar",
@@ -25,14 +25,14 @@ const TeamSection = () => {
     {
       name: "YK",
       role: "Head of Quant Strategy",
-      bio: "Our mystery quant who moonlights from a top hedge fund. IIT graduate with a talent for turning market inefficiencies into profit. Refuses to appear on video calls before noon.",
+      bio: "Mathematical genius specializing in risk modeling and optimization algorithms. YK developed much of the core logic that protects users from impermanent loss.",
       imageUrl: "/team/anonymous.jpg",
       credentials: "IIT graduate, 8+ years in quantitative finance"
     },
     {
       name: "Hamza Ahmed",
       role: "Chief Product Officer",
-      bio: "The user experience perfectionist who ensures our platform is intuitive even to those who think 'liquidity pool' is where you go swimming. Notorious for rejecting designs that require more than 3 clicks.",
+      bio: "UX specialist obsessed with simplifying complex financial interactions. Hamza ensures that AutoYield remains accessible even to those new to DeFi concepts.",
       imageUrl: "/team/anonymous.jpg", // Using placeholder image
       linkedin: "https://linkedin.com/in/hamzaahmed",
       credentials: "Led product at two successful fintech startups"
@@ -49,9 +49,9 @@ const TeamSection = () => {
           <div className="inline-block mb-4 px-4 py-1.5 bg-primary-muted rounded-full">
             <span className="text-xs font-semibold tracking-wider uppercase">Meet The Team</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">The Founders</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">The Problem Solvers</h2>
           <p className="text-lg max-w-3xl mx-auto mb-8">
-            We're just four friends who got tired of losing money on DeFi and decided to build something better. Each of us brings a unique perspective, but we share one common trait: we've all felt the pain we're now solving.
+            We're engineers and finance experts who recognized that LP strategies were too complex and risky for most users. By combining our expertise, we've created an accessible solution that removes barriers and minimizes risks.
           </p>
         </div>
         
@@ -80,9 +80,9 @@ const TeamSection = () => {
         
         <div className="mt-16 text-center">
           <blockquote className="text-xl italic max-w-3xl mx-auto">
-            "We built AutoYield because we got tired of explaining to our non-crypto friends why our 'passive income strategy' required checking charts every 45 minutes."
+            "Liquidity provision is like selling shovels in a gold rush—you earn steady income regardless of market direction. Our mission is to make these strategies accessible to everyone."
           </blockquote>
-          <p className="text-right max-w-3xl mx-auto mt-4 text-muted-foreground">— Hamza Ahmed, CPO</p>
+          <p className="text-right max-w-3xl mx-auto mt-4 text-muted-foreground">— Shuhaib Shariff, CEO</p>
         </div>
       </div>
     </section>
