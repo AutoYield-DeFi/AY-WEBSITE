@@ -17,7 +17,7 @@ const AboutUs = () => {
       />
       <Navbar />
       
-      <main>
+      <main className="overflow-hidden">
         {/* Hero Section */}
         <section className="pt-24 pb-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-primary-muted/10 to-white z-0"></div>
@@ -27,14 +27,20 @@ const AboutUs = () => {
           <div className="container mx-auto px-6 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
               <div className="inline-block mb-4 px-4 py-1.5 bg-primary-muted rounded-full animate-fade-in">
-                <span className="text-xs font-semibold tracking-wider uppercase">Our Story</span>
+                <span className="text-xs font-semibold tracking-wider uppercase text-primary">Our Story</span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-up">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-up bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-700">
                 Four Friends, Tired of<br/>Losing Money on Solana
               </h1>
               <p className="text-lg text-muted-foreground mb-8 animate-fade-up animation-delay-200">
                 AutoYield was born from frustration, built by people who were sick of watching their liquidity positions bleed out while they slept.
               </p>
+              <div className="animate-fade-up animation-delay-300">
+                <div className="inline-flex items-center justify-center px-4 py-1 rounded-full bg-blue-50 text-blue-700 text-sm font-medium">
+                  <span className="mr-2">•</span>
+                  <span>Trading fees are great. Impermanent loss isn't.</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>

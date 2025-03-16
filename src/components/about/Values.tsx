@@ -30,6 +30,7 @@ const Values = () => {
   return (
     <section id="values" className="py-20 bg-gradient-to-b from-white to-primary-muted/10 relative overflow-hidden">
       <div className="absolute bottom-0 right-0 w-full h-1/2 bg-primary-muted/5 transform rotate-3 origin-bottom-right"></div>
+      <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-primary/5 rounded-full blur-3xl -translate-x-1/2"></div>
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
@@ -44,7 +45,7 @@ const Values = () => {
           {values.map((value, index) => (
             <motion.div 
               key={index}
-              className="bg-white p-8 rounded-xl shadow-sm border border-primary/5 text-center transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+              className="bg-white p-8 rounded-xl shadow-sm border border-primary/5 text-center transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-primary/10"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -57,18 +58,6 @@ const Values = () => {
               <p className="text-muted-foreground">{value.description}</p>
             </motion.div>
           ))}
-        </div>
-        
-        <div className="mt-20 text-center">
-          <div className="max-w-3xl mx-auto p-8 bg-blue-50/50 rounded-xl">
-            <p className="font-medium text-lg mb-4">Our internal testing showed consistent outperformance compared to static liquidity positions.</p>
-            <p className="text-muted-foreground mb-6">
-              But we don't expect you to take our word for it—our dashboard shows real-time performance data so you can see for yourself.
-            </p>
-            <p className="text-sm text-blue-600 font-medium">
-              Join us and take back control of your liquidity.
-            </p>
-          </div>
         </div>
       </div>
     </section>

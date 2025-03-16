@@ -24,17 +24,20 @@ const TeamMember = ({
   credentials
 }: TeamMemberProps) => {
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 border-transparent hover:border-blue-200 h-full">
+    <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 border-primary/5 hover:border-blue-200 h-full group">
       <div className="p-6">
         <div className="flex flex-col items-center text-center mb-4">
-          <Avatar className="h-24 w-24 rounded-full border-2 border-blue-100 mb-4">
-            <AvatarImage src={imageUrl} alt={name} className="object-cover" />
-            <AvatarFallback className="bg-primary-muted text-primary text-xl">
-              {name.split(' ').map(n => n[0]).join('')}
-            </AvatarFallback>
-          </Avatar>
+          <div className="relative mb-4">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary to-blue-600 rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+            <Avatar className="h-24 w-24 rounded-full border-2 border-blue-100 group-hover:border-blue-200 transition-all duration-300 shadow-sm">
+              <AvatarImage src={imageUrl} alt={name} className="object-cover" />
+              <AvatarFallback className="bg-primary-muted text-primary text-xl">
+                {name.split(' ').map(n => n[0]).join('')}
+              </AvatarFallback>
+            </Avatar>
+          </div>
           
-          <h3 className="text-xl font-semibold mb-1">{name}</h3>
+          <h3 className="text-xl font-semibold mb-1 group-hover:text-primary transition-colors duration-300">{name}</h3>
           <p className="text-primary font-medium mb-3">{role}</p>
         </div>
         
