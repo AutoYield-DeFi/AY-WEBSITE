@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Clock } from 'lucide-react';
 
 const RoadmapHeader = () => {
   return (
@@ -20,7 +21,8 @@ const RoadmapHeader = () => {
             Our path to building the most sophisticated AI-powered liquidity management platform on Solana
           </p>
           <div className="flex justify-center gap-3 animate-fade-up animation-delay-300">
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+              <Clock size={14} />
               Starting Q2 2025
             </span>
             <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">

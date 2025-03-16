@@ -17,7 +17,7 @@ const SEO = ({
   title,
   description,
   canonical,
-  keywords = "liquidity management, Solana, DeFi, DLMM, Meteora, yield optimization",
+  keywords = "AI liquidity management, Solana, DeFi, DLMM, Meteora, yield optimization, AutoYield",
   ogType = "website",
   ogImage = "/og-image.png",
   twitterCard = "summary_large_image",

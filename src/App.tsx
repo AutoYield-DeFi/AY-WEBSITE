@@ -14,6 +14,7 @@ import AboutUs from "./pages/AboutUs";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
 import Roadmap from "./pages/Roadmap";
+import Docs from "./pages/Docs";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => {
                   <Route path="/glossary" element={<Glossary />} />
                   <Route path="/about" element={<AboutUs />} />
                   <Route path="/roadmap" element={<Roadmap />} />
+                  <Route path="/docs/*" element={<Docs />} />
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/blog/tag/:tag" element={<Blog />} />
                   <Route path="/blog/:id" element={<BlogDetail />} />
