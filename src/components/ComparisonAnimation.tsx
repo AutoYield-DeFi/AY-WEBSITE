@@ -125,8 +125,8 @@ const ComparisonAnimation = () => {
         </div>
       </div>
       
-      {/* Add animation styles */}
-      <style jsx>{`
+      {/* Add animation styles using CSS classes instead of inline JSX style tag */}
+      <style dangerouslySetInnerHTML={{ __html: `
         .animate-in .animate-item {
           opacity: 1;
           transform: translateX(0);
@@ -144,7 +144,7 @@ const ComparisonAnimation = () => {
         .animate-spin-slow {
           animation: spin-slow 6s linear infinite;
         }
-      `}</style>
+      `}} />
     </section>
   );
 };
