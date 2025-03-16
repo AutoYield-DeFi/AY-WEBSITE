@@ -36,9 +36,11 @@ const DocsWelcome = () => {
           mitigating impermanent loss and market risks.
         </p>
         <p>
-          The primary goal of AutoYield is to simplify liquidity provisioning through automation while delivering 
-          institutional-grade yield strategies. Unlike traditional LP solutions, which require manual intervention, 
-          AutoYield's QUANT AI agent continuously analyzes liquidity conditions and actively rebalances positions in real-time.
+          Our platform supports a diverse range of tokens - from well-established projects to promising small and mid-cap 
+          opportunities that meet our AI's rigorous evaluation criteria. The primary goal of AutoYield is to simplify 
+          liquidity provisioning through automation while delivering institutional-grade yield strategies. Unlike traditional 
+          LP solutions, which require manual intervention, AutoYield's QUANT AI agent continuously analyzes liquidity 
+          conditions and actively rebalances positions in real-time.
         </p>
       </section>
 
@@ -85,11 +87,11 @@ const DocsWelcome = () => {
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2">
                 <BookOpen size={18} className="text-primary" />
-                One-Click Liquidity
+                Diverse Token Support
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p>Simple user experience with complex optimization happening behind the scenes, powered by AI.</p>
+              <p>Our AI identifies profitable opportunities across established tokens and promising small and mid-cap projects.</p>
             </CardContent>
           </Card>
         </div>

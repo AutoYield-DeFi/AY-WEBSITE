@@ -63,16 +63,6 @@ const Navbar = () => {
               About
             </Link>
             <Link
-              to="/roadmap"
-              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                isActive('/roadmap')
-                  ? 'text-primary'
-                  : 'text-foreground/80 hover:text-foreground hover:bg-gray-100 dark:hover:bg-gray-800'
-              }`}
-            >
-              Roadmap
-            </Link>
-            <Link
               to="/docs"
               className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
                 location.pathname.startsWith('/docs')
@@ -91,16 +81,6 @@ const Navbar = () => {
               }`}
             >
               Blog
-            </Link>
-            <Link
-              to="/glossary"
-              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                isActive('/glossary')
-                  ? 'text-primary'
-                  : 'text-foreground/80 hover:text-foreground hover:bg-gray-100 dark:hover:bg-gray-800'
-              }`}
-            >
-              Glossary
             </Link>
           </div>
 
@@ -147,15 +127,6 @@ const Navbar = () => {
             About
           </Link>
           <Link
-            to="/roadmap"
-            className={`block px-3 py-2 rounded-md text-base font-medium ${
-              isActive('/roadmap') ? 'text-primary bg-primary/5' : 'hover:bg-gray-100 dark:hover:bg-gray-800'
-            }`}
-            onClick={() => setIsOpen(false)}
-          >
-            Roadmap
-          </Link>
-          <Link
             to="/docs"
             className={`block px-3 py-2 rounded-md text-base font-medium ${
               location.pathname.startsWith('/docs') ? 'text-primary bg-primary/5' : 'hover:bg-gray-100 dark:hover:bg-gray-800'
@@ -174,15 +145,6 @@ const Navbar = () => {
             onClick={() => setIsOpen(false)}
           >
             Blog
-          </Link>
-          <Link
-            to="/glossary"
-            className={`block px-3 py-2 rounded-md text-base font-medium ${
-              isActive('/glossary') ? 'text-primary bg-primary/5' : 'hover:bg-gray-100 dark:hover:bg-gray-800'
-            }`}
-            onClick={() => setIsOpen(false)}
-          >
-            Glossary
           </Link>
           <div className="pt-4">
             <Button variant="default" className="w-full rounded-full">
