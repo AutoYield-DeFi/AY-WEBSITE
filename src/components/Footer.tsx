@@ -31,7 +31,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground">Features</a></li>
               <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground">Security</a></li>
-              <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground">Roadmap</a></li>
+              <li><Link to="/roadmap" className="text-primary-foreground/80 hover:text-primary-foreground">Roadmap</Link></li>
               <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground">Pricing</a></li>
             </ul>
           </div>
@@ -39,11 +39,11 @@ const Footer = () => {
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider mb-4">Resources</h3>
             <ul className="space-y-3">
-              <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground">Documentation</a></li>
-              <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground">API</a></li>
-              <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground">Blog</a></li>
+              <li><Link to="/docs" className="text-primary-foreground/80 hover:text-primary-foreground">Documentation</Link></li>
+              <li><Link to="/docs/api-reference" className="text-primary-foreground/80 hover:text-primary-foreground">API</Link></li>
+              <li><Link to="/blog" className="text-primary-foreground/80 hover:text-primary-foreground">Blog</Link></li>
               <li><Link to="/glossary" className="text-primary-foreground/80 hover:text-primary-foreground">Glossary</Link></li>
-              <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground">FAQ</a></li>
+              <li><Link to="/docs/faq" className="text-primary-foreground/80 hover:text-primary-foreground">FAQ</Link></li>
             </ul>
           </div>
           

@@ -73,6 +73,16 @@ const Navbar = () => {
               Roadmap
             </Link>
             <Link
+              to="/docs"
+              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                location.pathname.startsWith('/docs')
+                  ? 'text-primary'
+                  : 'text-foreground/80 hover:text-foreground hover:bg-gray-100 dark:hover:bg-gray-800'
+              }`}
+            >
+              Docs
+            </Link>
+            <Link
               to="/blog"
               className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
                 isActive('/blog') || location.pathname.startsWith('/blog/')
@@ -144,6 +154,15 @@ const Navbar = () => {
             onClick={() => setIsOpen(false)}
           >
             Roadmap
+          </Link>
+          <Link
+            to="/docs"
+            className={`block px-3 py-2 rounded-md text-base font-medium ${
+              location.pathname.startsWith('/docs') ? 'text-primary bg-primary/5' : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+            }`}
+            onClick={() => setIsOpen(false)}
+          >
+            Docs
           </Link>
           <Link
             to="/blog"
