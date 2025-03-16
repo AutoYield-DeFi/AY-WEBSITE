@@ -10,7 +10,7 @@ const Hero = () => {
         <div className="max-w-3xl mx-auto text-center">
           <div className="animate-fade-in">
             <div className="inline-block mb-4 px-4 py-1.5 bg-primary-muted rounded-full">
-              <span className="text-xs font-semibold tracking-wider uppercase">Built on Solana</span>
+              <span className="text-xs font-semibold tracking-wider uppercase">POWERED BY AI AND BUILT ON SOLANA</span>
             </div>
           </div>
           
