@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowRight, TrendingUp, Shield } from 'lucide-react';
+import { ArrowRight, Shield } from 'lucide-react';
 import { Button } from './ui/button';
 import { Link } from 'react-router-dom';
 
@@ -22,14 +22,6 @@ const Hero = () => {
           <h1 className="animate-fade-up text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
             Smart Liquidity Management <span className="text-primary">on Solana</span>
           </h1>
-          
-          {/* Subtle highlight banner for results */}
-          <div className="animate-fade-up animation-delay-100 flex items-center justify-center mb-6">
-            <div className="px-4 py-2 bg-green-50 border border-green-100 rounded-lg inline-flex items-center">
-              <TrendingUp className="h-5 w-5 text-green-600 mr-2" />
-              <span className="text-sm md:text-base font-semibold text-green-700">Maximize your yield with automated management</span>
-            </div>
-          </div>
           
           <p className="animate-fade-up animation-delay-200 text-lg md:text-xl text-muted-foreground mb-8 text-balance">
             Effortlessly optimize LP positions with automated rebalancing, smart adjustments, and real-time yield optimization—no manual management required.
