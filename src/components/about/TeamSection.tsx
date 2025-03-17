@@ -8,7 +8,7 @@ const TeamSection = () => {
     {
       name: "Shuhaib Shariff",
       role: "CEO",
-      bio: "Veteran with 20+ years in SaaS and software product development. Led cross-functional teams to build business tools that simplify complex processes. Experienced in bootstrapping ventures and exploring blockchain technologies since 2021.",
+      bio: "Technology leader with over 20 years in SaaS and software development. Expert in building cross-functional teams that deliver intuitive business tools. Seasoned entrepreneur with experience scaling startups and exploring blockchain technologies since 2021.",
       imageUrl: "/team/anonymous.jpg", // Using placeholder image
       linkedin: "https://www.linkedin.com/in/shuhaib/",
       credentials: "20+ years in software product development"
@@ -16,7 +16,7 @@ const TeamSection = () => {
     {
       name: "Pratik Kumar",
       role: "CTO",
-      bio: "Engineering professional who transitioned from Marine Engineering to Computer Science and Blockchain Development. Brings unique perspective from cybersecurity to creating innovative DeFi solutions that bridge traditional and decentralized finance.",
+      bio: "Innovative technologist who evolved from Marine Engineering to Computer Science and Blockchain Development. Leverages cybersecurity background to create DeFi solutions that effectively bridge traditional and decentralized finance ecosystems.",
       imageUrl: "/team/anonymous.jpg", // Using placeholder image
       linkedin: "https://www.linkedin.com/in/pratik-kumar-/",
       github: "https://github.com/pratikasr",
@@ -25,14 +25,14 @@ const TeamSection = () => {
     {
       name: "YK",
       role: "Head of Quant Strategy",
-      bio: "AI Quant specialist developing sophisticated financial models that combine deep learning with quantitative methods. Creates autonomous asset management solutions for DeFi while building AutoYield's AI Quant engine in his spare time.",
+      bio: "Financial modeling expert combining AI and quantitative methods to revolutionize asset management in DeFi. Develops AutoYield's AI Quant engine while working as a hedge fund quant, bringing institutional expertise to decentralized markets.",
       imageUrl: "/team/anonymous.jpg",
       credentials: "IIT graduate, 3+ years in quantitative finance"
     },
     {
       name: "Ahmed Hamza",
       role: "Front-end Lead",
-      bio: "Web3 development expert specializing in modern JavaScript frameworks and blockchain integrations. Combines expertise in graph databases, RAG systems, and AI to create intuitive interfaces that make complex DeFi concepts accessible.",
+      bio: "Web3 development specialist with deep expertise in modern JavaScript frameworks and blockchain technologies. Creates intuitive interfaces by integrating graph databases, RAG systems, and AI to make complex DeFi concepts accessible to all users.",
       imageUrl: "/team/anonymous.jpg", // Using placeholder image
       linkedin: "https://www.linkedin.com/in/hamzax/",
       credentials: "Focused on UX, design and testing"
