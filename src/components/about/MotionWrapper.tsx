@@ -32,13 +32,16 @@ const createMotionComponent = (Element: keyof JSX.IntrinsicElements) => {
     const ref = React.useRef<HTMLElement>(null);
     
     React.useEffect(() => {
+      // Optimize by using a lower threshold and fewer observations
       const observer = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && !isInView) {
             setIsInView(true);
+            // Disconnect once the element is in view to save resources
+            observer.disconnect();
           }
         },
-        { threshold: 0.1 }
+        { threshold: 0.1, rootMargin: "50px" }
       );
       
       if (ref.current) {
@@ -46,11 +49,9 @@ const createMotionComponent = (Element: keyof JSX.IntrinsicElements) => {
       }
       
       return () => {
-        if (ref.current) {
-          observer.unobserve(ref.current);
-        }
+        observer.disconnect();
       };
-    }, []);
+    }, [isInView]);
     
     // Generate CSS classes based on animation props
     let animationClass = '';
@@ -60,7 +61,7 @@ const createMotionComponent = (Element: keyof JSX.IntrinsicElements) => {
       animationClass = 'animate-fade-up';
       
       if (transition?.delay) {
-        const delayMs = transition.delay * 1000;
+        const delayMs = Math.round(transition.delay * 1000 / 100) * 100; // Round to nearest 100ms
         delayClass = `animation-delay-${delayMs}`;
       }
     } else if (animate) {
