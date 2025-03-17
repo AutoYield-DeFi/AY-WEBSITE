@@ -1,13 +1,10 @@
-
 import React from 'react';
 import { ArrowRight, Sparkles, Shield, RefreshCcw, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
-
 const DocsWelcome = () => {
-  return (
-    <div className="space-y-10">
+  return <div className="space-y-10">
       <div className="space-y-4">
         <h1 className="text-4xl font-bold">Welcome to AutoYield</h1>
         <p className="text-xl text-muted-foreground">
@@ -29,12 +26,7 @@ const DocsWelcome = () => {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-bold">What is AutoYield?</h2>
-        <p>
-          AutoYield is an AI-powered liquidity management platform built exclusively on Solana. It provides intelligent, 
-          automated liquidity provisioning using Meteora's Dynamic Liquidity Market Maker (DLMM) pools. 
-          By leveraging advanced AI optimization, AutoYield enables users to maximize trading fees while 
-          mitigating impermanent loss and market risks.
-        </p>
+        <p>AutoYield is an AI-powered liquidity management platform built exclusively on Solana. It provides intelligent, automated liquidity provisioning using Meteora's Dynamic Liquidity Market Maker (DLMM) pools. By leveraging advanced AI optimization, our platform enables users to maximize trading fees while mitigating impermanent loss and market risks.</p>
         <p>
           Our platform supports a diverse range of tokens - from well-established projects to promising small and mid-cap 
           opportunities that meet our AI's rigorous evaluation criteria. The primary goal of AutoYield is to simplify 
@@ -158,8 +150,6 @@ const DocsWelcome = () => {
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default DocsWelcome;
