@@ -1,90 +1,78 @@
 
 import React from 'react';
+import { motion } from './MotionWrapper';
+import { Calendar, Code, Users, Rocket, Zap, BarChart3 } from 'lucide-react';
 
 const TimelineItem = ({ 
-  date, 
+  icon, 
   title, 
-  description, 
-  isLast = false 
+  description 
 }: { 
-  date: string; 
+  icon: React.ReactNode;
   title: string; 
-  description: string; 
-  isLast?: boolean;
+  description: string;
 }) => {
   return (
-    <div className="relative flex items-start">
-      {/* Dot and line */}
-      <div className="absolute left-0 flex flex-col items-center">
-        <div className="h-4 w-4 rounded-full bg-blue-600"></div>
-        {!isLast && <div className="h-full w-0.5 bg-blue-200"></div>}
+    <div className="flex items-start gap-4 mb-8">
+      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-muted flex items-center justify-center text-primary">
+        {icon}
       </div>
-      
-      {/* Content */}
-      <div className="ml-8 pb-8">
-        <span className="text-sm font-medium text-blue-600 block mb-2">{date}</span>
-        <h3 className="text-xl font-semibold mb-2">{title}</h3>
-        <p className="text-muted-foreground">{description}</p>
+      <div>
+        <h3 className="text-lg font-semibold mb-1">{title}</h3>
+        <p className="text-muted-foreground text-sm">{description}</p>
       </div>
     </div>
   );
 };
 
 const Timeline = () => {
-  const milestones = [
+  const items = [
     {
-      date: "Q2 2023",
-      title: "Concept Development",
-      description: "The AutoYield concept was born from observing the complexity and inefficiency in Solana DeFi liquidity management."
+      icon: <Code className="w-5 h-5" />,
+      title: "Idea",
+      description: "We experienced the complexity of liquidity provision firsthand and built AutoYield to simplify it"
     },
     {
-      date: "Q3 2023",
-      title: "Research & Team Formation",
-      description: "Our founding team came together, bringing expertise in DeFi, AI, and Solana development to create the AutoYield vision."
+      icon: <Zap className="w-5 h-5" />,
+      title: "Solution",
+      description: "AI-powered position management that abstracts away the complexity"
     },
     {
-      date: "Q4 2023",
-      title: "Technology Development",
-      description: "Development of the core QUANT AI engine and integration with Meteora's DLMM architecture began."
+      icon: <BarChart3 className="w-5 h-5" />,
+      title: "Technology",
+      description: "Intelligent algorithms detect optimal positions while mitigating impermanent loss"
     },
     {
-      date: "Q1 2024",
-      title: "Private Alpha",
-      description: "Limited release to select partners for testing our core liquidity management algorithms and security features."
-    },
-    {
-      date: "Q2 2024",
-      title: "Public Beta Launch",
-      description: "AutoYield opened to the public, allowing anyone to access AI-driven liquidity management on Solana."
-    },
-    {
-      date: "Q3 2024+",
-      title: "The Road Ahead",
-      description: "Expansion of supported pools, advanced AI features, and deeper ecosystem integrations planned for the future."
+      icon: <Rocket className="w-5 h-5" />,
+      title: "Result",
+      description: "Reliable crypto yield without requiring a PhD in financial engineering"
     }
   ];
 
   return (
-    <section id="timeline" className="py-12">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold mb-4">Our Journey</h2>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          The evolution of AutoYield from concept to a leading liquidity management platform on Solana.
-        </p>
-      </div>
-      
-      <div className="relative max-w-3xl mx-auto pl-4">
-        {milestones.map((milestone, index) => (
+    <motion.div 
+      className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ staggerChildren: 0.1 }}
+      viewport={{ once: true }}
+    >
+      {items.map((item, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.1 }}
+          viewport={{ once: true }}
+        >
           <TimelineItem
-            key={index}
-            date={milestone.date}
-            title={milestone.title}
-            description={milestone.description}
-            isLast={index === milestones.length - 1}
+            icon={item.icon}
+            title={item.title}
+            description={item.description}
           />
-        ))}
-      </div>
-    </section>
+        </motion.div>
+      ))}
+    </motion.div>
   );
 };
 

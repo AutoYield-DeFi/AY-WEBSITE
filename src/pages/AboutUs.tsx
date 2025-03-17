@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -6,6 +5,8 @@ import SEO from '@/components/SEO';
 import TeamSection from '@/components/about/TeamSection';
 import Mission from '@/components/about/Mission';
 import Values from '@/components/about/Values';
+import { motion } from '@/components/about/MotionWrapper';
+import { ArrowDown } from 'lucide-react';
 
 const AboutUs = () => {
   return <div className="min-h-screen bg-white">
@@ -14,7 +15,7 @@ const AboutUs = () => {
       
       <main className="overflow-hidden">
         {/* Hero Section */}
-        <section className="pt-20 md:pt-24 pb-12 md:pb-16 relative overflow-hidden">
+        <section className="pt-20 md:pt-24 pb-12 relative overflow-hidden flex min-h-[70vh] items-center">
           <div className="absolute inset-0 bg-gradient-to-br from-primary-muted/10 to-white z-0"></div>
           <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-500/5 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-primary/5 rounded-full blur-3xl"></div>
@@ -33,38 +34,67 @@ const AboutUs = () => {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-up bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-700">
                 Unlocking DeFi's<br />Hidden Potential
               </h1>
-              <p className="text-lg text-muted-foreground mb-8 animate-fade-up animation-delay-200">While everyone else was hunting for the next 100x token, we discovered that the real opportunity was in the infrastructure that powers the entire ecosystem!</p>
+              <p className="text-lg text-muted-foreground mb-8 animate-fade-up animation-delay-200">While everyone was hunting for 100x tokens, we discovered the real opportunity in the infrastructure!</p>
               
-              <div className="flex flex-col md:flex-row items-center justify-center gap-6 mt-10 mb-12">
-                <div className="w-full md:w-1/2 bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-fade-up animation-delay-300 relative overflow-hidden">
-                  <div className="absolute -right-4 -top-4 w-20 h-20 bg-blue-50 rounded-full"></div>
-                  <div className="flex items-center justify-center w-14 h-14 rounded-full bg-primary-muted text-primary mb-4 mx-auto relative z-10">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-pickaxe"><path d="M14.4 16.1 11 13M12 9l1-5 2 2 1-4 2 2-2.4 7.6"></path><path d="M16.8 14.5c1.8 1.8 4.3 2.3 6.1.5l-8-8c-1.8 1.8-1.3 4.3.4 6.1"></path><path d="M10 16.5l-6.7 6.7"></path><path d="M4.9 14.7 14.7 4.9"></path></svg>
+              {/* Visual explanation - simple & concise */}
+              <div className="flex justify-center mb-12">
+                <div className="relative max-w-lg w-full">
+                  <motion.div 
+                    className="absolute -top-4 -left-4 w-24 h-24 bg-blue-50 rounded-full opacity-70"
+                    animate={{ 
+                      scale: [1, 1.1, 1],
+                      rotate: [0, 5, 0],
+                    }}
+                    transition={{ 
+                      duration: 8,
+                      repeat: Infinity,
+                      repeatType: "reverse"
+                    }}
+                  />
+                  
+                  <motion.div 
+                    className="absolute -bottom-4 -right-4 w-32 h-32 bg-primary-muted/30 rounded-full opacity-70"
+                    animate={{ 
+                      scale: [1, 1.15, 1],
+                      rotate: [0, -5, 0],
+                    }}
+                    transition={{ 
+                      duration: 10,
+                      repeat: Infinity,
+                      repeatType: "reverse"
+                    }}
+                  />
+                  
+                  <div className="relative bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-primary/10 p-8 transform transition-all">
+                    <div className="grid grid-cols-2 gap-6">
+                      <div className="flex flex-col items-center text-center p-4">
+                        <div className="w-16 h-16 rounded-full bg-primary-muted flex items-center justify-center text-primary mb-4">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-bar-chart-4"><path d="M3 3v18h18"></path><path d="M13 17V9"></path><path d="M18 17V5"></path><path d="M8 17v-3"></path></svg>
+                        </div>
+                        <h3 className="text-base font-medium">The Problem</h3>
+                        <p className="text-sm text-muted-foreground mt-2">Liquidity provision is complex and risky for most users</p>
+                      </div>
+                      
+                      <div className="flex flex-col items-center text-center p-4">
+                        <div className="w-16 h-16 rounded-full bg-primary-muted flex items-center justify-center text-primary mb-4">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-sparkles"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path><path d="M5 3v4"></path><path d="M19 17v4"></path><path d="M3 5h4"></path><path d="M17 19h4"></path></svg>
+                        </div>
+                        <h3 className="text-base font-medium">Our Solution</h3>
+                        <p className="text-sm text-muted-foreground mt-2">AI-powered liquidity management with one click</p>
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-semibold mb-3 text-center relative z-10">The Infrastructure Play</h3>
-                  <p className="text-muted-foreground text-center relative z-10">
-                    Providing liquidity is the backbone of decentralized exchanges, yet it remains technically complex and risky for most users. We're changing that equation.
-                  </p>
-                </div>
-                
-                <div className="w-full md:w-1/2 bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-fade-up animation-delay-400 relative overflow-hidden">
-                  <div className="absolute -left-4 -bottom-4 w-20 h-20 bg-primary-muted/30 rounded-full"></div>
-                  <div className="flex items-center justify-center w-14 h-14 rounded-full bg-primary-muted text-primary mb-4 mx-auto relative z-10">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-network"><rect x="16" y="16" width="6" height="6" rx="1"></rect><rect x="2" y="16" width="6" height="6" rx="1"></rect><rect x="9" y="2" width="6" height="6" rx="1"></rect><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"></path><path d="M12 12V8"></path></svg>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3 text-center relative z-10">Beyond the Hype Cycle</h3>
-                  <p className="text-muted-foreground text-center relative z-10">
-                    Our team built AutoYield after years of watching DeFi users struggle with the complexity of liquidity provision while missing out on its consistent, market-neutral returns.
-                  </p>
                 </div>
               </div>
               
-              <div className="animate-fade-up animation-delay-300">
-                <div className="inline-flex items-center justify-center px-4 py-1 rounded-full bg-blue-50 text-blue-700 text-sm font-medium">
-                  <span className="mr-2">•</span>
-                  <span>Making LP strategies accessible to everyone</span>
-                </div>
-              </div>
+              <motion.div 
+                className="animate-bounce mt-10"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+              >
+                <ArrowDown className="mx-auto text-primary/60" />
+              </motion.div>
             </div>
           </div>
         </section>
@@ -72,11 +102,11 @@ const AboutUs = () => {
         {/* Mission Section */}
         <Mission />
         
-        {/* Team Section */}
-        <TeamSection />
-        
         {/* Values Section */}
         <Values />
+        
+        {/* Team Section - Kept unchanged as requested */}
+        <TeamSection />
       </main>
       
       <Footer />
