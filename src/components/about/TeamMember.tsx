@@ -12,6 +12,7 @@ interface TeamMemberProps {
   linkedin?: string;
   github?: string;
   credentials?: string;
+  icon?: React.ReactNode;
 }
 
 const TeamMember = ({ 
@@ -21,7 +22,8 @@ const TeamMember = ({
   imageUrl, 
   linkedin, 
   github,
-  credentials
+  credentials,
+  icon
 }: TeamMemberProps) => {
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 border-primary/5 hover:border-blue-200 h-full group">
@@ -35,6 +37,14 @@ const TeamMember = ({
                 {name.split(' ').map(n => n[0]).join('')}
               </AvatarFallback>
             </Avatar>
+            
+            {icon && (
+              <div className="absolute -bottom-2 -right-2 bg-white p-2 rounded-full shadow-md border border-blue-100 group-hover:border-blue-200 transition-all duration-300">
+                <div className="text-primary">
+                  {icon}
+                </div>
+              </div>
+            )}
           </div>
           
           <h3 className="text-xl font-semibold mb-1 group-hover:text-primary transition-colors duration-300">{name}</h3>
