@@ -5,6 +5,7 @@ import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { BlogPost } from '@/types/blog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+import { Heading, Paragraph, Label } from '@/components/ui/typography';
 
 interface BlogFeaturedPostProps {
   post: BlogPost;
@@ -24,21 +25,24 @@ const BlogFeaturedPost = ({ post }: BlogFeaturedPostProps) => {
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-0">
         <div className="lg:col-span-3 flex flex-col justify-center p-6 lg:p-10 order-2 lg:order-1">
           <div className="mb-4">
-            <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
-              Featured
-            </span>
-            <span className="ml-2 px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm font-medium">
-              {post.category}
-            </span>
+            <Label className="bg-primary/10 text-primary mr-2">Featured</Label>
+            <Label className="bg-gray-100 text-gray-800">{post.category}</Label>
           </div>
           
-          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-tight mb-4">
+          <Heading 
+            as="h2"
+            size="4xl"
+            serif
+            className="tracking-tight leading-tight mb-4"
+          >
             <Link to={`/blog/${post.slug}`} className="hover:text-primary transition-colors">
               {post.title}
             </Link>
-          </h2>
+          </Heading>
           
-          <p className="text-muted-foreground text-base md:text-lg mb-6">{post.excerpt}</p>
+          <Paragraph size="lg" muted className="mb-6">
+            {post.excerpt}
+          </Paragraph>
           
           <div className="flex flex-wrap items-center text-sm text-muted-foreground gap-x-4 gap-y-2 mb-6">
             <div className="flex items-center">

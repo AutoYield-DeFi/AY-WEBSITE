@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -7,6 +8,7 @@ import Mission from '@/components/about/Mission';
 import Values from '@/components/about/Values';
 import { motion } from '@/components/about/MotionWrapper';
 import { ArrowDown } from 'lucide-react';
+import { Heading, Paragraph, Label } from '@/components/ui/typography';
 
 const AboutUs = () => {
   return <div className="min-h-screen bg-white">
@@ -29,12 +31,23 @@ const AboutUs = () => {
           <div className="container mx-auto px-6 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
               <div className="inline-block mb-4 px-4 py-1.5 bg-primary-muted rounded-full animate-fade-in">
-                <span className="text-xs font-semibold tracking-wider uppercase text-primary">Our Story</span>
+                <Label className="tracking-wider uppercase text-primary">Our Story</Label>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-up bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-700">
+              <Heading 
+                as="h1" 
+                size="6xl" 
+                gradient 
+                className="mb-6 animate-fade-up"
+              >
                 Unlocking DeFi's<br />Hidden Potential
-              </h1>
-              <p className="text-lg text-muted-foreground mb-8 animate-fade-up animation-delay-200">While everyone was hunting for 100x tokens, we discovered the real opportunity in the infrastructure!</p>
+              </Heading>
+              <Paragraph 
+                size="lg" 
+                muted 
+                className="mb-8 animate-fade-up animation-delay-200"
+              >
+                While everyone was hunting for 100x tokens, we discovered the real opportunity in the infrastructure!
+              </Paragraph>
               
               {/* Visual explanation - simple & concise */}
               <div className="flex justify-center mb-12">
@@ -75,16 +88,20 @@ const AboutUs = () => {
                         <div className="w-16 h-16 rounded-full bg-primary-muted flex items-center justify-center text-primary mb-4">
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-bar-chart-4"><path d="M3 3v18h18"></path><path d="M13 17V9"></path><path d="M18 17V5"></path><path d="M8 17v-3"></path></svg>
                         </div>
-                        <h3 className="text-base font-medium">The Problem</h3>
-                        <p className="text-sm text-muted-foreground mt-2">Liquidity provision is complex and risky for most users</p>
+                        <Heading as="h3" size="base">The Problem</Heading>
+                        <Paragraph size="sm" muted className="mt-2">
+                          Liquidity provision is complex and risky for most users
+                        </Paragraph>
                       </div>
                       
                       <div className="flex flex-col items-center text-center p-4">
                         <div className="w-16 h-16 rounded-full bg-primary-muted flex items-center justify-center text-primary mb-4">
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-sparkles"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path><path d="M5 3v4"></path><path d="M19 17v4"></path><path d="M3 5h4"></path><path d="M17 19h4"></path></svg>
                         </div>
-                        <h3 className="text-base font-medium">Our Solution</h3>
-                        <p className="text-sm text-muted-foreground mt-2">AI-powered liquidity management with one click</p>
+                        <Heading as="h3" size="base">Our Solution</Heading>
+                        <Paragraph size="sm" muted className="mt-2">
+                          AI-powered liquidity management with one click
+                        </Paragraph>
                       </div>
                     </div>
                   </div>

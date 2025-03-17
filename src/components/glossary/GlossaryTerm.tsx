@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Heading, Paragraph } from '@/components/ui/typography';
 
 interface GlossaryTermProps {
   term: string;
@@ -17,7 +18,9 @@ const GlossaryTerm = ({ term, definition }: GlossaryTermProps) => {
         onClick={() => setIsExpanded(!isExpanded)}
         className="w-full flex items-center justify-between p-4 text-left"
       >
-        <h3 className="text-xl font-semibold">{term}</h3>
+        <Heading as="h3" size="xl">
+          {term}
+        </Heading>
         <div className="bg-gray-100 rounded-full p-1">
           {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
         </div>
@@ -30,7 +33,7 @@ const GlossaryTerm = ({ term, definition }: GlossaryTermProps) => {
         )}
       >
         <div className="border-t border-gray-100 pt-4">
-          <p className="text-muted-foreground">{definition}</p>
+          <Paragraph muted>{definition}</Paragraph>
         </div>
       </div>
     </div>

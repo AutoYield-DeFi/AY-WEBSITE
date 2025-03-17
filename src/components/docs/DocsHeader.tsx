@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Book } from 'lucide-react';
+import { Heading, Paragraph } from '@/components/ui/typography';
 
 interface DocsHeaderProps {
   title: string;
@@ -19,11 +20,13 @@ const DocsHeader: React.FC<DocsHeaderProps> = ({
         <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary-muted/50 flex items-center justify-center">
           {icon}
         </div>
-        <h1 className="text-3xl md:text-4xl font-bold">{title}</h1>
+        <Heading as="h1" size="4xl">
+          {title}
+        </Heading>
       </div>
-      <p className="text-xl text-muted-foreground max-w-3xl">
+      <Paragraph size="xl" muted className="max-w-3xl">
         {description}
-      </p>
+      </Paragraph>
     </div>
   );
 };

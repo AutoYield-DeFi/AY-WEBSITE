@@ -5,6 +5,7 @@ import { Calendar, Clock } from 'lucide-react';
 import { BlogPost } from '@/types/blog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
+import { Heading, Paragraph } from '@/components/ui/typography';
 
 interface BlogCardProps {
   post: BlogPost;
@@ -53,15 +54,19 @@ const BlogCard = ({ post, variant = 'default', className }: BlogCardProps) => {
         variant === 'compact' ? "p-4" : "p-5"
       )}>
         <Link to={`/blog/${post.slug}`} className="block group-hover:text-primary transition-colors">
-          <h3 className={cn(
-            "font-serif font-bold mb-2 line-clamp-2",
-            variant === 'compact' ? "text-lg" : "text-xl"
-          )}>
+          <Heading 
+            as="h3"
+            size={variant === 'compact' ? "lg" : "xl"}
+            serif 
+            className="mb-2 line-clamp-2"
+          >
             {post.title}
-          </h3>
+          </Heading>
         </Link>
         
-        <p className="text-muted-foreground text-sm mb-4 line-clamp-2">{post.excerpt}</p>
+        <Paragraph muted size="sm" className="mb-4 line-clamp-2">
+          {post.excerpt}
+        </Paragraph>
         
         <div className="mt-auto pt-4 border-t border-gray-100">
           <div className="flex items-center justify-between">
