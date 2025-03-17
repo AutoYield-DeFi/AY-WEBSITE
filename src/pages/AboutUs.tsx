@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -6,15 +5,9 @@ import SEO from '@/components/SEO';
 import TeamSection from '@/components/about/TeamSection';
 import Mission from '@/components/about/Mission';
 import Values from '@/components/about/Values';
-
 const AboutUs = () => {
-  return (
-    <div className="min-h-screen bg-white">
-      <SEO 
-        title="Our Story | AutoYield"
-        description="We're a team of engineers who experienced the pain of liquidity provision firsthand and built AutoYield to make it accessible to everyone."
-        keywords="AutoYield team, Solana DeFi, liquidity management, LP automation, DeFi solutions, AI liquidity"
-      />
+  return <div className="min-h-screen bg-white">
+      <SEO title="Our Story | AutoYield" description="We're a team of engineers who experienced the pain of liquidity provision firsthand and built AutoYield to make it accessible to everyone." keywords="AutoYield team, Solana DeFi, liquidity management, LP automation, DeFi solutions, AI liquidity" />
       <Navbar />
       
       <main className="overflow-hidden">
@@ -30,11 +23,9 @@ const AboutUs = () => {
                 <span className="text-xs font-semibold tracking-wider uppercase text-primary">Our Story</span>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-up bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-700">
-                Unlocking DeFi's<br/>Hidden Potential
+                Unlocking DeFi's<br />Hidden Potential
               </h1>
-              <p className="text-lg text-muted-foreground mb-8 animate-fade-up animation-delay-200">
-                While the crypto world chases the next big price movement, we discovered that consistent returns come from being the infrastructure that powers the entire ecosystem.
-              </p>
+              <p className="text-lg text-muted-foreground mb-8 animate-fade-up animation-delay-200">While the crypto world chases the next big price movement, we discovered that consistent returns come from being the infrastructure that powers the entire ecosystem!</p>
               
               <div className="flex flex-col md:flex-row items-center justify-center gap-6 mt-10 mb-12">
                 <div className="w-full md:w-1/2 bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-fade-up animation-delay-300">
@@ -79,8 +70,6 @@ const AboutUs = () => {
       </main>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default AboutUs;
