@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { motion } from '@/components/about/MotionWrapper';
-import { QuestionCircle } from 'lucide-react';
+import { HelpCircle, Mail, ExternalLink } from 'lucide-react';
 
 const FAQ = () => {
   const faqItems = [
@@ -91,7 +91,7 @@ const FAQ = () => {
                 <AccordionItem key={index} value={`item-${index}`}>
                   <AccordionTrigger className="text-left hover:no-underline">
                     <div className="flex items-start gap-3">
-                      <QuestionCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                      <HelpCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                       <span className="font-medium">{item.question}</span>
                     </div>
                   </AccordionTrigger>
