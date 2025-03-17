@@ -7,35 +7,35 @@ const TeamSection = () => {
   const team = [
     {
       name: "Shuhaib Shariff",
-      role: "Founder & CEO",
-      bio: "Former DeFi trader who believes liquidity provision is the most underrated opportunity in crypto. Shuhaib saw firsthand how LP strategies could generate consistent returns.",
+      role: "CEO",
+      bio: "20+ years in SaaS and software product development, led teams across design, engineering, and content to build tools that make business easier. Experience bootstrapping businesses from 0 to 10. Dabbling in blockchain, crypto & DeFi since 2021.",
       imageUrl: "/team/anonymous.jpg", // Using placeholder image
-      linkedin: "https://linkedin.com/in/shuhaibshariff",
-      credentials: "6+ years in DeFi trading and development"
+      linkedin: "https://www.linkedin.com/in/shuhaib/",
+      credentials: "20+ years in software product development"
     },
     {
       name: "Pratik Kumar",
       role: "CTO",
-      bio: "Systems architect who turned his attention to the technical challenges of LP management. Pratik's background in quantitative finance helps drive AutoYield's intelligent algorithms.",
+      bio: "Marine Engineer cultivating an interest in Computer Science, and becoming a Blockchain Developer. Started off in Cybersecurity and moved to blockchain building an ecosystem of solutions to bridge the gap between DeFi and CeFi.",
       imageUrl: "/team/anonymous.jpg", // Using placeholder image
-      linkedin: "https://linkedin.com/in/pratikkumar",
-      github: "https://github.com/pratikkumar",
-      credentials: "10+ years in financial technology and algorithmic trading"
+      linkedin: "https://www.linkedin.com/in/pratik-kumar-/",
+      github: "https://github.com/pratikasr",
+      credentials: "Specializes in Golang, RUST, COSMOS SDK & AI"
     },
     {
       name: "YK",
       role: "Head of Quant Strategy",
-      bio: "Mathematical genius specializing in risk modeling and optimization algorithms. YK developed much of the core logic that protects users from impermanent loss.",
+      bio: "AI Quant at a hedge fund, where he develops financial models using deep learning and quantitative methods to build AI-driven solutions for autonomous asset management in the DeFi space. Build's AutoYield's AI Quant engine over the weekends.",
       imageUrl: "/team/anonymous.jpg",
-      credentials: "IIT graduate, 8+ years in quantitative finance"
+      credentials: "IIT graduate, 3+ years in quantitative finance"
     },
     {
-      name: "Hamza Ahmed",
-      role: "Chief Product Officer",
-      bio: "UX specialist obsessed with simplifying complex financial interactions. Hamza ensures that AutoYield remains accessible even to those new to DeFi concepts.",
+      name: "Ahmed Hamza",
+      role: "Front-end Lead",
+      bio: "Web3 Development specialist with expertise in wagmi and ethers.js. Building with Graph Databases & RAG Systems while exploring AI integration. JavaScript enthusiast focused on creating exceptional user experiences with attention to design and testing.",
       imageUrl: "/team/anonymous.jpg", // Using placeholder image
-      linkedin: "https://linkedin.com/in/hamzaahmed",
-      credentials: "Led product at two successful fintech startups"
+      linkedin: "https://www.linkedin.com/in/hamzax/",
+      credentials: "Focused on UX, design and testing"
     }
   ];
 
@@ -51,7 +51,7 @@ const TeamSection = () => {
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6">The Problem Solvers</h2>
           <p className="text-lg max-w-3xl mx-auto mb-8">
-            We're engineers and finance experts who recognized that LP strategies were too complex and risky for most users. By combining our expertise, we've created an accessible solution that removes barriers and minimizes risks.
+            We're a diverse team of engineers, finance experts, and designers working to make DeFi's liquidity strategies accessible to everyone. Our combined expertise helps us build solutions that bridge the gap between complex DeFi mechanisms and everyday users.
           </p>
         </div>
         
