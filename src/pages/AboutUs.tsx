@@ -51,7 +51,7 @@ const AboutUs = () => {
                       repeatType: "reverse"
                     }}
                   >
-                    {/* Empty div for animation */}
+                    &nbsp;
                   </motion.div>
                   
                   <motion.div 
@@ -66,7 +66,7 @@ const AboutUs = () => {
                       repeatType: "reverse"
                     }}
                   >
-                    {/* Empty div for animation */}
+                    &nbsp;
                   </motion.div>
                   
                   <div className="relative bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-primary/10 p-8 transform transition-all">
@@ -103,13 +103,10 @@ const AboutUs = () => {
           </div>
         </section>
         
-        {/* Mission Section */}
         <Mission />
         
-        {/* Values Section */}
         <Values />
         
-        {/* Team Section - Kept unchanged as requested */}
         <TeamSection />
       </main>
       
