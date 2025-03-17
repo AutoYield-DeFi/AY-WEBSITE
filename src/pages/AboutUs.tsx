@@ -88,7 +88,7 @@ const AboutUs = () => {
                         <div className="w-16 h-16 rounded-full bg-primary-muted flex items-center justify-center text-primary mb-4">
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-bar-chart-4"><path d="M3 3v18h18"></path><path d="M13 17V9"></path><path d="M18 17V5"></path><path d="M8 17v-3"></path></svg>
                         </div>
-                        <Heading as="h3" size="base">The Problem</Heading>
+                        <Heading as="h3" size="lg">The Problem</Heading>
                         <Paragraph size="sm" muted className="mt-2">
                           Liquidity provision is complex and risky for most users
                         </Paragraph>
@@ -98,7 +98,7 @@ const AboutUs = () => {
                         <div className="w-16 h-16 rounded-full bg-primary-muted flex items-center justify-center text-primary mb-4">
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-sparkles"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path><path d="M5 3v4"></path><path d="M19 17v4"></path><path d="M3 5h4"></path><path d="M17 19h4"></path></svg>
                         </div>
-                        <Heading as="h3" size="base">Our Solution</Heading>
+                        <Heading as="h3" size="lg">Our Solution</Heading>
                         <Paragraph size="sm" muted className="mt-2">
                           AI-powered liquidity management with one click
                         </Paragraph>
