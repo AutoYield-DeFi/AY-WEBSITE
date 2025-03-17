@@ -14,7 +14,7 @@ const Mission = () => {
       <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-blue-500/5 rounded-full blur-3xl"></div>
       
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
           <motion.div 
             className="inline-block mb-4 px-4 py-1.5 bg-primary-muted rounded-full"
             initial={{ opacity: 0, y: 20 }}
@@ -25,13 +25,13 @@ const Mission = () => {
           </motion.div>
           
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-primary"
+            className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-primary"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             viewport={{ once: true }}
           >
-            Making DeFi's Best Yield Strategy Accessible
+            Making DeFi's Best Yield Strategy Simple
           </motion.h2>
         </div>
         
@@ -40,10 +40,10 @@ const Mission = () => {
         
         {/* Bottom CTA */}
         <motion.div 
-          className="text-center mt-12"
+          className="text-center mt-10"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
+          transition={{ delay: 0.4 }}
           viewport={{ once: true }}
         >
           <Link to="/docs/welcome">

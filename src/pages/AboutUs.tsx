@@ -50,7 +50,9 @@ const AboutUs = () => {
                       repeat: Infinity,
                       repeatType: "reverse"
                     }}
-                  />
+                  >
+                    {/* Empty div for animation */}
+                  </motion.div>
                   
                   <motion.div 
                     className="absolute -bottom-4 -right-4 w-32 h-32 bg-primary-muted/30 rounded-full opacity-70"
@@ -63,7 +65,9 @@ const AboutUs = () => {
                       repeat: Infinity,
                       repeatType: "reverse"
                     }}
-                  />
+                  >
+                    {/* Empty div for animation */}
+                  </motion.div>
                   
                   <div className="relative bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-primary/10 p-8 transform transition-all">
                     <div className="grid grid-cols-2 gap-6">
