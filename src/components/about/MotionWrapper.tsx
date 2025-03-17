@@ -13,8 +13,9 @@ interface MotionProps {
   onClick?: () => void;
 }
 
-export const motion = {
-  div: ({ 
+// Create a function to generate motion components for different HTML elements
+const createMotionComponent = (Element: keyof JSX.IntrinsicElements) => {
+  return ({ 
     children, 
     initial, 
     animate, 
@@ -23,11 +24,12 @@ export const motion = {
     whileInView, 
     viewport, 
     className = '',
-    onClick
-  }: MotionProps) => {
+    onClick,
+    ...props
+  }: MotionProps & React.HTMLAttributes<HTMLElement>) => {
     // Simple implementation of animation with CSS classes
     const [isInView, setIsInView] = React.useState(false);
-    const ref = React.useRef<HTMLDivElement>(null);
+    const ref = React.useRef<HTMLElement>(null);
     
     React.useEffect(() => {
       const observer = new IntersectionObserver(
@@ -52,21 +54,42 @@ export const motion = {
     
     // Generate CSS classes based on animation props
     let animationClass = '';
+    let delayClass = '';
     
     if (isInView && whileInView) {
       animationClass = 'animate-fade-up';
+      
+      if (transition?.delay) {
+        const delayMs = transition.delay * 1000;
+        delayClass = `animation-delay-${delayMs}`;
+      }
     } else if (animate) {
       animationClass = 'animate-fade-in';
     }
     
-    return (
-      <div 
-        ref={ref} 
-        className={`${className} ${animationClass}`}
-        onClick={onClick}
-      >
-        {children}
-      </div>
+    return React.createElement(
+      Element,
+      { 
+        ref: ref as any, 
+        className: `${className} ${animationClass} ${delayClass}`.trim(),
+        onClick,
+        ...props
+      },
+      children
     );
-  }
+  };
+};
+
+// Export motion components for common elements
+export const motion = {
+  div: createMotionComponent('div'),
+  h1: createMotionComponent('h1'),
+  h2: createMotionComponent('h2'),
+  h3: createMotionComponent('h3'),
+  p: createMotionComponent('p'),
+  span: createMotionComponent('span'),
+  section: createMotionComponent('section'),
+  article: createMotionComponent('article'),
+  button: createMotionComponent('button'),
+  img: createMotionComponent('img'),
 };
