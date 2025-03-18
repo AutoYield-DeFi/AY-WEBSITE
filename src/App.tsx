@@ -18,6 +18,7 @@ const Glossary = lazy(() => import("./pages/Glossary"));
 const AboutUs = lazy(() => import("./pages/AboutUs"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogDetail = lazy(() => import("./pages/BlogDetail"));
+const BlogAdmin = lazy(() => import("./pages/BlogAdmin"));
 const Roadmap = lazy(() => import("./pages/Roadmap"));
 const Docs = lazy(() => import("./pages/Docs"));
 const Legal = lazy(() => import("./pages/Legal"));
@@ -65,6 +66,7 @@ const App = () => {
                       <Route path="/blog" element={<Blog />} />
                       <Route path="/blog/tag/:tag" element={<Blog />} />
                       <Route path="/blog/:id" element={<BlogDetail />} />
+                      <Route path="/blog-admin" element={<BlogAdmin />} />
                       <Route path="/legal" element={<Legal />} />
                       <Route path="/faq" element={<FAQ />} />
                       {/* Catch-all route for 404 */}

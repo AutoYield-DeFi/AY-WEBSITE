@@ -344,3 +344,199 @@ export const fetchRelatedPosts = async (category: string, excludeId: string): Pr
   cachedRelatedPostsMap.set(cacheKey, related);
   return related;
 };
+
+// Add a new blog post from the formatted text content
+export const addBlogPost = (formattedContent: string): BlogPost | null => {
+  try {
+    // Parse the blog post content
+    const lines = formattedContent.split('\n');
+    
+    // Extract title
+    const titleLine = lines.find(line => line.startsWith('Title:'));
+    if (!titleLine) return null;
+    const title = titleLine.replace('Title:', '').trim();
+    
+    // Extract date
+    const dateLine = lines.find(line => line.startsWith('Date:'));
+    if (!dateLine) return null;
+    const publishedAt = dateLine.replace('Date:', '').trim();
+    
+    // Extract author
+    const authorLine = lines.find(line => line.startsWith('Author:'));
+    if (!authorLine) return null;
+    
+    // Parse author info
+    const authorInfo = authorLine.replace('Author:', '').trim();
+    const authorName = authorInfo.split('{')[0].trim();
+    
+    // Extract author title and bio if available
+    let authorTitle = "Contributing Author";
+    let authorBio = "";
+    
+    const titleMatch = authorInfo.match(/title: ?"([^"]+)"/);
+    if (titleMatch && titleMatch[1]) {
+      authorTitle = titleMatch[1];
+    }
+    
+    const bioMatch = authorInfo.match(/bio: ?"([^"]+)"/);
+    if (bioMatch && bioMatch[1]) {
+      authorBio = bioMatch[1];
+    }
+    
+    // Find content between the first and last "---"
+    const firstDividerIndex = lines.findIndex(line => line.trim() === '---');
+    const lastDividerIndex = lines.length - 1 - [...lines].reverse().findIndex(line => line.trim() === '---');
+    
+    if (firstDividerIndex === -1 || lastDividerIndex === -1 || firstDividerIndex === lastDividerIndex) {
+      return null;
+    }
+    
+    // Extract content
+    const contentLines = lines.slice(firstDividerIndex + 1, lastDividerIndex);
+    const content = contentLines.join('\n');
+    
+    // Generate an excerpt from the content
+    const excerpt = content.replace(/<[^>]*>/g, '').slice(0, 150) + '...';
+    
+    // Generate slug from title
+    const slug = title.toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/--+/g, '-');
+    
+    // Detect some tags based on content
+    const possibleTags = ['defi', 'solana', 'liquidity', 'meteora', 'yield', 'ai', 'dlmm', 'risk management'];
+    const tags = possibleTags.filter(tag => 
+      content.toLowerCase().includes(tag) || title.toLowerCase().includes(tag)
+    );
+    
+    // Determine category based on content keywords
+    let category = 'defi';
+    if (content.toLowerCase().includes('risk') || content.toLowerCase().includes('security')) {
+      category = 'risk management';
+    } else if (content.toLowerCase().includes('tutorial') || content.toLowerCase().includes('guide')) {
+      category = 'tutorials';
+    } else if (content.toLowerCase().includes('market') || content.toLowerCase().includes('trend')) {
+      category = 'market-insights';
+    } else if (content.toLowerCase().includes('ai') || content.toLowerCase().includes('quant')) {
+      category = 'ai';
+    }
+    
+    // Estimate reading time (average 200 words per minute)
+    const wordCount = content.split(/\s+/).length;
+    const readingTime = Math.ceil(wordCount / 200);
+    
+    // Select a relevant cover image
+    let coverImage = "https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=2832&auto=format&fit=crop";
+    if (content.toLowerCase().includes('ai') || title.toLowerCase().includes('ai')) {
+      coverImage = "https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2832&auto=format&fit=crop";
+    } else if (content.toLowerCase().includes('risk') || title.toLowerCase().includes('risk')) {
+      coverImage = "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2970&auto=format&fit=crop";
+    } else if (content.toLowerCase().includes('solana') || title.toLowerCase().includes('solana')) {
+      coverImage = "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?q=80&w=2897&auto=format&fit=crop";
+    }
+    
+    // Create the new blog post
+    const newPost: BlogPost = {
+      id: (blogData.length + 1).toString(),
+      slug,
+      title,
+      excerpt,
+      content: `<p>${content.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br/>')}</p>`,
+      publishedAt,
+      category,
+      tags: tags.length > 0 ? tags : ['defi', 'solana'],
+      readingTime,
+      coverImage,
+      author: {
+        name: authorName,
+        title: authorTitle,
+        avatar: '/team/alex.jpg', // Default avatar
+        bio: authorBio
+      },
+      seoDescription: excerpt
+    };
+    
+    // Add to the blog data array
+    blogData.unshift(newPost);
+    
+    // Clear cache to force refresh
+    cachedPosts = null;
+    cachedRelatedPostsMap.clear();
+    
+    return newPost;
+  } catch (error) {
+    console.error('Error parsing blog post content:', error);
+    return null;
+  }
+};
+
+// Format markdown features like tables and code blocks
+export const formatMarkdownFeatures = (content: string): string => {
+  let formattedContent = content;
+  
+  // Format tables
+  const tableRegex = /\|(.+)\|\n\|(-+\|)+\n((\|.+\|\n)+)/g;
+  formattedContent = formattedContent.replace(tableRegex, (match) => {
+    return `<div class="overflow-x-auto my-6"><table class="min-w-full divide-y divide-gray-200">
+      ${match.split('\n').map((row, index) => {
+        if (index === 1) return ''; // Skip the separator row
+        const cells = row.split('|').filter(cell => cell.trim() !== '');
+        const isHeader = index === 0;
+        const cellTag = isHeader ? 'th' : 'td';
+        const cellClasses = isHeader 
+          ? 'px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider' 
+          : 'px-6 py-4 whitespace-nowrap text-sm text-gray-500';
+        
+        return `<tr>${cells.map(cell => 
+          `<${cellTag} class="${cellClasses}">${cell.trim()}</${cellTag}>`
+        ).join('')}</tr>`;
+      }).join('')}
+    </table></div>`;
+  });
+  
+  // Format code blocks
+  const codeBlockRegex = /```([a-z]*)\n([\s\S]*?)```/g;
+  formattedContent = formattedContent.replace(codeBlockRegex, (match, language, code) => {
+    return `<pre class="bg-gray-900 text-gray-100 rounded-md p-4 my-4 overflow-x-auto"><code class="language-${language || 'text'}">${code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`;
+  });
+  
+  return formattedContent;
+};
+
+// Utility to parse markdown into formatted HTML
+export const parseMarkdown = (markdown: string): string => {
+  let html = markdown;
+  
+  // Format headers
+  html = html.replace(/^### (.*$)/gim, '<h3 class="text-xl font-semibold mt-6 mb-3">$1</h3>');
+  html = html.replace(/^## (.*$)/gim, '<h2 class="text-2xl font-semibold mt-8 mb-4">$1</h2>');
+  html = html.replace(/^# (.*$)/gim, '<h1 class="text-3xl font-bold mt-10 mb-5">$1</h1>');
+  
+  // Format lists
+  html = html.replace(/^\s*\n\* (.*)/gm, '<ul class="list-disc ml-5 my-4"><li>$1</li></ul>');
+  html = html.replace(/^\s*\n- (.*)/gm, '<ul class="list-disc ml-5 my-4"><li>$1</li></ul>');
+  html = html.replace(/^\s*\n\d\. (.*)/gm, '<ol class="list-decimal ml-5 my-4"><li>$1</li></ol>');
+  
+  // Remove list item duplicates (we get when we have multiple list items)
+  html = html.replace(/<\/ul>\s*<ul class="list-disc ml-5 my-4">/g, '');
+  html = html.replace(/<\/ol>\s*<ol class="list-decimal ml-5 my-4">/g, '');
+  
+  // Format bold and italic
+  html = html.replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>');
+  html = html.replace(/\*(.*)\*/gim, '<em>$1</em>');
+  
+  // Format links
+  html = html.replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" class="text-primary hover:underline" target="_blank" rel="noopener noreferrer">$1</a>');
+  
+  // Format paragraphs
+  html = html.replace(/^\s*(\n)?([^\s#\-\*\>].*)/gim, '<p class="my-4">$2</p>');
+  
+  // Format blockquotes
+  html = html.replace(/^\> (.*$)/gim, '<blockquote class="pl-4 border-l-4 border-gray-200 italic my-4">$1</blockquote>');
+  
+  // Handle special markdown features like tables and code blocks
+  html = formatMarkdownFeatures(html);
+  
+  return html;
+};
