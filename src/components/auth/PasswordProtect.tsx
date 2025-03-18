@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -61,15 +62,30 @@ const PasswordProtect: React.FC<PasswordProtectProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     
-    // Simple hardcoded password for demonstration
-    // In a real app, you would use a proper authentication system
-    if (password === 'autoyield2024') {
-      localStorage.setItem(passwordKey, 'true');
-      setIsAuthenticated(true);
-      toast.success('Authentication successful');
-    } else {
-      toast.error('Incorrect password');
+    try {
+      const urlToken = getUrlToken();
+      
+      if (!urlToken) {
+        toast.error('Invalid access URL');
+        return;
+      }
+      
+      const isValid = await validateSecureAccess(urlToken, password);
+      
+      if (isValid) {
+        localStorage.setItem(passwordKey, 'true');
+        setIsAuthenticated(true);
+        toast.success('Authentication successful');
+      } else {
+        toast.error('Incorrect password');
+      }
+    } catch (error) {
+      console.error('Authentication error:', error);
+      toast.error('Authentication failed');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -118,14 +134,14 @@ const PasswordProtect: React.FC<PasswordProtectProps> = ({
             <Heading as="h1" size="xl">Protected Area</Heading>
           </CardTitle>
           <CardDescription>
-            Please enter the admin password to access this area
+            Please enter the secure password to access this area
           </CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent>
             <div className="space-y-4">
               <Paragraph>
-                This area is for authorized personnel only. Enter the password to continue.
+                This area is for authorized personnel only. Enter the password provided to continue.
               </Paragraph>
               <Input
                 type="password"
@@ -137,8 +153,8 @@ const PasswordProtect: React.FC<PasswordProtectProps> = ({
             </div>
           </CardContent>
           <CardFooter>
-            <Button type="submit" className="w-full">
-              Authenticate
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? 'Authenticating...' : 'Authenticate'}
             </Button>
           </CardFooter>
         </form>
