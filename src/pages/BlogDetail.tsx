@@ -93,14 +93,6 @@ const BlogDetail = () => {
     );
   }
 
-  // Format the date using Intl API for better localization
-  const publishDate = new Date(post.publishedAt);
-  const formattedDate2 = new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  }).format(publishDate);
-
   return (
     <div className="min-h-screen bg-white">
       <SEO 
@@ -143,7 +135,7 @@ const BlogDetail = () => {
                   <div className="flex items-center gap-2 text-muted-foreground">
                     <span className="inline-flex items-center">
                       <Calendar size={14} className="mr-1 inline-block" />
-                      <time dateTime={post.publishedAt}>{formattedDate}>{formattedDate}</time>
+                      <time dateTime={post.publishedAt}>{formattedDate}</time>
                     </span>
                     <span className="inline-flex items-center">
                       <Clock size={14} className="mr-1 inline-block" />
