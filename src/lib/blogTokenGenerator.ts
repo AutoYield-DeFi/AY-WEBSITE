@@ -1,5 +1,5 @@
 
-import { generateSecureAccess, formatExpiryDate, clearSecureAccess } from './secureAccess';
+import { generateSecureAccess, formatExpiryDate, clearSecureAccess } from './auth';
 
 /**
  * Generate a secure access token and password for blog administration

@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Heading, Paragraph } from '@/components/ui/typography';
 import { toast } from 'sonner';
-import { validateSecureAccess, isValidSecureUrlPath, clearSecureAccess } from '@/lib/secureAccess';
+import { validateSecureAccess, isValidSecureUrlPath, clearSecureAccess } from '@/lib/auth';
 import { useLocation, Navigate } from 'react-router-dom';
 
 interface PasswordProtectProps {
