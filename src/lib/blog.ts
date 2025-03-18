@@ -1,113 +1,7 @@
 import { BlogPost } from '@/types/blog';
 
-// Sample blog data
+// Sample blog data - removed "Understanding DLMM: The Future of Liquidity on Solana" post
 const blogData: BlogPost[] = [
-  {
-    id: '6',
-    slug: 'raydium-jupiter-orca-solana-dex-comparison',
-    title: 'Raydium vs. Jupiter vs. Orca: The Ultimate Solana DEX Showdown',
-    excerpt: 'A comprehensive comparison of Solana\'s leading DEXs, analyzing their features, performance, and optimal use cases for different trading strategies.',
-    content: `
-      <h2>Introduction</h2>
-      <p>The Solana ecosystem has emerged as a powerhouse for decentralized trading, with multiple DEXs competing to offer the best trading experience. In this analysis, we'll dive deep into three major players: Raydium, Jupiter, and Orca.</p>
-
-      <h2>Market Share and Volume</h2>
-      <ul>
-        <li>Jupiter: Leading aggregator with over 60% of Solana's DEX volume</li>
-        <li>Raydium: Pioneer DEX with strong liquidity in native pools</li>
-        <li>Orca: Known for concentrated liquidity and innovative features</li>
-      </ul>
-
-      <h2>Key Features Comparison</h2>
-      
-      <h3>Jupiter</h3>
-      <ul>
-        <li>Best-in-class price execution through aggregation</li>
-        <li>Access to all major liquidity sources</li>
-        <li>Advanced routing algorithms</li>
-        <li>User-friendly interface</li>
-      </ul>
-
-      <h3>Raydium</h3>
-      <ul>
-        <li>Integrated with Serum order books</li>
-        <li>Strong farming incentives</li>
-        <li>Deep liquidity for major pairs</li>
-        <li>Project launchpad platform</li>
-      </ul>
-
-      <h3>Orca</h3>
-      <ul>
-        <li>Concentrated liquidity pools</li>
-        <li>Fair price impact</li>
-        <li>Simple, intuitive interface</li>
-        <li>Innovative tokenomics</li>
-      </ul>
-
-      <h2>Performance Analysis</h2>
-      <p>When it comes to performance metrics, each DEX shows distinct advantages:</p>
-
-      <h3>Price Execution</h3>
-      <ul>
-        <li>Jupiter leads in best price execution due to aggregation</li>
-        <li>Raydium excels in high-volume trading pairs</li>
-        <li>Orca optimizes for minimal price impact</li>
-      </ul>
-
-      <h3>Transaction Speed</h3>
-      <ul>
-        <li>All three maintain sub-second finality</li>
-        <li>Jupiter's routing may add milliseconds for complex trades</li>
-        <li>Direct trades on Raydium and Orca are marginally faster</li>
-      </ul>
-
-      <h2>Optimal Use Cases</h2>
-
-      <h3>Choose Jupiter for:</h3>
-      <ul>
-        <li>Best overall prices</li>
-        <li>Large trades requiring split routing</li>
-        <li>Access to maximum liquidity</li>
-      </ul>
-
-      <h3>Choose Raydium for:</h3>
-      <ul>
-        <li>Trading new token launches</li>
-        <li>Farming opportunities</li>
-        <li>Integration with Serum orderbook</li>
-      </ul>
-
-      <h3>Choose Orca for:</h3>
-      <ul>
-        <li>Concentrated liquidity provision</li>
-        <li>Simple swap interface</li>
-        <li>Fair price impact on medium-sized trades</li>
-      </ul>
-
-      <h2>Future Developments</h2>
-      <p>All three DEXs continue to innovate:</p>
-      <ul>
-        <li>Jupiter expanding cross-chain capabilities</li>
-        <li>Raydium developing new AMM models</li>
-        <li>Orca enhancing concentrated liquidity features</li>
-      </ul>
-
-      <h2>Conclusion</h2>
-      <p>The competition between these DEXs has created a robust trading ecosystem on Solana. While Jupiter leads in aggregation and best prices, Raydium and Orca maintain strong advantages in their specific niches. Traders benefit from using a combination of these platforms based on their specific needs.</p>
-    `,
-    publishedAt: '2025-03-18T09:00:00Z',
-    category: 'defi',
-    tags: ['solana', 'dex', 'trading', 'jupiter', 'raydium', 'orca'],
-    readingTime: 8,
-    coverImage: 'https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?q=80&w=2897&auto=format&fit=crop',
-    author: {
-      name: 'Michael Torres',
-      title: 'Market Analyst',
-      avatar: '/team/michael.jpg',
-      bio: 'Michael tracks DeFi market trends and analyzes on-chain data to identify emerging opportunities.'
-    },
-    seoDescription: 'Compare Solana\'s top DEXs - Raydium, Jupiter, and Orca. Learn their strengths, optimal use cases, and how to choose the right one for your trading needs.'
-  },
   {
     id: '5',
     slug: 'the-rise-of-meteoras-dlmm-a-new-era-in-liquidity-provisioning',
@@ -457,46 +351,6 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
   });
 };
 
-// Fetch blog posts with pagination
-export const fetchPaginatedBlogPosts = async (
-  page: number = 1, 
-  postsPerPage: number = 6
-): Promise<{ posts: BlogPost[], totalPosts: number, totalPages: number }> => {
-  const allPosts = await fetchBlogPosts();
-  
-  const startIndex = (page - 1) * postsPerPage;
-  const endIndex = startIndex + postsPerPage;
-  const paginatedPosts = allPosts.slice(startIndex, endIndex);
-  const totalPages = Math.ceil(allPosts.length / postsPerPage);
-  
-  return {
-    posts: paginatedPosts,
-    totalPosts: allPosts.length,
-    totalPages
-  };
-};
-
-// Fetch blog posts filtered by tag with pagination
-export const fetchPaginatedBlogPostsByTag = async (
-  tag: string,
-  page: number = 1,
-  postsPerPage: number = 6
-): Promise<{ posts: BlogPost[], totalPosts: number, totalPages: number }> => {
-  // Get filtered posts
-  const filteredPosts = await fetchBlogPostsByTag(tag);
-  
-  const startIndex = (page - 1) * postsPerPage;
-  const endIndex = startIndex + postsPerPage;
-  const paginatedPosts = filteredPosts.slice(startIndex, endIndex);
-  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
-  
-  return {
-    posts: paginatedPosts,
-    totalPosts: filteredPosts.length,
-    totalPages
-  };
-};
-
 // Fetch blog posts filtered by tag
 export const fetchBlogPostsByTag = async (tag: string): Promise<BlogPost[]> => {
   // Check if we have this tag cached
@@ -682,3 +536,79 @@ export const addBlogPost = (formattedContent: string): BlogPost | null => {
 
 // Format markdown features like tables and code blocks
 export const formatMarkdownFeatures = (content: string): string => {
+  let formattedContent = content;
+  
+  // Format tables
+  const tableRegex = /\|(.+)\|\n\|(-+\|)+\n((\|.+\|\n)+)/g;
+  formattedContent = formattedContent.replace(tableRegex, (match) => {
+    return `<div class="overflow-x-auto my-6"><table class="min-w-full divide-y divide-gray-200">
+      ${match.split('\n').map((row, index) => {
+        if (index === 1) return ''; // Skip the separator row
+        const cells = row.split('|').filter(cell => cell.trim() !== '');
+        const isHeader = index === 0;
+        const cellTag = isHeader ? 'th' : 'td';
+        const cellClasses = isHeader 
+          ? 'px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider' 
+          : 'px-6 py-4 whitespace-nowrap text-sm text-gray-500';
+        
+        return `<tr>${cells.map(cell => 
+          `<${cellTag} class="${cellClasses}">${cell.trim()}</${cellTag}>`
+        ).join('')}</tr>`;
+      }).join('')}
+    </table></div>`;
+  });
+  
+  // Format code blocks
+  const codeBlockRegex = /```([a-z]*)\n([\s\S]*?)```/g;
+  formattedContent = formattedContent.replace(codeBlockRegex, (match, language, code) => {
+    return `<pre class="bg-gray-900 text-gray-100 rounded-md p-4 my-4 overflow-x-auto"><code class="language-${language || 'text'}">${code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`;
+  });
+  
+  return formattedContent;
+};
+
+// Utility to parse markdown into formatted HTML
+export const parseMarkdown = (markdown: string): string => {
+  let html = markdown;
+  
+  // Format headers
+  html = html.replace(/^### (.*$)/gim, '<h3 class="text-xl font-semibold mt-6 mb-3">$1</h3>');
+  html = html.replace(/^## (.*$)/gim, '<h2 class="text-2xl font-semibold mt-8 mb-4">$1</h2>');
+  html = html.replace(/^# (.*$)/gim, '<h1 class="text-3xl font-bold mt-10 mb-5">$1</h1>');
+  
+  // Format lists
+  html = html.replace(/^\s*\n\* (.*)/gm, '<ul class="list-disc ml-5 my-4"><li>$1</li></ul>');
+  html = html.replace(/^\s*\n- (.*)/gm, '<ul class="list-disc ml-5 my-4"><li>$1</li></ul>');
+  html = html.replace(/^\s*\n\d\. (.*)/gm, '<ol class="list-decimal ml-5 my-4"><li>$1</li></ol>');
+  
+  // Remove list item duplicates (we get when we have multiple list items)
+  html = html.replace(/<\/ul>\s*<ul class="list-disc ml-5 my-4">/g, '');
+  html = html.replace(/<\/ol>\s*<ol class="list-decimal ml-5 my-4">/g, '');
+  
+  // Format bold and italic
+  html = html.replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>');
+  html = html.replace(/\*(.*)\*/gim, '<em>$1</em>');
+  
+  // Format links
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" class="text-primary hover:underline">$1</a>');
+  
+  // Format blockquotes
+  html = html.replace(/^\> (.*$)/gim, '<blockquote class="pl-4 italic border-l-4 border-gray-300 my-6">$1</blockquote>');
+  
+  // Format code segments
+  html = html.replace(/`([^`]+)`/g, '<code class="bg-gray-100 rounded px-1 py-0.5">$1</code>');
+  
+  // Format code blocks and tables using the helper function
+  html = formatMarkdownFeatures(html);
+  
+  // Format paragraphs (any line that doesn't match above patterns)
+  html = html.replace(/^(?!<[a-z]|\s*$|\s*\n\*|\s*\n-|\s*\n\d\.)(.*)/gim, '<p class="my-4">$1</p>');
+  
+  // Clean up any empty paragraphs
+  html = html.replace(/<p class="my-4"><\/p>/g, '');
+  
+  // Handle line breaks and spacing
+  html = html.replace(/\n\s*\n/g, '\n');
+  
+  return html;
+};
