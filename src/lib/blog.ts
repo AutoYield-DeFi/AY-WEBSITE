@@ -621,7 +621,7 @@ export const parseMarkdown = (markdown: string): string => {
   html = html.replace(/^\s*\n- (.*)/gm, '<ul class="list-disc ml-5 my-4"><li>$1</li></ul>');
   html = html.replace(/^\s*\n\d\. (.*)/gm, '<ol class="list-decimal ml-5 my-4"><li>$1</li></ol>');
   
-  // Remove list item duplicates (we get when we have multiple list items)
+  // Remove list item duplicates
   html = html.replace(/<\/ul>\s*<ul class="list-disc ml-5 my-4">/g, '');
   html = html.replace(/<\/ol>\s*<ol class="list-decimal ml-5 my-4">/g, '');
   
@@ -634,6 +634,8 @@ export const parseMarkdown = (markdown: string): string => {
   
   // Format blockquotes
   html = html.replace(/^\> (.*$)/gim, '<blockquote class="pl-4 italic border-l-4 border-gray-300 my-6">$1</blockquote>');
-  
-  // Format code segments
-  html =
+
+  // Format tables
+  html = formatMarkdownFeatures(html);
+
+  // Format paragraphs
