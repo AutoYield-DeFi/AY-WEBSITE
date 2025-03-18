@@ -6,6 +6,7 @@ import { addBlogPost } from '@/lib/blog';
 import { useToast } from '@/components/ui/use-toast';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Markdown } from '@/components/ui/markdown';
+import { useNavigate } from 'react-router-dom';
 
 const BlogPostForm = () => {
   const [content, setContent] = useState<string>(`Title: Your Blog Title
@@ -45,6 +46,7 @@ console.log(example);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [previewMode, setPreviewMode] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
   
   const handleSubmit = () => {
     setIsSubmitting(true);
@@ -56,13 +58,18 @@ console.log(example);
           title: "Blog post published!",
           description: `Successfully published "${newPost.title}"`,
         });
-        setContent('');
+        
+        // Clear the cache and redirect to the new blog post
+        setTimeout(() => {
+          navigate(`/blog/${newPost.slug}`);
+        }, 1500);
       } else {
         toast({
           title: "Error publishing post",
           description: "Please check your content format and try again",
           variant: "destructive"
         });
+        setIsSubmitting(false);
       }
     } catch (error) {
       toast({
@@ -71,7 +78,6 @@ console.log(example);
         variant: "destructive"
       });
       console.error(error);
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -104,11 +110,7 @@ console.log(example);
         {previewMode ? (
           <div className="border rounded-md p-4 h-[500px] overflow-y-auto">
             <h3 className="text-lg font-semibold mb-2">Preview</h3>
-            <div className="prose max-w-none">
-              {content.split('\n').map((line, i) => (
-                <div key={i}>{line}</div>
-              ))}
-            </div>
+            <Markdown>{content}</Markdown>
           </div>
         ) : (
           <Textarea

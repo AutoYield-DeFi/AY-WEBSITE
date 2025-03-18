@@ -58,6 +58,33 @@ export const Markdown = ({ children, className }: MarkdownProps) => {
               </td>
             );
           },
+          p({ children }) {
+            return <p className="my-4">{children}</p>;
+          },
+          ul({ children }) {
+            return <ul className="list-disc pl-5 my-4">{children}</ul>;
+          },
+          ol({ children }) {
+            return <ol className="list-decimal pl-5 my-4">{children}</ol>;
+          },
+          li({ children }) {
+            return <li className="mb-1">{children}</li>;
+          },
+          h1({ children }) {
+            return <h1 className="text-3xl font-bold mt-8 mb-4">{children}</h1>;
+          },
+          h2({ children }) {
+            return <h2 className="text-2xl font-semibold mt-6 mb-3">{children}</h2>;
+          },
+          h3({ children }) {
+            return <h3 className="text-xl font-semibold mt-5 mb-2">{children}</h3>;
+          },
+          h4({ children }) {
+            return <h4 className="text-lg font-medium mt-4 mb-2">{children}</h4>;
+          },
+          blockquote({ children }) {
+            return <blockquote className="pl-4 border-l-4 border-gray-200 italic my-4">{children}</blockquote>;
+          },
         }}
       >
         {children}

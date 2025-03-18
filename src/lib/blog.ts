@@ -1,4 +1,3 @@
-
 import { BlogPost } from '@/types/blog';
 
 // Sample blog data
@@ -297,6 +296,85 @@ const blogData: BlogPost[] = [
       avatar: '/team/emily.jpg',
       bio: "Emily leads AutoYield's AI research team, combining expertise in machine learning with deep DeFi knowledge."
     }
+  },
+  {
+    id: '5',
+    slug: 'the-rise-of-meteoras-dlmm-a-new-era-in-liquidity-provisioning',
+    title: 'The Rise of Meteora\'s DLMM: A New Era in Liquidity Provisioning',
+    excerpt: "An in-depth exploration of Meteora's Dynamic Liquidity Market Maker (DLMM) and how it's revolutionizing liquidity provisioning on Solana.",
+    content: `
+      <h2>Introduction</h2>
+      <p>Liquidity provisioning (LP) in DeFi has evolved dramatically over the years, with each innovation tackling inefficiencies in capital allocation, impermanent loss, and execution quality. While Uniswap's Automated Market Maker (AMM) introduced the concept of decentralized liquidity pools, and Uniswap V3's concentrated liquidity model improved capital efficiency, the space has remained ripe for further refinement.</p>
+      
+      <p>Enter Meteora's Dynamic Liquidity Market Maker (DLMM) — an innovative leap that combines the strengths of traditional order book models with the capital efficiency of AMMs. This article explores the mechanics of DLMM, its advantages over existing models, and why it is poised to redefine LP strategies on Solana.</p>
+      
+      <h2>Understanding DLMM: A Fusion of Order Books and AMMs</h2>
+      <p>Unlike traditional AMMs that use static bonding curves to determine pricing, Meteora's DLMM dynamically adjusts liquidity based on real-time market conditions. It blends concepts from Uniswap V3's concentrated liquidity with the reactive nature of order books, offering LPs greater control over their capital while optimizing trade execution.</p>
+      
+      <h3>How DLMM Works</h3>
+      <h4>Price Adaptive Liquidity Placement:</h4>
+      <p>Unlike conventional AMMs, where liquidity is spread across a constant curve, DLMM actively repositions liquidity around the current market price. This ensures that the capital is used where it is most needed — near the current price, leading to higher capital efficiency.</p>
+      
+      <h4>Automated Rebalancing:</h4>
+      <p>The system continuously adjusts the liquidity position based on price movements. Instead of LPs needing to manually rebalance their positions (as they would in Uniswap V3), DLMM does this automatically, reducing the need for active management and minimizing impermanent loss risks.</p>
+      
+      <h4>Directional Liquidity Control:</h4>
+      <p>LPs can choose to provide liquidity asymmetrically, favoring either the buy or sell side. This allows for more strategic positioning, particularly for market makers looking to hedge exposure while collecting fees.</p>
+      
+      <h4>Efficient Use of Solana's Speed:</h4>
+      <p>Solana's high throughput and low-latency execution enable DLMM to function in ways that Ethereum-based AMMs cannot. The ability to rebalance liquidity dynamically is computationally intensive, but Solana's parallelized execution environment makes it feasible at scale.</p>
+      
+      <h2>Why DLMM Outperforms Traditional AMMs</h2>
+      <h3>Capital Efficiency</h3>
+      <p>Traditional AMMs spread liquidity too thin, often leading to inefficient capital usage. Uniswap V3 improved on this by allowing LPs to concentrate liquidity within specific price ranges. DLMM takes it a step further by dynamically repositioning liquidity without requiring manual intervention. This results in:</p>
+      <ul>
+        <li>Higher fee earnings: LPs earn more fees since their liquidity is consistently placed where the most trading activity occurs.</li>
+        <li>Lower slippage for traders: More liquidity near the active price means better execution quality.</li>
+      </ul>
+      
+      <h3>Reduced Impermanent Loss (IL)</h3>
+      <p>One of the biggest risks in LPing is impermanent loss — the temporary loss suffered when asset prices move away from their initial position. DLMM mitigates this by adjusting liquidity placement dynamically. Since liquidity is consistently repositioned closer to market price, the impact of price movements is softened, reducing IL over time.</p>
+      
+      <h3>More Active Market Making Without Manual Effort</h3>
+      <p>Market makers on centralized exchanges actively update orders to optimize spreads and inventory. DLMM brings this capability to DeFi but in an automated fashion. LPs do not need to constantly adjust their positions manually, as the protocol takes care of it, making it a far more efficient passive income strategy compared to Uniswap V3.</p>
+      
+      <h2>Strategic Implications for LPs and Traders</h2>
+      <h3>For Liquidity Providers</h3>
+      <p>DLMM offers several strategic advantages for LPs:</p>
+      <ul>
+        <li>Higher Fee Capture: Because liquidity is more effectively placed, LPs benefit from increased trading volume capture.</li>
+        <li>Passive Yet Optimized: Unlike Uniswap V3, where LPs must actively rebalance, DLMM handles this automatically.</li>
+        <li>Directional Exposure: LPs can deploy capital in a way that aligns with their market outlook, reducing unwanted risk exposure.</li>
+      </ul>
+      
+      <h3>For Traders</h3>
+      <ul>
+        <li>Lower Slippage: The dynamic nature of DLMM means deeper liquidity at the market price, improving execution quality.</li>
+        <li>Reduced MEV Risk: Because DLMM continually adjusts liquidity placement, it reduces the effectiveness of front-running and sandwich attacks common in static AMM models.</li>
+      </ul>
+      
+      <h2>Future Outlook and Expansion</h2>
+      <p>Meteora's DLMM is just the beginning of a broader movement toward intelligent liquidity automation in DeFi. With Solana's continued growth and improvements in on-chain trading infrastructure, we can expect even more sophisticated versions of DLMM to emerge, potentially integrating machine learning models to predict and react to market shifts even more effectively.</p>
+      
+      <h3>Potential Enhancements</h3>
+      <ul>
+        <li>Multi-Asset Liquidity Pools: Expanding DLMM to handle baskets of correlated assets dynamically.</li>
+        <li>Cross-Chain Liquidity Deployment: Allowing LPs to seamlessly provide liquidity across multiple chains.</li>
+        <li>On-Chain Strategy Customization: Giving LPs granular control over their liquidity strategies via smart contract parameters.</li>
+      </ul>
+    `,
+    publishedAt: '2025-03-17T10:00:00Z',
+    category: 'defi',
+    tags: ['meteora', 'dlmm', 'solana', 'liquidity', 'defi'],
+    readingTime: 10,
+    coverImage: 'https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=2832&auto=format&fit=crop',
+    author: {
+      name: 'Shuhaib Shariff',
+      title: 'Co-founder at AutoYield',
+      avatar: '/team/alex.jpg',
+      bio: '20+ years in SaaS and software product development, led teams across design, engineering, and content to build tools that make business easier.'
+    },
+    seoDescription: "Explore how Meteora's Dynamic Liquidity Market Maker (DLMM) is revolutionizing DeFi on Solana with automated, efficient liquidity provisioning."
   }
 ];
 
@@ -442,7 +520,7 @@ export const addBlogPost = (formattedContent: string): BlogPost | null => {
       slug,
       title,
       excerpt,
-      content: `<p>${content.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br/>')}</p>`,
+      content: parseMarkdown(content),
       publishedAt,
       category,
       tags: tags.length > 0 ? tags : ['defi', 'solana'],
@@ -526,17 +604,4 @@ export const parseMarkdown = (markdown: string): string => {
   html = html.replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>');
   html = html.replace(/\*(.*)\*/gim, '<em>$1</em>');
   
-  // Format links
-  html = html.replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" class="text-primary hover:underline" target="_blank" rel="noopener noreferrer">$1</a>');
-  
-  // Format paragraphs
-  html = html.replace(/^\s*(\n)?([^\s#\-\*\>].*)/gim, '<p class="my-4">$2</p>');
-  
-  // Format blockquotes
-  html = html.replace(/^\> (.*$)/gim, '<blockquote class="pl-4 border-l-4 border-gray-200 italic my-4">$1</blockquote>');
-  
-  // Handle special markdown features like tables and code blocks
-  html = formatMarkdownFeatures(html);
-  
-  return html;
-};
+  //
