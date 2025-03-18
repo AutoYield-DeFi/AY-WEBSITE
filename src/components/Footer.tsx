@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Github, Twitter, Linkedin, Mail, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -62,7 +61,6 @@ const Footer = () => {
               <li><Link to="/legal" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Terms of Service</Link></li>
               <li><Link to="/legal?tab=privacy" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Privacy Policy</Link></li>
               <li><Link to="/legal?tab=disclaimer" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Risk Disclaimer</Link></li>
-              <li><Link to="/sitemap" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Sitemap</Link></li>
             </ul>
           </div>
         </div>
