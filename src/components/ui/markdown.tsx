@@ -12,6 +12,11 @@ interface MarkdownProps {
 }
 
 export const Markdown = ({ children, className }: MarkdownProps) => {
+  // Optimize by avoiding unnecessary checks for short content
+  if (!children || children.length < 10) {
+    return <div className={cn("prose prose-lg max-w-none", className)} />;
+  }
+
   // Check if content is already HTML (starts with HTML tags)
   const isHtml = /^<([a-z][a-z0-9]*)\b[^>]*>/i.test(children.trim());
 

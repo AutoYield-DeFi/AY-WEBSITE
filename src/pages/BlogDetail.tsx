@@ -2,7 +2,7 @@
 import React from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { ArrowLeft, Calendar, Clock, Twitter, Facebook, Linkedin, Copy, Bookmark, Heart, Share2 } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
@@ -121,43 +121,26 @@ const BlogDetail = () => {
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold tracking-tight leading-tight mb-6">{post.title}</h1>
             <h2 className="text-xl text-muted-foreground font-serif mb-8">{post.excerpt}</h2>
           
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <Avatar className="h-12 w-12 mr-4 border">
-                  <AvatarImage src={post.author.avatar} alt={post.author.name} />
-                  <AvatarFallback>{post.author.name.charAt(0)}</AvatarFallback>
-                </Avatar>
-                <div>
-                  <div className="font-medium">{post.author.name}</div>
-                  <div className="text-sm text-muted-foreground flex items-center gap-4">
-                    <span>{post.author.title}</span>
-                    <div className="flex items-center gap-2 text-muted-foreground">
-                      <span className="inline-flex items-center">
-                        <Calendar size={14} className="mr-1 inline-block" />
-                        <time dateTime={post.publishedAt}>{formattedDate}</time>
-                      </span>
-                      <span className="inline-flex items-center">
-                        <Clock size={14} className="mr-1 inline-block" />
-                        {post.readingTime} min read
-                      </span>
-                    </div>
+            <div className="flex items-center">
+              <Avatar className="h-12 w-12 mr-4 border">
+                <AvatarImage src={post.author.avatar} alt={post.author.name} />
+                <AvatarFallback>{post.author.name.charAt(0)}</AvatarFallback>
+              </Avatar>
+              <div>
+                <div className="font-medium">{post.author.name}</div>
+                <div className="text-sm text-muted-foreground flex items-center gap-4">
+                  <span>{post.author.title}</span>
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <span className="inline-flex items-center">
+                      <Calendar size={14} className="mr-1 inline-block" />
+                      <time dateTime={post.publishedAt}>{formattedDate}</time>
+                    </span>
+                    <span className="inline-flex items-center">
+                      <Clock size={14} className="mr-1 inline-block" />
+                      {post.readingTime} min read
+                    </span>
                   </div>
                 </div>
-              </div>
-              
-              <div className="flex space-x-2">
-                <Button variant="ghost" size="icon" onClick={handleCopyLink} title="Copy link">
-                  <Copy size={18} />
-                </Button>
-                <Button variant="ghost" size="icon" title="Share on Twitter">
-                  <Twitter size={18} />
-                </Button>
-                <Button variant="ghost" size="icon" title="Share on Facebook">
-                  <Facebook size={18} />
-                </Button>
-                <Button variant="ghost" size="icon" title="Share on LinkedIn">
-                  <Linkedin size={18} />
-                </Button>
               </div>
             </div>
           </div>
@@ -181,45 +164,9 @@ const BlogDetail = () => {
         {/* Article body - narrower for readability */}
         <div className="container mx-auto px-4">
           <div className="max-w-[700px] mx-auto">
-            {/* Floating share button for desktop */}
-            <div className="hidden lg:block fixed left-[calc(50%-400px)] top-1/3 transform -translate-x-full">
-              <div className="flex flex-col items-center space-y-3">
-                <Button variant="outline" size="icon" className="rounded-full h-10 w-10" title="Like">
-                  <Heart size={18} />
-                </Button>
-                <Button variant="outline" size="icon" className="rounded-full h-10 w-10" title="Save">
-                  <Bookmark size={18} />
-                </Button>
-                <Button variant="outline" size="icon" className="rounded-full h-10 w-10" title="Share">
-                  <Share2 size={18} />
-                </Button>
-                <div className="h-16 w-px bg-gray-200 mx-auto"></div>
-                <span className="text-sm text-gray-500">42</span>
-              </div>
-            </div>
-
             {/* Article content */}
             <div className="prose prose-lg lg:prose-xl mx-auto font-serif">
               <Markdown>{post.content}</Markdown>
-            </div>
-
-            {/* Mobile share and engagement bar */}
-            <div className="lg:hidden flex justify-between items-center border-t border-b border-gray-100 py-4 my-8">
-              <div className="flex items-center gap-3">
-                <Button variant="ghost" size="sm" className="gap-1 text-muted-foreground">
-                  <Heart size={16} />
-                  <span>42</span>
-                </Button>
-              </div>
-              
-              <div className="flex space-x-2">
-                <Button variant="ghost" size="icon">
-                  <Bookmark size={18} />
-                </Button>
-                <Button variant="ghost" size="icon">
-                  <Share2 size={18} />
-                </Button>
-              </div>
             </div>
 
             {/* Tags */}
@@ -254,7 +201,6 @@ const BlogDetail = () => {
                       rel="noopener noreferrer"
                       className="text-primary font-medium hover:underline inline-flex items-center"
                     >
-                      <Twitter size={16} className="mr-1" />
                       @{post.author.twitter}
                     </a>
                   )}

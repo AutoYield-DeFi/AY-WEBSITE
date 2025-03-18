@@ -9,11 +9,10 @@ import { Heading, Paragraph } from '@/components/ui/typography';
 
 interface BlogCardProps {
   post: BlogPost;
-  variant?: 'default' | 'compact';
   className?: string;
 }
 
-const BlogCard = ({ post, variant = 'default', className }: BlogCardProps) => {
+const BlogCard = ({ post, className }: BlogCardProps) => {
   // Format the date using Intl API for better localization
   const publishDate = new Date(post.publishedAt);
   const formattedDate = new Intl.DateTimeFormat('en-US', {
@@ -24,15 +23,11 @@ const BlogCard = ({ post, variant = 'default', className }: BlogCardProps) => {
 
   return (
     <article className={cn(
-      "group flex flex-col h-full rounded-lg overflow-hidden hover:shadow-md transition-all duration-300",
-      variant === 'compact' ? "border-0" : "border border-gray-100", 
+      "group flex flex-col h-full rounded-lg overflow-hidden hover:shadow-md transition-all duration-300 border border-gray-100", 
       className
     )}>
       <Link to={`/blog/${post.slug}`} className="block overflow-hidden">
-        <div className={cn(
-          "relative overflow-hidden",
-          variant === 'compact' ? "h-40" : "h-48"
-        )}>
+        <div className="relative overflow-hidden h-48">
           <img
             src={post.coverImage}
             alt={post.title}
@@ -49,14 +44,11 @@ const BlogCard = ({ post, variant = 'default', className }: BlogCardProps) => {
         </div>
       </Link>
       
-      <div className={cn(
-        "flex flex-col flex-grow",
-        variant === 'compact' ? "p-4" : "p-5"
-      )}>
+      <div className="flex flex-col flex-grow p-5">
         <Link to={`/blog/${post.slug}`} className="block group-hover:text-primary transition-colors">
           <Heading 
             as="h3"
-            size={variant === 'compact' ? "lg" : "xl"}
+            size="xl"
             serif 
             className="mb-2 line-clamp-2"
           >

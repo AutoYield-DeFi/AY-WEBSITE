@@ -6,7 +6,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import { fetchBlogPosts } from '@/lib/blog';
-import BlogFeaturedPost from '@/components/blog/BlogFeaturedPost';
 import BlogCard from '@/components/blog/BlogCard';
 import { ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -17,9 +16,8 @@ const Blog = () => {
     queryFn: fetchBlogPosts,
   });
 
-  // Separate featured posts from regular posts
-  const featuredPost = blogPosts?.[0];
-  const regularPosts = blogPosts?.slice(1) || [];
+  // All posts displayed in a grid without featured posts
+  const posts = blogPosts || [];
 
   return (
     <div className="min-h-screen bg-white">
@@ -40,9 +38,8 @@ const Blog = () => {
         </header>
 
         {isLoading ? (
-          <div className="flex justify-center py-20">
+          <div className="flex justify-center py-12">
             <div className="animate-pulse space-y-8 w-full max-w-5xl">
-              <div className="h-64 bg-gray-200 rounded-xl w-full"></div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {[1, 2, 3].map(i => (
                   <div key={i} className="space-y-4">
@@ -55,31 +52,18 @@ const Blog = () => {
             </div>
           </div>
         ) : (
-          <>
-            {featuredPost && <BlogFeaturedPost post={featuredPost} />}
-            
-            <div className="mt-20 mb-10">
-              <div className="flex justify-between items-center mb-8">
-                <h2 className="text-2xl md:text-3xl font-serif font-bold">Latest Articles</h2>
-                {regularPosts.length > 9 && (
-                  <Link 
-                    to="/blog/archive" 
-                    className="inline-flex items-center text-primary hover:text-primary/80 font-medium"
-                  >
-                    View all
-                    <ChevronRight size={16} className="ml-1" />
-                  </Link>
-                )}
-              </div>
+          <>            
+            <div className="mb-10">
+              <h2 className="text-2xl md:text-3xl font-serif font-bold mb-8">Latest Articles</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-                {regularPosts.slice(0, 9).map(post => (
+                {posts.map(post => (
                   <BlogCard key={post.id} post={post} />
                 ))}
               </div>
             </div>
             
-            {regularPosts.length > 9 && (
+            {posts.length > 9 && (
               <div className="flex justify-center mt-12">
                 <Button asChild variant="outline" size="lg">
                   <Link to="/blog/archive">
