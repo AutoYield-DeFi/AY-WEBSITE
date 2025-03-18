@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft, Calendar, Clock } from 'lucide-react';
 import Navbar from '@/components/Navbar';
@@ -7,11 +7,12 @@ import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import { Separator } from '@/components/ui/separator';
 import { fetchBlogPostById, fetchRelatedPosts } from '@/lib/blog';
-import BlogCard from '@/components/blog/BlogCard';
-import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { toast } from '@/components/ui/use-toast';
-import { Markdown } from '@/components/ui/markdown';
+import BlogAuthor from '@/components/blog/BlogAuthor';
+import BlogContent from '@/components/blog/BlogContent';
+import RelatedPosts from '@/components/blog/RelatedPosts';
+import { Link } from 'react-router-dom';
 
 const BlogDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -29,7 +30,7 @@ const BlogDetail = () => {
     enabled: !!post,
   });
 
-  // Memoize date formatting to avoid unnecessary recalculations
+  // Memoize date formatting
   const formattedDate = useMemo(() => {
     if (!post) return '';
     const publishDate = new Date(post.publishedAt);
@@ -50,10 +51,6 @@ const BlogDetail = () => {
 
   const handleBackClick = () => {
     navigate('/blog');
-  };
-
-  const handleTagClick = (tag: string) => {
-    navigate(`/blog?tag=${tag}`);
   };
 
   if (isPostLoading) {
@@ -117,11 +114,15 @@ const BlogDetail = () => {
           </button>
         </div>
 
-        {/* Article header - with wider container for title */}
+        {/* Article header */}
         <header className="container mx-auto px-4 mb-10">
           <div className="max-w-[800px] mx-auto">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold tracking-tight leading-tight mb-6">{post.title}</h1>
-            <h2 className="text-xl text-muted-foreground font-serif mb-8">{post.excerpt}</h2>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold tracking-tight leading-tight mb-6">
+              {post.title}
+            </h1>
+            <h2 className="text-xl text-muted-foreground font-serif mb-8">
+              {post.excerpt}
+            </h2>
           
             <div className="flex items-center">
               <Avatar className="h-12 w-12 mr-4 border">
@@ -148,7 +149,7 @@ const BlogDetail = () => {
           </div>
         </header>
 
-        {/* Cover image - full width for visual impact */}
+        {/* Cover image */}
         {post.coverImage && (
           <div className="relative w-full mb-12 max-h-[600px] overflow-hidden">
             <img 
@@ -163,68 +164,15 @@ const BlogDetail = () => {
           </div>
         )}
 
-        {/* Article body - narrower for readability */}
+        {/* Article body */}
         <div className="container mx-auto px-4">
-          <div className="max-w-[700px] mx-auto">
-            {/* Article content */}
-            <div className="prose prose-lg lg:prose-xl mx-auto font-serif">
-              <Markdown>{post.content}</Markdown>
-            </div>
-
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2 mt-10 mb-10">
-              {post.tags?.map(tag => (
-                <button 
-                  key={tag} 
-                  onClick={() => handleTagClick(tag)}
-                  className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors"
-                >
-                  #{tag}
-                </button>
-              ))}
-            </div>
-
-            <Separator className="my-12" />
-            
-            {/* Author bio */}
-            <div className="bg-gray-50 p-8 rounded-xl">
-              <div className="flex items-start md:items-center flex-col md:flex-row gap-6">
-                <Avatar className="h-16 w-16 border-2 border-white">
-                  <AvatarImage src={post.author.avatar} alt={post.author.name} />
-                  <AvatarFallback>{post.author.name.charAt(0)}</AvatarFallback>
-                </Avatar>
-                <div className="flex-1">
-                  <h3 className="text-xl font-medium mb-2">Written by {post.author.name}</h3>
-                  <p className="text-muted-foreground mb-4">{post.author.bio}</p>
-                  {post.author.twitter && (
-                    <a 
-                      href={`https://twitter.com/${post.author.twitter}`} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-primary font-medium hover:underline inline-flex items-center"
-                    >
-                      @{post.author.twitter}
-                    </a>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
+          <BlogContent content={post.content} tags={post.tags} />
+          <Separator className="my-12" />
+          <BlogAuthor author={post.author} />
         </div>
 
-        {/* Related articles */}
-        {relatedPosts.length > 0 && (
-          <div className="mt-20 bg-gray-50 py-16">
-            <div className="container mx-auto px-4">
-              <h2 className="text-2xl font-serif font-bold mb-8 max-w-5xl mx-auto">More from AutoYield Blog</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                {relatedPosts.map(relatedPost => (
-                  <BlogCard key={relatedPost.id} post={relatedPost} />
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Related posts */}
+        <RelatedPosts posts={relatedPosts} />
       </article>
 
       <Footer />
