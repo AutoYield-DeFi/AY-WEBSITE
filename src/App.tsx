@@ -13,7 +13,6 @@ import Glossary from "./pages/Glossary";
 import AboutUs from "./pages/AboutUs";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
-import BlogAddBatch from "./pages/BlogAddBatch";
 import Roadmap from "./pages/Roadmap";
 import Docs from "./pages/Docs";
 import Legal from "./pages/Legal";
@@ -39,8 +38,7 @@ const App = () => {
                   <Route path="/docs/*" element={<Docs />} />
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/blog/tag/:tag" element={<Blog />} />
-                  <Route path="/blog/:secureToken" element={<BlogAddBatch />} />
-                  <Route path="/blog/post/:id" element={<BlogDetail />} />
+                  <Route path="/blog/:id" element={<BlogDetail />} />
                   <Route path="/legal" element={<Legal />} />
                   <Route path="/faq" element={<FAQ />} />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
