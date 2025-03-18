@@ -635,7 +635,7 @@ export const parseMarkdown = (markdown: string): string => {
   // Format blockquotes
   html = html.replace(/^\> (.*$)/gim, '<blockquote class="pl-4 italic border-l-4 border-gray-300 my-6">$1</blockquote>');
 
-  // Format tables
+  // Format tables and code blocks
   html = formatMarkdownFeatures(html);
 
-  // Format paragraphs
+  // Format
