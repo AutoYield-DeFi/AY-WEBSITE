@@ -681,4 +681,4 @@ export const addBlogPost = (formattedContent: string): BlogPost | null => {
 };
 
 // Format markdown features like tables and code blocks
-export const formatMarkdownFeatures = (content: string): string =>
+export const formatMarkdownFeatures = (content: string): string => {
