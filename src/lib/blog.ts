@@ -1,4 +1,3 @@
-
 import { BlogPost } from '@/types/blog';
 
 // Sample blog data - removed "Understanding DLMM: The Future of Liquidity on Solana" post
@@ -69,7 +68,7 @@ const blogData: BlogPost[] = [
         <li>On-Chain Strategy Customization: Giving LPs granular control over their liquidity strategies via smart contract parameters.</li>
       </ul>
     `,
-    publishedAt: '2023-12-17T10:00:00Z',
+    publishedAt: '2025-03-17T10:00:00Z',
     category: 'defi',
     tags: ['meteora', 'dlmm', 'solana', 'liquidity', 'defi'],
     readingTime: 10,
@@ -169,7 +168,7 @@ const blogData: BlogPost[] = [
       
       <p>This cycle of continuous improvement means that AutoYield's performance advantage compounds over time, as our strategies become increasingly sophisticated and well-tuned to market realities.</p>
     `,
-    publishedAt: '2023-11-18T13:20:00Z',
+    publishedAt: '2025-03-17T13:20:00Z',
     category: 'liquidity',
     tags: ['AI', 'quant', 'strategies', 'optimization'],
     readingTime: 9,
@@ -252,7 +251,7 @@ const blogData: BlogPost[] = [
       
       <p>At AutoYield, we're positioned at the forefront of these developments, continually adapting our strategies to capture the best opportunities for our users within the dynamic Solana ecosystem.</p>
     `,
-    publishedAt: '2023-10-05T09:45:00Z',
+    publishedAt: '2025-03-17T09:45:00Z',
     category: 'market-insights',
     tags: ['solana', 'ecosystem', 'growth', 'defi trends'],
     readingTime: 7,
@@ -314,7 +313,7 @@ const blogData: BlogPost[] = [
       
       <p>By automating these complex strategies, we enable our users to benefit from liquidity provision while significantly reducing the risks traditionally associated with it.</p>
     `,
-    publishedAt: '2023-08-22T14:15:00Z',
+    publishedAt: '2025-03-17T14:15:00Z',
     category: 'tutorials',
     tags: ['impermanent loss', 'LP', 'risk management', 'tutorials'],
     readingTime: 8,
@@ -331,6 +330,7 @@ const blogData: BlogPost[] = [
 // Optimized blog fetching with caching mechanism
 let cachedPosts: BlogPost[] | null = null;
 let cachedRelatedPostsMap: Map<string, BlogPost[]> = new Map();
+let cachedFilteredPostsMap: Map<string, BlogPost[]> = new Map();
 
 // Fetch all blog posts with caching - ensure latest posts appear first
 export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
@@ -349,6 +349,29 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
       resolve(cachedPosts);
     }, 200); // Reduced timeout for better performance
   });
+};
+
+// Fetch blog posts filtered by tag
+export const fetchBlogPostsByTag = async (tag: string): Promise<BlogPost[]> => {
+  // Check if we have this tag cached
+  const cacheKey = `tag-${tag.toLowerCase()}`;
+  if (cachedFilteredPostsMap.has(cacheKey)) {
+    return Promise.resolve(cachedFilteredPostsMap.get(cacheKey)!);
+  }
+  
+  // Get all posts first (possibly from cache)
+  const allPosts = await fetchBlogPosts();
+  
+  // Filter by tag (case insensitive)
+  const tagLower = tag.toLowerCase();
+  const filtered = allPosts.filter(post => 
+    post.tags?.some(t => t.toLowerCase() === tagLower)
+  );
+  
+  // Cache the result
+  cachedFilteredPostsMap.set(cacheKey, filtered);
+  
+  return filtered;
 };
 
 // Fetch a single blog post by ID with type safety - optimized performance
@@ -375,6 +398,13 @@ export const fetchRelatedPosts = async (category: string, excludeId: string): Pr
   
   cachedRelatedPostsMap.set(cacheKey, related);
   return related;
+};
+
+// Clear all caches
+export const clearBlogCaches = () => {
+  cachedPosts = null;
+  cachedRelatedPostsMap.clear();
+  cachedFilteredPostsMap.clear();
 };
 
 // Add a new blog post from the formatted text content
@@ -495,6 +525,7 @@ export const addBlogPost = (formattedContent: string): BlogPost | null => {
     // Clear cache to force refresh
     cachedPosts = null;
     cachedRelatedPostsMap.clear();
+    cachedFilteredPostsMap.clear();
     
     return newPost;
   } catch (error) {
