@@ -18,7 +18,6 @@ import Roadmap from "./pages/Roadmap";
 import Docs from "./pages/Docs";
 import Legal from "./pages/Legal";
 import FAQ from "./pages/FAQ";
-import SecureAccessGenerator from "./pages/SecureAccessGenerator";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -44,7 +43,6 @@ const App = () => {
                   <Route path="/blog/post/:id" element={<BlogDetail />} />
                   <Route path="/legal" element={<Legal />} />
                   <Route path="/faq" element={<FAQ />} />
-                  <Route path="/generate-blog-access" element={<SecureAccessGenerator />} />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                   <Route path="*" element={<NotFound />} />
                 </Routes>
