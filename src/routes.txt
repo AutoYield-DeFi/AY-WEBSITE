@@ -1,0 +1,14 @@
+
+To complete the implementation, add the BlogAddBatch route to your App.tsx:
+
+1. Import the BlogAddBatch component at the top of App.tsx:
+```typescript
+import BlogAddBatch from './pages/BlogAddBatch';
+```
+
+2. Add the route inside your Routes component:
+```typescript
+<Route path="/blog/add" element={<BlogAddBatch />} />
+```
+
+This will make the form accessible at the URL: yoursite.com/blog/add

@@ -333,3 +333,26 @@ export const fetchRelatedPosts = async (category: string, excludeId: string): Pr
     }, 800);
   });
 };
+
+// Save new blog posts to the collection
+export const saveBlogPosts = async (posts: BlogPost[]): Promise<BlogPost[]> => {
+  // In a real application, this would be an API call
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      // Add all new posts to the beginning of the array
+      posts.forEach(post => {
+        // Check if post with this ID already exists
+        const existingIndex = blogData.findIndex(p => p.id === post.id);
+        if (existingIndex >= 0) {
+          // Replace existing post
+          blogData[existingIndex] = post;
+        } else {
+          // Add new post to the beginning
+          blogData.unshift(post);
+        }
+      });
+      
+      resolve(posts);
+    }, 800);
+  });
+};

@@ -23,3 +23,14 @@ export interface BlogPost {
   seoDescription?: string;
   canonical?: string;
 }
+
+export interface SimplifiedBlogInput {
+  title: string;
+  date: string;
+  author: string;
+  authorMeta?: {
+    title?: string;
+    bio?: string;
+  };
+  content: string;
+}
