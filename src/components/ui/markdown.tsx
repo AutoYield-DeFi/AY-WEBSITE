@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -18,7 +19,7 @@ export const Markdown = ({ children, className }: MarkdownProps) => {
   if (isHtml) {
     return (
       <div 
-        className={cn("prose prose-gray max-w-none", className)}
+        className={cn("prose prose-lg lg:prose-xl max-w-none", className)}
         dangerouslySetInnerHTML={{ __html: children }}
       />
     );
@@ -26,7 +27,7 @@ export const Markdown = ({ children, className }: MarkdownProps) => {
 
   // Otherwise, process as Markdown
   return (
-    <div className={cn("prose prose-gray max-w-none", className)}>
+    <div className={cn("prose prose-lg lg:prose-xl max-w-none", className)}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
@@ -38,6 +39,7 @@ export const Markdown = ({ children, className }: MarkdownProps) => {
                 style={materialLight}
                 language={match[1]}
                 PreTag="div"
+                className="rounded-md"
                 {...props}
               >
                 {String(children).replace(/\n$/, '')}
@@ -50,8 +52,8 @@ export const Markdown = ({ children, className }: MarkdownProps) => {
           },
           table({ children }) {
             return (
-              <div className="overflow-x-auto">
-                <table className="border-collapse border border-gray-200">
+              <div className="overflow-x-auto my-8">
+                <table className="border-collapse border border-gray-200 w-full">
                   {children}
                 </table>
               </div>
@@ -72,31 +74,56 @@ export const Markdown = ({ children, className }: MarkdownProps) => {
             );
           },
           p({ children }) {
-            return <p className="my-4">{children}</p>;
+            return <p className="my-5 text-gray-800 leading-relaxed">{children}</p>;
           },
           ul({ children }) {
-            return <ul className="list-disc pl-5 my-4">{children}</ul>;
+            return <ul className="list-disc pl-6 my-5 space-y-2">{children}</ul>;
           },
           ol({ children }) {
-            return <ol className="list-decimal pl-5 my-4">{children}</ol>;
+            return <ol className="list-decimal pl-6 my-5 space-y-2">{children}</ol>;
           },
           li({ children }) {
-            return <li className="mb-1">{children}</li>;
+            return <li className="mb-2">{children}</li>;
           },
           h1({ children }) {
-            return <h1 className="text-3xl font-bold mt-8 mb-4">{children}</h1>;
+            return <h1 className="text-4xl font-serif font-bold mt-10 mb-6 leading-tight">{children}</h1>;
           },
           h2({ children }) {
-            return <h2 className="text-2xl font-semibold mt-6 mb-3">{children}</h2>;
+            return <h2 className="text-3xl font-serif font-semibold mt-8 mb-4 leading-tight">{children}</h2>;
           },
           h3({ children }) {
-            return <h3 className="text-xl font-semibold mt-5 mb-2">{children}</h3>;
+            return <h3 className="text-2xl font-serif font-semibold mt-6 mb-3 leading-tight">{children}</h3>;
           },
           h4({ children }) {
-            return <h4 className="text-lg font-medium mt-4 mb-2">{children}</h4>;
+            return <h4 className="text-xl font-serif font-medium mt-5 mb-3 leading-tight">{children}</h4>;
           },
           blockquote({ children }) {
-            return <blockquote className="pl-4 border-l-4 border-gray-200 italic my-4">{children}</blockquote>;
+            return <blockquote className="pl-4 italic border-l-4 border-gray-300 my-6 text-gray-700">{children}</blockquote>;
+          },
+          img({ src, alt }) {
+            return (
+              <div className="my-8">
+                <img 
+                  src={src} 
+                  alt={alt || ''} 
+                  className="rounded-lg w-full" 
+                  loading="lazy"
+                />
+                {alt && <figcaption className="text-center text-sm text-gray-500 mt-2">{alt}</figcaption>}
+              </div>
+            );
+          },
+          a({ href, children }) {
+            return (
+              <a 
+                href={href} 
+                className="text-primary underline decoration-1 underline-offset-2 hover:decoration-2 transition-all"
+                target={href?.startsWith('http') ? "_blank" : undefined}
+                rel={href?.startsWith('http') ? "noopener noreferrer" : undefined}
+              >
+                {children}
+              </a>
+            );
           },
         }}
       >

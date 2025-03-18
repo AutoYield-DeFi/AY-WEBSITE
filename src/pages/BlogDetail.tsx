@@ -2,7 +2,7 @@
 import React from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { ArrowLeft, Calendar, Clock, Twitter, Facebook, Linkedin, Copy, Bookmark, Heart } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, Twitter, Facebook, Linkedin, Copy, Bookmark, Heart, Share2 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
@@ -104,95 +104,122 @@ const BlogDetail = () => {
       <Navbar />
 
       <article className="pt-20 pb-16">
-        <div className="container mx-auto px-4">
-          {/* Breadcrumb */}
-          <div className="mb-6 max-w-[740px] mx-auto">
-            <button 
-              onClick={handleBackClick}
-              className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <ArrowLeft size={16} className="mr-2" />
-              Back to all posts
-            </button>
-          </div>
+        {/* Breadcrumb */}
+        <div className="container mx-auto px-4 mb-6">
+          <button 
+            onClick={handleBackClick}
+            className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <ArrowLeft size={16} className="mr-2" />
+            Back to all posts
+          </button>
+        </div>
 
-          {/* Article header */}
-          <header className="max-w-[740px] mx-auto mb-10">
-            <div className="mb-6">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold tracking-tight leading-tight mb-6">{post.title}</h1>
-              <h2 className="text-xl text-muted-foreground font-serif mb-6">{post.excerpt}</h2>
-            
+        {/* Article header - with wider container for title */}
+        <header className="container mx-auto px-4 mb-10">
+          <div className="max-w-[800px] mx-auto">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold tracking-tight leading-tight mb-6">{post.title}</h1>
+            <h2 className="text-xl text-muted-foreground font-serif mb-8">{post.excerpt}</h2>
+          
+            <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <Avatar className="h-12 w-12 mr-4 border-2 border-white">
+                <Avatar className="h-12 w-12 mr-4 border">
                   <AvatarImage src={post.author.avatar} alt={post.author.name} />
                   <AvatarFallback>{post.author.name.charAt(0)}</AvatarFallback>
                 </Avatar>
-                <div className="flex-1">
+                <div>
                   <div className="font-medium">{post.author.name}</div>
                   <div className="text-sm text-muted-foreground flex items-center gap-4">
                     <span>{post.author.title}</span>
-                    <span className="inline-flex items-center">
-                      <Calendar size={14} className="mr-1 inline-block" />
-                      <time dateTime={post.publishedAt}>{formattedDate}</time>
-                    </span>
-                    <span className="inline-flex items-center">
-                      <Clock size={14} className="mr-1 inline-block" />
-                      {post.readingTime} min read
-                    </span>
+                    <div className="flex items-center gap-2 text-muted-foreground">
+                      <span className="inline-flex items-center">
+                        <Calendar size={14} className="mr-1 inline-block" />
+                        <time dateTime={post.publishedAt}>{formattedDate}</time>
+                      </span>
+                      <span className="inline-flex items-center">
+                        <Clock size={14} className="mr-1 inline-block" />
+                        {post.readingTime} min read
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* Social sharing */}
-            <div className="flex justify-between items-center py-4 border-t border-b border-gray-100">
+              
               <div className="flex space-x-2">
-                <Button variant="ghost" size="icon" onClick={handleCopyLink} aria-label="Copy link">
+                <Button variant="ghost" size="icon" onClick={handleCopyLink} title="Copy link">
                   <Copy size={18} />
                 </Button>
-                <Button variant="ghost" size="icon" aria-label="Share on Twitter">
+                <Button variant="ghost" size="icon" title="Share on Twitter">
                   <Twitter size={18} />
                 </Button>
-                <Button variant="ghost" size="icon" aria-label="Share on Facebook">
+                <Button variant="ghost" size="icon" title="Share on Facebook">
                   <Facebook size={18} />
                 </Button>
-                <Button variant="ghost" size="icon" aria-label="Share on LinkedIn">
+                <Button variant="ghost" size="icon" title="Share on LinkedIn">
                   <Linkedin size={18} />
                 </Button>
               </div>
-              
-              <div className="flex items-center gap-2">
-                <Button variant="ghost" size="sm" className="gap-1 text-muted-foreground">
-                  <Heart size={16} />
-                  <span className="text-sm">42</span>
+            </div>
+          </div>
+        </header>
+
+        {/* Cover image - full width for visual impact */}
+        {post.coverImage && (
+          <div className="relative w-full mb-12 max-h-[600px] overflow-hidden">
+            <img 
+              src={post.coverImage} 
+              alt={post.title} 
+              className="w-full object-cover" 
+              style={{ maxHeight: "600px", objectPosition: "center" }}
+              loading="eager"  
+              width={1600}
+              height={800}
+            />
+          </div>
+        )}
+
+        {/* Article body - narrower for readability */}
+        <div className="container mx-auto px-4">
+          <div className="max-w-[700px] mx-auto">
+            {/* Floating share button for desktop */}
+            <div className="hidden lg:block fixed left-[calc(50%-400px)] top-1/3 transform -translate-x-full">
+              <div className="flex flex-col items-center space-y-3">
+                <Button variant="outline" size="icon" className="rounded-full h-10 w-10" title="Like">
+                  <Heart size={18} />
                 </Button>
-                <Button variant="ghost" size="icon" aria-label="Save article">
+                <Button variant="outline" size="icon" className="rounded-full h-10 w-10" title="Save">
                   <Bookmark size={18} />
                 </Button>
+                <Button variant="outline" size="icon" className="rounded-full h-10 w-10" title="Share">
+                  <Share2 size={18} />
+                </Button>
+                <div className="h-16 w-px bg-gray-200 mx-auto"></div>
+                <span className="text-sm text-gray-500">42</span>
               </div>
             </div>
-          </header>
 
-          {/* Cover image */}
-          {post.coverImage && (
-            <div className="mb-12 max-w-screen-lg mx-auto">
-              <div className="rounded-lg overflow-hidden">
-                <img 
-                  src={post.coverImage} 
-                  alt={post.title} 
-                  className="w-full h-auto object-cover" 
-                  loading="eager"  
-                  width={1200}
-                  height={675}
-                />
-              </div>
-            </div>
-          )}
-
-          {/* Article body */}
-          <div className="max-w-[740px] mx-auto">
+            {/* Article content */}
             <div className="prose prose-lg lg:prose-xl mx-auto font-serif">
               <Markdown>{post.content}</Markdown>
+            </div>
+
+            {/* Mobile share and engagement bar */}
+            <div className="lg:hidden flex justify-between items-center border-t border-b border-gray-100 py-4 my-8">
+              <div className="flex items-center gap-3">
+                <Button variant="ghost" size="sm" className="gap-1 text-muted-foreground">
+                  <Heart size={16} />
+                  <span>42</span>
+                </Button>
+              </div>
+              
+              <div className="flex space-x-2">
+                <Button variant="ghost" size="icon">
+                  <Bookmark size={18} />
+                </Button>
+                <Button variant="ghost" size="icon">
+                  <Share2 size={18} />
+                </Button>
+              </div>
             </div>
 
             {/* Tags */}
@@ -208,7 +235,7 @@ const BlogDetail = () => {
               ))}
             </div>
 
-            <Separator className="my-10" />
+            <Separator className="my-12" />
             
             {/* Author bio */}
             <div className="bg-gray-50 p-8 rounded-xl">
@@ -239,9 +266,9 @@ const BlogDetail = () => {
 
         {/* Related articles */}
         {relatedPosts.length > 0 && (
-          <div className="mt-16 bg-gray-50 py-16">
+          <div className="mt-20 bg-gray-50 py-16">
             <div className="container mx-auto px-4">
-              <h2 className="text-2xl font-bold mb-8 max-w-5xl mx-auto">More from AutoYield Blog</h2>
+              <h2 className="text-2xl font-serif font-bold mb-8 max-w-5xl mx-auto">More from AutoYield Blog</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
                 {relatedPosts.map(relatedPost => (
                   <BlogCard key={relatedPost.id} post={relatedPost} />
