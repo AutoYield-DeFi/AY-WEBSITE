@@ -607,7 +607,7 @@ export const formatMarkdownFeatures = (content: string): string => {
   return formattedContent;
 };
 
-// Utility to parse markdown into formatted HTML
+// Format markdown to HTML with proper styling
 export const parseMarkdown = (markdown: string): string => {
   let html = markdown;
   
