@@ -12,7 +12,7 @@ import BlogCard from '@/components/blog/BlogCard';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { toast } from '@/components/ui/use-toast';
-import { Card, CardContent } from '@/components/ui/card';
+import { Markdown } from '@/components/ui/markdown';
 
 const BlogDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -192,7 +192,7 @@ const BlogDetail = () => {
           {/* Article body */}
           <div className="max-w-[740px] mx-auto">
             <div className="prose prose-lg lg:prose-xl mx-auto font-serif">
-              <div dangerouslySetInnerHTML={{ __html: post.content }} />
+              <Markdown>{post.content}</Markdown>
             </div>
 
             {/* Tags */}

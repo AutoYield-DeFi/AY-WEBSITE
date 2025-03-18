@@ -5,6 +5,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { addBlogPost } from '@/lib/blog';
 import { useToast } from '@/components/ui/use-toast';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Markdown } from '@/components/ui/markdown';
 
 const BlogPostForm = () => {
   const [content, setContent] = useState<string>(`Title: Your Blog Title
