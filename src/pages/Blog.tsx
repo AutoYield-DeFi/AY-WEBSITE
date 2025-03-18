@@ -55,7 +55,7 @@ const Blog = () => {
     queryFn: () => tagFilter 
       ? fetchPaginatedBlogPostsByTag(tagFilter, currentPage, POSTS_PER_PAGE) 
       : fetchPaginatedBlogPosts(currentPage, POSTS_PER_PAGE),
-    keepPreviousData: true,
+    placeholderData: 'keepPrevious', // Using the correct option for React Query v5+
   });
   
   // Handle pagination
