@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -12,6 +11,20 @@ interface MarkdownProps {
 }
 
 export const Markdown = ({ children, className }: MarkdownProps) => {
+  // Check if content is already HTML (starts with HTML tags)
+  const isHtml = /^<([a-z][a-z0-9]*)\b[^>]*>/i.test(children.trim());
+
+  // If content is already HTML, render it directly
+  if (isHtml) {
+    return (
+      <div 
+        className={cn("prose prose-gray max-w-none", className)}
+        dangerouslySetInnerHTML={{ __html: children }}
+      />
+    );
+  }
+
+  // Otherwise, process as Markdown
   return (
     <div className={cn("prose prose-gray max-w-none", className)}>
       <ReactMarkdown
