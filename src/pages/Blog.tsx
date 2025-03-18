@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
-import { fetchPaginatedBlogPosts, fetchPaginatedBlogPostsByTag } from '@/lib/blog';
+import { fetchPaginatedBlogPosts, fetchPaginatedBlogPostsByTag, addBlogPost } from '@/lib/blog';
 import BlogCard from '@/components/blog/BlogCard';
 import { Button } from '@/components/ui/button';
 import { Heading, Paragraph } from '@/components/ui/typography';
