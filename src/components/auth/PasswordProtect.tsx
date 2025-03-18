@@ -55,6 +55,7 @@ const PasswordProtect: React.FC<PasswordProtectProps> = ({
     }
     
     console.log('Checking if URL is valid:', urlToken);
+    console.log('Current time:', new Date().toISOString());
     const isValid = isValidSecureUrlPath(urlToken);
     
     if (!isValid) {

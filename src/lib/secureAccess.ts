@@ -1,4 +1,3 @@
-
 import { nanoid } from 'nanoid';
 
 // Define interfaces for secure access
@@ -49,7 +48,6 @@ const hashPassword = async (password: string, salt: string): Promise<string> => 
 
 /**
  * Generate a new secure access token (URL path and password)
- * Returns an object with the URL path, password, and expiry time
  */
 export const generateSecureAccess = async (): Promise<{
   urlPath: string;
@@ -86,7 +84,9 @@ export const generateSecureAccess = async (): Promise<{
   // Save to localStorage (encrypted in a real app)
   saveSecureAccess(secureAccess);
   
-  console.log('Created new secure access token that expires at:', new Date(expiresAt).toISOString());
+  console.log('Created new secure access token');
+  console.log('Current time:', new Date().toISOString());
+  console.log('Expires at:', new Date(expiresAt).toISOString());
   
   return {
     urlPath,

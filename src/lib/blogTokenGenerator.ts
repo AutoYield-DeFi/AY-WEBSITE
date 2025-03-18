@@ -25,6 +25,7 @@ export const generateBlogToken = async (): Promise<{
   
   console.log('Generated new blog token with URL:', fullUrl);
   console.log('Token expires at:', expiryFormatted);
+  console.log('Current time:', formatExpiryDate(new Date()));
   
   return {
     fullUrl,
