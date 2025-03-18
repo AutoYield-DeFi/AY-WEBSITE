@@ -5,8 +5,6 @@ import Hero from '@/components/Hero';
 import ComparisonAnimation from '@/components/ComparisonAnimation';
 import DeFiExplainer from '@/components/DeFiExplainer';
 import ConsolidatedFeatures from '@/components/ConsolidatedFeatures';
-import Features from '@/components/Features';
-import SecurityFeatures from '@/components/SecurityFeatures';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 
@@ -23,8 +21,6 @@ const Index = () => {
       <ComparisonAnimation />
       <DeFiExplainer />
       <ConsolidatedFeatures />
-      <Features />
-      <SecurityFeatures />
       <Footer />
     </div>
   );
