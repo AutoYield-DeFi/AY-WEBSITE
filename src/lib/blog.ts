@@ -1,3 +1,4 @@
+
 import { BlogPost } from '@/types/blog';
 
 // Sample blog data
@@ -604,4 +605,26 @@ export const parseMarkdown = (markdown: string): string => {
   html = html.replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>');
   html = html.replace(/\*(.*)\*/gim, '<em>$1</em>');
   
-  //
+  // Format links
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" class="text-primary hover:underline">$1</a>');
+  
+  // Format blockquotes
+  html = html.replace(/^\> (.*$)/gim, '<blockquote class="pl-4 italic border-l-4 border-gray-300 my-6">$1</blockquote>');
+  
+  // Format code segments
+  html = html.replace(/`([^`]+)`/g, '<code class="bg-gray-100 rounded px-1 py-0.5">$1</code>');
+  
+  // Format code blocks and tables using the helper function
+  html = formatMarkdownFeatures(html);
+  
+  // Format paragraphs (any line that doesn't match above patterns)
+  html = html.replace(/^(?!<[a-z]|\s*$|\s*\n\*|\s*\n-|\s*\n\d\.)(.*)/gim, '<p class="my-4">$1</p>');
+  
+  // Clean up any empty paragraphs
+  html = html.replace(/<p class="my-4"><\/p>/g, '');
+  
+  // Handle line breaks and spacing
+  html = html.replace(/\n\s*\n/g, '\n');
+  
+  return html;
+};
