@@ -11,6 +11,7 @@ interface SEOProps {
   ogImage?: string;
   twitterCard?: string;
   jsonLd?: Record<string, any>;
+  noindex?: boolean;
 }
 
 const SEO = ({
@@ -21,10 +22,14 @@ const SEO = ({
   ogType = "website",
   ogImage = "/og-image.png", 
   twitterCard = "summary_large_image",
-  jsonLd
+  jsonLd,
+  noindex = false
 }: SEOProps) => {
   const siteTitle = "AutoYield";
   const fullTitle = title.includes(siteTitle) ? title : `${title} | ${siteTitle}`;
+  const baseUrl = import.meta.env.PROD ? "https://autoyield.io" : "http://localhost:8080";
+  const fullCanonical = canonical ? canonical : undefined;
+  const fullOgImage = ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`;
   
   return (
     <Helmet>
@@ -32,23 +37,30 @@ const SEO = ({
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       {keywords && <meta name="keywords" content={keywords} />}
-      {canonical && <link rel="canonical" href={canonical} />}
+      {canonical && <link rel="canonical" href={fullCanonical} />}
+      {noindex && <meta name="robots" content="noindex,nofollow" />}
+      
+      {/* Security Headers */}
+      <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdn.gpteng.co; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: images.unsplash.com;" />
+      <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+      <meta http-equiv="X-Frame-Options" content="DENY" />
+      <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={ogType} />
       <meta property="og:site_name" content={siteTitle} />
-      {canonical && <meta property="og:url" content={canonical} />}
+      {fullCanonical && <meta property="og:url" content={fullCanonical} />}
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={ogImage} />
+      <meta property="og:image" content={fullOgImage} />
       
       {/* Twitter */}
       <meta property="twitter:card" content={twitterCard} />
       <meta property="twitter:site" content="@AutoYield" />
-      {canonical && <meta property="twitter:url" content={canonical} />}
+      {fullCanonical && <meta property="twitter:url" content={fullCanonical} />}
       <meta property="twitter:title" content={fullTitle} />
       <meta property="twitter:description" content={description} />
-      <meta property="twitter:image" content={ogImage} />
+      <meta property="twitter:image" content={fullOgImage} />
       
       {/* Structured Data (JSON-LD) */}
       {jsonLd && (

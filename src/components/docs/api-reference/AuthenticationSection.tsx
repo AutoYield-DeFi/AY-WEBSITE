@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Server } from 'lucide-react';
+import { Server, Shield } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import CodeBlock from './CodeBlock';
 
@@ -11,6 +11,13 @@ const AuthenticationSection = () => {
         <Server size={24} className="text-primary" />
         Authentication
       </h2>
+      <div className="flex items-center mb-4 p-3 bg-amber-50 text-amber-800 rounded-md border border-amber-200">
+        <Shield className="h-5 w-5 mr-2 flex-shrink-0" />
+        <p className="text-sm">
+          Always use HTTPS when calling the API and never expose API keys in client-side code.
+        </p>
+      </div>
+      
       <p>
         There are two methods for authenticating with the AutoYield API:
       </p>
@@ -28,7 +35,8 @@ const AuthenticationSection = () => {
           </p>
           <CodeBlock code={`GET /pools\nAuthorization: Bearer YOUR_API_KEY`} />
           <p className="mt-2">
-            To generate an API key, go to your account settings in the AutoYield dashboard and navigate to the API section.
+            To generate an API key, go to your account settings in the AutoYield dashboard and navigate to the API section. 
+            API keys should be treated as secrets and stored securely.
           </p>
         </TabsContent>
         
@@ -42,6 +50,9 @@ const AuthenticationSection = () => {
             Then include the token in subsequent requests:
           </p>
           <CodeBlock code={`GET /user/positions\nAuthorization: Bearer YOUR_JWT_TOKEN`} />
+          <p className="mt-2 text-sm text-muted-foreground">
+            Tokens expire after 1 hour and should be refreshed using the <code>/auth/refresh</code> endpoint.
+          </p>
         </TabsContent>
       </Tabs>
     </section>

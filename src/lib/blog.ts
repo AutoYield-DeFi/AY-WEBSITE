@@ -300,36 +300,47 @@ const blogData: BlogPost[] = [
   }
 ];
 
-// Fetch all blog posts
+// Optimized blog fetching with caching mechanism
+let cachedPosts: BlogPost[] | null = null;
+let cachedRelatedPostsMap: Map<string, BlogPost[]> = new Map();
+
+// Fetch all blog posts with caching
 export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
+  if (cachedPosts) {
+    return Promise.resolve(cachedPosts);
+  }
+  
   // In a real application, this would be an API call
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(blogData);
-    }, 800);
+      cachedPosts = [...blogData];
+      resolve(cachedPosts);
+    }, 300); // Reduced timeout for better performance
   });
 };
 
-// Fetch a single blog post by ID
+// Fetch a single blog post by ID with type safety
 export const fetchBlogPostById = async (id: string): Promise<BlogPost | undefined> => {
-  // In a real application, this would be an API call
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const post = blogData.find(post => post.id === id || post.slug === id);
-      resolve(post);
-    }, 800);
-  });
+  // Try to use cached posts if available
+  const posts = cachedPosts || await fetchBlogPosts();
+  return posts.find(post => post.id === id || post.slug === id);
 };
 
-// Fetch related blog posts
+// Fetch related blog posts with caching
 export const fetchRelatedPosts = async (category: string, excludeId: string): Promise<BlogPost[]> => {
-  // In a real application, this would be an API call
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const related = blogData
-        .filter(post => post.category === category && (post.id !== excludeId && post.slug !== excludeId))
-        .slice(0, 3);
-      resolve(related);
-    }, 800);
-  });
+  const cacheKey = `${category}-${excludeId}`;
+  
+  if (cachedRelatedPostsMap.has(cacheKey)) {
+    return Promise.resolve(cachedRelatedPostsMap.get(cacheKey)!);
+  }
+  
+  // Use cached posts if available
+  const posts = cachedPosts || await fetchBlogPosts();
+  
+  const related = posts
+    .filter(post => post.category === category && (post.id !== excludeId && post.slug !== excludeId))
+    .slice(0, 3);
+  
+  cachedRelatedPostsMap.set(cacheKey, related);
+  return related;
 };
