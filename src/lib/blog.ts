@@ -1,3 +1,4 @@
+
 import { BlogPost } from '@/types/blog';
 
 // Sample blog data - removed "Understanding DLMM: The Future of Liquidity on Solana" post
@@ -349,6 +350,46 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
       resolve(cachedPosts);
     }, 200); // Reduced timeout for better performance
   });
+};
+
+// Fetch blog posts with pagination
+export const fetchPaginatedBlogPosts = async (
+  page: number = 1, 
+  postsPerPage: number = 6
+): Promise<{ posts: BlogPost[], totalPosts: number, totalPages: number }> => {
+  const allPosts = await fetchBlogPosts();
+  
+  const startIndex = (page - 1) * postsPerPage;
+  const endIndex = startIndex + postsPerPage;
+  const paginatedPosts = allPosts.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(allPosts.length / postsPerPage);
+  
+  return {
+    posts: paginatedPosts,
+    totalPosts: allPosts.length,
+    totalPages
+  };
+};
+
+// Fetch blog posts filtered by tag with pagination
+export const fetchPaginatedBlogPostsByTag = async (
+  tag: string,
+  page: number = 1,
+  postsPerPage: number = 6
+): Promise<{ posts: BlogPost[], totalPosts: number, totalPages: number }> => {
+  // Get filtered posts
+  const filteredPosts = await fetchBlogPostsByTag(tag);
+  
+  const startIndex = (page - 1) * postsPerPage;
+  const endIndex = startIndex + postsPerPage;
+  const paginatedPosts = filteredPosts.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+  
+  return {
+    posts: paginatedPosts,
+    totalPosts: filteredPosts.length,
+    totalPages
+  };
 };
 
 // Fetch blog posts filtered by tag
