@@ -27,12 +27,15 @@ export const generateBlogToken = async (): Promise<{
     
     console.log('Successfully generated new blog token');
     console.log('URL:', fullUrl);
+    console.log('Password:', password);
     console.log('Token expires at:', expiryFormatted);
     console.log('Current time:', formatExpiryDate(new Date()));
     
+    // Display a toast with more detailed information
     toast({
       title: "Blog token generated",
-      description: `Valid until ${expiryFormatted}`,
+      description: `URL: ${fullUrl}\nPassword: ${password}\nValid until: ${expiryFormatted}`,
+      duration: 10000, // Show for 10 seconds to give user time to copy
     });
     
     return {
