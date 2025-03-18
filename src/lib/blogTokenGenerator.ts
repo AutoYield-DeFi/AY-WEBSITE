@@ -2,6 +2,18 @@
 import { generateSecureAccess, formatExpiryDate, clearSecureAccess } from './auth';
 import { toast } from '@/hooks/use-toast';
 
+// Store the most recently generated token
+let lastGeneratedToken: {
+  fullUrl: string;
+  password: string;
+  expiresAt: string;
+} | null = null;
+
+/**
+ * Get the last generated token
+ */
+export const getLastGeneratedToken = () => lastGeneratedToken;
+
 /**
  * Generate a secure access token and password for blog administration
  * Returns the URL path, password, and expiry time
@@ -37,6 +49,13 @@ export const generateBlogToken = async (): Promise<{
       description: `URL: ${fullUrl}\nPassword: ${password}\nValid until: ${expiryFormatted}`,
       duration: 10000, // Show for 10 seconds to give user time to copy
     });
+    
+    // Store the token for display in the modal
+    lastGeneratedToken = {
+      fullUrl,
+      password,
+      expiresAt: expiryFormatted
+    };
     
     return {
       fullUrl,
