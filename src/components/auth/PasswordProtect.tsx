@@ -1,10 +1,11 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Heading, Paragraph } from '@/components/ui/typography';
 import { toast } from 'sonner';
+import { validateSecureAccess, isValidSecureUrlPath } from '@/lib/secureAccess';
+import { useLocation, Navigate } from 'react-router-dom';
 
 interface PasswordProtectProps {
   children: React.ReactNode;
@@ -24,8 +25,41 @@ const PasswordProtect: React.FC<PasswordProtectProps> = ({
     }
     return false;
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [isExpired, setIsExpired] = useState(false);
+  const [isInvalidUrl, setIsInvalidUrl] = useState(false);
+  const location = useLocation();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Extract the URL token from the path
+  const getUrlToken = (): string | null => {
+    const pathParts = location.pathname.split('/');
+    const lastPart = pathParts[pathParts.length - 1];
+    
+    // Check if it matches our URL pattern (admin-timestamp-token)
+    if (lastPart.startsWith('admin-')) {
+      return lastPart;
+    }
+    
+    return null;
+  };
+
+  // Validate the URL on component mount
+  useEffect(() => {
+    const urlToken = getUrlToken();
+    
+    if (!urlToken) {
+      setIsInvalidUrl(true);
+      return;
+    }
+    
+    const isValid = isValidSecureUrlPath(urlToken);
+    
+    if (!isValid) {
+      setIsExpired(true);
+    }
+  }, [location]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Simple hardcoded password for demonstration
@@ -38,6 +72,39 @@ const PasswordProtect: React.FC<PasswordProtectProps> = ({
       toast.error('Incorrect password');
     }
   };
+
+  // Handle invalid URL case
+  if (isInvalidUrl) {
+    return <Navigate to="/404" replace />;
+  }
+
+  // Handle expired link case
+  if (isExpired) {
+    return (
+      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle>
+              <Heading as="h1" size="xl">Link Expired</Heading>
+            </CardTitle>
+            <CardDescription>
+              This secure access link has expired
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Paragraph className="mb-4">
+              Secure access links are valid for 24 hours only. Please request a new access link to continue.
+            </Paragraph>
+          </CardContent>
+          <CardFooter>
+            <Button onClick={() => window.location.href = '/'} className="w-full">
+              Return to Home
+            </Button>
+          </CardFooter>
+        </Card>
+      </div>
+    );
+  }
 
   if (isAuthenticated) {
     return <>{children}</>;

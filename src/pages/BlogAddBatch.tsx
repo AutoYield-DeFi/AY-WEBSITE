@@ -1,12 +1,16 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BlogBatchForm from '@/components/blog/BlogBatchForm';
 import PasswordProtect from '@/components/auth/PasswordProtect';
 
 const BlogAddBatch = () => {
+  // Get the secure access token from URL
+  const { secureToken } = useParams<{ secureToken: string }>();
+
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
