@@ -3,170 +3,136 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Heading, Paragraph } from '@/components/ui/typography';
-import { Input } from '@/components/ui/input';
+import { generateBlogToken } from '@/lib/blogTokenGenerator';
 import { toast } from 'sonner';
-import { generateSecureAccess, formatExpiryDate } from '@/lib/secureAccess';
-import PasswordProtect from '@/components/auth/PasswordProtect';
 
 const SecureAccessGenerator = () => {
   const [isGenerating, setIsGenerating] = useState(false);
-  const [generatedData, setGeneratedData] = useState<{
-    url: string;
+  const [accessDetails, setAccessDetails] = useState<{
+    fullUrl: string;
     password: string;
-    expiresAt: Date;
+    expiresAt: string;
   } | null>(null);
 
   const handleGenerateAccess = async () => {
     setIsGenerating(true);
-    
     try {
-      const { urlPath, password, expiresAt } = await generateSecureAccess();
-      
-      // Create full URL
-      const baseUrl = window.location.origin;
-      const fullUrl = `${baseUrl}/blog/${urlPath}`;
-      
-      setGeneratedData({
-        url: fullUrl,
-        password,
-        expiresAt
-      });
-      
-      toast.success('Secure access generated successfully');
+      const details = await generateBlogToken();
+      setAccessDetails(details);
+      toast.success("Secure access token generated successfully");
     } catch (error) {
-      console.error('Error generating secure access:', error);
-      toast.error('Failed to generate secure access');
+      console.error("Error generating access:", error);
+      toast.error("Failed to generate secure access token");
     } finally {
       setIsGenerating(false);
     }
   };
 
-  const handleCopyToClipboard = (text: string, type: 'URL' | 'password') => {
-    navigator.clipboard.writeText(text)
-      .then(() => {
-        toast.success(`${type} copied to clipboard`);
-      })
-      .catch(() => {
-        toast.error(`Failed to copy ${type}`);
-      });
+  const handleCopyUrl = () => {
+    if (accessDetails) {
+      navigator.clipboard.writeText(accessDetails.fullUrl);
+      toast.success("URL copied to clipboard");
+    }
+  };
+
+  const handleCopyPassword = () => {
+    if (accessDetails) {
+      navigator.clipboard.writeText(accessDetails.password);
+      toast.success("Password copied to clipboard");
+    }
   };
 
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Generate Secure Access - AutoYield</title>
-        <meta name="description" content="Generate secure, temporary access to admin features" />
+        <title>Generate Blog Access - AutoYield</title>
+        <meta name="description" content="Generate secure access to add blog posts" />
       </Helmet>
 
       <Navbar />
 
       <div className="container mx-auto px-4 py-16 mt-16">
-        <PasswordProtect>
-          <header className="mb-12 text-center">
-            <h1 className="text-3xl font-serif font-bold tracking-tight mb-2">Secure Access Generator</h1>
-            <p className="text-muted-foreground">
-              Generate temporary secure access links for blog administration
-            </p>
-          </header>
+        <header className="mb-12 text-center">
+          <h1 className="text-3xl font-serif font-bold tracking-tight mb-2">Blog Admin Access</h1>
+          <p className="text-muted-foreground">
+            Generate secure, time-limited access to add blog posts
+          </p>
+        </header>
 
-          <div className="w-full max-w-2xl mx-auto">
-            <Card>
-              <CardHeader>
-                <CardTitle>Generate New Secure Access</CardTitle>
-                <CardDescription>
-                  Create a new temporary secure access link valid for 24 hours
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                {!generatedData ? (
-                  <div className="text-center py-6">
-                    <Paragraph className="mb-6">
-                      Click the button below to generate a new secure access link and password.
-                      This link will be valid for exactly 24 hours from generation.
-                    </Paragraph>
-                    <Button 
-                      onClick={handleGenerateAccess} 
-                      disabled={isGenerating}
-                      size="lg"
-                    >
-                      {isGenerating ? 'Generating...' : 'Generate Secure Access'}
-                    </Button>
-                  </div>
-                ) : (
-                  <div className="space-y-6">
-                    <div className="rounded-md bg-amber-50 p-4 border border-amber-200">
-                      <Heading as="h3" size="sm" className="text-amber-800 mb-2">
-                        Access Expires: {formatExpiryDate(generatedData.expiresAt)}
-                      </Heading>
-                      <Paragraph className="text-amber-700 text-sm">
-                        This secure access link and password will automatically expire after 24 hours.
-                        Save these credentials now - they cannot be retrieved later.
-                      </Paragraph>
-                    </div>
-
-                    <div className="space-y-4">
-                      <div>
-                        <label className="block text-sm font-medium mb-1">Secure Access URL</label>
-                        <div className="flex">
-                          <Input
-                            value={generatedData.url}
-                            readOnly
-                            className="font-mono text-sm bg-muted"
-                          />
-                          <Button
-                            variant="outline"
-                            className="ml-2 whitespace-nowrap"
-                            onClick={() => handleCopyToClipboard(generatedData.url, 'URL')}
-                          >
-                            Copy URL
-                          </Button>
-                        </div>
+        <div className="max-w-2xl mx-auto">
+          <Card>
+            <CardHeader>
+              <CardTitle>
+                <Heading as="h2" size="xl">Generate Secure Access</Heading>
+              </CardTitle>
+              <CardDescription>
+                Create a temporary access link valid for 24 hours
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {!accessDetails ? (
+                <div className="py-4">
+                  <Paragraph className="mb-4">
+                    Click the button below to generate a secure access link for adding blog posts.
+                    This link will be valid for 24 hours.
+                  </Paragraph>
+                  <Button 
+                    onClick={handleGenerateAccess} 
+                    disabled={isGenerating} 
+                    className="w-full"
+                  >
+                    {isGenerating ? 'Generating...' : 'Generate Secure Access'}
+                  </Button>
+                </div>
+              ) : (
+                <div className="space-y-6 py-4">
+                  <div>
+                    <Heading as="h3" size="sm" className="mb-2">Access URL</Heading>
+                    <div className="flex items-center gap-2">
+                      <div className="bg-muted p-3 rounded-md flex-1 text-sm font-mono break-all">
+                        {accessDetails.fullUrl}
                       </div>
-
-                      <div>
-                        <label className="block text-sm font-medium mb-1">Secure Password</label>
-                        <div className="flex">
-                          <Input
-                            value={generatedData.password}
-                            readOnly
-                            className="font-mono text-sm bg-muted"
-                          />
-                          <Button
-                            variant="outline"
-                            className="ml-2 whitespace-nowrap"
-                            onClick={() => handleCopyToClipboard(generatedData.password, 'password')}
-                          >
-                            Copy Password
-                          </Button>
-                        </div>
-                      </div>
+                      <Button variant="outline" size="sm" onClick={handleCopyUrl}>
+                        Copy
+                      </Button>
                     </div>
                   </div>
-                )}
-              </CardContent>
-              <CardFooter className="flex justify-between">
-                {generatedData && (
-                  <Button
-                    variant="outline"
-                    onClick={() => setGeneratedData(null)}
-                  >
-                    Reset
+                  
+                  <div>
+                    <Heading as="h3" size="sm" className="mb-2">Password</Heading>
+                    <div className="flex items-center gap-2">
+                      <div className="bg-muted p-3 rounded-md flex-1 text-sm font-mono">
+                        {accessDetails.password}
+                      </div>
+                      <Button variant="outline" size="sm" onClick={handleCopyPassword}>
+                        Copy
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <Heading as="h3" size="sm" className="mb-2">Expires</Heading>
+                    <div className="bg-muted p-3 rounded-md text-sm">
+                      {accessDetails.expiresAt}
+                    </div>
+                  </div>
+                  
+                  <Paragraph className="text-muted-foreground text-sm mt-4">
+                    Share these credentials securely. For security reasons, this information will not be saved
+                    and cannot be retrieved later.
+                  </Paragraph>
+                  
+                  <Button onClick={handleGenerateAccess} className="w-full">
+                    Generate New Access
                   </Button>
-                )}
-                {generatedData && (
-                  <Button
-                    onClick={() => window.open(generatedData.url, '_blank')}
-                  >
-                    Open Secure URL
-                  </Button>
-                )}
-              </CardFooter>
-            </Card>
-          </div>
-        </PasswordProtect>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </div>
       </div>
 
       <Footer />
