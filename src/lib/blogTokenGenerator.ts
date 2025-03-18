@@ -13,8 +13,8 @@ export const generateBlogToken = async (): Promise<{
   // Generate secure access
   const { urlPath, password, expiresAt } = await generateSecureAccess();
   
-  // Format the full URL
-  const baseUrl = window.location.origin;
+  // Format the full URL with the correct domain
+  const baseUrl = 'https://preview--pixel-perfect-astro.lovable.app';
   const fullUrl = `${baseUrl}/blog/${urlPath}`;
   
   // Format expiry date for display
