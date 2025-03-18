@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Heading, Paragraph } from '@/components/ui/typography';
 import { toast } from 'sonner';
-import { validateSecureAccess, isValidSecureUrlPath } from '@/lib/secureAccess';
+import { validateSecureAccess, isValidSecureUrlPath, clearSecureAccess } from '@/lib/secureAccess';
 import { useLocation, Navigate } from 'react-router-dom';
 
 interface PasswordProtectProps {
@@ -49,14 +49,19 @@ const PasswordProtect: React.FC<PasswordProtectProps> = ({
     const urlToken = getUrlToken();
     
     if (!urlToken) {
+      console.log('Invalid URL format, no token found');
       setIsInvalidUrl(true);
       return;
     }
     
+    console.log('Checking if URL is valid:', urlToken);
     const isValid = isValidSecureUrlPath(urlToken);
     
     if (!isValid) {
+      console.log('URL has expired or is invalid');
       setIsExpired(true);
+    } else {
+      console.log('URL is valid and not expired');
     }
   }, [location]);
 
@@ -79,7 +84,7 @@ const PasswordProtect: React.FC<PasswordProtectProps> = ({
         setIsAuthenticated(true);
         toast.success('Authentication successful');
       } else {
-        toast.error('Incorrect password');
+        toast.error('Incorrect password or expired link');
       }
     } catch (error) {
       console.error('Authentication error:', error);
@@ -104,12 +109,15 @@ const PasswordProtect: React.FC<PasswordProtectProps> = ({
               <Heading as="h1" size="xl">Link Expired</Heading>
             </CardTitle>
             <CardDescription>
-              This secure access link has expired
+              This secure access link has expired or is invalid
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Paragraph className="mb-4">
-              Secure access links are valid for 24 hours only. Please request a new access link to continue.
+              Secure access links are valid for 24 hours only. Please generate a new access link to continue.
+            </Paragraph>
+            <Paragraph className="text-sm text-muted-foreground mt-2">
+              Note: If you just generated this link and are seeing this message, there might be an issue with your browser's date and time settings.
             </Paragraph>
           </CardContent>
           <CardFooter>

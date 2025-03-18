@@ -80,8 +80,13 @@ export const generateSecureAccess = async (): Promise<{
     expiresAt,
   };
   
+  // Clear any existing tokens before saving the new one
+  clearSecureAccess();
+  
   // Save to localStorage (encrypted in a real app)
   saveSecureAccess(secureAccess);
+  
+  console.log('Created new secure access token that expires at:', new Date(expiresAt).toISOString());
   
   return {
     urlPath,
@@ -99,13 +104,25 @@ export const validateSecureAccess = async (
 ): Promise<boolean> => {
   // Get stored access data
   const accessData = getSecureAccess();
-  if (!accessData) return false;
+  if (!accessData) {
+    console.log('No access data found');
+    return false;
+  }
   
   // Check if URL path matches
-  if (accessData.urlPath !== urlPath) return false;
+  if (accessData.urlPath !== urlPath) {
+    console.log('URL path does not match');
+    return false;
+  }
+  
+  const now = Date.now();
   
   // Check if expired
-  if (Date.now() > accessData.expiresAt) {
+  if (now > accessData.expiresAt) {
+    console.log('Token has expired:', { 
+      current: new Date(now).toISOString(),
+      expiry: new Date(accessData.expiresAt).toISOString() 
+    });
     // Clean up expired token
     clearSecureAccess();
     return false;
@@ -113,7 +130,11 @@ export const validateSecureAccess = async (
   
   // Validate password by hashing input with stored salt
   const hashedInput = await hashPassword(password, accessData.salt);
-  return hashedInput === accessData.hashedPassword;
+  const isValid = hashedInput === accessData.hashedPassword;
+  
+  console.log('Password validation:', isValid);
+  
+  return isValid;
 };
 
 /**
@@ -121,18 +142,31 @@ export const validateSecureAccess = async (
  */
 export const isValidSecureUrlPath = (urlPath: string): boolean => {
   const accessData = getSecureAccess();
-  if (!accessData) return false;
+  if (!accessData) {
+    console.log('No access data found when checking URL path');
+    return false;
+  }
   
   // Check if URL path matches
-  if (accessData.urlPath !== urlPath) return false;
+  if (accessData.urlPath !== urlPath) {
+    console.log('URL path does not match stored path');
+    return false;
+  }
+  
+  const now = Date.now();
   
   // Check if expired
-  if (Date.now() > accessData.expiresAt) {
+  if (now > accessData.expiresAt) {
+    console.log('Token has expired:', { 
+      current: new Date(now).toISOString(),
+      expiry: new Date(accessData.expiresAt).toISOString() 
+    });
     // Clean up expired token
     clearSecureAccess();
     return false;
   }
   
+  console.log('URL path is valid and not expired');
   return true;
 };
 
@@ -157,6 +191,7 @@ const getSecureAccess = (): SecureAccess | null => {
       const parsed = JSON.parse(data) as SecureAccess;
       return parsed;
     } catch (e) {
+      console.error('Error parsing secure access data:', e);
       return null;
     }
   }

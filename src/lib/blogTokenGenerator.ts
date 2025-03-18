@@ -1,5 +1,5 @@
 
-import { generateSecureAccess, formatExpiryDate } from './secureAccess';
+import { generateSecureAccess, formatExpiryDate, clearSecureAccess } from './secureAccess';
 
 /**
  * Generate a secure access token and password for blog administration
@@ -10,6 +10,9 @@ export const generateBlogToken = async (): Promise<{
   password: string;
   expiresAt: string;
 }> => {
+  // Clear any existing tokens before generating a new one
+  clearSecureAccess();
+  
   // Generate secure access
   const { urlPath, password, expiresAt } = await generateSecureAccess();
   
@@ -19,6 +22,9 @@ export const generateBlogToken = async (): Promise<{
   
   // Format expiry date for display
   const expiryFormatted = formatExpiryDate(expiresAt);
+  
+  console.log('Generated new blog token with URL:', fullUrl);
+  console.log('Token expires at:', expiryFormatted);
   
   return {
     fullUrl,
