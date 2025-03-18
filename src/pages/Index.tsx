@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import {
@@ -34,6 +35,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/lib/utils"
 import { CalendarIcon } from "lucide-react"
 import * as React from "react"
+import { format } from "date-fns"
 
 import { BlogTokenGenerator } from '@/components/BlogTokenGenerator';
 
@@ -42,6 +44,8 @@ import { BlogTokenGenerator } from '@/components/BlogTokenGenerator';
 
 // This is just an example location - integrate it where it makes sense in your actual app
 const Index = () => {
+  const [date, setDate] = React.useState<Date | undefined>(undefined);
+
   return (
     <>
       <section className="container grid items-center gap-6 py-8 md:py-10">
@@ -204,6 +208,7 @@ const Index = () => {
                   date > new Date() || date < new Date("1900-01-01")
                 }
                 initialFocus
+                className="pointer-events-auto"
               />
             </PopoverContent>
           </Popover>
