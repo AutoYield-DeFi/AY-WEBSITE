@@ -1,5 +1,4 @@
-
-import React, { useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -23,13 +22,13 @@ const Blog = () => {
       : fetchBlogPosts(),
   });
 
-  // All posts displayed in a grid without featured posts
+  // Memoize posts to prevent unnecessary rerenders
   const posts = blogPosts || [];
   
-  // Clear tag filter
-  const handleClearFilter = () => {
+  // Memoize handler to prevent recreation on each render
+  const handleClearFilter = useCallback(() => {
     navigate('/blog');
-  };
+  }, [navigate]);
 
   return (
     <div className="min-h-screen bg-white">
@@ -125,4 +124,4 @@ const Blog = () => {
   );
 };
 
-export default Blog;
+export default React.memo(Blog);

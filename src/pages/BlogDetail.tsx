@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft, Calendar, Clock } from 'lucide-react';
@@ -29,6 +28,17 @@ const BlogDetail = () => {
     queryFn: () => fetchRelatedPosts(post?.category as string, id as string),
     enabled: !!post,
   });
+
+  // Memoize date formatting to avoid unnecessary recalculations
+  const formattedDate = useMemo(() => {
+    if (!post) return '';
+    const publishDate = new Date(post.publishedAt);
+    return new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }).format(publishDate);
+  }, [post?.publishedAt]);
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -85,7 +95,7 @@ const BlogDetail = () => {
 
   // Format the date using Intl API for better localization
   const publishDate = new Date(post.publishedAt);
-  const formattedDate = new Intl.DateTimeFormat('en-US', {
+  const formattedDate2 = new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
@@ -133,7 +143,7 @@ const BlogDetail = () => {
                   <div className="flex items-center gap-2 text-muted-foreground">
                     <span className="inline-flex items-center">
                       <Calendar size={14} className="mr-1 inline-block" />
-                      <time dateTime={post.publishedAt}>{formattedDate}</time>
+                      <time dateTime={post.publishedAt}>{formattedDate}>{formattedDate}</time>
                     </span>
                     <span className="inline-flex items-center">
                       <Clock size={14} className="mr-1 inline-block" />
@@ -230,4 +240,4 @@ const BlogDetail = () => {
   );
 };
 
-export default BlogDetail;
+export default React.memo(BlogDetail);
