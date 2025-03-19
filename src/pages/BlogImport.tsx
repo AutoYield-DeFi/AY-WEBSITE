@@ -1,21 +1,15 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
-import { Button } from '@/components/ui/button';
 import { addBlogPost } from '@/lib/blog';
 import { useToast } from '@/components/ui/use-toast';
 import { useNavigate } from 'react-router-dom';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
-import { Heading, Paragraph } from '@/components/ui/typography';
-import { Markdown } from '@/components/ui/markdown';
 
 const BlogImport = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
-  const [showPreview, setShowPreview] = useState(false);
   
   // Blog post content properly formatted
   const formattedBlogContent = `Title: Raydium vs. Jupiter vs. Orca: The Ultimate Solana DEX Showdown
@@ -123,115 +117,55 @@ Challenges:
 
 As Solana's DeFi ecosystem matures, these platforms will likely continue to specialize and integrate with each other, creating a more efficient and user-friendly trading environment for all participants.`;
 
-  const handlePublish = () => {
-    setIsSubmitting(true);
-    try {
-      const newPost = addBlogPost(formattedBlogContent);
-      
-      if (newPost) {
-        toast({
-          title: "Blog post published!",
-          description: `Successfully published "${newPost.title}"`,
-        });
+  useEffect(() => {
+    const publishPost = () => {
+      try {
+        const newPost = addBlogPost(formattedBlogContent);
         
-        // Redirect to the new blog post
-        setTimeout(() => {
+        if (newPost) {
+          toast({
+            title: "Blog post published!",
+            description: `Successfully published "${newPost.title}"`,
+          });
+          
+          // Redirect to the new blog post
           navigate(`/blog/${newPost.slug}`);
-        }, 1500);
-      } else {
+        } else {
+          toast({
+            title: "Error publishing post",
+            description: "Please check your content format and try again",
+            variant: "destructive"
+          });
+        }
+      } catch (error) {
         toast({
           title: "Error publishing post",
-          description: "Please check your content format and try again",
+          description: "An unexpected error occurred",
           variant: "destructive"
         });
-        setIsSubmitting(false);
+        console.error(error);
       }
-    } catch (error) {
-      toast({
-        title: "Error publishing post",
-        description: "An unexpected error occurred",
-        variant: "destructive"
-      });
-      console.error(error);
-      setIsSubmitting(false);
-    }
-  };
+    };
+    
+    // Publish immediately
+    publishPost();
+  }, [toast, navigate]);
   
   return (
     <div className="min-h-screen bg-white">
       <SEO 
-        title="Import Blog Post - AutoYield"
-        description="Import and optimize a blog post for AutoYield"
+        title="Publishing Blog Post - AutoYield"
+        description="Publishing a blog post about Solana DEXs for AutoYield"
         noindex={true}
       />
       <Navbar />
 
       <div className="container mx-auto px-4 py-10 mt-16">
-        <header className="mb-8 max-w-3xl mx-auto">
-          <Heading as="h1" size="3xl" serif className="mb-4">
-            Blog Post Import
-          </Heading>
-          <Paragraph muted className="text-lg">
-            Review and publish the optimized blog post.
-          </Paragraph>
-        </header>
-
-        <div className="max-w-4xl mx-auto">
-          <Card className="w-full">
-            <CardHeader>
-              <CardTitle>Raydium vs. Jupiter vs. Orca: The Ultimate Solana DEX Showdown</CardTitle>
-              <CardDescription>
-                Ready to publish this comprehensive comparison of Solana DEXs
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <h3 className="font-medium">Preview Content</h3>
-                    <p className="text-sm text-muted-foreground">
-                      The blog has been optimized with proper formatting and SEO tags
-                    </p>
-                  </div>
-                  <Button 
-                    variant="outline" 
-                    onClick={() => setShowPreview(!showPreview)}
-                  >
-                    {showPreview ? "Hide Preview" : "Show Preview"}
-                  </Button>
-                </div>
-                
-                {showPreview && (
-                  <div className="border rounded-md p-6 max-h-[500px] overflow-y-auto bg-white">
-                    <Markdown>{formattedBlogContent.split('---')[1]}</Markdown>
-                  </div>
-                )}
-                
-                <div className="space-y-2 mt-4">
-                  <h3 className="font-medium">Content Optimizations</h3>
-                  <ul className="list-disc pl-5 space-y-1">
-                    <li>Proper Markdown heading structure (H1, H2, H3)</li>
-                    <li>Formatted comparison table</li>
-                    <li>Optimized bullet points with bold highlighting</li>
-                    <li>Added conclusion section</li>
-                    <li>SEO tags: solana, defi, dex, raydium, jupiter, orca, trading, liquidity</li>
-                    <li>Category assignment: defi</li>
-                  </ul>
-                </div>
-              </div>
-            </CardContent>
-            <CardFooter className="flex justify-between">
-              <Button variant="outline" onClick={() => navigate('/blog')}>
-                Cancel
-              </Button>
-              <Button 
-                onClick={handlePublish} 
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "Publishing..." : "Publish Blog Post"}
-              </Button>
-            </CardFooter>
-          </Card>
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-3xl font-bold mb-4">Publishing Blog Post...</h1>
+          <p className="text-lg text-gray-600">
+            Your post is being published directly. You'll be redirected to the blog post once it's ready.
+          </p>
         </div>
       </div>
 

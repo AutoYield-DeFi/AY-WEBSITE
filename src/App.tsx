@@ -1,8 +1,9 @@
+
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import Home from '@/pages/Home';
-import About from '@/pages/About';
+import Home from '@/pages/Index';
+import About from '@/pages/AboutUs';
 import Blog from '@/pages/Blog';
 import BlogDetail from '@/pages/BlogDetail';
 import BlogAdmin from '@/pages/BlogAdmin';
