@@ -1,179 +1,97 @@
-
-import { BlogPost } from '@/types/blog';
 import { blogData } from './data';
-import { 
-  getCachedPosts, 
-  setCachedPosts, 
-  hasRelatedPostsCache, 
-  getRelatedPostsCache, 
-  setRelatedPostsCache, 
-  hasFilteredPostsCache, 
-  getFilteredPostsCache, 
-  setFilteredPostsCache 
-} from './cache';
+import { BlogPost } from '@/types/blog';
+
+// In-memory cache for blog posts
+let blogPostsCache: BlogPost[] | null = null;
+let blogPostsByTagCache: { [tag: string]: BlogPost[] } = {};
 
 /**
- * Fetch all blog posts with caching - ensure latest posts appear first
+ * Fetches all blog posts.
+ * @returns Array of blog posts
  */
 export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
-  try {
-    // Check cache first
-    const cachedPosts = getCachedPosts();
-    if (cachedPosts && cachedPosts.length > 0) {
-      console.log('Using cached posts:', cachedPosts.length);
-      return Promise.resolve(cachedPosts);
-    }
-    
-    console.log('No cached posts found, fetching from source');
-    
-    // In a real application, this would be an API call
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        try {
-          // Sort by publish date, newest first
-          const sortedPosts = [...blogData].sort((a, b) => 
-            new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-          );
-          console.log('Sorted blog posts:', sortedPosts.length);
-          
-          // Log the first few posts to help debug
-          console.log('First 3 posts after sorting:', sortedPosts.slice(0, 3).map(p => ({
-            title: p.title,
-            date: p.publishedAt,
-            timestamp: new Date(p.publishedAt).getTime()
-          })));
-          
-          setCachedPosts(sortedPosts);
-          resolve(sortedPosts);
-        } catch (error) {
-          console.error("Error fetching blog posts:", error);
-          // Return empty array instead of throwing
-          resolve([]);
-        }
-      }, 500); // Increased timeout to ensure stability
-    });
-  } catch (error) {
-    console.error("Unexpected error in fetchBlogPosts:", error);
-    return [];
+  if (blogPostsCache) {
+    console.log('Returning blog posts from cache');
+    return blogPostsCache;
   }
+
+  console.log('Fetching all blog posts from data source');
+  // Simulate API call delay
+  await new Promise(resolve => setTimeout(resolve, 200));
+  
+  blogPostsCache = blogData;
+  return blogPostsCache;
 };
 
 /**
- * Fetch blog posts filtered by tag
- */
-export const fetchBlogPostsByTag = async (tag: string): Promise<BlogPost[]> => {
-  try {
-    if (!tag) return fetchBlogPosts();
-    
-    console.log(`Fetching posts by tag: ${tag}`);
-    
-    // Check if we have this tag cached
-    const cacheKey = `tag-${tag.toLowerCase()}`;
-    if (hasFilteredPostsCache(cacheKey)) {
-      const cachedResult = getFilteredPostsCache(cacheKey);
-      console.log(`Using cached results for tag ${tag}:`, cachedResult.length);
-      return Promise.resolve(cachedResult);
-    }
-    
-    // Get all posts first (possibly from cache)
-    const allPosts = await fetchBlogPosts();
-    if (!allPosts || allPosts.length === 0) {
-      console.log('No posts found to filter by tag');
-      return [];
-    }
-    
-    // Filter by tag (case insensitive)
-    const tagLower = tag.toLowerCase();
-    const filtered = allPosts.filter(post => 
-      post.tags && post.tags.some(t => t.toLowerCase() === tagLower)
-    );
-    
-    console.log(`Found ${filtered.length} posts for tag: ${tag}`);
-    
-    // Cache the result
-    setFilteredPostsCache(cacheKey, filtered);
-    
-    return filtered;
-  } catch (error) {
-    console.error(`Error in fetchBlogPostsByTag for tag ${tag}:`, error);
-    return [];
-  }
-};
-
-/**
- * Fetch a single blog post by ID with type safety - optimized performance
+ * Fetches a single blog post by its ID.
+ * @param id - The ID of the blog post to fetch
+ * @returns The blog post, or undefined if not found
  */
 export const fetchBlogPostById = async (id: string): Promise<BlogPost | undefined> => {
-  if (!id) {
-    console.log('No post ID provided');
-    return undefined;
-  }
-  
-  try {
-    console.log(`Fetching blog post by id: ${id}`);
-    
-    // Try to use cached posts if available
-    let posts = getCachedPosts();
-    if (!posts || posts.length === 0) {
-      console.log('No cached posts, fetching all posts first');
-      posts = await fetchBlogPosts();
-    }
-    
-    if (!posts || posts.length === 0) {
-      console.log('No posts available to search by ID');
-      return undefined;
-    }
-    
-    const post = posts.find(post => post.id === id || post.slug === id);
-    console.log(`Post found for id ${id}:`, !!post);
-    return post;
-  } catch (error) {
-    console.error(`Error fetching blog post by id ${id}:`, error);
-    return undefined;
-  }
+  console.log(`Fetching blog post by ID: ${id}`);
+  const posts = await fetchBlogPosts();
+  return posts.find(post => post.id === id);
 };
 
 /**
- * Fetch related blog posts with caching - optimized
+ * Fetches related blog posts based on category, excluding the current post.
+ * @param category - The category of the blog post
+ * @param currentPostId - The ID of the current blog post to exclude
+ * @returns Array of related blog posts
  */
-export const fetchRelatedPosts = async (category: string, excludeId: string): Promise<BlogPost[]> => {
+export const fetchRelatedPosts = async (category: string, currentPostId: string): Promise<BlogPost[]> => {
+  console.log(`Fetching related blog posts for category: ${category}, excluding ID: ${currentPostId}`);
+  const posts = await fetchBlogPosts();
+  return posts.filter(post => post.category === category && post.id !== currentPostId).slice(0, 3);
+};
+
+/**
+ * Fetches blog posts by tag.
+ * @param tag - The tag to filter blog posts by
+ * @returns Array of blog posts with the specified tag
+ */
+export const fetchBlogPostsByTag = async (tag: string): Promise<BlogPost[]> => {
+  if (blogPostsByTagCache[tag]) {
+    console.log(`Returning blog posts for tag "${tag}" from cache`);
+    return blogPostsByTagCache[tag];
+  }
+
+  console.log(`Fetching blog posts by tag: ${tag}`);
+  const posts = await fetchBlogPosts();
+  const filteredPosts = posts.filter(post => post.tags && post.tags.includes(tag));
+  blogPostsByTagCache[tag] = filteredPosts;
+  return filteredPosts;
+};
+
+/**
+ * Clears the blog posts cache.
+ */
+export const clearBlogCaches = () => {
+  console.log('Clearing blog posts cache');
+  blogPostsCache = null;
+  blogPostsByTagCache = {};
+};
+
+/**
+ * Fetches blog posts by author name
+ * @param authorName - The name of the author
+ * @returns Array of blog posts by the specified author
+ */
+export const fetchBlogPostsByAuthor = async (authorName: string): Promise<BlogPost[]> => {
+  console.log(`Fetching blog posts by author: ${authorName}`);
+  
   try {
-    if (!category) {
-      console.log('No category provided for related posts');
-      return [];
-    }
+    const allPosts = await fetchBlogPosts();
+    const filteredPosts = allPosts.filter(post => 
+      post.author && post.author.name && 
+      post.author.name.toLowerCase() === authorName.toLowerCase()
+    );
     
-    console.log(`Fetching related posts for category: ${category}, excluding: ${excludeId}`);
-    
-    const cacheKey = `${category}-${excludeId}`;
-    
-    if (hasRelatedPostsCache(cacheKey)) {
-      const cachedResult = getRelatedPostsCache(cacheKey);
-      console.log(`Using cached related posts for ${category}:`, cachedResult.length);
-      return Promise.resolve(cachedResult);
-    }
-    
-    // Use cached posts if available
-    let posts = getCachedPosts();
-    if (!posts || posts.length === 0) {
-      console.log('No cached posts, fetching all posts first');
-      posts = await fetchBlogPosts();
-    }
-    
-    if (!posts || posts.length === 0) {
-      console.log('No posts available to find related posts');
-      return [];
-    }
-    
-    const related = posts
-      .filter(post => post.category === category && post.id !== excludeId && post.slug !== excludeId)
-      .slice(0, 3);
-    
-    console.log(`Found ${related.length} related posts`);
-    setRelatedPostsCache(cacheKey, related);
-    return related;
+    console.log(`Found ${filteredPosts.length} posts by author: ${authorName}`);
+    return filteredPosts;
   } catch (error) {
-    console.error('Error fetching related posts:', error);
+    console.error(`Error fetching posts by author ${authorName}:`, error);
     return [];
   }
 };

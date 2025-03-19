@@ -63,6 +63,46 @@ const BlogDetail = () => {
     navigate('/blog');
   };
 
+  const handleAuthorClick = () => {
+    if (post?.author?.name) {
+      navigate(`/blog?author=${encodeURIComponent(post.author.name)}`);
+    }
+  };
+
+  // Generate structured data JSON-LD for the blog post
+  const getJsonLd = () => {
+    if (!post) return null;
+    
+    const baseUrl = import.meta.env.PROD ? 'https://autoyield.io' : window.location.origin;
+    const articleUrl = `${baseUrl}/blog/${post.slug}`;
+    
+    return {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": post.title,
+      "description": post.seoDescription || post.excerpt,
+      "image": post.coverImage,
+      "datePublished": post.publishedAt,
+      "author": {
+        "@type": "Person",
+        "name": post.author.name
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "AutoYield",
+        "logo": {
+          "@type": "ImageObject",
+          "url": `${baseUrl}/logo.png`
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": articleUrl
+      },
+      "keywords": post.tags?.join(', ') || post.category
+    };
+  };
+
   if (isPostLoading) {
     return (
       <div className="min-h-screen bg-white">
@@ -105,10 +145,11 @@ const BlogDetail = () => {
       <SEO 
         title={post.title}
         description={post.seoDescription || post.excerpt}
-        keywords={`${post.category}, AutoYield blog, DeFi, Solana, liquidity management, ${post.tags?.join(', ')}`}
+        keywords={`${post.category}, ${post.tags?.join(', ')}, AutoYield blog, DeFi, Solana, liquidity management`}
         ogImage={post.coverImage}
         canonical={post.canonical || undefined}
         ogType="article"
+        jsonLd={getJsonLd()}
       />
       <Navbar />
 
@@ -140,7 +181,12 @@ const BlogDetail = () => {
                 <AvatarFallback>{post.author.name.charAt(0)}</AvatarFallback>
               </Avatar>
               <div>
-                <div className="font-medium">{post.author.name}</div>
+                <button 
+                  onClick={handleAuthorClick}
+                  className="font-medium hover:text-primary transition-colors"
+                >
+                  {post.author.name}
+                </button>
                 <div className="text-sm text-muted-foreground flex items-center gap-4">
                   <span>{post.author.title}</span>
                   <div className="flex items-center gap-2 text-muted-foreground">

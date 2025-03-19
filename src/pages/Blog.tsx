@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
-import { fetchBlogPosts, fetchBlogPostsByTag, clearBlogCaches } from '@/lib/blog';
+import { fetchBlogPosts, fetchBlogPostsByTag, fetchBlogPostsByAuthor, clearBlogCaches } from '@/lib/blog';
 import BlogCard from '@/components/blog/BlogCard';
 import { Button } from '@/components/ui/button';
 import { Heading } from '@/components/ui/typography';
@@ -18,6 +18,7 @@ const Blog = () => {
   const { toast } = useToast();
   const searchParams = new URLSearchParams(location.search);
   const tagFilter = searchParams.get('tag');
+  const authorFilter = searchParams.get('author');
   
   // Clear caches on initial load to ensure fresh data
   useEffect(() => {
@@ -26,13 +27,18 @@ const Blog = () => {
   
   // Query for blog posts with better error handling
   const { data: blogPosts, isLoading, isError, refetch } = useQuery({
-    queryKey: ['blogPosts', tagFilter || 'all'],
+    queryKey: ['blogPosts', tagFilter || authorFilter || 'all'],
     queryFn: async () => {
-      console.log(`Fetching blog posts with tag: ${tagFilter || 'none'}`);
+      console.log(`Fetching blog posts with tag: ${tagFilter || 'none'} or author: ${authorFilter || 'none'}`);
       try {
-        const posts = tagFilter 
-          ? await fetchBlogPostsByTag(tagFilter) 
-          : await fetchBlogPosts();
+        let posts;
+        if (tagFilter) {
+          posts = await fetchBlogPostsByTag(tagFilter);
+        } else if (authorFilter) {
+          posts = await fetchBlogPostsByAuthor(authorFilter);
+        } else {
+          posts = await fetchBlogPosts();
+        }
         
         console.log(`Successfully fetched ${posts.length} posts`);
         return posts;
@@ -82,12 +88,25 @@ const Blog = () => {
   return (
     <div className="min-h-screen bg-white">
       <SEO 
-        title={tagFilter 
-          ? `AutoYield Blog - Posts about ${tagFilter}` 
-          : "AutoYield Blog - DeFi Insights & Liquidity Management"
+        title={
+          authorFilter
+            ? `Articles by ${authorFilter} | AutoYield Blog`
+            : tagFilter 
+              ? `Posts about ${tagFilter} | AutoYield Blog` 
+              : "AutoYield Blog - DeFi Insights & Liquidity Management"
         }
-        description="Explore in-depth articles on DeFi, Solana ecosystem, liquidity management, and yield optimization strategies from the AutoYield team."
-        keywords="DeFi blog, liquidity blog, Solana DeFi, AutoYield blog, cryptocurrency articles, yield optimization"
+        description={
+          authorFilter
+            ? `Explore articles written by ${authorFilter} about DeFi, Solana ecosystem, and liquidity management strategies.`
+            : tagFilter
+              ? `Explore in-depth articles about ${tagFilter} from the AutoYield team.`
+              : "Explore in-depth articles on DeFi, Solana ecosystem, liquidity management, and yield optimization strategies from the AutoYield team."
+        }
+        keywords={
+          tagFilter
+            ? `${tagFilter}, DeFi blog, liquidity blog, Solana DeFi, AutoYield blog`
+            : "DeFi blog, liquidity blog, Solana DeFi, AutoYield blog, cryptocurrency articles, yield optimization"
+        }
         ogImage="/images/blog-og-image.png"
       />
       <Navbar />
@@ -97,7 +116,16 @@ const Blog = () => {
           <Heading as="h1" size="4xl" serif className="mb-4">
             AutoYield Blog
           </Heading>
-          {tagFilter ? (
+          {authorFilter ? (
+            <div className="space-y-4">
+              <p className="text-xl text-muted-foreground">
+                Articles written by <span className="text-primary font-medium">{authorFilter}</span>
+              </p>
+              <Button variant="outline" size="sm" onClick={handleClearFilter}>
+                View all articles
+              </Button>
+            </div>
+          ) : tagFilter ? (
             <div className="space-y-4">
               <p className="text-xl text-muted-foreground">
                 Showing posts tagged with <span className="text-primary font-medium">#{tagFilter}</span>
@@ -139,7 +167,11 @@ const Blog = () => {
             <div className="mb-10 max-w-5xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-serif font-bold mb-8">
                 {posts && posts.length > 0 
-                  ? (tagFilter ? `Posts tagged with #${tagFilter}` : "Latest Articles") 
+                  ? (authorFilter 
+                      ? `Articles by ${authorFilter}`
+                      : tagFilter 
+                        ? `Posts tagged with #${tagFilter}` 
+                        : "Latest Articles") 
                   : "No articles found"
                 }
               </h2>
@@ -153,13 +185,16 @@ const Blog = () => {
               ) : (
                 <div className="text-center py-12 border rounded-lg">
                   <p className="text-lg text-muted-foreground">
-                    {tagFilter ? `No articles found for tag "${tagFilter}".` : "No articles found."}
+                    {authorFilter 
+                      ? `No articles found by ${authorFilter}.`
+                      : tagFilter 
+                        ? `No articles found for tag "${tagFilter}".` 
+                        : "No articles found."
+                    }
                   </p>
-                  {tagFilter && (
-                    <Button variant="outline" className="mt-4" onClick={handleClearFilter}>
-                      View all articles
-                    </Button>
-                  )}
+                  <Button variant="outline" className="mt-4" onClick={handleClearFilter}>
+                    View all articles
+                  </Button>
                 </div>
               )}
             </div>

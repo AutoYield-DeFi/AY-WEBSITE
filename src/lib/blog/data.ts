@@ -193,7 +193,7 @@ export const blogData: BlogPost[] = [
     category: 'market-insights',
     tags: ['dex', 'raydium', 'jupiter', 'orca', 'comparison', 'solana'],
     readingTime: 12,
-    coverImage: 'https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=2832&auto=format&fit=crop',
+    coverImage: 'https://images.unsplash.com/photo-1618044733300-9472054094ee?q=80&w=2500&auto=format&fit=crop',
     author: {
       name: 'Shuhaib Shariff',
       title: 'Co-founder at AutoYield',
@@ -272,7 +272,7 @@ export const blogData: BlogPost[] = [
     category: 'defi',
     tags: ['meteora', 'dlmm', 'solana', 'liquidity', 'defi'],
     readingTime: 10,
-    coverImage: 'https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=2832&auto=format&fit=crop',
+    coverImage: 'https://images.unsplash.com/photo-1622630998477-20aa696ecb05?q=80&w=2924&auto=format&fit=crop',
     author: {
       name: 'Shuhaib Shariff',
       title: 'Co-founder at AutoYield',
@@ -372,7 +372,7 @@ export const blogData: BlogPost[] = [
     category: 'liquidity',
     tags: ['AI', 'quant', 'strategies', 'optimization'],
     readingTime: 9,
-    coverImage: 'https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2832&auto=format&fit=crop',
+    coverImage: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2940&auto=format&fit=crop',
     author: {
       name: 'Shuhaib Shariff',
       title: 'Co-founder at AutoYield',
@@ -455,7 +455,7 @@ export const blogData: BlogPost[] = [
     category: 'market-insights',
     tags: ['solana', 'ecosystem', 'growth', 'defi trends'],
     readingTime: 7,
-    coverImage: 'https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?q=80&w=2897&auto=format&fit=crop',
+    coverImage: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2832&auto=format&fit=crop',
     author: {
       name: 'Shuhaib Shariff',
       title: 'Co-founder at AutoYield',
@@ -517,7 +517,7 @@ export const blogData: BlogPost[] = [
     category: 'tutorials',
     tags: ['impermanent loss', 'LP', 'risk management', 'tutorials'],
     readingTime: 8,
-    coverImage: 'https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2970&auto=format&fit=crop',
+    coverImage: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=2070&auto=format&fit=crop',
     author: {
       name: 'Shuhaib Shariff',
       title: 'Co-founder at AutoYield',

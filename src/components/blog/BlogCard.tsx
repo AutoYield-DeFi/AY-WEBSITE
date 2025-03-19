@@ -29,6 +29,12 @@ const BlogCard = ({ post, className }: BlogCardProps) => {
     navigate(`/blog?tag=${tag}`);
   };
 
+  const handleAuthorClick = (e: React.MouseEvent) => {
+    e.preventDefault(); // Prevent navigating to the blog post
+    e.stopPropagation(); // Stop event bubbling
+    navigate(`/blog?author=${encodeURIComponent(post.author.name)}`);
+  };
+
   return (
     <article className={cn(
       "group flex flex-col h-full rounded-lg overflow-hidden hover:shadow-md transition-all duration-300 border border-gray-100", 
@@ -92,7 +98,12 @@ const BlogCard = ({ post, className }: BlogCardProps) => {
                 <AvatarImage src={post.author.avatar} alt={post.author.name} />
                 <AvatarFallback>{post.author.name.charAt(0)}</AvatarFallback>
               </Avatar>
-              <span className="text-sm font-medium">{post.author.name}</span>
+              <button 
+                onClick={handleAuthorClick}
+                className="text-sm font-medium hover:text-primary transition-colors"
+              >
+                {post.author.name}
+              </button>
             </div>
             
             <div className="flex items-center gap-3 text-xs text-muted-foreground">
