@@ -5,7 +5,8 @@ export {
   fetchRelatedPosts, 
   clearBlogCaches,
   fetchBlogPostsByTag,
-  fetchBlogPostsByAuthor
+  fetchBlogPostsByAuthor,
+  getAvailablePosts
 } from './fetch';
 
 export { addBlogPost } from './create';

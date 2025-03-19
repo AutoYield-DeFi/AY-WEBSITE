@@ -1,12 +1,12 @@
 
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import { Separator } from '@/components/ui/separator';
-import { fetchBlogPostById, fetchRelatedPosts, getAvailablePosts } from '@/lib/blog';
+import { fetchBlogPostById, fetchRelatedPosts, fetchBlogPosts } from '@/lib/blog';
 import { useToast } from '@/components/ui/use-toast';
 import BlogAuthor from '@/components/blog/BlogAuthor';
 import BlogContent from '@/components/blog/BlogContent';
@@ -16,19 +16,26 @@ import BlogCoverImage from '@/components/blog/BlogCoverImage';
 import BackButton from '@/components/blog/BackButton';
 import BlogJsonLd from '@/components/blog/BlogJsonLd';
 import BlogBreadcrumb from '@/components/blog/BlogBreadcrumb';
+import { BlogPost } from '@/types/blog';
 
 const BlogDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [availablePosts, setAvailablePosts] = useState<{id: string, slug: string}[]>([]);
   
-  // First, let's debug what posts are available
+  // Debug available posts
   useEffect(() => {
     async function debugPosts() {
       if (id) {
         console.log(`Blog detail page loaded with ID/slug: ${id}`);
-        const availablePosts = await getAvailablePosts();
-        console.log("Available posts:", availablePosts);
+        const posts = await fetchBlogPosts();
+        const simplifiedPosts = posts.map(post => ({
+          id: post.id,
+          slug: post.slug
+        }));
+        console.log("Available posts:", simplifiedPosts);
+        setAvailablePosts(simplifiedPosts);
       }
     }
     debugPosts();
@@ -42,9 +49,32 @@ const BlogDetail = () => {
     queryKey: ['blogPost', id],
     queryFn: async () => {
       console.log(`Fetching post with ID: ${id}`);
-      const result = await fetchBlogPostById(id as string);
-      console.log(`Fetch result:`, result);
-      return result;
+      if (!id) return undefined;
+      
+      try {
+        const posts = await fetchBlogPosts();
+        
+        // First try to find by ID
+        let post = posts.find(post => post.id === id);
+        
+        // If not found by ID, try by slug
+        if (!post) {
+          console.log(`Post not found by ID, trying slug: ${id}`);
+          post = posts.find(post => post.slug === id);
+        }
+        
+        if (!post) {
+          console.error(`Post not found with ID or slug: ${id}`, 
+            posts.map(p => ({ id: p.id, slug: p.slug })));
+          return undefined;
+        } else {
+          console.log(`Post found: ${post.title}`);
+          return post;
+        }
+      } catch (error) {
+        console.error(`Error fetching post by ID/slug ${id}:`, error);
+        throw error;
+      }
     },
     enabled: !!id,
     retry: 2,
@@ -52,8 +82,11 @@ const BlogDetail = () => {
 
   const { data: relatedPosts = [] } = useQuery({
     queryKey: ['relatedPosts', post?.category, id],
-    queryFn: () => fetchRelatedPosts(post?.category as string, id as string),
-    enabled: !!post && !!post.category,
+    queryFn: () => {
+      if (!post?.category || !id) return [];
+      return fetchRelatedPosts(post.category, id);
+    },
+    enabled: !!post && !!post.category && !!id,
   });
 
   // Log errors for debugging
@@ -111,7 +144,17 @@ const BlogDetail = () => {
         <div className="container mx-auto px-4 py-12 text-center">
           <h1 className="text-2xl font-bold mb-4">Blog post not found</h1>
           <p className="mb-4">The blog post you're looking for doesn't exist or has been removed.</p>
-          <p className="mb-8 text-sm text-gray-500">Requested ID/slug: {id}</p>
+          <p className="mb-4 text-sm text-gray-500">Requested ID/slug: {id}</p>
+          {availablePosts.length > 0 && (
+            <div className="mb-4">
+              <p className="font-medium">Available posts:</p>
+              <ul className="text-sm text-gray-600 mt-2">
+                {availablePosts.map((p, index) => (
+                  <li key={index}>ID: {p.id}, Slug: {p.slug}</li>
+                ))}
+              </ul>
+            </div>
+          )}
           <Link to="/blog" className="text-primary hover:underline">
             Return to Blog
           </Link>
@@ -122,7 +165,7 @@ const BlogDetail = () => {
   }
 
   // Calculate baseUrl for canonical URL
-  const baseUrl = import.meta.env.PROD ? 'https://autoyield.io' : window.location.origin;
+  const baseUrl = window.location.origin;
   const canonicalUrl = `${baseUrl}/blog/${post.slug}`;
 
   return (
@@ -136,10 +179,10 @@ const BlogDetail = () => {
         ogType="article"
         publishedTime={post.publishedAt}
         modifiedTime={post.updatedAt || post.publishedAt}
-        author={post.author.name}
+        author={post.author?.name}
         section={post.category}
-        twitterCreator={post.author.twitter ? `@${post.author.twitter}` : undefined}
-        jsonLd={<BlogJsonLd post={post} />}
+        twitterCreator={post.author?.twitter ? `@${post.author.twitter}` : undefined}
+        jsonLd={post ? <BlogJsonLd post={post} /> : null}
       />
       <Navbar />
 
@@ -153,10 +196,16 @@ const BlogDetail = () => {
         </div>
 
         {/* Article header */}
-        <BlogHeader 
-          post={post} 
-          formattedDate={formattedDate} 
-        />
+        {post && (
+          <BlogHeader 
+            title={post.title}
+            description={post.excerpt}
+            authorName={post.author?.name}
+            authorTitle={post.author?.title}
+            date={formattedDate}
+            readingTime={post.readingTime}
+          />
+        )}
 
         {/* Cover image */}
         <BlogCoverImage src={post.coverImage} alt={post.title} />
@@ -165,16 +214,16 @@ const BlogDetail = () => {
         <div className="container mx-auto px-4">
           <BlogContent 
             content={post.content} 
-            tags={post.tags} 
+            tags={post.tags || []} 
             title={post.title}
             slug={post.slug}
           />
           <Separator className="my-12" />
-          <BlogAuthor author={post.author} />
+          {post.author && <BlogAuthor author={post.author} />}
         </div>
 
         {/* Related posts */}
-        {relatedPosts.length > 0 && (
+        {relatedPosts && relatedPosts.length > 0 && (
           <RelatedPosts posts={relatedPosts} />
         )}
       </article>

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/sonner';
@@ -49,7 +49,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/docs" element={<Docs />}>
-              <Route path="" element={<Navigate to="/docs/welcome" replace />} />
+              <Route index element={<Navigate to="/docs/welcome" replace />} />
               <Route path="welcome" element={<DocsWelcome />} />
               <Route path="getting-started" element={<DocsGettingStarted />} />
               <Route path="core-features" element={<DocsCoreFeatures />} />
