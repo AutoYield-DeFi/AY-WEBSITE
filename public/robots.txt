@@ -2,6 +2,13 @@
 User-agent: *
 Allow: /
 
+# Important pages
+Allow: /blog/
+Allow: /docs/
+Allow: /about/
+Allow: /faq/
+Allow: /glossary/
+
 Sitemap: https://autoyield.io/sitemap.xml
 
 # Disallow access to admin routes

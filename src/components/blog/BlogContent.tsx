@@ -3,15 +3,20 @@ import React from 'react';
 import { Markdown } from '@/components/ui/markdown';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import BlogSocialShare from './BlogSocialShare';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 interface BlogContentProps {
   content: string;
   tags?: string[];
+  title: string;
+  slug: string;
 }
 
-const BlogContent = ({ content, tags }: BlogContentProps) => {
+const BlogContent = ({ content, tags, title, slug }: BlogContentProps) => {
   const navigate = useNavigate();
+  const baseUrl = import.meta.env.PROD ? 'https://autoyield.io' : window.location.origin;
+  const articleUrl = `${baseUrl}/blog/${slug}`;
 
   const handleTagClick = (tag: string) => {
     navigate(`/blog?tag=${tag}`);
@@ -26,8 +31,10 @@ const BlogContent = ({ content, tags }: BlogContentProps) => {
         <Markdown className="blog-content">{processedContent}</Markdown>
       </div>
 
+      <BlogSocialShare title={title} url={articleUrl} />
+
       {tags && tags.length > 0 && (
-        <div className="flex flex-wrap gap-2 mt-10 mb-10">
+        <div className="flex flex-wrap gap-2 mt-6 mb-10">
           {tags.map(tag => (
             <button 
               key={tag} 

@@ -15,6 +15,7 @@ import BlogHeader from '@/components/blog/BlogHeader';
 import BlogCoverImage from '@/components/blog/BlogCoverImage';
 import BackButton from '@/components/blog/BackButton';
 import BlogJsonLd from '@/components/blog/BlogJsonLd';
+import BlogBreadcrumb from '@/components/blog/BlogBreadcrumb';
 
 const BlogDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -102,6 +103,10 @@ const BlogDetail = () => {
     );
   }
 
+  // Calculate baseUrl for canonical URL
+  const baseUrl = import.meta.env.PROD ? 'https://autoyield.io' : window.location.origin;
+  const canonicalUrl = `${baseUrl}/blog/${post.slug}`;
+
   return (
     <div className="min-h-screen bg-white">
       <SEO 
@@ -109,16 +114,24 @@ const BlogDetail = () => {
         description={post.seoDescription || post.excerpt}
         keywords={`${post.category}, ${post.tags?.join(', ')}, AutoYield blog, DeFi, Solana, liquidity management`}
         ogImage={post.coverImage}
-        canonical={post.canonical || undefined}
+        canonical={canonicalUrl}
         ogType="article"
+        publishedTime={post.publishedAt}
+        modifiedTime={post.updatedAt || post.publishedAt}
+        author={post.author.name}
+        section={post.category}
+        twitterCreator={post.author.twitter ? `@${post.author.twitter}` : undefined}
         jsonLd={<BlogJsonLd post={post} />}
       />
       <Navbar />
 
       <article className="pt-20 pb-16">
-        {/* Breadcrumb */}
+        {/* Breadcrumb and Back Button */}
         <div className="container mx-auto px-4 mb-6">
-          <BackButton onClick={handleBackClick} />
+          <div className="flex justify-between items-center">
+            <BlogBreadcrumb post={post} />
+            <BackButton onClick={handleBackClick} />
+          </div>
         </div>
 
         {/* Article header */}
@@ -129,7 +142,12 @@ const BlogDetail = () => {
 
         {/* Article body */}
         <div className="container mx-auto px-4">
-          <BlogContent content={post.content} tags={post.tags} />
+          <BlogContent 
+            content={post.content} 
+            tags={post.tags} 
+            title={post.title}
+            slug={post.slug}
+          />
           <Separator className="my-12" />
           <BlogAuthor author={post.author} />
         </div>

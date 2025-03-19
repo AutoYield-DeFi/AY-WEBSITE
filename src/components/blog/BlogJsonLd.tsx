@@ -19,9 +19,11 @@ const BlogJsonLd = ({ post }: BlogJsonLdProps) => {
     "description": post.seoDescription || post.excerpt,
     "image": post.coverImage,
     "datePublished": post.publishedAt,
+    "dateModified": post.updatedAt || post.publishedAt,
     "author": {
       "@type": "Person",
-      "name": post.author.name
+      "name": post.author.name,
+      "url": post.author.twitter ? `https://twitter.com/${post.author.twitter}` : undefined
     },
     "publisher": {
       "@type": "Organization",
@@ -35,7 +37,9 @@ const BlogJsonLd = ({ post }: BlogJsonLdProps) => {
       "@type": "WebPage",
       "@id": articleUrl
     },
-    "keywords": post.tags?.join(', ') || post.category
+    "keywords": post.tags?.join(', ') || post.category,
+    "articleSection": post.category,
+    "wordCount": post.content.split(/\s+/).length
   };
 
   return (

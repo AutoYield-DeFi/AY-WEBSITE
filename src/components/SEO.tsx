@@ -10,7 +10,12 @@ interface SEOProps {
   ogType?: string;
   ogImage?: string;
   twitterCard?: string;
-  jsonLd?: Record<string, any>;
+  twitterCreator?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  section?: string;
+  jsonLd?: React.ReactNode;
   noindex?: boolean;
 }
 
@@ -22,6 +27,11 @@ const SEO = ({
   ogType = "website",
   ogImage = "/og-image.png", 
   twitterCard = "summary_large_image",
+  twitterCreator,
+  publishedTime,
+  modifiedTime,
+  author,
+  section,
   jsonLd,
   noindex = false
 }: SEOProps) => {
@@ -53,21 +63,26 @@ const SEO = ({
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={fullOgImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      
+      {/* Article specific Open Graph tags */}
+      {ogType === "article" && author && <meta property="article:author" content={author} />}
+      {ogType === "article" && section && <meta property="article:section" content={section} />}
+      {ogType === "article" && publishedTime && <meta property="article:published_time" content={publishedTime} />}
+      {ogType === "article" && modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
       
       {/* Twitter */}
-      <meta property="twitter:card" content={twitterCard} />
-      <meta property="twitter:site" content="@AutoYield" />
-      {fullCanonical && <meta property="twitter:url" content={fullCanonical} />}
-      <meta property="twitter:title" content={fullTitle} />
-      <meta property="twitter:description" content={description} />
-      <meta property="twitter:image" content={fullOgImage} />
+      <meta name="twitter:card" content={twitterCard} />
+      <meta name="twitter:site" content="@AutoYield" />
+      {twitterCreator && <meta name="twitter:creator" content={twitterCreator} />}
+      {fullCanonical && <meta name="twitter:url" content={fullCanonical} />}
+      <meta name="twitter:title" content={fullTitle} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={fullOgImage} />
       
       {/* Structured Data (JSON-LD) */}
-      {jsonLd && (
-        <script type="application/ld+json">
-          {JSON.stringify(jsonLd)}
-        </script>
-      )}
+      {jsonLd}
     </Helmet>
   );
 };
