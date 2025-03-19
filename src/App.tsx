@@ -14,11 +14,13 @@ import Glossary from '@/pages/Glossary';
 import Roadmap from '@/pages/Roadmap';
 import FAQ from '@/pages/FAQ';
 import BlogImport from '@/pages/BlogImport';
+import ScrollToTop from '@/components/ScrollToTop';
 
 const App = () => {
   return (
     <HelmetProvider>
       <Router>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -28,7 +30,6 @@ const App = () => {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/legal" element={<Legal />} />
           <Route path="/blog" element={<Blog />} />
-          {/* Fixed route order: specific routes before dynamic routes */}
           <Route path="/blog/import" element={<BlogImport />} />
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/admin" element={<BlogAdmin />} />

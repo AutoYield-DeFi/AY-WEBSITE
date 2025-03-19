@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
-import { fetchBlogPosts, fetchBlogPostsByTag, clearBlogCaches } from '@/lib/blog';
+import { fetchBlogPosts, fetchBlogPostsByTag } from '@/lib/blog';
 import BlogCard from '@/components/blog/BlogCard';
 import { Button } from '@/components/ui/button';
 import { Heading } from '@/components/ui/typography';
@@ -19,12 +19,7 @@ const Blog = () => {
   const searchParams = new URLSearchParams(location.search);
   const tagFilter = searchParams.get('tag');
   
-  // Clear cache before loading to ensure fresh data
-  useEffect(() => {
-    console.log('Clearing blog caches on mount');
-    clearBlogCaches();
-  }, []);
-  
+  // Query for blog posts
   const { data: blogPosts, isLoading, isError, refetch } = useQuery({
     queryKey: ['blogPosts', tagFilter],
     queryFn: () => {
@@ -36,7 +31,6 @@ const Blog = () => {
     staleTime: 60 * 1000, // 1 minute
     retry: 3,
     refetchOnWindowFocus: false,
-    refetchOnMount: true,
   });
 
   // Memoize posts to prevent unnecessary rerenders
@@ -49,7 +43,6 @@ const Blog = () => {
   
   const handleRetry = useCallback(() => {
     console.log('Manually retrying blog post fetch');
-    clearBlogCaches();
     refetch().catch(err => {
       console.error('Failed to refetch blog posts:', err);
       toast({

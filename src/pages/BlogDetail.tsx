@@ -1,3 +1,4 @@
+
 import React, { useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -8,7 +9,7 @@ import SEO from '@/components/SEO';
 import { Separator } from '@/components/ui/separator';
 import { fetchBlogPostById, fetchRelatedPosts } from '@/lib/blog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { toast } from '@/components/ui/use-toast';
+import { useToast } from '@/components/ui/use-toast';
 import BlogAuthor from '@/components/blog/BlogAuthor';
 import BlogContent from '@/components/blog/BlogContent';
 import RelatedPosts from '@/components/blog/RelatedPosts';
@@ -17,18 +18,27 @@ import { Link } from 'react-router-dom';
 const BlogDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { toast } = useToast();
   
-  const { data: post, isLoading: isPostLoading } = useQuery({
+  const { data: post, isLoading: isPostLoading, error } = useQuery({
     queryKey: ['blogPost', id],
     queryFn: () => fetchBlogPostById(id as string),
     enabled: !!id,
+    retry: 2,
   });
 
   const { data: relatedPosts = [] } = useQuery({
-    queryKey: ['relatedPosts', post?.category],
+    queryKey: ['relatedPosts', post?.category, id],
     queryFn: () => fetchRelatedPosts(post?.category as string, id as string),
-    enabled: !!post,
+    enabled: !!post && !!post.category,
   });
+
+  // Log errors for debugging
+  React.useEffect(() => {
+    if (error) {
+      console.error('Error loading blog post:', error);
+    }
+  }, [error]);
 
   // Memoize date formatting
   const formattedDate = useMemo(() => {
@@ -97,7 +107,7 @@ const BlogDetail = () => {
         description={post.seoDescription || post.excerpt}
         keywords={`${post.category}, AutoYield blog, DeFi, Solana, liquidity management, ${post.tags?.join(', ')}`}
         ogImage={post.coverImage}
-        canonical={post.canonical || window.location.href}
+        canonical={post.canonical || undefined}
         ogType="article"
       />
       <Navbar />
