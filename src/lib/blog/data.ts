@@ -1,8 +1,206 @@
-
 import { BlogPost } from '@/types/blog';
 
 // Sample blog data
 export const blogData: BlogPost[] = [
+  {
+    id: '6',
+    slug: 'raydium-jupiter-orca-solana-dex-showdown',
+    title: 'Raydium vs. Jupiter vs. Orca: The Ultimate Solana DEX Showdown',
+    excerpt: 'An in-depth comparison of the top three DEXs on Solana: Raydium, Jupiter, and Orca. We analyze their features, fee structures, and performance to help you choose the best platform for your needs.',
+    content: `
+      <h2>Introduction to Solana DEXs</h2>
+      <p>Decentralized exchanges (DEXs) have become a cornerstone of the Solana ecosystem, enabling users to trade assets without intermediaries. Among the numerous options available, Raydium, Jupiter, and Orca have emerged as the three dominant platforms, each with unique features and advantages. This article provides a comprehensive comparison to help you determine which DEX best suits your trading needs.</p>
+      
+      <h2>Market Position and Trading Volume</h2>
+      
+      <p>When evaluating DEXs, trading volume serves as a critical indicator of liquidity and user adoption. Here's how our three contenders stack up:</p>
+      
+      <h3>Jupiter: The Aggregator King</h3>
+      <p>Jupiter has positioned itself as Solana's premier DEX aggregator, routing trades through multiple liquidity sources to find the best rates. This approach has helped Jupiter capture an impressive market share:</p>
+      <ul>
+        <li>24-hour trading volume: $250-300 million (average)</li>
+        <li>Market share: Approximately 60-65% of Solana DEX volume</li>
+        <li>Monthly unique users: 800,000+</li>
+      </ul>
+      
+      <h3>Raydium: The Pioneer</h3>
+      <p>As one of the earliest DEXs on Solana, Raydium established a strong foundation and continues to maintain a significant presence:</p>
+      <ul>
+        <li>24-hour trading volume: $80-120 million (average)</li>
+        <li>Market share: Approximately 15-20% of Solana DEX volume</li>
+        <li>Monthly unique users: 250,000+</li>
+      </ul>
+      
+      <h3>Orca: The User-Focused Alternative</h3>
+      <p>Orca has carved out its niche by emphasizing simplicity and user experience:</p>
+      <ul>
+        <li>24-hour trading volume: $40-70 million (average)</li>
+        <li>Market share: Approximately 10-15% of Solana DEX volume</li>
+        <li>Monthly unique users: 150,000+</li>
+      </ul>
+      
+      <h2>Trading Mechanism and Liquidity Model</h2>
+      
+      <p>Each platform employs a different approach to facilitating trades and managing liquidity, significantly impacting trading experience and outcomes.</p>
+      
+      <h3>Jupiter: Multi-Route Aggregation</h3>
+      <p>Jupiter's key innovation is its ability to split and route orders through multiple DEXs and liquidity pools simultaneously:</p>
+      <ul>
+        <li><strong>Routing algorithm:</strong> Uses an advanced pathfinding algorithm to identify the most efficient trading routes across the Solana ecosystem</li>
+        <li><strong>Price impact minimization:</strong> Reduces slippage by splitting orders across multiple liquidity sources</li>
+        <li><strong>Liquidity access:</strong> Aggregates liquidity from virtually all major Solana DEXs and AMMs</li>
+      </ul>
+      
+      <h3>Raydium: Hybrid Liquidity Model</h3>
+      <p>Raydium pioneered a unique approach that combines AMM liquidity with order book access:</p>
+      <ul>
+        <li><strong>Market making:</strong> Provides liquidity to Serum's central limit order book</li>
+        <li><strong>Pools:</strong> Operates conventional AMM pools similar to Uniswap</li>
+        <li><strong>Concentrated liquidity:</strong> Recently added Uniswap V3-style concentrated liquidity pools</li>
+      </ul>
+      
+      <h3>Orca: Fair Price and Concentrated Liquidity</h3>
+      <p>Orca focuses on creating a streamlined trading experience:</p>
+      <ul>
+        <li><strong>Whirlpools:</strong> Concentrated liquidity pools allowing LPs to specify price ranges</li>
+        <li><strong>Fair price indicator:</strong> Helps users identify if they're receiving a fair market price</li>
+        <li><strong>Simplified interface:</strong> Designed for ease of use rather than advanced trading features</li>
+      </ul>
+      
+      <h2>Fee Structure and Cost Comparison</h2>
+      
+      <p>Trading costs can significantly impact returns, especially for high-frequency traders. Here's how the fee structures compare:</p>
+      
+      <h3>Jupiter</h3>
+      <ul>
+        <li><strong>Taker fees:</strong> Varies based on route (typically 0.2-0.85%)</li>
+        <li><strong>Priority fees:</strong> Dynamic based on network congestion</li>
+        <li><strong>Fee revenue model:</strong> Currently passes all fees to underlying protocols, but will introduce a revenue-sharing model in the future</li>
+      </ul>
+      
+      <h3>Raydium</h3>
+      <ul>
+        <li><strong>Trading fees:</strong> 0.25% for most pools, 0.05% for stable pairs</li>
+        <li><strong>LP fees:</strong> 0.22% goes to LPs, 0.03% to protocol treasury</li>
+        <li><strong>Concentrated liquidity fees:</strong> Customizable between 0.01% and 1% based on pool</li>
+      </ul>
+      
+      <h3>Orca</h3>
+      <ul>
+        <li><strong>Standard pools:</strong> 0.3% trading fee (0.25% to LPs, 0.05% to protocol)</li>
+        <li><strong>Stable pools:</strong> 0.05% trading fee (0.04% to LPs, 0.01% to protocol)</li>
+        <li><strong>Whirlpools:</strong> Variable fees from 0.01% to 1% depending on the pool</li>
+      </ul>
+      
+      <h2>User Experience and Accessibility</h2>
+      
+      <p>The interface design and overall user experience can be deciding factors, especially for newcomers to DeFi.</p>
+      
+      <h3>Jupiter: Functionality First</h3>
+      <p>Jupiter prioritizes powerful features and comprehensive trading options:</p>
+      <ul>
+        <li><strong>Interface complexity:</strong> Moderate - provides advanced features but remains relatively intuitive</li>
+        <li><strong>Mobile support:</strong> Well-optimized responsive design, no dedicated app</li>
+        <li><strong>Unique features:</strong> Limit orders, dollar-cost averaging, swap history tracking</li>
+        <li><strong>Wallet compatibility:</strong> Supports 30+ Solana wallets</li>
+      </ul>
+      
+      <h3>Raydium: Feature-Rich but Complex</h3>
+      <p>Raydium offers a comprehensive suite of trading tools:</p>
+      <ul>
+        <li><strong>Interface complexity:</strong> Higher - numerous features can overwhelm new users</li>
+        <li><strong>Mobile support:</strong> Functional but not optimized for smaller screens</li>
+        <li><strong>Unique features:</strong> Acceleraytor (launchpad), staking, farming, and order book integration</li>
+        <li><strong>Wallet compatibility:</strong> Supports most major Solana wallets</li>
+      </ul>
+      
+      <h3>Orca: Simplicity and Clarity</h3>
+      <p>Orca's primary focus is creating an accessible user experience:</p>
+      <ul>
+        <li><strong>Interface complexity:</strong> Low - deliberately simplified for ease of use</li>
+        <li><strong>Mobile support:</strong> Excellent responsive design</li>
+        <li><strong>Unique features:</strong> Fair price indicator, impact visualization, simplified LP interface</li>
+        <li><strong>Wallet compatibility:</strong> Supports all major Solana wallets</li>
+      </ul>
+      
+      <h2>Liquidity Provider Considerations</h2>
+      
+      <p>For those interested in providing liquidity rather than just trading, important differences exist between these platforms.</p>
+      
+      <h3>Jupiter</h3>
+      <p>Jupiter itself doesn't offer direct LP opportunities as it's primarily an aggregator, but it has announced plans to introduce its own liquidity pools in the future.</p>
+      
+      <h3>Raydium</h3>
+      <p>Raydium offers multiple options for liquidity providers:</p>
+      <ul>
+        <li><strong>Standard pools:</strong> Traditional AMM pools with continuous liquidity across all price ranges</li>
+        <li><strong>Concentrated liquidity:</strong> Allows targeting specific price ranges for greater efficiency</li>
+        <li><strong>Farming rewards:</strong> Additional RAY token incentives for selected pools</li>
+        <li><strong>Impermanent loss protection:</strong> None built-in, but some strategies available through third-party services</li>
+      </ul>
+      
+      <h3>Orca</h3>
+      <p>Orca provides thoughtfully designed LP features:</p>
+      <ul>
+        <li><strong>Whirlpools:</strong> Concentrated liquidity with intuitive controls</li>
+        <li><strong>Visible APR:</strong> Clear display of expected returns</li>
+        <li><strong>Impact calculator:</strong> Tools to estimate potential impermanent loss</li>
+        <li><strong>Automated strategies:</strong> Partnership with Kamino Finance for automated LP strategies</li>
+      </ul>
+      
+      <h2>AutoYield's Integration Capabilities</h2>
+      
+      <p>As an AI-driven liquidity management platform, AutoYield has different levels of integration with each of these DEXs:</p>
+      
+      <h3>Integration with Meteora DLMM</h3>
+      <p>While our primary focus is on Meteora's DLMM pools, our roadmap includes plans to optimize liquidity across multiple DEXs, including:</p>
+      
+      <ul>
+        <li><strong>Jupiter:</strong> High integration potential through their upcoming LP features and comprehensive API</li>
+        <li><strong>Raydium:</strong> Strong compatibility with their concentrated liquidity pools</li>
+        <li><strong>Orca Whirlpools:</strong> Excellent candidate for AI-optimized positioning due to their flexible fee structure</li>
+      </ul>
+      
+      <h2>Conclusion: Which DEX is Right for You?</h2>
+      
+      <p>The "best" Solana DEX depends entirely on your specific needs:</p>
+      
+      <h3>Choose Jupiter if:</h3>
+      <ul>
+        <li>You want consistently best prices and minimal price impact</li>
+        <li>You trade a wide variety of tokens, including less liquid ones</li>
+        <li>You value having advanced features like limit orders and DCA</li>
+      </ul>
+      
+      <h3>Choose Raydium if:</h3>
+      <ul>
+        <li>You want access to an all-in-one DeFi platform with staking, farming, and IDO opportunities</li>
+        <li>You prefer having order book functionality alongside AMM pools</li>
+        <li>You're interested in participating in new token launches</li>
+      </ul>
+      
+      <h3>Choose Orca if:</h3>
+      <ul>
+        <li>You value simplicity and user experience above all else</li>
+        <li>You're new to DeFi and appreciate clear, non-intimidating interfaces</li>
+        <li>You want to provide liquidity with an intuitive concentrated liquidity interface</li>
+      </ul>
+      
+      <p>Many advanced Solana users ultimately use a combination of these platforms—Jupiter for optimal trading, Raydium for farming and launches, and Orca for simple liquidity provision. With AutoYield's upcoming multi-DEX support, users will be able to optimize their liquidity strategies across all these platforms automatically.</p>
+    `,
+    publishedAt: '2025-03-20T09:00:00Z',
+    category: 'market-insights',
+    tags: ['dex', 'raydium', 'jupiter', 'orca', 'comparison', 'solana'],
+    readingTime: 12,
+    coverImage: 'https://images.unsplash.com/photo-1642790551116-03a3e95ae732?q=80&w=2940&auto=format&fit=crop',
+    author: {
+      name: 'Michael Torres',
+      title: 'Market Analyst',
+      avatar: '/team/michael.jpg',
+      bio: 'Michael tracks DeFi market trends and analyzes on-chain data to identify emerging opportunities.'
+    },
+    seoDescription: "Compare Solana's top DEXs - Raydium, Jupiter, and Orca - to find which platform best suits your trading style and investment goals."
+  },
   {
     id: '5',
     slug: 'the-rise-of-meteoras-dlmm-a-new-era-in-liquidity-provisioning',
