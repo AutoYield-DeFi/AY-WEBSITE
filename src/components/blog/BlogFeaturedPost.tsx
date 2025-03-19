@@ -79,14 +79,17 @@ const BlogFeaturedPost = ({ post }: BlogFeaturedPostProps) => {
         <div className="lg:col-span-2 order-1 lg:order-2">
           <Link to={`/blog/${post.slug}`} className="block h-full">
             <div className="h-64 lg:h-full">
-              <img
-                src={post.coverImage}
-                alt={post.title}
-                className="w-full h-full object-cover"
-                loading="eager"
-                width={800}
-                height={600}
-              />
+              {post.coverImage && (
+                <img
+                  src={post.coverImage}
+                  alt={post.title}
+                  className="w-full h-full object-cover"
+                  loading="eager"
+                  width={800}
+                  height={600}
+                  onError={(e) => console.error(`Image load error for ${post.slug}:`, e)}
+                />
+              )}
             </div>
           </Link>
         </div>

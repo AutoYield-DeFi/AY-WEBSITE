@@ -36,14 +36,17 @@ const BlogCard = ({ post, className }: BlogCardProps) => {
     )}>
       <Link to={`/blog/${post.slug}`} className="block overflow-hidden">
         <div className="relative overflow-hidden h-48">
-          <img
-            src={post.coverImage}
-            alt={post.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            loading="lazy"
-            width={600}
-            height={400}
-          />
+          {post.coverImage && (
+            <img
+              src={post.coverImage}
+              alt={post.title}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+              width={600}
+              height={400}
+              onError={(e) => console.error(`Image load error for ${post.slug}:`, e)}
+            />
+          )}
           <div className="absolute top-3 left-3">
             <span className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">
               {post.category}

@@ -193,7 +193,7 @@ export const blogData: BlogPost[] = [
     category: 'market-insights',
     tags: ['dex', 'raydium', 'jupiter', 'orca', 'comparison', 'solana'],
     readingTime: 12,
-    coverImage: 'https://images.unsplash.com/photo-1642790551116-03a3e95ae732?q=80&w=2940&auto=format&fit=crop',
+    coverImage: 'https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=2832&auto=format&fit=crop',
     author: {
       name: 'Shuhaib Shariff',
       title: 'Co-founder at AutoYield',
@@ -274,10 +274,10 @@ export const blogData: BlogPost[] = [
     readingTime: 10,
     coverImage: 'https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=2832&auto=format&fit=crop',
     author: {
-      name: 'Alex Johnson',
-      title: 'DeFi Researcher',
+      name: 'Shuhaib Shariff',
+      title: 'Co-founder at AutoYield',
       avatar: '/team/alex.jpg',
-      bio: 'Alex specializes in decentralized finance protocols and liquidity solutions on Solana and other leading blockchains.'
+      bio: '20+ years in SaaS and software product development, led teams across design, engineering, and content to build tools that make business easier.'
     },
     seoDescription: "Explore how Meteora's Dynamic Liquidity Market Maker (DLMM) is revolutionizing DeFi on Solana with automated, efficient liquidity provisioning."
   },
@@ -374,10 +374,10 @@ export const blogData: BlogPost[] = [
     readingTime: 9,
     coverImage: 'https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2832&auto=format&fit=crop',
     author: {
-      name: 'Emily Wei',
-      title: 'Lead AI Researcher',
-      avatar: '/team/emily.jpg',
-      bio: "Emily leads AutoYield's AI research team, combining expertise in machine learning with deep DeFi knowledge."
+      name: 'Shuhaib Shariff',
+      title: 'Co-founder at AutoYield',
+      avatar: '/team/alex.jpg',
+      bio: '20+ years in SaaS and software product development, led teams across design, engineering, and content to build tools that make business easier.'
     }
   },
   {
@@ -457,10 +457,10 @@ export const blogData: BlogPost[] = [
     readingTime: 7,
     coverImage: 'https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?q=80&w=2897&auto=format&fit=crop',
     author: {
-      name: 'Michael Torres',
-      title: 'Market Analyst',
-      avatar: '/team/michael.jpg',
-      bio: 'Michael tracks DeFi market trends and analyzes on-chain data to identify emerging opportunities.'
+      name: 'Shuhaib Shariff',
+      title: 'Co-founder at AutoYield',
+      avatar: '/team/alex.jpg',
+      bio: '20+ years in SaaS and software product development, led teams across design, engineering, and content to build tools that make business easier.'
     }
   },
   {
@@ -519,10 +519,10 @@ export const blogData: BlogPost[] = [
     readingTime: 8,
     coverImage: 'https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2970&auto=format&fit=crop',
     author: {
-      name: 'Sarah Johnson',
-      title: 'Head of Education',
-      avatar: '/team/sarah.jpg',
-      bio: 'Sarah simplifies complex DeFi concepts through educational content. Former professor of financial technology.'
+      name: 'Shuhaib Shariff',
+      title: 'Co-founder at AutoYield',
+      avatar: '/team/alex.jpg',
+      bio: '20+ years in SaaS and software product development, led teams across design, engineering, and content to build tools that make business easier.'
     }
   }
 ];
