@@ -1,5 +1,5 @@
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft, Calendar, Clock } from 'lucide-react';
@@ -20,6 +20,10 @@ const BlogDetail = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   
+  useEffect(() => {
+    console.log(`Blog detail page loaded with ID/slug: ${id}`);
+  }, [id]);
+  
   const { data: post, isLoading: isPostLoading, error } = useQuery({
     queryKey: ['blogPost', id],
     queryFn: () => fetchBlogPostById(id as string),
@@ -34,11 +38,16 @@ const BlogDetail = () => {
   });
 
   // Log errors for debugging
-  React.useEffect(() => {
+  useEffect(() => {
     if (error) {
       console.error('Error loading blog post:', error);
+      toast({
+        title: "Error loading blog post",
+        description: "There was an issue loading this article. Please try again.",
+        variant: "destructive"
+      });
     }
-  }, [error]);
+  }, [error, toast]);
 
   // Memoize date formatting
   const formattedDate = useMemo(() => {

@@ -41,7 +41,7 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
 export const fetchBlogPostById = async (id: string): Promise<BlogPost | undefined> => {
   console.log(`Fetching blog post by ID: ${id}`);
   const posts = await fetchBlogPosts();
-  return posts.find(post => post.id === id);
+  return posts.find(post => post.id === id || post.slug === id);
 };
 
 /**
@@ -53,7 +53,11 @@ export const fetchBlogPostById = async (id: string): Promise<BlogPost | undefine
 export const fetchRelatedPosts = async (category: string, currentPostId: string): Promise<BlogPost[]> => {
   console.log(`Fetching related blog posts for category: ${category}, excluding ID: ${currentPostId}`);
   const posts = await fetchBlogPosts();
-  return posts.filter(post => post.category === category && post.id !== currentPostId).slice(0, 3);
+  return posts.filter(post => 
+    post.category === category && 
+    post.id !== currentPostId && 
+    post.slug !== currentPostId
+  ).slice(0, 3);
 };
 
 /**
