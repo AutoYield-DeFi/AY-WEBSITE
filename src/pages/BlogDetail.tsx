@@ -1,19 +1,20 @@
 
 import React, { useMemo, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { ArrowLeft, Calendar, Clock } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import { Separator } from '@/components/ui/separator';
 import { fetchBlogPostById, fetchRelatedPosts } from '@/lib/blog';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useToast } from '@/components/ui/use-toast';
 import BlogAuthor from '@/components/blog/BlogAuthor';
 import BlogContent from '@/components/blog/BlogContent';
 import RelatedPosts from '@/components/blog/RelatedPosts';
-import { Link } from 'react-router-dom';
+import BlogHeader from '@/components/blog/BlogHeader';
+import BlogCoverImage from '@/components/blog/BlogCoverImage';
+import BackButton from '@/components/blog/BackButton';
+import BlogJsonLd from '@/components/blog/BlogJsonLd';
 
 const BlogDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -60,56 +61,8 @@ const BlogDetail = () => {
     }).format(publishDate);
   }, [post?.publishedAt]);
 
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText(window.location.href);
-    toast({
-      title: "Link copied",
-      description: "Article link has been copied to clipboard",
-    });
-  };
-
   const handleBackClick = () => {
     navigate('/blog');
-  };
-
-  const handleAuthorClick = () => {
-    if (post?.author?.name) {
-      navigate(`/blog?author=${encodeURIComponent(post.author.name)}`);
-    }
-  };
-
-  // Generate structured data JSON-LD for the blog post
-  const getJsonLd = () => {
-    if (!post) return null;
-    
-    const baseUrl = import.meta.env.PROD ? 'https://autoyield.io' : window.location.origin;
-    const articleUrl = `${baseUrl}/blog/${post.slug}`;
-    
-    return {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      "headline": post.title,
-      "description": post.seoDescription || post.excerpt,
-      "image": post.coverImage,
-      "datePublished": post.publishedAt,
-      "author": {
-        "@type": "Person",
-        "name": post.author.name
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "AutoYield",
-        "logo": {
-          "@type": "ImageObject",
-          "url": `${baseUrl}/logo.png`
-        }
-      },
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": articleUrl
-      },
-      "keywords": post.tags?.join(', ') || post.category
-    };
   };
 
   if (isPostLoading) {
@@ -158,76 +111,21 @@ const BlogDetail = () => {
         ogImage={post.coverImage}
         canonical={post.canonical || undefined}
         ogType="article"
-        jsonLd={getJsonLd()}
+        jsonLd={<BlogJsonLd post={post} />}
       />
       <Navbar />
 
       <article className="pt-20 pb-16">
         {/* Breadcrumb */}
         <div className="container mx-auto px-4 mb-6">
-          <button 
-            onClick={handleBackClick}
-            className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <ArrowLeft size={16} className="mr-2" />
-            Back to all posts
-          </button>
+          <BackButton onClick={handleBackClick} />
         </div>
 
         {/* Article header */}
-        <header className="container mx-auto px-4 mb-10">
-          <div className="max-w-[800px] mx-auto">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold tracking-tight leading-tight mb-6">
-              {post.title}
-            </h1>
-            <h2 className="text-xl text-muted-foreground font-serif mb-8">
-              {post.excerpt}
-            </h2>
-          
-            <div className="flex items-center">
-              <Avatar className="h-12 w-12 mr-4 border">
-                <AvatarImage src={post.author.avatar} alt={post.author.name} />
-                <AvatarFallback>{post.author.name.charAt(0)}</AvatarFallback>
-              </Avatar>
-              <div>
-                <button 
-                  onClick={handleAuthorClick}
-                  className="font-medium hover:text-primary transition-colors"
-                >
-                  {post.author.name}
-                </button>
-                <div className="text-sm text-muted-foreground flex items-center gap-4">
-                  <span>{post.author.title}</span>
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <span className="inline-flex items-center">
-                      <Calendar size={14} className="mr-1 inline-block" />
-                      <time dateTime={post.publishedAt}>{formattedDate}</time>
-                    </span>
-                    <span className="inline-flex items-center">
-                      <Clock size={14} className="mr-1 inline-block" />
-                      {post.readingTime} min read
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </header>
+        <BlogHeader post={post} formattedDate={formattedDate} />
 
         {/* Cover image */}
-        {post.coverImage && (
-          <div className="relative w-full mb-12 max-h-[600px] overflow-hidden">
-            <img 
-              src={post.coverImage} 
-              alt={post.title} 
-              className="w-full object-cover" 
-              style={{ maxHeight: "600px", objectPosition: "center" }}
-              loading="eager"  
-              width={1600}
-              height={800}
-            />
-          </div>
-        )}
+        <BlogCoverImage src={post.coverImage} alt={post.title} />
 
         {/* Article body */}
         <div className="container mx-auto px-4">
