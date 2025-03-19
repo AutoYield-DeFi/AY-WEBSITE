@@ -1,5 +1,21 @@
 
-// Re-export all blog-related functionality
-export { clearBlogCaches } from './cache';
-export { fetchBlogPosts, fetchBlogPostById, fetchBlogPostsByTag, fetchRelatedPosts } from './fetch';
-export { addBlogPost } from './create';
+// Export everything from our blog modules
+export * from './fetch';
+export * from './cache';
+export * from './data';
+export * from './create';
+export * from './types';
+
+// Also export our functions directly for easier importing
+import { fetchBlogPosts, fetchBlogPostById, fetchBlogPostsByTag, fetchRelatedPosts } from './fetch';
+import { clearBlogCaches } from './cache';
+import { createBlogPost } from './create';
+
+export {
+  fetchBlogPosts,
+  fetchBlogPostById,
+  fetchBlogPostsByTag,
+  fetchRelatedPosts,
+  clearBlogCaches,
+  createBlogPost
+};

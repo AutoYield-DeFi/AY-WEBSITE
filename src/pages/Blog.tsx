@@ -1,5 +1,5 @@
 
-import React, { useCallback, useMemo, useEffect } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -19,18 +19,27 @@ const Blog = () => {
   const searchParams = new URLSearchParams(location.search);
   const tagFilter = searchParams.get('tag');
   
-  // Query for blog posts
+  // Query for blog posts with better error handling
   const { data: blogPosts, isLoading, isError, refetch } = useQuery({
-    queryKey: ['blogPosts', tagFilter],
-    queryFn: () => {
+    queryKey: ['blogPosts', tagFilter || 'all'],
+    queryFn: async () => {
       console.log(`Fetching blog posts with tag: ${tagFilter || 'none'}`);
-      return tagFilter 
-        ? fetchBlogPostsByTag(tagFilter) 
-        : fetchBlogPosts();
+      try {
+        const posts = tagFilter 
+          ? await fetchBlogPostsByTag(tagFilter) 
+          : await fetchBlogPosts();
+        
+        console.log(`Successfully fetched ${posts.length} posts`);
+        return posts;
+      } catch (error) {
+        console.error('Failed to fetch blog posts:', error);
+        throw error;
+      }
     },
     staleTime: 60 * 1000, // 1 minute
-    retry: 3,
+    retry: 2,
     refetchOnWindowFocus: false,
+    refetchOnMount: true,
   });
 
   // Memoize posts to prevent unnecessary rerenders
@@ -43,6 +52,11 @@ const Blog = () => {
   
   const handleRetry = useCallback(() => {
     console.log('Manually retrying blog post fetch');
+    toast({
+      title: "Retrying...",
+      description: "Attempting to load blog posts again",
+    });
+    
     refetch().catch(err => {
       console.error('Failed to refetch blog posts:', err);
       toast({
@@ -53,7 +67,12 @@ const Blog = () => {
     });
   }, [refetch, toast]);
 
-  console.log('Blog render state:', { isLoading, isError, postsCount: posts.length });
+  console.log('Blog render state:', { 
+    isLoading, 
+    isError, 
+    postsCount: posts?.length || 0,
+    location: location.pathname
+  });
   
   return (
     <div className="min-h-screen bg-white">
@@ -114,13 +133,13 @@ const Blog = () => {
           <>            
             <div className="mb-10 max-w-5xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-serif font-bold mb-8">
-                {posts.length > 0 
+                {posts && posts.length > 0 
                   ? (tagFilter ? `Posts tagged with #${tagFilter}` : "Latest Articles") 
                   : "No articles found"
                 }
               </h2>
               
-              {posts.length > 0 ? (
+              {posts && posts.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
                   {posts.map(post => (
                     <BlogCard key={post.id} post={post} />
@@ -140,7 +159,7 @@ const Blog = () => {
               )}
             </div>
             
-            {posts.length > 9 && (
+            {posts && posts.length > 9 && (
               <div className="flex justify-center mt-12">
                 <Button asChild variant="outline" size="lg">
                   <Link to="/blog/archive">
@@ -158,4 +177,4 @@ const Blog = () => {
   );
 };
 
-export default React.memo(Blog);
+export default Blog;
