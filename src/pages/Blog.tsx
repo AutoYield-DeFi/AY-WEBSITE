@@ -1,11 +1,11 @@
 
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
-import { fetchBlogPosts, fetchBlogPostsByTag } from '@/lib/blog';
+import { fetchBlogPosts, fetchBlogPostsByTag, clearBlogCaches } from '@/lib/blog';
 import BlogCard from '@/components/blog/BlogCard';
 import { Button } from '@/components/ui/button';
 import { Heading } from '@/components/ui/typography';
@@ -18,6 +18,11 @@ const Blog = () => {
   const { toast } = useToast();
   const searchParams = new URLSearchParams(location.search);
   const tagFilter = searchParams.get('tag');
+  
+  // Clear caches on initial load to ensure fresh data
+  useEffect(() => {
+    clearBlogCaches();
+  }, []);
   
   // Query for blog posts with better error handling
   const { data: blogPosts, isLoading, isError, refetch } = useQuery({
@@ -36,7 +41,7 @@ const Blog = () => {
         throw error;
       }
     },
-    staleTime: 60 * 1000, // 1 minute
+    staleTime: 0, // Set to 0 to always fetch fresh data
     retry: 2,
     refetchOnWindowFocus: false,
     refetchOnMount: true,
