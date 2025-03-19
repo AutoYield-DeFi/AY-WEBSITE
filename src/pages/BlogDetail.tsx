@@ -134,7 +134,7 @@ const BlogDetail = () => {
           </div>
         </div>
 
-        {/* Article header */}
+        {/* Article header - using the updated BlogHeader component */}
         <BlogHeader post={post} formattedDate={formattedDate} />
 
         {/* Cover image */}
