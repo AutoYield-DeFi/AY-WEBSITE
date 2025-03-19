@@ -1,6 +1,13 @@
-export { fetchBlogPosts, fetchBlogPostById, fetchRelatedPosts, clearBlogCaches } from './fetch';
 
-// Export fetchBlogPostsByAuthor function
-export { fetchBlogPostsByAuthor } from './fetch';
+export { 
+  fetchBlogPosts, 
+  fetchBlogPostById, 
+  fetchRelatedPosts, 
+  clearBlogCaches,
+  fetchBlogPostsByTag,
+  fetchBlogPostsByAuthor
+} from './fetch';
 
-export type { BlogPost } from './data';
+export { addBlogPost } from './create';
+
+export type { BlogPost } from '@/types/blog';

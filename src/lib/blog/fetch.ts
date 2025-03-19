@@ -1,9 +1,19 @@
+
 import { blogData } from './data';
 import { BlogPost } from '@/types/blog';
 
 // In-memory cache for blog posts
 let blogPostsCache: BlogPost[] | null = null;
 let blogPostsByTagCache: { [tag: string]: BlogPost[] } = {};
+
+/**
+ * Clears the blog posts cache.
+ */
+export const clearBlogCaches = () => {
+  console.log('Clearing blog posts cache');
+  blogPostsCache = null;
+  blogPostsByTagCache = {};
+};
 
 /**
  * Fetches all blog posts.
@@ -62,15 +72,6 @@ export const fetchBlogPostsByTag = async (tag: string): Promise<BlogPost[]> => {
   const filteredPosts = posts.filter(post => post.tags && post.tags.includes(tag));
   blogPostsByTagCache[tag] = filteredPosts;
   return filteredPosts;
-};
-
-/**
- * Clears the blog posts cache.
- */
-export const clearBlogCaches = () => {
-  console.log('Clearing blog posts cache');
-  blogPostsCache = null;
-  blogPostsByTagCache = {};
 };
 
 /**
