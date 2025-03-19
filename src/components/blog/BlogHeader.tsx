@@ -10,7 +10,6 @@ interface BlogHeaderProps {
   tagFilter?: string | null;
   authorFilter?: string | null;
   onClearFilter?: () => void;
-  // Add these new props
   post?: BlogPost;
   formattedDate?: string;
 }
@@ -25,18 +24,18 @@ const BlogHeader = ({
   formattedDate 
 }: BlogHeaderProps) => {
   // For blog detail page
-  if (post) {
+  if (post && post.title) {
     return (
       <header className="container mx-auto max-w-[800px] px-4 pt-10 pb-6 text-center">
         <div className="mb-4 text-sm font-medium text-muted-foreground">
           {post.category && (
             <span className="mr-2">{post.category}</span>
           )}
-          &#8226; 
+          <span>&#8226;</span>
           <time dateTime={post.publishedAt} className="ml-2">
             {formattedDate}
           </time>
-          &#8226;
+          <span>&#8226;</span>
           <span className="ml-2">{post.readingTime} min read</span>
         </div>
         <Heading as="h1" size="4xl" serif className="mb-6">
@@ -75,7 +74,7 @@ const BlogHeader = ({
           </Button>
         </div>
       ) : (
-        <p className="text-xl text-muted-foreground">{description}</p>
+        description && <p className="text-xl text-muted-foreground">{description}</p>
       )}
     </header>
   );

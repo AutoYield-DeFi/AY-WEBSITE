@@ -34,30 +34,71 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
 };
 
 /**
- * Fetches a single blog post by its ID.
- * @param id - The ID of the blog post to fetch
+ * Fetches a single blog post by its ID or slug.
+ * @param idOrSlug - The ID or slug of the blog post to fetch
  * @returns The blog post, or undefined if not found
  */
-export const fetchBlogPostById = async (id: string): Promise<BlogPost | undefined> => {
-  console.log(`Fetching blog post by ID: ${id}`);
-  const posts = await fetchBlogPosts();
-  return posts.find(post => post.id === id || post.slug === id);
+export const fetchBlogPostById = async (idOrSlug: string): Promise<BlogPost | undefined> => {
+  console.log(`Fetching blog post by ID or slug: ${idOrSlug}`);
+  
+  if (!idOrSlug) {
+    console.error('Invalid ID or slug provided:', idOrSlug);
+    return undefined;
+  }
+  
+  try {
+    const posts = await fetchBlogPosts();
+    
+    // First try to find by ID
+    let post = posts.find(post => post.id === idOrSlug);
+    
+    // If not found by ID, try by slug
+    if (!post) {
+      console.log(`Post not found by ID, trying slug: ${idOrSlug}`);
+      post = posts.find(post => post.slug === idOrSlug);
+    }
+    
+    if (!post) {
+      console.error(`Post not found with ID or slug: ${idOrSlug}`);
+    } else {
+      console.log(`Post found: ${post.title}`);
+    }
+    
+    return post;
+  } catch (error) {
+    console.error(`Error fetching post by ID/slug ${idOrSlug}:`, error);
+    return undefined;
+  }
 };
 
 /**
  * Fetches related blog posts based on category, excluding the current post.
  * @param category - The category of the blog post
- * @param currentPostId - The ID of the current blog post to exclude
+ * @param currentPostId - The ID or slug of the current blog post to exclude
  * @returns Array of related blog posts
  */
 export const fetchRelatedPosts = async (category: string, currentPostId: string): Promise<BlogPost[]> => {
-  console.log(`Fetching related blog posts for category: ${category}, excluding ID: ${currentPostId}`);
-  const posts = await fetchBlogPosts();
-  return posts.filter(post => 
-    post.category === category && 
-    post.id !== currentPostId && 
-    post.slug !== currentPostId
-  ).slice(0, 3);
+  console.log(`Fetching related blog posts for category: ${category}, excluding ID/slug: ${currentPostId}`);
+  
+  if (!category || !currentPostId) {
+    console.log('Invalid category or currentPostId provided');
+    return [];
+  }
+  
+  try {
+    const posts = await fetchBlogPosts();
+    const relatedPosts = posts.filter(post => 
+      post.category === category && 
+      post.id !== currentPostId && 
+      post.slug !== currentPostId
+    ).slice(0, 3);
+    
+    console.log(`Found ${relatedPosts.length} related posts`);
+    return relatedPosts;
+  } catch (error) {
+    console.error(`Error fetching related posts for category ${category}:`, error);
+    return [];
+  }
 };
 
 /**

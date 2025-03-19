@@ -26,7 +26,11 @@ const BlogDetail = () => {
     console.log(`Blog detail page loaded with ID/slug: ${id}`);
   }, [id]);
   
-  const { data: post, isLoading: isPostLoading, error } = useQuery({
+  const { 
+    data: post, 
+    isLoading: isPostLoading, 
+    error 
+  } = useQuery({
     queryKey: ['blogPost', id],
     queryFn: () => fetchBlogPostById(id as string),
     enabled: !!id,
@@ -134,8 +138,11 @@ const BlogDetail = () => {
           </div>
         </div>
 
-        {/* Article header - using the updated BlogHeader component */}
-        <BlogHeader post={post} formattedDate={formattedDate} />
+        {/* Article header */}
+        <BlogHeader 
+          post={post} 
+          formattedDate={formattedDate} 
+        />
 
         {/* Cover image */}
         <BlogCoverImage src={post.coverImage} alt={post.title} />
@@ -153,7 +160,9 @@ const BlogDetail = () => {
         </div>
 
         {/* Related posts */}
-        <RelatedPosts posts={relatedPosts} />
+        {relatedPosts.length > 0 && (
+          <RelatedPosts posts={relatedPosts} />
+        )}
       </article>
 
       <Footer />
