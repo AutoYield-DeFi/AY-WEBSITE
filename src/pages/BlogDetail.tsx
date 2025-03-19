@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import { Separator } from '@/components/ui/separator';
-import { fetchBlogPostById, fetchRelatedPosts, fetchBlogPosts } from '@/lib/blog';
+import { fetchBlogPostById, fetchRelatedPosts, fetchBlogPosts, getAvailablePosts } from '@/lib/blog';
 import { useToast } from '@/components/ui/use-toast';
 import BlogAuthor from '@/components/blog/BlogAuthor';
 import BlogContent from '@/components/blog/BlogContent';
@@ -196,16 +196,7 @@ const BlogDetail = () => {
         </div>
 
         {/* Article header */}
-        {post && (
-          <BlogHeader 
-            title={post.title}
-            description={post.excerpt}
-            authorName={post.author?.name}
-            authorTitle={post.author?.title}
-            date={formattedDate}
-            readingTime={post.readingTime}
-          />
-        )}
+        <BlogHeader post={post} formattedDate={formattedDate} />
 
         {/* Cover image */}
         <BlogCoverImage src={post.coverImage} alt={post.title} />
