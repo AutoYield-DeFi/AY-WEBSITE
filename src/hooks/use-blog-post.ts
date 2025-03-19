@@ -2,18 +2,18 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useToast } from '@/components/ui/use-toast';
-import { fetchBlogPostById, fetchRelatedPosts, fetchBlogPosts, getAvailablePosts } from '@/lib/blog';
+import { fetchBlogPosts, fetchRelatedPosts } from '@/lib/blog';
 import type { BlogPost } from '@/types/blog';
 
 export function useBlogPost(idOrSlug?: string) {
   const { toast } = useToast();
   const [availablePosts, setAvailablePosts] = useState<{id: string, slug: string}[]>([]);
   
-  // Debug available posts
+  // Get available posts for debugging
   useEffect(() => {
-    async function debugPosts() {
-      if (idOrSlug) {
-        console.log(`Blog detail page loaded with ID/slug: ${idOrSlug}`);
+    async function fetchAvailablePosts() {
+      try {
+        console.log(`Fetching available posts for debug info. ID/slug: ${idOrSlug}`);
         const posts = await fetchBlogPosts();
         const simplifiedPosts = posts.map(post => ({
           id: post.id,
@@ -21,11 +21,17 @@ export function useBlogPost(idOrSlug?: string) {
         }));
         console.log("Available posts:", simplifiedPosts);
         setAvailablePosts(simplifiedPosts);
+      } catch (error) {
+        console.error("Error fetching available posts:", error);
       }
     }
-    debugPosts();
+    
+    if (idOrSlug) {
+      fetchAvailablePosts();
+    }
   }, [idOrSlug]);
   
+  // Query for the blog post
   const { 
     data: post, 
     isLoading: isPostLoading, 
@@ -33,24 +39,31 @@ export function useBlogPost(idOrSlug?: string) {
   } = useQuery({
     queryKey: ['blogPost', idOrSlug],
     queryFn: async () => {
-      console.log(`Fetching post with ID or slug: ${idOrSlug}`);
       if (!idOrSlug) return undefined;
+      
+      console.log(`Fetching post with ID/slug: "${idOrSlug}"`);
       
       try {
         const posts = await fetchBlogPosts();
         
-        // First try to find by ID
-        let post = posts.find(post => post.id === idOrSlug);
+        // Try matching by ID
+        let post = posts.find(p => p.id === idOrSlug);
         
-        // If not found by ID, try by slug
+        // If not found by ID, try by exact slug
         if (!post) {
-          console.log(`Post not found by ID, trying by slug: ${idOrSlug}`);
-          post = posts.find(post => post.slug === idOrSlug || post.slug === idOrSlug.toLowerCase());
+          console.log(`Post not found by ID, trying by exact slug: "${idOrSlug}"`);
+          post = posts.find(p => p.slug === idOrSlug);
         }
         
+        // If still not found, try case-insensitive match
         if (!post) {
-          // Try with URL-encoded slug or partial matching
-          console.log(`Post not found with exact match, trying partial or decoded match`);
+          console.log(`Post not found by exact slug, trying case-insensitive: "${idOrSlug}"`);
+          post = posts.find(p => p.slug.toLowerCase() === idOrSlug.toLowerCase());
+        }
+        
+        // If still not found, try partial match
+        if (!post) {
+          console.log(`Post not found with exact match, trying partial match`);
           const decodedSlug = decodeURIComponent(idOrSlug);
           post = posts.find(p => 
             p.slug.includes(idOrSlug) || 
@@ -58,18 +71,18 @@ export function useBlogPost(idOrSlug?: string) {
             p.slug.includes(decodedSlug) || 
             decodedSlug.includes(p.slug)
           );
-          
-          if (!post) {
-            console.error(`Post not found with ID or slug: ${idOrSlug}`, 
-              posts.map(p => ({ id: p.id, slug: p.slug })));
-            return undefined;
-          }
         }
         
-        console.log(`Post found: ${post.title}`);
+        if (post) {
+          console.log(`Post found: "${post.title}" (id: ${post.id}, slug: ${post.slug})`);
+        } else {
+          console.error(`Post not found for "${idOrSlug}". Available posts:`, 
+            posts.map(p => ({ id: p.id, slug: p.slug })));
+        }
+        
         return post;
       } catch (error) {
-        console.error(`Error fetching post by ID/slug ${idOrSlug}:`, error);
+        console.error(`Error fetching post by ID/slug "${idOrSlug}":`, error);
         throw error;
       }
     },
@@ -87,7 +100,7 @@ export function useBlogPost(idOrSlug?: string) {
     enabled: !!post && !!post.category && !!idOrSlug,
   });
 
-  // Log errors for debugging
+  // Show error toast if post loading fails
   useEffect(() => {
     if (error) {
       console.error('Error loading blog post:', error);
@@ -99,15 +112,21 @@ export function useBlogPost(idOrSlug?: string) {
     }
   }, [error, toast]);
 
-  // Memoize date formatting
+  // Format the post date
   const formattedDate = useMemo(() => {
-    if (!post) return '';
-    const publishDate = new Date(post.publishedAt);
-    return new Intl.DateTimeFormat('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    }).format(publishDate);
+    if (!post?.publishedAt) return '';
+    
+    try {
+      const publishDate = new Date(post.publishedAt);
+      return new Intl.DateTimeFormat('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      }).format(publishDate);
+    } catch (error) {
+      console.error('Error formatting date:', error);
+      return '';
+    }
   }, [post?.publishedAt]);
 
   return {

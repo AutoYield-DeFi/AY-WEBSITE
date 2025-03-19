@@ -28,13 +28,14 @@ import DocsAdvancedSettings from '@/components/docs/DocsAdvancedSettings';
 import DocsFAQ from '@/components/docs/DocsFAQ';
 import DocsAPIReference from '@/components/docs/DocsAPIReference';
 
-// Create a client
+// Create a client with better error handling and caching
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 2,
-      staleTime: 30 * 1000,
+      staleTime: 0, // Set to 0 to always refetch on mount
       refetchOnWindowFocus: false,
+      refetchOnMount: true,
     },
   },
 });
@@ -66,10 +67,8 @@ const App = () => {
             <Route path="/faq" element={<FAQ />} />
             <Route path="/legal" element={<Legal />} />
             <Route path="/blog" element={<Blog />} />
-            {/* Specific routes before dynamic routes */}
             <Route path="/blog/import" element={<BlogImport />} />
             <Route path="/admin" element={<BlogAdmin />} />
-            {/* Dynamic route last */}
             <Route path="/blog/:id" element={<BlogDetail />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

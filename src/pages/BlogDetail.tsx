@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -20,21 +20,11 @@ const BlogDetail = () => {
     availablePosts 
   } = useBlogPost(id);
 
-  // Debug logging
-  useEffect(() => {
-    console.log(`BlogDetail component loaded for ID: ${id}`);
-    console.log(`Post loading: ${isPostLoading}, Post found: ${!!post}`);
-    if (post) {
-      console.log(`Post title: ${post.title}, slug: ${post.slug}`);
-    }
-  }, [id, isPostLoading, post]);
-
   if (isPostLoading) {
     return <BlogDetailSkeleton />;
   }
 
   if (!post) {
-    console.error(`No post found for ID/slug: ${id}`);
     return <BlogPostNotFound id={id} availablePosts={availablePosts} />;
   }
 
@@ -56,7 +46,7 @@ const BlogDetail = () => {
         author={post.author?.name}
         section={post.category}
         twitterCreator={post.author?.twitter ? `@${post.author.twitter}` : undefined}
-        jsonLd={post ? <BlogJsonLd post={post} /> : null}
+        jsonLd={<BlogJsonLd post={post} />}
       />
       <Navbar />
       
@@ -71,4 +61,4 @@ const BlogDetail = () => {
   );
 };
 
-export default React.memo(BlogDetail);
+export default BlogDetail;
