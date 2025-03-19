@@ -343,17 +343,24 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
   // Sort by date (newest first)
   return new Promise((resolve) => {
     setTimeout(() => {
-      // Sort by publish date, newest first
-      cachedPosts = [...blogData].sort((a, b) => 
-        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-      );
-      resolve(cachedPosts);
-    }, 200); // Reduced timeout for better performance
+      try {
+        // Sort by publish date, newest first
+        cachedPosts = [...blogData].sort((a, b) => 
+          new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+        );
+        resolve(cachedPosts);
+      } catch (error) {
+        console.error("Error fetching blog posts:", error);
+        resolve([]);
+      }
+    }, 100); // Reduced timeout for better performance
   });
 };
 
 // Fetch blog posts filtered by tag
 export const fetchBlogPostsByTag = async (tag: string): Promise<BlogPost[]> => {
+  if (!tag) return fetchBlogPosts();
+  
   // Check if we have this tag cached
   const cacheKey = `tag-${tag.toLowerCase()}`;
   if (cachedFilteredPostsMap.has(cacheKey)) {
@@ -377,6 +384,8 @@ export const fetchBlogPostsByTag = async (tag: string): Promise<BlogPost[]> => {
 
 // Fetch a single blog post by ID with type safety - optimized performance
 export const fetchBlogPostById = async (id: string): Promise<BlogPost | undefined> => {
+  if (!id) return undefined;
+  
   // Try to use cached posts if available
   const posts = cachedPosts || await fetchBlogPosts();
   return posts.find(post => post.id === id || post.slug === id);
@@ -384,6 +393,8 @@ export const fetchBlogPostById = async (id: string): Promise<BlogPost | undefine
 
 // Fetch related blog posts with caching - optimized
 export const fetchRelatedPosts = async (category: string, excludeId: string): Promise<BlogPost[]> => {
+  if (!category) return [];
+  
   const cacheKey = `${category}-${excludeId}`;
   
   if (cachedRelatedPostsMap.has(cacheKey)) {
@@ -524,9 +535,7 @@ export const addBlogPost = (formattedContent: string): BlogPost | null => {
     blogData.unshift(newPost);
     
     // Clear cache to force refresh
-    cachedPosts = null;
-    cachedRelatedPostsMap.clear();
-    cachedFilteredPostsMap.clear();
+    clearBlogCaches();
     
     return newPost;
   } catch (error) {

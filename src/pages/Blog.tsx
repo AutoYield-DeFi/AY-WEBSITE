@@ -5,25 +5,33 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
-import { fetchBlogPosts, fetchBlogPostsByTag } from '@/lib/blog';
+import { fetchBlogPosts, fetchBlogPostsByTag, clearBlogCaches } from '@/lib/blog';
 import BlogCard from '@/components/blog/BlogCard';
 import { Button } from '@/components/ui/button';
 import { Heading } from '@/components/ui/typography';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useToast } from '@/components/ui/use-toast';
 
 const Blog = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { toast } = useToast();
   const searchParams = new URLSearchParams(location.search);
   const tagFilter = searchParams.get('tag');
   
-  const { data: blogPosts, isLoading, isError } = useQuery({
+  // Clear cache before loading to ensure fresh data
+  React.useEffect(() => {
+    clearBlogCaches();
+  }, []);
+  
+  const { data: blogPosts, isLoading, isError, refetch } = useQuery({
     queryKey: ['blogPosts', tagFilter],
     queryFn: () => tagFilter 
       ? fetchBlogPostsByTag(tagFilter) 
       : fetchBlogPosts(),
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    retry: 1,
+    staleTime: 2 * 60 * 1000, // 2 minutes
+    retry: 2,
+    refetchOnWindowFocus: false,
   });
 
   // Memoize posts to prevent unnecessary rerenders
@@ -33,6 +41,18 @@ const Blog = () => {
   const handleClearFilter = useCallback(() => {
     navigate('/blog');
   }, [navigate]);
+  
+  const handleRetry = useCallback(() => {
+    clearBlogCaches();
+    refetch().catch(err => {
+      console.error('Failed to refetch blog posts:', err);
+      toast({
+        title: "Failed to load blog posts",
+        description: "Please try again later",
+        variant: "destructive"
+      });
+    });
+  }, [refetch, toast]);
 
   return (
     <div className="min-h-screen bg-white">
@@ -85,7 +105,7 @@ const Blog = () => {
             <p className="text-lg text-muted-foreground mb-4">
               Unable to load blog posts. Please try again later.
             </p>
-            <Button onClick={() => window.location.reload()}>
+            <Button onClick={handleRetry}>
               Retry
             </Button>
           </div>
