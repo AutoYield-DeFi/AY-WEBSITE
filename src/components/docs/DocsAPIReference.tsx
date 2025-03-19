@@ -6,18 +6,18 @@ import ApiIntroSection from './api-reference/ApiIntroSection';
 import ApiOverviewSection from './api-reference/ApiOverviewSection';
 import AuthenticationSection from './api-reference/AuthenticationSection';
 import ApiEndpointsSection from './api-reference/ApiEndpointsSection';
-import SdkIntegrationSection from './api-reference/SdkIntegrationSection';
 import ApiSupportSection from './api-reference/ApiSupportSection';
+import SdkIntegrationSection from './api-reference/SdkIntegrationSection';
 
 const DocsAPIReference = () => {
   return (
     <div className="space-y-10">
       <DocsHeader
         title="API Reference"
-        description="Technical documentation for integrating with AutoYield's API"
+        description="Comprehensive documentation for integrating with the AutoYield API"
         icon={<Code size={24} className="text-primary" />}
       />
-
+      
       <ApiIntroSection />
       <ApiOverviewSection />
       <AuthenticationSection />

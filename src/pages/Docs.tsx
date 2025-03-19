@@ -5,7 +5,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import DocsLayout from '@/components/docs/DocsLayout';
 import SEO from '@/components/SEO';
-import DocsSidebar from '@/components/docs/DocsSidebar';
 import DocsWelcome from '@/components/docs/DocsWelcome';
 import DocsGettingStarted from '@/components/docs/DocsGettingStarted';
 import DocsCoreFeatures from '@/components/docs/DocsCoreFeatures';
@@ -28,7 +27,7 @@ const Docs = () => {
       <Navbar />
       <DocsLayout>
         <Routes>
-          <Route index element={<Navigate to="/docs/welcome" replace />} />
+          <Route path="/" element={<Navigate to="/docs/welcome" replace />} />
           <Route path="welcome" element={<DocsWelcome />} />
           <Route path="getting-started" element={<DocsGettingStarted />} />
           <Route path="core-features" element={<DocsCoreFeatures />} />
