@@ -3,6 +3,7 @@ import React from 'react';
 import { Markdown } from '@/components/ui/markdown';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 interface BlogContentProps {
   content: string;
@@ -16,10 +17,13 @@ const BlogContent = ({ content, tags }: BlogContentProps) => {
     navigate(`/blog?tag=${tag}`);
   };
 
+  // Process content to better handle tables if necessary
+  const processedContent = content.includes('<table') ? content : content;
+
   return (
     <div className="max-w-[700px] mx-auto">
       <div className="prose prose-lg lg:prose-xl mx-auto font-serif">
-        <Markdown>{content}</Markdown>
+        <Markdown className="blog-content">{processedContent}</Markdown>
       </div>
 
       {tags && tags.length > 0 && (
