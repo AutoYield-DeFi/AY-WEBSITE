@@ -41,10 +41,11 @@ const SEO = ({
       {noindex && <meta name="robots" content="noindex,nofollow" />}
       
       {/* Security Headers */}
-      <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdn.gpteng.co; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: images.unsplash.com;" />
-      <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-      <meta http-equiv="X-Frame-Options" content="DENY" />
-      <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+      <meta httpEquiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdn.gpteng.co; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: images.unsplash.com https://raw.githubusercontent.com https://*.githubusercontent.com; connect-src 'self' https://*.autoyield.io; frame-ancestors 'none';" />
+      <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
+      <meta httpEquiv="X-Frame-Options" content="DENY" />
+      <meta httpEquiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+      <meta httpEquiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()" />
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={ogType} />

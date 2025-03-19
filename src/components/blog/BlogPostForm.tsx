@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Info } from 'lucide-react';
+import { sanitizeMarkdown } from '@/lib/sanitize';
 
 const BlogPostForm = () => {
   const [content, setContent] = useState<string>(`Title: Your Blog Title
@@ -68,7 +69,9 @@ Summarize the key takeaways from your post and potentially suggest next steps or
   const handleSubmit = () => {
     setIsSubmitting(true);
     try {
-      const newPost = addBlogPost(content);
+      // Sanitize content before saving
+      const sanitizedContent = sanitizeMarkdown(content);
+      const newPost = addBlogPost(sanitizedContent);
       
       if (newPost) {
         toast({
@@ -133,7 +136,7 @@ Summarize the key takeaways from your post and potentially suggest next steps or
           <TabsContent value="preview">
             <div className="border rounded-md p-6 h-[600px] overflow-y-auto bg-white">
               <h3 className="text-lg font-semibold mb-4 text-gray-500">Preview</h3>
-              <Markdown>{content}</Markdown>
+              <Markdown>{sanitizeMarkdown(content)}</Markdown>
             </div>
           </TabsContent>
         </Tabs>
