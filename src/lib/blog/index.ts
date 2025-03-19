@@ -9,7 +9,7 @@ export * from './types';
 // Also export our functions directly for easier importing
 import { fetchBlogPosts, fetchBlogPostById, fetchBlogPostsByTag, fetchRelatedPosts } from './fetch';
 import { clearBlogCaches } from './cache';
-import { createBlogPost } from './create';
+import { addBlogPost } from './create';
 
 export {
   fetchBlogPosts,
@@ -17,5 +17,5 @@ export {
   fetchBlogPostsByTag,
   fetchRelatedPosts,
   clearBlogCaches,
-  createBlogPost
+  addBlogPost
 };
