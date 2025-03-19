@@ -1,5 +1,5 @@
 
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -20,18 +20,23 @@ const Blog = () => {
   const tagFilter = searchParams.get('tag');
   
   // Clear cache before loading to ensure fresh data
-  React.useEffect(() => {
+  useEffect(() => {
+    console.log('Clearing blog caches on mount');
     clearBlogCaches();
   }, []);
   
   const { data: blogPosts, isLoading, isError, refetch } = useQuery({
     queryKey: ['blogPosts', tagFilter],
-    queryFn: () => tagFilter 
-      ? fetchBlogPostsByTag(tagFilter) 
-      : fetchBlogPosts(),
-    staleTime: 2 * 60 * 1000, // 2 minutes
-    retry: 2,
+    queryFn: () => {
+      console.log(`Fetching blog posts with tag: ${tagFilter || 'none'}`);
+      return tagFilter 
+        ? fetchBlogPostsByTag(tagFilter) 
+        : fetchBlogPosts();
+    },
+    staleTime: 60 * 1000, // 1 minute
+    retry: 3,
     refetchOnWindowFocus: false,
+    refetchOnMount: true,
   });
 
   // Memoize posts to prevent unnecessary rerenders
@@ -43,6 +48,7 @@ const Blog = () => {
   }, [navigate]);
   
   const handleRetry = useCallback(() => {
+    console.log('Manually retrying blog post fetch');
     clearBlogCaches();
     refetch().catch(err => {
       console.error('Failed to refetch blog posts:', err);
@@ -54,6 +60,8 @@ const Blog = () => {
     });
   }, [refetch, toast]);
 
+  console.log('Blog render state:', { isLoading, isError, postsCount: posts.length });
+  
   return (
     <div className="min-h-screen bg-white">
       <SEO 

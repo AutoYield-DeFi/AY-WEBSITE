@@ -1,3 +1,4 @@
+
 import { BlogPost } from '@/types/blog';
 import { parseMarkdown } from './markdown';
 
@@ -335,19 +336,22 @@ let cachedFilteredPostsMap: Map<string, BlogPost[]> = new Map();
 
 // Fetch all blog posts with caching - ensure latest posts appear first
 export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
+  console.log('Fetching all blog posts, cached:', !!cachedPosts);
+  
   if (cachedPosts) {
     return Promise.resolve(cachedPosts);
   }
   
   // In a real application, this would be an API call
-  // Sort by date (newest first)
   return new Promise((resolve) => {
     setTimeout(() => {
       try {
+        console.log('Blog data length:', blogData.length);
         // Sort by publish date, newest first
         cachedPosts = [...blogData].sort((a, b) => 
           new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
         );
+        console.log('Sorted blog posts:', cachedPosts.length);
         resolve(cachedPosts);
       } catch (error) {
         console.error("Error fetching blog posts:", error);
@@ -360,6 +364,8 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
 // Fetch blog posts filtered by tag
 export const fetchBlogPostsByTag = async (tag: string): Promise<BlogPost[]> => {
   if (!tag) return fetchBlogPosts();
+  
+  console.log(`Fetching posts by tag: ${tag}`);
   
   // Check if we have this tag cached
   const cacheKey = `tag-${tag.toLowerCase()}`;
@@ -376,6 +382,8 @@ export const fetchBlogPostsByTag = async (tag: string): Promise<BlogPost[]> => {
     post.tags?.some(t => t.toLowerCase() === tagLower)
   );
   
+  console.log(`Found ${filtered.length} posts for tag: ${tag}`);
+  
   // Cache the result
   cachedFilteredPostsMap.set(cacheKey, filtered);
   
@@ -386,14 +394,25 @@ export const fetchBlogPostsByTag = async (tag: string): Promise<BlogPost[]> => {
 export const fetchBlogPostById = async (id: string): Promise<BlogPost | undefined> => {
   if (!id) return undefined;
   
+  console.log(`Fetching blog post by id: ${id}`);
+  
   // Try to use cached posts if available
-  const posts = cachedPosts || await fetchBlogPosts();
-  return posts.find(post => post.id === id || post.slug === id);
+  try {
+    const posts = cachedPosts || await fetchBlogPosts();
+    const post = posts.find(post => post.id === id || post.slug === id);
+    console.log(`Post found for id ${id}:`, !!post);
+    return post;
+  } catch (error) {
+    console.error(`Error fetching blog post by id ${id}:`, error);
+    return undefined;
+  }
 };
 
 // Fetch related blog posts with caching - optimized
 export const fetchRelatedPosts = async (category: string, excludeId: string): Promise<BlogPost[]> => {
   if (!category) return [];
+  
+  console.log(`Fetching related posts for category: ${category}, excluding: ${excludeId}`);
   
   const cacheKey = `${category}-${excludeId}`;
   
@@ -401,19 +420,26 @@ export const fetchRelatedPosts = async (category: string, excludeId: string): Pr
     return Promise.resolve(cachedRelatedPostsMap.get(cacheKey)!);
   }
   
-  // Use cached posts if available
-  const posts = cachedPosts || await fetchBlogPosts();
-  
-  const related = posts
-    .filter(post => post.category === category && (post.id !== excludeId && post.slug !== excludeId))
-    .slice(0, 3);
-  
-  cachedRelatedPostsMap.set(cacheKey, related);
-  return related;
+  try {
+    // Use cached posts if available
+    const posts = cachedPosts || await fetchBlogPosts();
+    
+    const related = posts
+      .filter(post => post.category === category && (post.id !== excludeId && post.slug !== excludeId))
+      .slice(0, 3);
+    
+    console.log(`Found ${related.length} related posts`);
+    cachedRelatedPostsMap.set(cacheKey, related);
+    return related;
+  } catch (error) {
+    console.error('Error fetching related posts:', error);
+    return [];
+  }
 };
 
-// Clear all caches
+// Clear all caches - made robust to prevent any issues
 export const clearBlogCaches = () => {
+  console.log('Clearing all blog caches');
   cachedPosts = null;
   cachedRelatedPostsMap.clear();
   cachedFilteredPostsMap.clear();

@@ -28,6 +28,7 @@ const App = () => {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/legal" element={<Legal />} />
           <Route path="/blog" element={<Blog />} />
+          {/* Fixed route order: specific routes before dynamic routes */}
           <Route path="/blog/import" element={<BlogImport />} />
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/admin" element={<BlogAdmin />} />
