@@ -31,48 +31,6 @@ const SEO = ({
   const fullCanonical = canonical ? canonical : undefined;
   const fullOgImage = ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`;
   
-  // Create a strong CSP header for a financial application
-  const cspDirectives = [
-    // Default sources restriction
-    "default-src 'self'",
-    
-    // Scripts - only allow from self and specific CDNs needed for functionality
-    "script-src 'self' 'unsafe-inline' cdn.gpteng.co", 
-    
-    // Styles - allow inline for shadcn/ui components and Google Fonts
-    "style-src 'self' 'unsafe-inline' fonts.googleapis.com",
-    
-    // Fonts - allow Google Fonts
-    "font-src 'self' fonts.gstatic.com",
-    
-    // Images - allow self, data URIs for small images, and specific image hosts
-    "img-src 'self' data: images.unsplash.com https://raw.githubusercontent.com https://*.githubusercontent.com",
-    
-    // Connect - API endpoints, restrict to known domains
-    "connect-src 'self' https://*.autoyield.io",
-    
-    // Prevent embedding in iframes (anti-clickjacking)
-    "frame-ancestors 'none'",
-    
-    // Media restrictions
-    "media-src 'self'",
-    
-    // Object restrictions (prevent Flash, etc.)
-    "object-src 'none'",
-    
-    // Form actions restricted to same origin
-    "form-action 'self'",
-    
-    // Base URI restricted to prevent base tag hijacking
-    "base-uri 'self'",
-    
-    // Block mixed content
-    "upgrade-insecure-requests",
-    
-    // Manifest files
-    "manifest-src 'self'"
-  ].join("; ");
-  
   return (
     <Helmet>
       {/* Basic Meta Tags */}
@@ -83,13 +41,11 @@ const SEO = ({
       {noindex && <meta name="robots" content="noindex,nofollow" />}
       
       {/* Security Headers */}
-      <meta httpEquiv="Content-Security-Policy" content={cspDirectives} />
+      <meta httpEquiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdn.gpteng.co; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: images.unsplash.com https://raw.githubusercontent.com https://*.githubusercontent.com; connect-src 'self' https://*.autoyield.io; frame-ancestors 'none';" />
       <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
       <meta httpEquiv="X-Frame-Options" content="DENY" />
       <meta httpEquiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
       <meta httpEquiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()" />
-      <meta httpEquiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains; preload" />
-      <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={ogType} />
@@ -110,7 +66,7 @@ const SEO = ({
       {/* Structured Data (JSON-LD) */}
       {jsonLd && (
         <script type="application/ld+json">
-          {JSON.stringify(sanitizeJson(jsonLd))}
+          {JSON.stringify(jsonLd)}
         </script>
       )}
     </Helmet>

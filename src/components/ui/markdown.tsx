@@ -5,7 +5,6 @@ import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { materialLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { cn } from '@/lib/utils';
-import { sanitizeUrlParam } from '@/lib/sanitize';
 
 interface MarkdownProps {
   children: string;
@@ -21,7 +20,7 @@ export const Markdown = ({ children, className }: MarkdownProps) => {
   // Check if content is already HTML (starts with HTML tags)
   const isHtml = /^<([a-z][a-z0-9]*)\b[^>]*>/i.test(children.trim());
 
-  // If content is already HTML, render it directly in a sanitized way
+  // If content is already HTML, render it directly
   if (isHtml) {
     return (
       <div 
@@ -107,46 +106,25 @@ export const Markdown = ({ children, className }: MarkdownProps) => {
             return <blockquote className="pl-4 italic border-l-4 border-gray-300 my-6 text-gray-700">{children}</blockquote>;
           },
           img({ src, alt }) {
-            // Verify and sanitize image URLs
-            const sanitizedSrc = src ? (
-              src.startsWith('http') || src.startsWith('/') ? src : '#'
-            ) : '#';
-            
             return (
               <div className="my-8">
                 <img 
-                  src={sanitizedSrc} 
+                  src={src} 
                   alt={alt || ''} 
                   className="rounded-lg w-full" 
                   loading="lazy"
-                  onError={(e) => {
-                    // Fallback for broken images
-                    e.currentTarget.src = '/placeholder.svg';
-                    e.currentTarget.alt = 'Image failed to load';
-                  }}
                 />
                 {alt && <figcaption className="text-center text-sm text-gray-500 mt-2">{alt}</figcaption>}
               </div>
             );
           },
           a({ href, children }) {
-            // Sanitize URLs and enforce security best practices for links
-            let sanitizedHref = '#';
-            
-            if (href) {
-              // Allow only http/https/relative URLs
-              if (href.startsWith('http://') || href.startsWith('https://') || 
-                  href.startsWith('/') || href.startsWith('#')) {
-                sanitizedHref = href;
-              }
-            }
-            
             return (
               <a 
-                href={sanitizedHref} 
+                href={href} 
                 className="text-primary underline decoration-1 underline-offset-2 hover:decoration-2 transition-all"
-                target={sanitizedHref.startsWith('http') ? "_blank" : undefined}
-                rel={sanitizedHref.startsWith('http') ? "noopener noreferrer" : undefined}
+                target={href?.startsWith('http') ? "_blank" : undefined}
+                rel={href?.startsWith('http') ? "noopener noreferrer" : undefined}
               >
                 {children}
               </a>

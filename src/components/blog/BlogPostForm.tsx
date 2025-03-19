@@ -62,30 +62,13 @@ Summarize the key takeaways from your post and potentially suggest next steps or
 ---
 `);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [previewMode, setPreviewMode] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
-  
-  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    // Limit input length to prevent DoS attacks
-    if (e.target.value.length <= 100000) {
-      setContent(e.target.value);
-    }
-  };
   
   const handleSubmit = () => {
     setIsSubmitting(true);
     try {
-      // Validate content has required fields before proceeding
-      if (!content.includes('Title:') || !content.includes('Date:') || !content.includes('---')) {
-        toast({
-          title: "Invalid blog format",
-          description: "Blog post must include Title, Date and separator (---)",
-          variant: "destructive"
-        });
-        setIsSubmitting(false);
-        return;
-      }
-      
       // Sanitize content before saving
       const sanitizedContent = sanitizeMarkdown(content);
       const newPost = addBlogPost(sanitizedContent);
@@ -144,10 +127,9 @@ Summarize the key takeaways from your post and potentially suggest next steps or
           <TabsContent value="edit" className="space-y-4">
             <Textarea
               value={content}
-              onChange={handleContentChange}
+              onChange={(e) => setContent(e.target.value)}
               className="min-h-[600px] font-mono text-sm"
               placeholder="Enter your blog post content here..."
-              maxLength={100000} // Prevent excessive input
             />
           </TabsContent>
           
