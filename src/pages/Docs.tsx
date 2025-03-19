@@ -1,23 +1,23 @@
 
-import React, { useEffect } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import DocsLayout from '@/components/docs/DocsLayout';
 import SEO from '@/components/SEO';
+import DocsSidebar from '@/components/docs/DocsSidebar';
+import DocsWelcome from '@/components/docs/DocsWelcome';
+import DocsGettingStarted from '@/components/docs/DocsGettingStarted';
+import DocsCoreFeatures from '@/components/docs/DocsCoreFeatures';
+import DocsAIStrategies from '@/components/docs/DocsAIStrategies';
+import DocsSecurityModel from '@/components/docs/DocsSecurityModel';
+import DocsFeeStructure from '@/components/docs/DocsFeeStructure';
+import DocsGuides from '@/components/docs/DocsGuides';
+import DocsAdvancedSettings from '@/components/docs/DocsAdvancedSettings';
+import DocsFAQ from '@/components/docs/DocsFAQ';
+import DocsAPIReference from '@/components/docs/DocsAPIReference';
 
 const Docs = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  
-  // Handle redirection from /docs to /docs/welcome
-  useEffect(() => {
-    if (location.pathname === '/docs') {
-      console.log('Redirecting from /docs to /docs/welcome');
-      navigate('/docs/welcome', { replace: true });
-    }
-  }, [location.pathname, navigate]);
-
   return (
     <>
       <SEO 
@@ -27,7 +27,19 @@ const Docs = () => {
       />
       <Navbar />
       <DocsLayout>
-        <Outlet />
+        <Routes>
+          <Route index element={<Navigate to="/docs/welcome" replace />} />
+          <Route path="welcome" element={<DocsWelcome />} />
+          <Route path="getting-started" element={<DocsGettingStarted />} />
+          <Route path="core-features" element={<DocsCoreFeatures />} />
+          <Route path="ai-strategies" element={<DocsAIStrategies />} />
+          <Route path="security-model" element={<DocsSecurityModel />} />
+          <Route path="fee-structure" element={<DocsFeeStructure />} />
+          <Route path="guides" element={<DocsGuides />} />
+          <Route path="advanced-settings" element={<DocsAdvancedSettings />} />
+          <Route path="faq" element={<DocsFAQ />} />
+          <Route path="api-reference" element={<DocsAPIReference />} />
+        </Routes>
       </DocsLayout>
       <Footer />
     </>

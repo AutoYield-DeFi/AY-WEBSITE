@@ -2,7 +2,7 @@
 import { BlogPost } from '@/types/blog';
 import { parseMarkdown } from '../markdown';
 import { blogData } from './data';
-import { clearBlogCaches } from './fetch';
+import { clearBlogCaches } from './cache';
 
 /**
  * Add a new blog post from the formatted text content

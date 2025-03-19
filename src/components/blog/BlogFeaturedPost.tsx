@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { BlogPost } from '@/types/blog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -12,8 +12,6 @@ interface BlogFeaturedPostProps {
 }
 
 const BlogFeaturedPost = ({ post }: BlogFeaturedPostProps) => {
-  const navigate = useNavigate();
-  
   // Format the date using Intl API for better localization
   const publishDate = new Date(post.publishedAt);
   const formattedDate = new Intl.DateTimeFormat('en-US', {
@@ -21,12 +19,6 @@ const BlogFeaturedPost = ({ post }: BlogFeaturedPostProps) => {
     month: 'long',
     day: 'numeric'
   }).format(publishDate);
-
-  const handleAuthorClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    navigate(`/blog?author=${encodeURIComponent(post.author.name)}`);
-  };
 
   return (
     <article className="rounded-xl overflow-hidden bg-white border border-gray-100 hover:shadow-lg transition-all duration-300">
@@ -69,12 +61,7 @@ const BlogFeaturedPost = ({ post }: BlogFeaturedPostProps) => {
               <AvatarFallback>{post.author.name.charAt(0)}</AvatarFallback>
             </Avatar>
             <div>
-              <button 
-                onClick={handleAuthorClick}
-                className="font-medium hover:text-primary transition-colors"
-              >
-                {post.author.name}
-              </button>
+              <div className="font-medium">{post.author.name}</div>
               <div className="text-sm text-muted-foreground">{post.author.title}</div>
             </div>
           </div>

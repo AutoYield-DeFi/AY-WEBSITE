@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import type { Author } from '@/types/blog';
 
@@ -9,12 +8,6 @@ interface BlogAuthorProps {
 }
 
 const BlogAuthor = ({ author }: BlogAuthorProps) => {
-  const navigate = useNavigate();
-
-  const handleAuthorClick = () => {
-    navigate(`/blog?author=${encodeURIComponent(author.name)}`);
-  };
-
   return (
     <div className="bg-gray-50 p-8 rounded-xl">
       <div className="flex items-start md:items-center flex-col md:flex-row gap-6">
@@ -23,15 +16,7 @@ const BlogAuthor = ({ author }: BlogAuthorProps) => {
           <AvatarFallback>{author.name.charAt(0)}</AvatarFallback>
         </Avatar>
         <div className="flex-1">
-          <h3 className="text-xl font-medium mb-2">
-            Written by{' '}
-            <button 
-              onClick={handleAuthorClick}
-              className="font-medium hover:text-primary transition-colors"
-            >
-              {author.name}
-            </button>
-          </h3>
+          <h3 className="text-xl font-medium mb-2">Written by {author.name}</h3>
           <p className="text-muted-foreground mb-4">{author.bio}</p>
           {author.twitter && (
             <a 
