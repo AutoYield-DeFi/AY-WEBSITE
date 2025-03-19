@@ -1,3 +1,4 @@
+
 import { BlogPost } from '@/types/blog';
 
 // Sample blog data
@@ -194,10 +195,10 @@ export const blogData: BlogPost[] = [
     readingTime: 12,
     coverImage: 'https://images.unsplash.com/photo-1642790551116-03a3e95ae732?q=80&w=2940&auto=format&fit=crop',
     author: {
-      name: 'Michael Torres',
-      title: 'Market Analyst',
-      avatar: '/team/michael.jpg',
-      bio: 'Michael tracks DeFi market trends and analyzes on-chain data to identify emerging opportunities.'
+      name: 'Shuhaib Shariff',
+      title: 'Co-founder at AutoYield',
+      avatar: '/team/alex.jpg',
+      bio: '20+ years in SaaS and software product development, led teams across design, engineering, and content to build tools that make business easier.'
     },
     seoDescription: "Compare Solana's top DEXs - Raydium, Jupiter, and Orca - to find which platform best suits your trading style and investment goals."
   },
@@ -273,10 +274,10 @@ export const blogData: BlogPost[] = [
     readingTime: 10,
     coverImage: 'https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=2832&auto=format&fit=crop',
     author: {
-      name: 'Shuhaib Shariff',
-      title: 'Co-founder at AutoYield',
+      name: 'Alex Johnson',
+      title: 'DeFi Researcher',
       avatar: '/team/alex.jpg',
-      bio: '20+ years in SaaS and software product development, led teams across design, engineering, and content to build tools that make business easier.'
+      bio: 'Alex specializes in decentralized finance protocols and liquidity solutions on Solana and other leading blockchains.'
     },
     seoDescription: "Explore how Meteora's Dynamic Liquidity Market Maker (DLMM) is revolutionizing DeFi on Solana with automated, efficient liquidity provisioning."
   },
