@@ -52,19 +52,37 @@ export const fetchBlogPostById = async (idOrSlug: string): Promise<BlogPost | un
     // First try to find by ID
     let post = posts.find(post => post.id === idOrSlug);
     
-    // If not found by ID, try by slug
+    // If not found by ID, try by exact slug match
     if (!post) {
-      console.log(`Post not found by ID, trying slug: ${idOrSlug}`);
+      console.log(`Post not found by ID, trying exact slug: ${idOrSlug}`);
       post = posts.find(post => post.slug === idOrSlug);
+    }
+    
+    // If still not found, try case-insensitive match
+    if (!post) {
+      console.log(`Post not found by exact slug, trying case-insensitive: ${idOrSlug}`);
+      post = posts.find(post => post.slug.toLowerCase() === idOrSlug.toLowerCase());
+    }
+    
+    // If still not found, try with URL-encoded slug or partial matching
+    if (!post) {
+      console.log(`Post not found with exact/case-insensitive match, trying partial match`);
+      const decodedSlug = decodeURIComponent(idOrSlug);
+      post = posts.find(p => 
+        p.slug.includes(idOrSlug) || 
+        idOrSlug.includes(p.slug) || 
+        p.slug.includes(decodedSlug) || 
+        decodedSlug.includes(p.slug)
+      );
     }
     
     if (!post) {
       console.error(`Post not found with ID or slug: ${idOrSlug}`, 
         posts.map(p => ({ id: p.id, slug: p.slug })));
-    } else {
-      console.log(`Post found: ${post.title}`);
-    }
+      return undefined;
+    } 
     
+    console.log(`Post found: ${post.title}`);
     return post;
   } catch (error) {
     console.error(`Error fetching post by ID/slug ${idOrSlug}:`, error);

@@ -5,15 +5,15 @@ import { useToast } from '@/components/ui/use-toast';
 import { fetchBlogPostById, fetchRelatedPosts, fetchBlogPosts, getAvailablePosts } from '@/lib/blog';
 import type { BlogPost } from '@/types/blog';
 
-export function useBlogPost(id?: string) {
+export function useBlogPost(idOrSlug?: string) {
   const { toast } = useToast();
   const [availablePosts, setAvailablePosts] = useState<{id: string, slug: string}[]>([]);
   
   // Debug available posts
   useEffect(() => {
     async function debugPosts() {
-      if (id) {
-        console.log(`Blog detail page loaded with ID/slug: ${id}`);
+      if (idOrSlug) {
+        console.log(`Blog detail page loaded with ID/slug: ${idOrSlug}`);
         const posts = await fetchBlogPosts();
         const simplifiedPosts = posts.map(post => ({
           id: post.id,
@@ -24,55 +24,67 @@ export function useBlogPost(id?: string) {
       }
     }
     debugPosts();
-  }, [id]);
+  }, [idOrSlug]);
   
   const { 
     data: post, 
     isLoading: isPostLoading, 
     error 
   } = useQuery({
-    queryKey: ['blogPost', id],
+    queryKey: ['blogPost', idOrSlug],
     queryFn: async () => {
-      console.log(`Fetching post with ID: ${id}`);
-      if (!id) return undefined;
+      console.log(`Fetching post with ID or slug: ${idOrSlug}`);
+      if (!idOrSlug) return undefined;
       
       try {
         const posts = await fetchBlogPosts();
         
         // First try to find by ID
-        let post = posts.find(post => post.id === id);
+        let post = posts.find(post => post.id === idOrSlug);
         
         // If not found by ID, try by slug
         if (!post) {
-          console.log(`Post not found by ID, trying slug: ${id}`);
-          post = posts.find(post => post.slug === id);
+          console.log(`Post not found by ID, trying by slug: ${idOrSlug}`);
+          post = posts.find(post => post.slug === idOrSlug || post.slug === idOrSlug.toLowerCase());
         }
         
         if (!post) {
-          console.error(`Post not found with ID or slug: ${id}`, 
-            posts.map(p => ({ id: p.id, slug: p.slug })));
-          return undefined;
-        } else {
-          console.log(`Post found: ${post.title}`);
-          return post;
+          // Try with URL-encoded slug or partial matching
+          console.log(`Post not found with exact match, trying partial or decoded match`);
+          const decodedSlug = decodeURIComponent(idOrSlug);
+          post = posts.find(p => 
+            p.slug.includes(idOrSlug) || 
+            idOrSlug.includes(p.slug) || 
+            p.slug.includes(decodedSlug) || 
+            decodedSlug.includes(p.slug)
+          );
+          
+          if (!post) {
+            console.error(`Post not found with ID or slug: ${idOrSlug}`, 
+              posts.map(p => ({ id: p.id, slug: p.slug })));
+            return undefined;
+          }
         }
+        
+        console.log(`Post found: ${post.title}`);
+        return post;
       } catch (error) {
-        console.error(`Error fetching post by ID/slug ${id}:`, error);
+        console.error(`Error fetching post by ID/slug ${idOrSlug}:`, error);
         throw error;
       }
     },
-    enabled: !!id,
+    enabled: !!idOrSlug,
     retry: 2,
   });
 
   // Query for related posts
   const { data: relatedPosts = [] } = useQuery({
-    queryKey: ['relatedPosts', post?.category, id],
+    queryKey: ['relatedPosts', post?.category, idOrSlug],
     queryFn: () => {
-      if (!post?.category || !id) return [];
-      return fetchRelatedPosts(post.category, id);
+      if (!post?.category || !idOrSlug) return [];
+      return fetchRelatedPosts(post.category, idOrSlug);
     },
-    enabled: !!post && !!post.category && !!id,
+    enabled: !!post && !!post.category && !!idOrSlug,
   });
 
   // Log errors for debugging
