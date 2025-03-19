@@ -30,8 +30,8 @@ const App = () => {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/admin" element={<BlogAdmin />} />
-          <Route path="*" element={<NotFound />} />
           <Route path="/blog/import" element={<BlogImport />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </HelmetProvider>
