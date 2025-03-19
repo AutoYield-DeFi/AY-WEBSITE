@@ -59,7 +59,8 @@ export const fetchBlogPostById = async (idOrSlug: string): Promise<BlogPost | un
     }
     
     if (!post) {
-      console.error(`Post not found with ID or slug: ${idOrSlug}`);
+      console.error(`Post not found with ID or slug: ${idOrSlug}`, 
+        posts.map(p => ({ id: p.id, slug: p.slug })));
     } else {
       console.log(`Post found: ${post.title}`);
     }
@@ -140,4 +141,16 @@ export const fetchBlogPostsByAuthor = async (authorName: string): Promise<BlogPo
     console.error(`Error fetching posts by author ${authorName}:`, error);
     return [];
   }
+};
+
+/**
+ * Debug function to get all available blog posts slugs and IDs
+ * @returns Array of objects with id and slug
+ */
+export const getAvailablePosts = async (): Promise<{id: string, slug: string}[]> => {
+  const posts = await fetchBlogPosts();
+  return posts.map(post => ({
+    id: post.id,
+    slug: post.slug
+  }));
 };

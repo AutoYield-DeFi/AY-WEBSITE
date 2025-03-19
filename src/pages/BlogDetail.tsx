@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import { Separator } from '@/components/ui/separator';
-import { fetchBlogPostById, fetchRelatedPosts } from '@/lib/blog';
+import { fetchBlogPostById, fetchRelatedPosts, getAvailablePosts } from '@/lib/blog';
 import { useToast } from '@/components/ui/use-toast';
 import BlogAuthor from '@/components/blog/BlogAuthor';
 import BlogContent from '@/components/blog/BlogContent';
@@ -22,8 +22,16 @@ const BlogDetail = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   
+  // First, let's debug what posts are available
   useEffect(() => {
-    console.log(`Blog detail page loaded with ID/slug: ${id}`);
+    async function debugPosts() {
+      if (id) {
+        console.log(`Blog detail page loaded with ID/slug: ${id}`);
+        const availablePosts = await getAvailablePosts();
+        console.log("Available posts:", availablePosts);
+      }
+    }
+    debugPosts();
   }, [id]);
   
   const { 
@@ -32,7 +40,12 @@ const BlogDetail = () => {
     error 
   } = useQuery({
     queryKey: ['blogPost', id],
-    queryFn: () => fetchBlogPostById(id as string),
+    queryFn: async () => {
+      console.log(`Fetching post with ID: ${id}`);
+      const result = await fetchBlogPostById(id as string);
+      console.log(`Fetch result:`, result);
+      return result;
+    },
     enabled: !!id,
     retry: 2,
   });
@@ -97,8 +110,9 @@ const BlogDetail = () => {
         <Navbar />
         <div className="container mx-auto px-4 py-12 text-center">
           <h1 className="text-2xl font-bold mb-4">Blog post not found</h1>
-          <p className="mb-8">The blog post you're looking for doesn't exist or has been removed.</p>
-          <Link to="/blog" className="btn-primary">
+          <p className="mb-4">The blog post you're looking for doesn't exist or has been removed.</p>
+          <p className="mb-8 text-sm text-gray-500">Requested ID/slug: {id}</p>
+          <Link to="/blog" className="text-primary hover:underline">
             Return to Blog
           </Link>
         </div>
