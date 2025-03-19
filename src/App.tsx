@@ -28,9 +28,9 @@ const App = () => {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/legal" element={<Legal />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/import" element={<BlogImport />} />
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/admin" element={<BlogAdmin />} />
-          <Route path="/blog/import" element={<BlogImport />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
