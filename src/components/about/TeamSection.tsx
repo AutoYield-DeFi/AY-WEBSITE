@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from './MotionWrapper';
 import TeamMember from './TeamMember';
@@ -10,7 +9,7 @@ const TeamSection = () => {
       name: "Shuhaib Shariff",
       role: "CEO",
       bio: "Veteran product leader who spent two decades building intuitive software before deciding that traditional finance wasn't confusing enough. Now transforms DeFi's complexity into solutions anyone can use.",
-      imageUrl: "/team/anonymous.jpg",
+      imageUrl: "/team/ss-pic.jpg",
       linkedin: "https://www.linkedin.com/in/shuhaib/",
       credentials: "20+ years in software product development",
       icon: <Rocket className="h-5 w-5" />
@@ -37,7 +36,8 @@ const TeamSection = () => {
       name: "Ahmed Hamza",
       role: "Front-end Lead",
       bio: "Interface architect who believes complex DeFi protocols deserve beautiful, intuitive interfaces. Combines graph databases and AI to create experiences that make you forget you're interacting with blockchain.",
-      imageUrl: "/team/anonymous.jpg",
+      imageUrl: "/team/hh.png",
+      linkedin: "https://www.linkedin.com/in/hamzax/",
       linkedin: "https://www.linkedin.com/in/hamzax/",
       credentials: "Focused on UX, design and testing",
       icon: <Lightbulb className="h-5 w-5" />
