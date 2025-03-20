@@ -38,7 +38,6 @@ const TeamSection = () => {
       bio: "Interface architect who believes complex DeFi protocols deserve beautiful, intuitive interfaces. Combines graph databases and AI to create experiences that make you forget you're interacting with blockchain.",
       imageUrl: "/team/hh.png",
       linkedin: "https://www.linkedin.com/in/hamzax/",
-      linkedin: "https://www.linkedin.com/in/hamzax/",
       credentials: "Focused on UX, design and testing",
       icon: <Lightbulb className="h-5 w-5" />
     }
