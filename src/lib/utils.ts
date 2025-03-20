@@ -1,3 +1,6 @@
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
 /**
  * Sanitize a JSON object to prevent prototype pollution and other attacks
  * This is particularly important for DeFi applications handling financial data
@@ -29,4 +32,8 @@ export function sanitizeJson(json: unknown): unknown {
   });
   
   return sanitized;
+}
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
 }
