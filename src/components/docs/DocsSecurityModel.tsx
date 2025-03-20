@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Shield, Lock, AlertTriangle, Eye, Users, CheckCircle } from 'lucide-react';
+import { Shield, Lock, AlertTriangle, Eye, Users, CheckCircle, Code, Database, AlertCircle } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
 
@@ -24,6 +24,16 @@ const DocsSecurityModel = () => {
           architecture. Your security is our highest priority, which is why we've built multiple layers of protection 
           into our platform.
         </p>
+        
+        <Alert variant="destructive" className="my-6">
+          <AlertTriangle className="h-5 w-5" />
+          <AlertTitle>Critical DeFi Security Warning</AlertTitle>
+          <AlertDescription>
+            As a DeFi application handling financial assets, AutoYield implements rigorous security measures beyond 
+            industry standards. However, all DeFi platforms carry inherent risks. Only deposit what you can afford to lose and 
+            always verify transactions before signing them.
+          </AlertDescription>
+        </Alert>
       </section>
 
       <section className="space-y-6">
@@ -47,6 +57,8 @@ const DocsSecurityModel = () => {
               <li>Vaults interact with Meteora DLMM pools through secure program-to-program calls</li>
               <li>Strict permission controls ensure only authorized operations can occur</li>
               <li>All state changes are verified through multi-level validation checks</li>
+              <li>Reentrancy guards prevent flash loan and similar attacks</li>
+              <li>Integer overflow protection for all numerical calculations</li>
             </ul>
           </CardContent>
         </Card>
@@ -69,6 +81,7 @@ const DocsSecurityModel = () => {
               <li>Withdrawals can be made instantly, without requiring approval from us</li>
               <li>Your assets never pass through any centralized wallet or third-party custodian</li>
               <li>Even if AutoYield's web interface were to go offline, your assets would remain accessible</li>
+              <li>No admin keys exist that could freeze or seize your funds</li>
             </ul>
             <Alert>
               <AlertTitle>Security Benefit</AlertTitle>
@@ -98,7 +111,38 @@ const DocsSecurityModel = () => {
               <li>All P2P calls include strict validation of input parameters and expected outputs</li>
               <li>Transaction atomicity ensures operations either complete fully or revert entirely</li>
               <li>No reliance on external oracles or off-chain data sources for critical operations</li>
+              <li>Comprehensive error handling prevents partial execution states</li>
             </ul>
+          </CardContent>
+        </Card>
+        
+        <Card id="blockchain-security">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Code size={20} className="text-primary" />
+              Blockchain-Specific Security
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p>
+              Solana's unique architecture requires specific security considerations that we've addressed in our implementation.
+            </p>
+            <h4 className="font-semibold">Solana-specific protections:</h4>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>Account validation to prevent account substitution attacks</li>
+              <li>Proper handling of CPI (Cross-Program Invocation) context</li>
+              <li>Signing verification to prevent unauthorized transactions</li>
+              <li>Comprehensive seed derivation validation</li>
+              <li>Careful management of PDAs (Program Derived Addresses)</li>
+              <li>Protection against transaction instruction manipulation</li>
+            </ul>
+            <Alert variant="default" className="bg-primary-muted/10 mt-4">
+              <AlertCircle className="h-4 w-4" />
+              <AlertDescription>
+                Our contracts implement specific defenses against common Solana attack vectors including instruction 
+                snooping, account data manipulation, and malicious CPI chains.
+              </AlertDescription>
+            </Alert>
           </CardContent>
         </Card>
       </section>
@@ -124,6 +168,7 @@ const DocsSecurityModel = () => {
               <li>Continuous automated testing through fuzzing and formal verification</li>
               <li>All audit reports are published publicly for transparency</li>
               <li>Identified issues are addressed with verification from auditors</li>
+              <li>Bug bounty program to incentivize responsible disclosure</li>
             </ul>
             <p className="mt-2">
               <a href="#" className="text-primary hover:underline">View our latest audit reports</a>
@@ -149,6 +194,7 @@ const DocsSecurityModel = () => {
               <li>Signers are distributed across different geographic locations and jurisdictions</li>
               <li>Hardware security modules (HSMs) protect signing keys</li>
               <li>Time-locks on significant changes for community review</li>
+              <li>Transparent on-chain governance with public proposals</li>
             </ul>
           </CardContent>
         </Card>
@@ -171,6 +217,7 @@ const DocsSecurityModel = () => {
               <li>Multi-sig approval required to activate emergency stop</li>
               <li>Granular control allows pausing specific functions without affecting others</li>
               <li>User withdrawals remain enabled even during emergency stop periods</li>
+              <li>Time-locked execution prevents indefinite freezing of protocol</li>
             </ul>
             <Alert>
               <AlertTitle>User Protection</AlertTitle>
@@ -200,6 +247,7 @@ const DocsSecurityModel = () => {
               <li>Regular rotation of operator keys</li>
               <li>Detailed logging of all operator actions on-chain</li>
               <li>Rate limiting prevents rapid, potentially malicious actions</li>
+              <li>Hierarchical approval system for different risk levels</li>
             </ul>
           </CardContent>
         </Card>
@@ -222,7 +270,34 @@ const DocsSecurityModel = () => {
               <li>Machine learning models detect anomalous patterns</li>
               <li>Automatic alerts for unusual activity or potential exploits</li>
               <li>Dedicated security team responds to alerts 24/7</li>
+              <li>Circuit breakers activate when extreme market conditions are detected</li>
             </ul>
+          </CardContent>
+        </Card>
+        
+        <Card id="secure-architecture">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Database size={20} className="text-primary" />
+              Secure Web Application Architecture
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p>
+              Our web application implements industry-leading security practices to protect against common web vulnerabilities.
+            </p>
+            <h4 className="font-semibold">Web security measures:</h4>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>Comprehensive Content Security Policy (CSP) to prevent XSS attacks</li>
+              <li>Secure, HttpOnly cookies and proper CORS configuration</li>
+              <li>Input validation and output encoding for all user-provided content</li>
+              <li>Protection against CSRF, clickjacking, and injection attacks</li>
+              <li>Regular security scanning and penetration testing</li>
+              <li>Sanitization of all data displayed in the interface</li>
+            </ul>
+            <p className="mt-4 text-sm text-muted-foreground">
+              Our application is regularly tested against OWASP Top 10 vulnerabilities and follows industry best practices for secure coding.
+            </p>
           </CardContent>
         </Card>
       </section>
@@ -239,6 +314,9 @@ const DocsSecurityModel = () => {
           <li><strong>Oracle Risk:</strong> Using multiple price sources and on-chain data to prevent manipulation</li>
           <li><strong>Centralization Risk:</strong> Non-custodial design and multi-sig governance</li>
           <li><strong>Front-Running Risk:</strong> Transaction monitoring and anomaly detection</li>
+          <li><strong>MEV Protection:</strong> Special transaction ordering protection to prevent MEV extraction</li>
+          <li><strong>Bridge Risk:</strong> Limited interaction with cross-chain bridges to reduce attack surface</li>
+          <li><strong>Protocol Dependency Risk:</strong> Continuous monitoring of integrated protocols</li>
         </ul>
       </section>
 
@@ -253,6 +331,9 @@ const DocsSecurityModel = () => {
           <li>Never share your seed phrase or private keys with anyone</li>
           <li>Start with smaller positions until you're comfortable with the platform</li>
           <li>Keep your wallet software and operating system updated</li>
+          <li>Use unique passwords and 2FA for your exchange accounts</li>
+          <li>Be wary of phishing attempts and fake websites</li>
+          <li>Review all transaction details before signing</li>
         </ul>
       </section>
     </div>
