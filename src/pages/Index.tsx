@@ -2,8 +2,8 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import ComparisonAnimation from '@/components/ComparisonAnimation';
 import DeFiExplainer from '@/components/DeFiExplainer';
+import ComparisonAnimation from '@/components/ComparisonAnimation';
 import ConsolidatedFeatures from '@/components/ConsolidatedFeatures';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
@@ -18,8 +18,8 @@ const Index = () => {
       />
       <Navbar />
       <Hero />
-      <ComparisonAnimation />
       <DeFiExplainer />
+      <ComparisonAnimation />
       <ConsolidatedFeatures />
       <Footer />
     </div>
