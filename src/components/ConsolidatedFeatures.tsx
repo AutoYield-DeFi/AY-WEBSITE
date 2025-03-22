@@ -32,7 +32,7 @@ const ConsolidatedFeatures = () => {
     },
     {
       icon: MousePointer,
-      title: "One-Click Liquidity",
+      title: "Two-Click Liquidity",
       description: "Simplified interface reduces complex decisions - designed to be accessible for beginners and experts alike.",
       color: "bg-amber-50 text-amber-600 border-amber-100"
     },
