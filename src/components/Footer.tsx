@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Github, Twitter, Linkedin, Mail, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -22,10 +23,10 @@ const Footer = () => {
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors" aria-label="Twitter">
                 <Twitter size={20} />
               </a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors" aria-label="Github">
+              <a href="https://github.com/AutoYield-DeFi" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors" aria-label="Github">
                 <Github size={20} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/company/autoyield-defi" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors" aria-label="LinkedIn">
                 <Linkedin size={20} />
               </a>
               <a href="mailto:contact@autoyield.io" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors" aria-label="Email">
