@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from './MotionWrapper';
+import { motion } from 'framer-motion'; // Changed import to framer-motion
 import TeamMember from './TeamMember';
 import { Code, Lightbulb, BarChart4, Rocket } from 'lucide-react';
 
@@ -45,8 +45,8 @@ const TeamSection = () => {
 
   return (
     <section id="team" className="py-20 bg-white relative overflow-hidden">
-      <div className="absolute top-40 right-20 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 left-20 w-80 h-80 bg-primary/5 rounded-full blur-3xl"></div>
+      <div className="absolute top-40 right-20 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl transform-gpu will-change-transform"></div>
+      <div className="absolute bottom-20 left-20 w-80 h-80 bg-primary/5 rounded-full blur-3xl transform-gpu will-change-transform"></div>
       <div className="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNCQkRERkYiIGZpbGwtb3BhY2l0eT0iMC4yIj48cGF0aCBkPSJNMzYgMzBoLTJ2Mmgydi0yem0tNS0xMGgtMnYyaDJ2LTJ6bTUgMGgtMnYyaDJ2LTJ6TTIwIDMwaC0ydjJoMnYtMnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10"></div>
       
       <div className="container mx-auto px-6 relative z-10">
@@ -55,7 +55,8 @@ const TeamSection = () => {
             className="inline-block mb-4 px-4 py-1.5 bg-primary-muted rounded-full"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "50px" }}
+            transition={{ duration: 0.5 }}
           >
             <span className="text-xs font-semibold tracking-wider uppercase">Meet The Team</span>
           </motion.div>
@@ -63,8 +64,8 @@ const TeamSection = () => {
             className="text-3xl md:text-4xl font-bold mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            viewport={{ once: true }}
+            transition={{ delay: 0.1, duration: 0.5 }}
+            viewport={{ once: true, margin: "50px" }}
           >
             The DeFi Optimists
           </motion.h2>
@@ -72,8 +73,8 @@ const TeamSection = () => {
             className="text-lg max-w-3xl mx-auto mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            viewport={{ once: true, margin: "50px" }}
           >
             We're the kind of people who saw everyone struggling with liquidity protocols and thought, "Let's fix that!" instead of "Let's build another NFT marketplace!" Our combined expertise helps us build solutions that bridge the gap between complex DeFi mechanisms and everyday users.
           </motion.p>
@@ -87,7 +88,7 @@ const TeamSection = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "50px" }}
             >
               <TeamMember
                 name={member.name}
