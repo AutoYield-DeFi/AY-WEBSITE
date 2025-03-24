@@ -1,13 +1,17 @@
-
 import { BlogPost } from '@/types/blog';
 import { parseMarkdown } from '../markdown';
 import { blogData } from './data';
 import { clearBlogCaches } from './cache';
+import { saveBlogPostToFile } from './file-system';
+import { parseMarkdownBlog } from './markdown-loader';
+
+// Configure which data source to use
+const USE_FILE_SYSTEM = true;
 
 /**
  * Add a new blog post from the formatted text content
  */
-export const addBlogPost = (formattedContent: string): BlogPost | null => {
+export const addBlogPost = async (formattedContent: string): Promise<BlogPost | null> => {
   try {
     // Parse the blog post content
     const lines = formattedContent.split('\n');
@@ -118,8 +122,16 @@ export const addBlogPost = (formattedContent: string): BlogPost | null => {
       seoDescription: excerpt
     };
     
-    // Add to the beginning of the blog data array (newest first)
-    blogData.unshift(newPost);
+    // If using file system, save the post to a markdown file
+    if (USE_FILE_SYSTEM) {
+      const saved = await saveBlogPostToFile(newPost);
+      if (!saved) {
+        console.error('Failed to save blog post to file');
+      }
+    } else {
+      // Otherwise add to the beginning of the blog data array (newest first)
+      blogData.unshift(newPost);
+    }
     
     // Clear cache to force refresh
     clearBlogCaches();
@@ -127,6 +139,63 @@ export const addBlogPost = (formattedContent: string): BlogPost | null => {
     return newPost;
   } catch (error) {
     console.error('Error parsing blog post content:', error);
+    return null;
+  }
+};
+
+/**
+ * Create or update a blog post from markdown content with frontmatter
+ */
+export const createOrUpdateBlogPost = async (markdownContent: string, slug?: string): Promise<BlogPost | null> => {
+  try {
+    // If slug is provided, this is an update, otherwise it's a new post
+    const isNewPost = !slug;
+    
+    // Generate a slug from the title in frontmatter if not provided
+    let postSlug = slug;
+    if (!postSlug) {
+      // Extract title from frontmatter
+      const titleMatch = markdownContent.match(/title: ["']([^"']+)["']/);
+      if (titleMatch && titleMatch[1]) {
+        postSlug = titleMatch[1].toLowerCase()
+          .replace(/[^\w\s-]/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/--+/g, '-');
+      } else {
+        // Generate a random slug if no title is found
+        postSlug = `post-${Date.now().toString(36)}`;
+      }
+    }
+    
+    // Parse the markdown content to a blog post
+    const blogPost = parseMarkdownBlog(markdownContent, postSlug);
+    
+    // Save the post to a file
+    if (USE_FILE_SYSTEM) {
+      const saved = await saveBlogPostToFile(blogPost);
+      if (!saved) {
+        console.error('Failed to save blog post to file');
+        return null;
+      }
+    } else {
+      // For non-file system, update or add to the blog data array
+      const existingPostIndex = blogData.findIndex(post => post.slug === postSlug);
+      
+      if (existingPostIndex >= 0) {
+        // Update existing post
+        blogData[existingPostIndex] = blogPost;
+      } else {
+        // Add new post to the beginning (newest first)
+        blogData.unshift(blogPost);
+      }
+    }
+    
+    // Clear cache to force refresh
+    clearBlogCaches();
+    
+    return blogPost;
+  } catch (error) {
+    console.error('Error creating/updating blog post:', error);
     return null;
   }
 };

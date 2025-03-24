@@ -1,4 +1,3 @@
-
 import { BlogPost } from '@/types/blog';
 import { blogData } from './data';
 import { 
@@ -11,6 +10,13 @@ import {
   getFilteredPostsCache, 
   setFilteredPostsCache 
 } from './cache';
+import { 
+  loadBlogPostsFromFiles,
+  loadBlogPostFromFile
+} from './file-system';
+
+// Configure which data source to use
+const USE_FILE_SYSTEM = true;
 
 /**
  * Fetch all blog posts with caching - ensure latest posts appear first
@@ -26,7 +32,23 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
     
     console.log('No cached posts found, fetching from source');
     
-    // In a real application, this would be an API call
+    if (USE_FILE_SYSTEM) {
+      try {
+        const posts = await loadBlogPostsFromFiles();
+        if (posts.length > 0) {
+          console.log('Loaded posts from markdown files:', posts.length);
+          setCachedPosts(posts);
+          return posts;
+        } else {
+          console.log('No posts found in markdown files, falling back to sample data');
+        }
+      } catch (error) {
+        console.error('Error loading posts from markdown files:', error);
+        console.log('Falling back to sample data');
+      }
+    }
+    
+    // Fallback to sample data from data.ts
     return new Promise((resolve) => {
       setTimeout(() => {
         try {
@@ -111,6 +133,19 @@ export const fetchBlogPostById = async (id: string): Promise<BlogPost | undefine
   
   try {
     console.log(`Fetching blog post by id: ${id}`);
+    
+    if (USE_FILE_SYSTEM) {
+      try {
+        // First, try loading directly from file if it's a slug
+        const post = await loadBlogPostFromFile(id);
+        if (post) {
+          console.log(`Post found in markdown file for slug ${id}`);
+          return post;
+        }
+      } catch (error) {
+        console.error(`Error loading post from markdown file (${id}):`, error);
+      }
+    }
     
     // Try to use cached posts if available
     let posts = getCachedPosts();

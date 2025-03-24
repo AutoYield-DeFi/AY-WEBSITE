@@ -34,6 +34,25 @@ export function sanitizeJson(json: unknown): unknown {
   return sanitized;
 }
 
+/**
+ * Calculate estimated reading time for a text
+ * @param text Content to calculate reading time for
+ * @param wordsPerMinute Reading speed, defaults to 225 WPM
+ * @returns Reading time in minutes (rounded up)
+ */
+export function calculateReadingTime(text: string, wordsPerMinute = 225): number {
+  const cleanText = text
+    .replace(/<[^>]*>/g, '') // Remove HTML tags
+    .replace(/\s+/g, ' ') // Normalize whitespace
+    .trim();
+    
+  const words = cleanText.split(/\s+/).length;
+  const readingTime = Math.ceil(words / wordsPerMinute);
+  
+  // Return at least 1 minute
+  return Math.max(1, readingTime);
+}
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
