@@ -28,7 +28,7 @@ const TeamSection = () => {
       name: "YK",
       role: "Head of Quant Strategy",
       bio: "Spends weekdays teaching AI to predict financial markets and weekends teaching it to optimize DeFi yields. Translates institutional quantitative expertise into algorithms that work while you sleep.",
-      imageUrl: "/team/anonymous.jpg",
+      imageUrl: "/team/iit.jpg",
       credentials: "IIT graduate, 3+ years in quantitative finance",
       icon: <BarChart4 className="h-5 w-5" />
     },
