@@ -93,15 +93,17 @@ const Footer = () => {
                 <LinkedinIcon />
               </motion.a>
               
-              <motion.a 
-                href="mailto:contact@autoyield.io" 
-                className="text-primary-foreground/80 hover:text-primary-foreground transition-colors" 
-                aria-label="Email"
-                initial="initial"
-                whileHover="hover"
-                variants={iconVariants}
+              <motion.a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSf2EOQoZQ97opT4bT7y-vSAjoUk3VLOn0eWpH6dUbTIMYe9kA/viewform?usp=header" // Use the Google Form URL
+                target="_blank" // Add target="_blank"
+                rel="noopener noreferrer" // Add rel attribute
+                className="text-primary-foreground/80 hover:text-primary-foreground transition-colors" // Keep the styling
+                aria-label="Contact" // Use the "Contact" label
+                initial="initial" // Keep animation prop
+                whileHover="hover" // Keep animation prop
+                variants={iconVariants} // Keep animation prop
               >
-                <EmailIcon />
+                <EmailIcon /> {/* Keep the custom icon for consistency */}
               </motion.a>
             </div>
           </div>
