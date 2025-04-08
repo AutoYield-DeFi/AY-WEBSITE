@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { motion } from './MotionWrapper';
+import { motion } from 'framer-motion'; // Changed import to framer-motion
 import { Code, Zap, BarChart3, Rocket } from 'lucide-react';
 
 const TimelineItem = ({ 
@@ -16,11 +15,11 @@ const TimelineItem = ({
 }) => {
   return (
     <motion.div 
-      className="flex items-start gap-4 mb-6 bg-white/80 p-5 rounded-lg shadow-sm border border-primary/5 hover:shadow-md transition-all duration-300"
+      className="flex items-start gap-4 mb-6 bg-white/80 p-5 rounded-lg shadow-sm border border-primary/5 hover:shadow-md transition-all duration-300 transform-gpu"
       initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
       whileInView={{ opacity: 1, x: 0 }}
-      transition={{ delay: index * 0.1 }}
-      viewport={{ once: true }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      viewport={{ once: true, margin: "50px" }}
     >
       <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-muted flex items-center justify-center text-primary">
         {icon}

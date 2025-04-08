@@ -1,8 +1,8 @@
-
 import React from 'react';
 import { ArrowRight, Shield } from 'lucide-react';
 import { Button } from './ui/button';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion'; // Import framer-motion
 
 const Hero = () => {
   return (
@@ -13,21 +13,40 @@ const Hero = () => {
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
-          <div className="animate-fade-in">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+          >
             <div className="inline-block mb-4 px-4 py-1.5 bg-primary-muted rounded-full">
               <span className="text-xs font-semibold tracking-wider uppercase">Powered by AI. Built on Solana</span>
             </div>
-          </div>
+          </motion.div>
           
-          <h1 className="animate-fade-up text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4"
+          >
             Smart Liquidity Management <span className="text-primary">on Solana</span>
-          </h1>
+          </motion.h1>
           
-          <p className="animate-fade-up animation-delay-200 text-lg md:text-xl text-muted-foreground mb-8 text-balance">
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="text-lg md:text-xl text-muted-foreground mb-8 text-balance"
+          >
             Effortlessly optimize LP positions with automated rebalancing, smart adjustments, and real-time yield optimization—no manual management required.
-          </p>
+          </motion.p>
           
-          <div className="animate-fade-up animation-delay-300 flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
+          >
             <Button className="btn-primary w-full sm:w-auto flex items-center justify-center gap-2 group">
               Start Earning Now
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
@@ -37,10 +56,15 @@ const Hero = () => {
                 How It Works
               </Button>
             </Link>
-          </div>
+          </motion.div>
           
           {/* Added security and platform indicators */}
-          <div className="animate-fade-up animation-delay-400 flex flex-wrap justify-center gap-4 mt-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="flex flex-wrap justify-center gap-4 mt-4"
+          >
             <div className="flex items-center text-sm text-muted-foreground">
               <Shield className="h-4 w-4 mr-1 text-blue-500" />
               <span>Audited Smart Contracts</span>
@@ -53,7 +77,7 @@ const Hero = () => {
               <div className="h-2 w-2 rounded-full bg-amber-500 mr-1"></div>
               <span>Automatic Compounding</span>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

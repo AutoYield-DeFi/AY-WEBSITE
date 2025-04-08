@@ -1,10 +1,9 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { motion } from '@/components/about/MotionWrapper';
+import { motion } from 'framer-motion'; // Changed import to framer-motion
 import { HelpCircle, Mail, ExternalLink } from 'lucide-react';
 
 const FAQ = () => {
@@ -73,19 +72,29 @@ const FAQ = () => {
           className="max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          viewport={{ once: true, margin: "50px" }}
+          transition={{ duration: 0.6 }}
         >
-          <div className="text-center mb-16">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
             <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
               Frequently Asked Questions
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Find answers to common questions about AutoYield's platform, features, and how to maximize your DeFi earnings.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/50 rounded-xl p-6 mb-8">
+          <motion.div 
+            className="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/50 rounded-xl p-6 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <h2 className="text-xl font-semibold mb-2 text-amber-800 dark:text-amber-400">Important Risk Disclosure</h2>
             <p className="text-amber-700 dark:text-amber-300">
               AutoYield is currently in Beta. DeFi platforms involve inherent risks including smart contract vulnerabilities, 
@@ -93,42 +102,69 @@ const FAQ = () => {
               consider these risks and only invest funds they can afford to lose. Past performance is not indicative of 
               future results.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="bg-card rounded-xl p-6 shadow-lg border border-border">
+          <motion.div 
+            className="bg-card rounded-xl p-6 shadow-lg border border-border"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
             <Accordion type="single" collapsible className="w-full">
               {faqItems.map((item, index) => (
-                <AccordionItem key={index} value={`item-${index}`}>
-                  <AccordionTrigger className="text-left hover:no-underline">
-                    <div className="flex items-start gap-3">
-                      <HelpCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span className="font-medium">{item.question}</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="pl-8 text-muted-foreground">
-                    {item.answer}
-                  </AccordionContent>
-                </AccordionItem>
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.1 * index + 0.4 }}
+                >
+                  <AccordionItem value={`item-${index}`}>
+                    <AccordionTrigger className="text-left hover:no-underline">
+                      <div className="flex items-start gap-3">
+                        <HelpCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                        <span className="font-medium">{item.question}</span>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="pl-8 text-muted-foreground">
+                      {item.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                </motion.div>
               ))}
             </Accordion>
-          </div>
+          </motion.div>
 
-          <div className="mt-16 text-center">
+          <motion.div 
+            className="mt-16 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
             <h2 className="text-2xl font-semibold mb-4">Still have questions?</h2>
             <p className="text-muted-foreground mb-8">
               Our team is always ready to help you with any questions you might have.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="mailto:support@autoyield.io" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
+              <motion.a 
+                href="mailto:support@autoyield.io" 
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
                 <Mail className="h-4 w-4" />
                 Contact Support
-              </a>
-              <a href="/docs" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/90 transition-colors">
+              </motion.a>
+              <motion.a 
+                href="/docs" 
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/90 transition-colors"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
                 <ExternalLink className="h-4 w-4" />
                 Read Documentation
-              </a>
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </main>
       

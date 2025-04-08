@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Shield, Clock, HeartHandshake, LineChart } from 'lucide-react';
-import { motion } from './MotionWrapper';
+import { motion } from 'framer-motion'; // Changed import to framer-motion
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 const Values = () => {
@@ -31,14 +30,15 @@ const Values = () => {
   return (
     <section id="values" className="py-16 bg-gradient-to-b from-white to-primary-muted/10 relative overflow-hidden">
       <div className="absolute bottom-0 right-0 w-full h-1/2 bg-primary-muted/5 transform rotate-3 origin-bottom-right"></div>
-      <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-primary/5 rounded-full blur-3xl -translate-x-1/2"></div>
+      <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 transform-gpu will-change-transform"></div>
       
       <div className="container mx-auto px-6 relative z-10">
         <motion.div 
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "50px" }}
+          transition={{ duration: 0.5 }}
         >
           <div className="inline-block mb-4 px-4 py-1.5 bg-primary-muted rounded-full">
             <span className="text-xs font-semibold tracking-wider uppercase">Our Principles</span>
@@ -61,8 +61,12 @@ const Values = () => {
                     className="bg-white p-6 rounded-xl shadow-sm border border-primary/5 text-center h-full transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md relative overflow-hidden"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true }}
+                    transition={{ 
+                      duration: 0.5, 
+                      delay: index * 0.1,
+                      ease: "easeOut"
+                    }}
+                    viewport={{ once: true, margin: "30px" }}
                   >
                     <div className="absolute top-0 right-0 -mt-4 -mr-4 w-20 h-20 bg-primary-muted/20 rounded-full"></div>
                     <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary-muted text-primary mb-4 relative z-10">
