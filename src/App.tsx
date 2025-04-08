@@ -20,6 +20,7 @@ const Glossary = lazy(() => import('@/pages/Glossary'));
 const Roadmap = lazy(() => import('@/pages/Roadmap'));
 const FAQ = lazy(() => import('@/pages/FAQ'));
 const BlogImport = lazy(() => import('@/pages/BlogImport'));
+const Waitlist = lazy(() => import('@/pages/Waitlist'));
 
 // Create QueryClient outside component to prevent recreation on renders
 const queryClient = new QueryClient({
@@ -50,6 +51,7 @@ const AppRoutes = React.memo(() => {
         <Route path="/admin" element={<BlogAdmin />} />
         {/* Dynamic route last */}
         <Route path="/blog/:id" element={<BlogDetail />} />
+        <Route path="/waitlist" element={<Waitlist />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>

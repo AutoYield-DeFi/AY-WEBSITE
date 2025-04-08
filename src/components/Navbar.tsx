@@ -86,9 +86,11 @@ const Navbar = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="default" className="rounded-full">
-              Launch App
-            </Button>
+            <Link to="/waitlist">
+              <Button variant="default" className="rounded-full">
+                Get Early Access
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -147,9 +149,11 @@ const Navbar = () => {
             Blog
           </Link>
           <div className="pt-4">
-            <Button variant="default" className="w-full rounded-full">
-              Launch App
-            </Button>
+            <Link to="/waitlist" className="block w-full" onClick={() => setIsOpen(false)}>
+              <Button variant="default" className="w-full rounded-full">
+                Get Early Access
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

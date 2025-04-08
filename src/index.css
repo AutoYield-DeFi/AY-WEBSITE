@@ -232,3 +232,12 @@
     transform: translateY(-8px);
   }
 }
+#getWaitlistContainer div.gw-w-full { text-align: left !important; }
+#getWaitlistContainer > div > div.gw-flex.gw-flex-col > div.gw-mt-4:last-of-type {
+  display: none !important;
+  visibility: hidden !important; /* Add visibility for extra measure */
+  height: 0 !important; /* Collapse its height */
+  overflow: hidden !important; /* Prevent overflow */
+  margin: 0 !important; /* Remove margins */
+  padding: 0 !important; /* Remove padding */
+}
