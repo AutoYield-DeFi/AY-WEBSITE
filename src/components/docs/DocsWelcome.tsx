@@ -17,9 +17,9 @@ const DocsWelcome = () => {
             </Link>
           </Button>
           <Button variant="outline" asChild className="flex-shrink-0">
-            <a href="https://autoyield.replit.app/pools" target="_blank" rel="noopener noreferrer">
-              Launch App
-            </a>
+            <Link to="/waitlist">
+              Get Early Access
+            </Link>
           </Button>
         </div>
       </div>

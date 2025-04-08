@@ -50,9 +50,9 @@ const Footer = () => {
               <li><Link to="/glossary" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Glossary</Link></li>
               <li><Link to="/roadmap" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Roadmap</Link></li>
               <li><Link to="/faq" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">FAQ</Link></li>
-              <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors flex items-center gap-1">
-                Launch App <ExternalLink size={14} />
-              </a></li>
+              <li><Link to="/waitlist" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors flex items-center gap-1">
+                Get Early Access
+              </Link></li>
             </ul>
           </div>
           
