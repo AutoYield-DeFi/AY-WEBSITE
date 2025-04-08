@@ -39,7 +39,7 @@ const iconVariants = {
 };
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
+  const currentYear = new Date(new Date().toLocaleString('en-US', { timeZone: 'UTC' })).getFullYear();
   
   return (
     <footer className="bg-primary text-primary-foreground py-16">
@@ -51,7 +51,7 @@ const Footer = () => {
               <Logo variant="full" size="lg" darkMode={true} />
             </Link>
             <p className="text-primary-foreground/90 mb-6 text-sm leading-relaxed">
-              AI-powered liquidity management platform on Solana, maximizing yields across established, mid-cap, and promising small-cap tokens.
+              AI-powered liquidity management platform on Solana. It maximizes yields across established, mid-cap, and promising small-cap tokens.
             </p>
             <div className="flex space-x-4 mt-4">
               <motion.a 
@@ -94,16 +94,16 @@ const Footer = () => {
               </motion.a>
               
               <motion.a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSf2EOQoZQ97opT4bT7y-vSAjoUk3VLOn0eWpH6dUbTIMYe9kA/viewform?usp=header" // Use the Google Form URL
-                target="_blank" // Add target="_blank"
-                rel="noopener noreferrer" // Add rel attribute
-                className="text-primary-foreground/80 hover:text-primary-foreground transition-colors" // Keep the styling
-                aria-label="Contact" // Use the "Contact" label
-                initial="initial" // Keep animation prop
-                whileHover="hover" // Keep animation prop
-                variants={iconVariants} // Keep animation prop
+                href="https://docs.google.com/forms/d/e/1FAIpQLSf2EOQoZQ97opT4bT7y-vSAjoUk3VLOn0eWpH6dUbTIMYe9kA/viewform?usp=header"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                aria-label="Contact"
+                initial="initial"
+                whileHover="hover"
+                variants={iconVariants}
               >
-                <EmailIcon /> {/* Keep the custom icon for consistency */}
+                <EmailIcon />
               </motion.a>
             </div>
           </div>
@@ -124,7 +124,7 @@ const Footer = () => {
               <li><Link to="/glossary" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Glossary</Link></li>
               <li><Link to="/roadmap" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Roadmap</Link></li>
               <li><Link to="/faq" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">FAQ</Link></li>
-              <li><Link to="/waitlist" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors flex items-center gap-1">
+              <li><Link to="/waitlist" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                 Get Early Access
               </Link></li>
             </ul>
