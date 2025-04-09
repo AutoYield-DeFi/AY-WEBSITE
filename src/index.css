@@ -241,3 +241,25 @@
   margin: 0 !important; /* Remove margins */
   padding: 0 !important; /* Remove padding */
 }
+#getWaitlistContainer div[style*="background-color"] > div:first-child {
+  /* --- Style Overrides --- */
+
+  /* text-3xl equivalent */
+  font-size: 1.875rem !important; /* Overrides widget's gw-text-2xl */
+  line-height: 2.25rem !important;
+
+  /* font-extrabold equivalent */
+  font-weight: 700 !important; /* Overrides widget's gw-font-bold */
+
+  /* text-primary equivalent */
+  /* IMPORTANT: Replace #2563eb with YOUR actual primary text color hex code or CSS variable */
+  color: #2563eb !important; /* Overrides widget's inline style and color */
+  /* Example using a CSS variable: color: var(--color-primary) !important; */
+
+  /* mb-4 equivalent */
+  margin-bottom: 1rem !important; /* Add desired margin */
+  padding-bottom: 0 !important; /* Override widget's gw-pb-2 */
+
+  /* Keep widget's text alignment (centered) unless you want to change it */
+  /* text-align: left !important; */ /* Optional: Uncomment this line to force left alignment */
+}
