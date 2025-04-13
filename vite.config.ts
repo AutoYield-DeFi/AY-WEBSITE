@@ -6,12 +6,10 @@ import path from "path";
 // Added: fonts.googleapis.com to style-src
 // Added: fonts.gstatic.com to font-src
 const csp = `
-  default-src 'self';
-  script-src 'self' 'unsafe-inline' prod-waitlist-widget.s3.us-east-2.amazonaws.com www.google.com www.gstatic.com cdn.gpteng.co;
-  connect-src 'self' api.getwaitlist.com *.autoyield.io;
+  default-src 'self';  script-src 'self' 'unsafe-inline' prod-waitlist-widget.s3.us-east-2.amazonaws.com www.google.com www.gstatic.com cdn.gpteng.co;  connect-src 'self' api.getwaitlist.com *.autoyield.io;
   style-src 'self' 'unsafe-inline' prod-waitlist-widget.s3.us-east-2.amazonaws.com fonts.googleapis.com;
   frame-src 'self' www.google.com;
-  img-src 'self' data:;
+  img-src 'self' data: * https:;
   font-src 'self' data: fonts.gstatic.com;
   object-src 'none';
   base-uri 'self';
