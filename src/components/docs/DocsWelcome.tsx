@@ -17,9 +17,9 @@ const DocsWelcome = () => {
             </Link>
           </Button>
           <Button variant="outline" asChild className="flex-shrink-0">
-            <Link to="/waitlist">
+            <a href="https://getwaitlist.com/waitlist/27123" target="_blank" rel="noopener noreferrer">
               Get Early Access
-            </Link>
+            </a>
           </Button>
         </div>
       </div>

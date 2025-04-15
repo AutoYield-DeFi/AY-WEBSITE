@@ -85,11 +85,11 @@ const Navbar = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link to="/waitlist">
+            <a href="https://getwaitlist.com/waitlist/27123" target="_blank" rel="noopener noreferrer">
               <Button variant="default" className="rounded-full">
                 Get Early Access
               </Button>
-            </Link>
+            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -148,11 +148,11 @@ const Navbar = () => {
             Blog
           </Link>
           <div className="pt-4">
-            <Link to="/waitlist" className="block w-full" onClick={() => setIsOpen(false)}>
+            <a href="https://getwaitlist.com/waitlist/27123" className="block w-full" target="_blank" rel="noopener noreferrer" onClick={() => setIsOpen(false)}>
               <Button variant="default" className="w-full rounded-full">
                 Get Early Access
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </div>

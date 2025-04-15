@@ -122,9 +122,9 @@ const Footer = () => {
               <li><Link to="/glossary" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Glossary</Link></li>
               <li><Link to="/roadmap" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Roadmap</Link></li>
               <li><Link to="/faq" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">FAQ</Link></li>
-              <li><Link to="/waitlist" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+              <li><a href="https://getwaitlist.com/waitlist/27123" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors" target="_blank" rel="noopener noreferrer">
                 Get Early Access
-              </Link></li>
+              </a></li>
             </ul>
           </div>
           
