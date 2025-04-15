@@ -47,9 +47,15 @@ const Hero = () => {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
           >
-            <Button className="btn-primary w-full sm:w-auto flex items-center justify-center gap-2 group">
-              Start Earning Now
-              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+            <Button asChild className="btn-primary w-full sm:w-auto flex items-center justify-center gap-2 group">
+              <a
+                href="https://getwaitlist.com/waitlist/27123"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Get Early Access
+                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+              </a>
             </Button>
             <Link to="/about">
               <Button variant="outline" className="btn-secondary w-full sm:w-auto">
