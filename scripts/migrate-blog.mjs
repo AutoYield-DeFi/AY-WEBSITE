@@ -5,10 +5,16 @@ import { blogData } from '../src/lib/blog/data.ts'; // Corrected path to .ts fil
 import { JSDOM } from 'jsdom'; // Needed by htmlToBlocks for parsing
 
 // --- Sanity Client Configuration ---
-// WARNING: Hardcoding tokens is generally discouraged for security reasons.
-// Consider environment variables for production use cases.
-// Revoke this token after the migration is complete.
-const SANITY_API_TOKEN = 'skGzhBnrovOBKJSUFYCggTnle7NMqhNpr1w4BeO3XxSKecSWnvsN243UFCHcPFLquk6eaTKnp83EwtsmQcinWbLLJ6NOonD97OYoAk6GGYmFtWOkYCn9e1nmJVqyzLb3wYLMGiSxbWfE0SaS45xqkovbpRmPGroZDEDmvhXSSmDoK2hZ1k31';
+/**
+ * WARNING: Do not hardcode tokens in source code.
+ * Use environment variables for security.
+ * Example: export SANITY_API_TOKEN=your-token
+ */
+const SANITY_API_TOKEN = process.env.SANITY_API_TOKEN;
+if (!SANITY_API_TOKEN) {
+  console.error('Error: SANITY_API_TOKEN environment variable is not set.');
+  process.exit(1);
+}
 
 const client = createClient({
   projectId: 'mtevlcny',
