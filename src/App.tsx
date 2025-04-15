@@ -106,7 +106,7 @@ const AppRoutes = React.memo(() => (
       {/* Specific blog routes before dynamic one */}
       <Route path="/blog/import" element={<BlogImport />} />
       {/* Dynamic blog route */}
-      <Route path="/blog/:id" element={<BlogDetail />} />
+      <Route path="/blog/:slug" element={<BlogDetail />} />
 
       {/* Other routes */}
       <Route path="/admin" element={<BlogAdmin />} />

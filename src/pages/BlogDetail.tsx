@@ -15,20 +15,20 @@ import RelatedPosts from '@/components/blog/RelatedPosts';
 import { Link } from 'react-router-dom';
 
 const BlogDetail = () => {
-  const { id } = useParams<{ id: string }>();
+  const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const { toast } = useToast();
   
   const { data: post, isLoading: isPostLoading, error } = useQuery({
-    queryKey: ['blogPost', id],
-    queryFn: () => fetchBlogPostById(id as string),
-    enabled: !!id,
+    queryKey: ['blogPost', slug],
+    queryFn: () => fetchBlogPostById(slug as string),
+    enabled: !!slug,
     retry: 2,
   });
 
   const { data: relatedPosts = [] } = useQuery({
-    queryKey: ['relatedPosts', post?.category, id],
-    queryFn: () => fetchRelatedPosts(post?.category as string, id as string),
+    queryKey: ['relatedPosts', post?.category, slug],
+    queryFn: () => fetchRelatedPosts(post?.category as string, slug as string),
     enabled: !!post && !!post.category,
   });
 

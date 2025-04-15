@@ -77,6 +77,7 @@ export function sanitizeHtml(html: string): string {
  * This function applies additional protection specific to markdown content
  */
 export function sanitizeMarkdown(markdown: string): string {
+  if (typeof markdown !== "string") return '';
   if (!markdown) return '';
   
   // Remove potential script injections in markdown code blocks

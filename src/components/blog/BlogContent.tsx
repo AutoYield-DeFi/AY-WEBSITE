@@ -1,13 +1,13 @@
 
 import React from 'react';
-import { Markdown } from '@/components/ui/markdown';
-import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { sanitizeMarkdown, sanitizeUrlParam } from '@/lib/sanitize';
+import { sanitizeUrlParam } from '@/lib/sanitize';
+
+// Import PortableText renderer
+import { PortableText } from '@portabletext/react';
 
 interface BlogContentProps {
-  content: string;
+  content: any; // Portable Text array from Sanity
   tags?: string[];
 }
 
@@ -15,21 +15,14 @@ const BlogContent = ({ content, tags }: BlogContentProps) => {
   const navigate = useNavigate();
 
   const handleTagClick = (tag: string) => {
-    // Sanitize the tag before using it in a URL
     const sanitizedTag = sanitizeUrlParam(tag);
     navigate(`/blog?tag=${sanitizedTag}`);
   };
 
-  // Process content to better handle tables if necessary
-  const processedContent = content.includes('<table') ? content : content;
-  
-  // Sanitize the content to prevent XSS attacks with our enhanced sanitizer
-  const sanitizedContent = sanitizeMarkdown(processedContent);
-
   return (
     <div className="max-w-[700px] mx-auto">
       <div className="prose prose-lg lg:prose-xl mx-auto font-serif">
-        <Markdown className="blog-content">{sanitizedContent}</Markdown>
+        <PortableText value={content} />
       </div>
 
       {tags && tags.length > 0 && (

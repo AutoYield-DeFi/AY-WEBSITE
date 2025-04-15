@@ -5,8 +5,11 @@ import path from "path";
 // Define the Content Security Policy string
 // Added: fonts.googleapis.com to style-src
 // Added: fonts.gstatic.com to font-src
+// Fixed: Ensure Sanity API is properly included in connect-src
 const csp = `
-  default-src 'self';  script-src 'self' 'unsafe-inline' prod-waitlist-widget.s3.us-east-2.amazonaws.com www.google.com www.gstatic.com cdn.gpteng.co;  connect-src 'self' api.getwaitlist.com *.autoyield.io;
+  default-src 'self';
+  script-src 'self' 'unsafe-inline' prod-waitlist-widget.s3.us-east-2.amazonaws.com www.google.com www.gstatic.com cdn.gpteng.co;
+  connect-src 'self' api.getwaitlist.com *.autoyield.io https://mtevlcny.apicdn.sanity.io;
   style-src 'self' 'unsafe-inline' prod-waitlist-widget.s3.us-east-2.amazonaws.com fonts.googleapis.com;
   frame-src 'self' www.google.com;
   img-src 'self' data: * https:;

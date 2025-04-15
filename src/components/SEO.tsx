@@ -29,7 +29,8 @@ const SEO = ({
   const fullTitle = title.includes(siteTitle) ? title : `${title} | ${siteTitle}`;
   const baseUrl = import.meta.env.PROD ? "https://autoyield.io" : "http://localhost:8080";
   const fullCanonical = canonical ? canonical : undefined;
-  const fullOgImage = ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`;
+  const safeOgImage = ogImage || "/og-image.png";
+  const fullOgImage = safeOgImage.startsWith("http") ? safeOgImage : `${baseUrl}${safeOgImage}`;
 
   // Default organization structured data
   const defaultJsonLd = {

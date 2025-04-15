@@ -1,7 +1,7 @@
 
 import { BlogPost } from '@/types/blog';
 import { parseMarkdown } from '../markdown';
-import { blogData } from './data';
+// import { blogData } from './data';
 import { clearBlogCaches } from './cache';
 
 /**
@@ -97,34 +97,10 @@ export const addBlogPost = (formattedContent: string): BlogPost | null => {
       coverImage = "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?q=80&w=2897&auto=format&fit=crop";
     }
     
-    // Create the new blog post
-    const newPost: BlogPost = {
-      id: (blogData.length + 1).toString(),
-      slug,
-      title,
-      excerpt,
-      content: parseMarkdown(content),
-      publishedAt,
-      category,
-      tags: tags.length > 0 ? tags : ['defi', 'solana'],
-      readingTime,
-      coverImage,
-      author: {
-        name: authorName,
-        title: authorTitle,
-        avatar: '/team/alex.jpg', // Default avatar
-        bio: authorBio
-      },
-      seoDescription: excerpt
-    };
-    
-    // Add to the beginning of the blog data array (newest first)
-    blogData.unshift(newPost);
-    
-    // Clear cache to force refresh
+    // Create the new blog post (local only, deprecated)
+    // With Sanity integration, add posts via Sanity Studio or API.
     clearBlogCaches();
-    
-    return newPost;
+    return null;
   } catch (error) {
     console.error('Error parsing blog post content:', error);
     return null;

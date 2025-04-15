@@ -1,6 +1,6 @@
 
 import { BlogPost } from '@/types/blog';
-import { blogData } from './data';
+import sanityClient from './sanityClient';
 import { 
   getCachedPosts, 
   setCachedPosts, 
@@ -26,32 +26,36 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
     
     console.log('No cached posts found, fetching from source');
     
-    // In a real application, this would be an API call
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        try {
-          // Sort by publish date, newest first
-          const sortedPosts = [...blogData].sort((a, b) => 
-            new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-          );
-          console.log('Sorted blog posts:', sortedPosts.length);
-          
-          // Log the first few posts to help debug
-          console.log('First 3 posts after sorting:', sortedPosts.slice(0, 3).map(p => ({
-            title: p.title,
-            date: p.publishedAt,
-            timestamp: new Date(p.publishedAt).getTime()
-          })));
-          
-          setCachedPosts(sortedPosts);
-          resolve(sortedPosts);
-        } catch (error) {
-          console.error("Error fetching blog posts:", error);
-          // Return empty array instead of throwing
-          resolve([]);
-        }
-      }, 500); // Increased timeout to ensure stability
-    });
+    // Fetch posts from Sanity
+    try {
+      const posts = await sanityClient.fetch(
+        `*[_type == "post"] | order(publishedAt desc){
+          _id,
+          title,
+          "id": _id,
+          "slug": slug.current,
+          excerpt,
+          "content": body,
+          publishedAt,
+          category,
+          tags,
+          readingTime,
+          seoDescription,
+          "coverImage": coverImage.asset->url,
+          author->{
+            name,
+            title,
+            avatar,
+            bio
+          }
+        }`
+      );
+      setCachedPosts(posts);
+      return posts;
+    } catch (error) {
+      console.error("Error fetching blog posts from Sanity:", error);
+      return [];
+    }
   } catch (error) {
     console.error("Unexpected error in fetchBlogPosts:", error);
     return [];
