@@ -9,7 +9,7 @@ import path from "path";
 const csp = `
   default-src 'self';
   script-src 'self' 'unsafe-inline' prod-waitlist-widget.s3.us-east-2.amazonaws.com www.google.com www.gstatic.com cdn.gpteng.co;
-  connect-src 'self' api.getwaitlist.com *.autoyield.io https://mtevlcny.apicdn.sanity.io;
+  connect-src 'self' api.getwaitlist.com *.autoyield.io *.sanity.io;
   style-src 'self' 'unsafe-inline' prod-waitlist-widget.s3.us-east-2.amazonaws.com fonts.googleapis.com;
   frame-src 'self' www.google.com;
   img-src 'self' data: * https:;
