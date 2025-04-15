@@ -31,7 +31,19 @@ const SEO = ({
   const fullCanonical = canonical ? canonical : undefined;
   const fullOgImage = ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`;
 
-  // REMOVED THE cspDirectives VARIABLE DEFINITION - No longer needed here
+  // Default organization structured data
+  const defaultJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "AutoYield",
+    "url": baseUrl,
+    "logo": `${baseUrl}/favicon.svg`,
+    "sameAs": [
+      "https://twitter.com/AutoYield",
+      "https://autoyield.io"
+    ],
+    "description": "AI-powered DeFi liquidity management platform on Solana."
+  };
 
   return (
     <Helmet>
@@ -41,19 +53,6 @@ const SEO = ({
       {keywords && <meta name="keywords" content={keywords} />}
       {canonical && <link rel="canonical" href={fullCanonical} />}
       {noindex && <meta name="robots" content="noindex,nofollow" />}
-
-      {/* --- Security Headers - REMOVE ALL META TAGS BELOW --- */}
-      {/*
-        <meta httpEquiv="Content-Security-Policy" content={cspDirectives} />
-        <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
-        <meta httpEquiv="X-Frame-Options" content="DENY" />
-        <meta httpEquiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-        <meta httpEquiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()" />
-        <meta httpEquiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains; preload" />
-        <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
-      */}
-      {/* --- End of removed security meta tags --- */}
-
 
       {/* Open Graph / Facebook - KEEP THESE */}
       <meta property="og:type" content={ogType} />
@@ -72,11 +71,9 @@ const SEO = ({
       <meta property="twitter:image" content={fullOgImage} />
 
       {/* Structured Data (JSON-LD) - KEEP THIS */}
-      {jsonLd && (
-        <script type="application/ld+json">
-          {JSON.stringify(sanitizeJson(jsonLd))}
-        </script>
-      )}
+      <script type="application/ld+json">
+        {JSON.stringify(sanitizeJson(jsonLd || defaultJsonLd))}
+      </script>
     </Helmet>
   );
 };

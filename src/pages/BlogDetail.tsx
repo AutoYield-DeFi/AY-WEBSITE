@@ -1,4 +1,3 @@
-
 import React, { useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -50,6 +49,34 @@ const BlogDetail = () => {
       day: 'numeric'
     }).format(publishDate);
   }, [post?.publishedAt]);
+
+  // Generate BlogPosting structured data for SEO
+  const blogPostingJsonLd = post ? {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.seoDescription || post.excerpt,
+    "image": post.coverImage,
+    "author": {
+      "@type": "Person",
+      "name": post.author?.name,
+      "description": post.author?.bio,
+      "jobTitle": post.author?.title
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "AutoYield",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${window.location.origin}/favicon.svg`
+      }
+    },
+    "datePublished": post.publishedAt,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": post.canonical || window.location.href
+    }
+  } : undefined;
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -109,6 +136,7 @@ const BlogDetail = () => {
         ogImage={post.coverImage}
         canonical={post.canonical || undefined}
         ogType="article"
+        jsonLd={blogPostingJsonLd}
       />
       <Navbar />
 
