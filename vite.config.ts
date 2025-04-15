@@ -7,25 +7,25 @@ import path from "path";
 // Added: fonts.gstatic.com to font-src
 // Fixed: Ensure Sanity API is properly included in connect-src
 const csp = `
-  default-src 'self';
-  script-src 'self' 'unsafe-inline' prod-waitlist-widget.s3.us-east-2.amazonaws.com www.google.com www.gstatic.com cdn.gpteng.co;
-  connect-src 'self' api.getwaitlist.com *.autoyield.io *.sanity.io;
-  style-src 'self' 'unsafe-inline' prod-waitlist-widget.s3.us-east-2.amazonaws.com fonts.googleapis.com;
-  frame-src 'self' www.google.com;
-  img-src 'self' data: * https:;
-  font-src 'self' data: fonts.gstatic.com;
-  object-src 'none';
-  base-uri 'self';
-  form-action 'self';
-  upgrade-insecure-requests;
-`.trim().replace(/\s+/g, ' '); // Clean up whitespace for the header value
+default-src 'self';
+script-src 'self' 'unsafe-inline' prod-waitlist-widget.s3.us-east-2.amazonaws.com www.google.com www.gstatic.com cdn.gpteng.co static.cloudflareinsights.com;
+connect-src 'self' api.getwaitlist.com *.autoyield.io *.sanity.io;
+style-src 'self' 'unsafe-inline' prod-waitlist-widget.s3.us-east-2.amazonaws.com fonts.googleapis.com;
+frame-src 'self' www.google.com;
+img-src 'self' data: * https: cdn.sanity.io;
+font-src 'self' data: fonts.gstatic.com;
+object-src 'none';
+base-uri 'self';
+form-action 'self';
+upgrade-insecure-requests;
+`.trim().replace(/\s+/g, " "); // Clean up whitespace for the header value
 
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
     // Add the headers configuration block
     headers: {
-      'Content-Security-Policy': csp
+      "Content-Security-Policy": csp,
       // Recommended security headers (uncomment if not set elsewhere like Cloudflare):
       // 'X-Frame-Options': 'DENY', // Or 'SAMEORIGIN'
       // 'X-Content-Type-Options': 'nosniff',
