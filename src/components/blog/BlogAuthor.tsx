@@ -7,6 +7,8 @@ interface BlogAuthorProps {
 }
 
 const BlogAuthor = ({ author }: BlogAuthorProps) => {
+  if (!author) return null;
+  console.log('BlogAuthor:', author); // Debugging line to check author data
   return (
     <div className="py-6">
       <div className="flex items-center gap-5">

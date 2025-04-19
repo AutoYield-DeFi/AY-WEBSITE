@@ -41,7 +41,12 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
           readingTime,
           seoDescription,
           "coverImage": coverImage.asset->url,
-          author->{name,title,avatar,bio}
+          author->{
+            name,
+            title,
+            bio,
+            "avatar": avatar.asset->url
+          }
         }`
       );
       setCachedPosts(posts);
@@ -141,7 +146,12 @@ export const fetchBlogPostById = async (id: string): Promise<BlogPost & { relate
       readingTime,
       seoDescription,
       "coverImage": coverImage.asset->url,
-      author->{name,title,avatar,bio},
+      author->{
+        name,
+        title,
+        bio,
+        "avatar": avatar.asset->url
+      },
       "relatedPosts": relatedPosts[]->{
         _id,
         title,
@@ -154,7 +164,12 @@ export const fetchBlogPostById = async (id: string): Promise<BlogPost & { relate
         readingTime,
         seoDescription,
         "coverImage": coverImage.asset->url,
-        author->{name,title,avatar,bio}
+        author->{
+          name,
+          title,
+          bio,
+          "avatar": avatar.asset->url
+        }
       }
     }`;
     const post = await sanityClient.fetch(query, {id});
