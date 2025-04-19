@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { ArrowLeft, Calendar, Clock } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
@@ -94,17 +94,20 @@ const BlogDetail = () => {
     return (
       <div className="min-h-screen bg-white">
         <Navbar />
-        <div className="container mx-auto px-4 py-12">
-          {/* Simplified loading state to match potential new layout */}
-          <div className="max-w-3xl mx-auto animate-pulse space-y-8">
-            <div className="h-10 bg-gray-200 rounded w-3/4 mx-auto"></div> {/* Title */}
-            <div className="h-6 bg-gray-200 rounded w-1/2 mx-auto"></div> {/* Meta */}
-            <div className="h-80 bg-gray-200 rounded"></div> {/* Image */}
-            <div className="space-y-4 pt-4">
-              <div className="h-4 bg-gray-200 rounded"></div>
-              <div className="h-4 bg-gray-200 rounded"></div>
-              <div className="h-4 bg-gray-200 rounded w-5/6"></div>
-              <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+        <div className="container mx-auto px-4 py-16">
+          {/* Minimalist loading state */}
+          <div className="max-w-3xl mx-auto animate-pulse">
+            <div className="mb-12">
+              <div className="h-8 bg-gray-100 rounded w-24 mx-auto mb-6"></div> {/* Category */}
+              <div className="h-10 bg-gray-100 rounded w-3/4 mx-auto mb-4"></div> {/* Title */}
+              <div className="h-6 bg-gray-100 rounded w-1/3 mx-auto"></div> {/* Meta */}
+            </div>
+            <div className="h-[400px] bg-gray-100 rounded mb-12"></div> {/* Image */}
+            <div className="space-y-6 pt-4 mb-8">
+              <div className="h-4 bg-gray-100 rounded"></div>
+              <div className="h-4 bg-gray-100 rounded"></div>
+              <div className="h-4 bg-gray-100 rounded w-5/6"></div>
+              <div className="h-4 bg-gray-100 rounded w-3/4"></div>
             </div>
           </div>
         </div>
@@ -117,10 +120,10 @@ const BlogDetail = () => {
     return (
       <div className="min-h-screen bg-white">
         <Navbar />
-        <div className="container mx-auto px-4 py-12 text-center">
+        <div className="container mx-auto px-4 py-16 max-w-2xl text-center">
           <h1 className="text-2xl font-bold mb-4">Blog post not found</h1>
-          <p className="mb-8">The blog post you're looking for doesn't exist or has been removed.</p>
-          <Link to="/blog" className="btn-primary">
+          <p className="mb-8 text-gray-600">The blog post you're looking for doesn't exist or has been removed.</p>
+          <Link to="/blog" className="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors">
             Return to Blog
           </Link>
         </div>
@@ -142,66 +145,68 @@ const BlogDetail = () => {
       />
       <Navbar />
 
-      {/* Back Button - Minimalist */}
-      <div className="container mx-auto px-4 pt-20 mb-6 text-center sm:text-left"> {/* Centered on small screens */}
+      {/* Back navigation */}
+      <div className="container mx-auto px-4 md:px-8 pt-24 pb-6 max-w-3xl">
         <button 
           onClick={handleBackClick}
-          className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors"
+          className="inline-flex items-center text-sm text-gray-500 hover:text-primary transition-colors"
         >
           <ArrowLeft size={16} className="mr-1.5" />
           Back to all posts
         </button>
       </div>
 
-      {/* Use max-w-3xl for the main article container */}
-      <article className="container mx-auto px-4 max-w-3xl pb-16"> 
-        {/* Article header - Centered */}
-        <header className="mb-10 text-center"> {/* Center align header text */}
-          {/* Category Link (Optional, similar to fuwari) */}
+      {/* Article container */}
+      <article className="container mx-auto px-4 md:px-8 max-w-3xl pb-16">
+        {/* Article header - Simple and centered */}
+        <header className="mb-16 text-center">
+          {/* Category */}
           {post.category && (
-             <Link 
-               to={`/blog?category=${encodeURIComponent(post.category)}`} 
-               className="text-sm font-medium text-primary hover:underline mb-2 inline-block"
-             >
-               {post.category}
-             </Link>
-           )}
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-sans font-bold tracking-tight leading-tight mb-4">
+            <Link 
+              to={`/blog?category=${encodeURIComponent(post.category)}`} 
+              className="inline-block mb-3 px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 hover:bg-primary/10 hover:text-primary transition-colors"
+            >
+              {post.category}
+            </Link>
+          )}
+          
+          {/* Title */}
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-sans font-medium leading-tight mb-6">
             {post.title}
           </h1>
-          {/* Excerpt can be optional or styled differently if needed */}
-          {/* <h2 className="text-lg text-muted-foreground font-sans mb-6">
-            {post.excerpt}
-          </h2> */}
           
-          {/* Simplified Meta Info - Centered */}
-          <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground mt-4">
-             <span className="inline-flex items-center">
-               <Calendar size={14} className="mr-1.5 inline-block" />
-               <time dateTime={post.publishedAt}>{formattedDate}</time>
-             </span>
-             <span className="inline-flex items-center">
-               <Clock size={14} className="mr-1.5 inline-block" />
-               {post.readingTime} min read
-             </span>
-             {/* Author name can be here or just rely on the bottom component */}
-             {/* <span className="inline-flex items-center">
-               <User size={14} className="mr-1.5 inline-block" /> 
-               {post.author.name}
-             </span> */}
-           </div> 
+          {/* Meta info */}
+          <div className="flex flex-wrap items-center justify-center text-sm text-gray-500 gap-4 mt-6">
+            {/* Date */}
+            <span className="inline-flex items-center">
+              <Calendar size={14} className="mr-1.5 opacity-70" />
+              <time dateTime={post.publishedAt}>{formattedDate}</time>
+            </span>
+            
+            {/* Reading time */}
+            <span className="inline-flex items-center">
+              <Clock size={14} className="mr-1.5 opacity-70" />
+              {post.readingTime} min read
+            </span>
+            
+            {/* Author */}
+            <span className="inline-flex items-center">
+              <User size={14} className="mr-1.5 opacity-70" />
+              {post.author.name}
+            </span>
+          </div>
         </header>
 
-        {/* Cover image - Placed after header, potentially wider */}
+        {/* Cover image */}
         {post.coverImage && (
-          <div className="relative w-full mb-10 rounded-lg overflow-hidden shadow-md"> {/* Added rounded corners and shadow */}
+          <div className="relative w-full -mx-4 sm:mx-0 mb-16 overflow-hidden rounded-lg">
             <img 
               src={post.coverImage} 
               alt={`Cover image for ${post.title}`} 
-              className="w-full h-auto object-cover" // Use object-cover, remove max-height
+              className="w-full h-auto object-cover" 
               loading="eager"  
-              width={1200} // Adjust based on typical image size/ratio
-              height={630} // Standard OG image ratio
+              width={1200}
+              height={630}
             />
           </div>
         )}
@@ -211,16 +216,32 @@ const BlogDetail = () => {
           <BlogContent content={post.content} tags={post.tags} /> 
         </div>
 
-        {/* Separator and Author - Still within max-w-3xl */}
-        <Separator className="my-12" />
-        <BlogAuthor author={post.author} />
+        {/* Tags */}
+        {post.tags && post.tags.length > 0 && (
+          <div className="mt-12 flex flex-wrap gap-2">
+            {post.tags.map(tag => (
+              <Link 
+                key={tag}
+                to={`/blog?tag=${encodeURIComponent(tag)}`} 
+                className="px-3 py-1 bg-gray-100 text-gray-800 hover:bg-primary/10 hover:text-primary transition-colors rounded-full text-sm"
+              >
+                #{tag}
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {/* Author section */}
+        <div className="mt-16 pt-4 border-t border-gray-100">
+          <BlogAuthor author={post.author} />
+        </div>
         
-        {/* Related posts - Still within max-w-3xl */}
+        {/* Related posts */}
         {relatedPosts && relatedPosts.length > 0 && (
-          <>
-            <Separator className="my-12" /> 
+          <div className="mt-20">
+            <h2 className="text-2xl font-medium mb-8">More from AutoYield</h2>
             <RelatedPosts posts={relatedPosts} />
-          </>
+          </div>
         )}
       </article>
 
