@@ -144,7 +144,7 @@ const BlogCard = ({ post, className, style }: BlogCardProps) => {
 
             {/* Cover Image Section */}
             {hasCover && image && (
-                <div className="relative md:w-[35%] lg:w-[40%] xl:w-[35%] flex-shrink-0 order-1 md:order-2 h-52 z-0"> {/* Applied consistent height h-52 again */}
+                <div className="relative md:w-[35%] lg:w-[40%] xl:w-[35%] flex-shrink-0 order-1 md:order-2 h-fit  max-h-[275px] z-0"> 
                     <img
                         src={image}
                         alt={`Relevant visual for: ${title}`}
