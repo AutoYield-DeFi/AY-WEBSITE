@@ -37,16 +37,11 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
           "content": body,
           publishedAt,
           category,
-          tags,
+          "tags": tags[]->title,
           readingTime,
           seoDescription,
           "coverImage": coverImage.asset->url,
-          author->{
-            name,
-            title,
-            avatar,
-            bio
-          }
+          author->{name,title,avatar,bio}
         }`
       );
       setCachedPosts(posts);
@@ -122,7 +117,7 @@ export const fetchBlogPostById = async (id: string): Promise<BlogPost & { relate
       "content": body,
       publishedAt,
       category,
-      tags,
+      "tags": tags[]->title,
       readingTime,
       seoDescription,
       "coverImage": coverImage.asset->url,
@@ -135,7 +130,7 @@ export const fetchBlogPostById = async (id: string): Promise<BlogPost & { relate
         excerpt,
         publishedAt,
         category,
-        tags,
+        "tags": tags[]->title,
         readingTime,
         seoDescription,
         "coverImage": coverImage.asset->url,

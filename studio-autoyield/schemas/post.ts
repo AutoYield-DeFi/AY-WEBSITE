@@ -66,11 +66,16 @@ export default defineType({
       name: 'tags',
       title: 'Tags',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [
+        {
+          type: 'reference',
+          to: [{type: 'tag'}]
+        }
+      ],
       options: {
-        layout: 'tags', // Use tag input UI
+        layout: 'tags',
       },
-      description: 'Relevant keywords for the post',
+      description: 'Select one or more existing tags',
     }),
     defineField({
       name: 'relatedPosts',

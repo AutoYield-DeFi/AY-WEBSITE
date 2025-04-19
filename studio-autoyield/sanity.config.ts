@@ -3,6 +3,7 @@ import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 // Import the schemas we created
 import author from './schemas/author'
+import { tag } from './schemas/tag'
 import post from './schemas/post'
 
 export default defineConfig({
@@ -16,6 +17,6 @@ export default defineConfig({
 
   schema: {
     // Add our schemas to the types array
-    types: [author, post],
+    types: [author, tag, post],
   },
 })
