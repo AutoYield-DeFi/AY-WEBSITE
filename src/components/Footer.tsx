@@ -53,7 +53,7 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4 mt-4">
               <motion.a 
-                href="https://twitter.com" 
+                href="http://x.com/autoyield_io" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-primary-foreground/80 hover:text-primary-foreground transition-colors" 
