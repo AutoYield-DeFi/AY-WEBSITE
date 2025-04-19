@@ -9,6 +9,7 @@ import BlogCard from '@/components/blog/BlogCard';
 import { Button } from '@/components/ui/button';
 import { Heading } from '@/components/ui/typography';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Card } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
 
 const Blog = () => {
@@ -124,15 +125,28 @@ const Blog = () => {
         </header>
 
         {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 gap-x-8 gap-y-12 max-w-5xl mx-auto">          
+            <div className="mb-10 max-w-5xl mx-auto text-center">
+              <Skeleton className="h-8 w-1/3 mb-4 mx-auto" />
+            </div>
             {[1, 2, 3].map((i) => (
-              <div key={i} className="border rounded-lg p-4 h-[400px]">
-                <Skeleton className="h-48 w-full mb-4 rounded-lg" />
-                <Skeleton className="h-6 w-3/4 mb-2" />
-                <Skeleton className="h-4 w-full mb-4" />
-                <Skeleton className="h-4 w-5/6 mb-2" />
-                <Skeleton className="h-10 w-full mt-auto" />
-              </div>
+              <Card
+                key={i}
+                className="group flex flex-col md:flex-row w-full overflow-hidden relative border border-gray-200/80 rounded-lg shadow-sm"
+              >
+                <div className="flex flex-col p-5 md:p-6 flex-grow order-2 md:order-1 z-0">
+                  <Skeleton className="h-6 w-3/4 mb-3 rounded" />
+                  <div className="flex items-center gap-x-3 mb-3">
+                    <Skeleton className="h-4 w-20 rounded-md" />
+                    <Skeleton className="h-4 w-12 rounded-md" />
+                  </div>
+                  <Skeleton className="h-4 w-full mb-4 rounded" />
+                  <Skeleton className="h-10 w-32 mt-auto rounded" />
+                </div>
+                <div className="relative md:w-[35%] lg:w-[40%] xl:w-[35%] flex-shrink-0 order-1 md:order-2 max-h-[200px] md:max-h-none z-0">
+                  <Skeleton className="w-full h-full object-cover md:rounded-r-lg" />
+                </div>
+              </Card>
             ))}
           </div>
         ) : isError ? (
