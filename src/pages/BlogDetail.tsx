@@ -164,7 +164,7 @@ const BlogDetail = () => {
           {post.category && (
             <Link 
               to={`/blog?category=${encodeURIComponent(post.category)}`} 
-              className="inline-block mb-3 px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 hover:bg-primary/10 hover:text-primary transition-colors"
+              className="inline-block mb-3 px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 hover:bg-primary/10 hover:text-primary transition-colors capitalize"
             >
               {post.category}
             </Link>
