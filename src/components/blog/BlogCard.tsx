@@ -67,7 +67,7 @@ const BlogCard = ({ post, className, style }: BlogCardProps) => {
                     <Heading
                         as="h3"
                         size="lg"
-                        serif
+                        // serif prop removed again
                         className="text-gray-900 group-hover:text-primary transition-colors duration-200 line-clamp-3"
                     >
                         {title}
@@ -116,7 +116,7 @@ const BlogCard = ({ post, className, style }: BlogCardProps) => {
                 <Paragraph
                     muted
                     size="sm"
-                    className="mb-4 text-gray-700/90 line-clamp-3 flex-grow"
+                    className="mb-4 text-gray-700/90 line-clamp-3" // Removed flex-grow again
                 >
                     {description || ''}
                 </Paragraph>
@@ -144,7 +144,7 @@ const BlogCard = ({ post, className, style }: BlogCardProps) => {
 
             {/* Cover Image Section */}
             {hasCover && image && (
-                <div className="relative md:w-[35%] lg:w-[40%] xl:w-[35%] flex-shrink-0 order-1 md:order-2 max-h-[200px] md:max-h-none z-0">
+                <div className="relative md:w-[35%] lg:w-[40%] xl:w-[35%] flex-shrink-0 order-1 md:order-2 h-52 z-0"> {/* Applied consistent height h-52 again */}
                     <img
                         src={image}
                         alt={`Relevant visual for: ${title}`}

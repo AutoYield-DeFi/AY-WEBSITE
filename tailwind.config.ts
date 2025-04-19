@@ -20,7 +20,7 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ["Inter", "SF Pro Display", "SF Pro", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif"],
-				serif: ["Merriweather", "Georgia", "Cambria", "Times New Roman", "Times", "serif"],
+				serif: ["Georgia", "Cambria", "Times New Roman", "Times", "serif"],
 				mono: ["Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"],
 			},
 			colors: {

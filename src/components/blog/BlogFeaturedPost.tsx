@@ -32,7 +32,6 @@ const BlogFeaturedPost = ({ post }: BlogFeaturedPostProps) => {
           <Heading 
             as="h2"
             size="4xl"
-            serif
             className="tracking-tight leading-tight mb-4"
           >
             <Link to={`/blog/${post.slug}`} className="hover:text-primary transition-colors">

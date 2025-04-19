@@ -21,7 +21,7 @@ const BlogContent = ({ content, tags }: BlogContentProps) => {
 
   return (
     <div className="max-w-[700px] mx-auto">
-      <div className="prose prose-lg lg:prose-xl mx-auto font-serif">
+      <div className="prose prose-lg lg:prose-xl mx-auto font-sans">
         <PortableText value={content} />
       </div>
 

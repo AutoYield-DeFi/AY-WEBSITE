@@ -155,10 +155,10 @@ const BlogDetail = () => {
         {/* Article header */}
         <header className="container mx-auto px-4 mb-10">
           <div className="max-w-[800px] mx-auto">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold tracking-tight leading-tight mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-sans font-bold tracking-tight leading-tight mb-6">
               {post.title}
             </h1>
-            <h2 className="text-xl text-muted-foreground font-serif mb-8">
+            <h2 className="text-xl text-muted-foreground font-sans mb-8">
               {post.excerpt}
             </h2>
           

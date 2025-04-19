@@ -94,7 +94,7 @@ const Blog = () => {
 
       <div className="container mx-auto px-4 py-10 mt-16">
         <header className="mb-12 text-center max-w-2xl mx-auto">
-          <Heading as="h1" size="4xl" serif className="mb-4">
+          <Heading as="h1" size="4xl" className="mb-4">
             AutoYield Blog
           </Heading>
           {tagFilter ? (
@@ -137,7 +137,7 @@ const Blog = () => {
         ) : (
           <>            
             <div className="mb-10 max-w-5xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-serif font-bold mb-8">
+              <h2 className="text-2xl md:text-3xl font-sans font-bold mb-8">
                 {posts && posts.length > 0 
                   ? (tagFilter ? `Posts tagged with #${tagFilter}` : "Latest Articles") 
                   : "No articles found"

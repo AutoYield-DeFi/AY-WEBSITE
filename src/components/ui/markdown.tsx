@@ -92,16 +92,16 @@ export const Markdown = ({ children, className }: MarkdownProps) => {
             return <li className="mb-2">{children}</li>;
           },
           h1({ children }) {
-            return <h1 className="text-4xl font-serif font-bold mt-10 mb-6 leading-tight">{children}</h1>;
+            return <h1 className="text-4xl font-sans font-bold mt-10 mb-6 leading-tight">{children}</h1>;
           },
           h2({ children }) {
-            return <h2 className="text-3xl font-serif font-semibold mt-8 mb-4 leading-tight">{children}</h2>;
+            return <h2 className="text-3xl font-sans font-semibold mt-8 mb-4 leading-tight">{children}</h2>;
           },
           h3({ children }) {
-            return <h3 className="text-2xl font-serif font-semibold mt-6 mb-3 leading-tight">{children}</h3>;
+            return <h3 className="text-2xl font-sans font-semibold mt-6 mb-3 leading-tight">{children}</h3>;
           },
           h4({ children }) {
-            return <h4 className="text-xl font-serif font-medium mt-5 mb-3 leading-tight">{children}</h4>;
+            return <h4 className="text-xl font-sans font-medium mt-5 mb-3 leading-tight">{children}</h4>;
           },
           blockquote({ children }) {
             return <blockquote className="pl-4 italic border-l-4 border-gray-300 my-6 text-gray-700">{children}</blockquote>;
