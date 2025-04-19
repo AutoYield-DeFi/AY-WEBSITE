@@ -193,7 +193,7 @@ const BlogDetail = () => {
             <img 
               src={post.coverImage} 
               alt={post.title} 
-              className="w-full object-cover" 
+              className="w-full object-contain" 
               style={{ maxHeight: "600px", objectPosition: "center" }}
               loading="eager"  
               width={1600}
