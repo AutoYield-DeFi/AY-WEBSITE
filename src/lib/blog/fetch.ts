@@ -57,6 +57,26 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
 };
 
 /**
+ * Fetch blog posts filtered by category
+ */
+export const fetchBlogPostsByCategory = async (category: string): Promise<BlogPost[]> => {
+  try {
+    if (!category) return fetchBlogPosts();
+    console.log(`Fetching posts by category: ${category}`);
+    // Check cache or fetch all posts
+    let posts = getCachedPosts();
+    if (!posts || posts.length === 0) posts = await fetchBlogPosts();
+    // Filter by exact category match
+    const filtered = posts.filter(post => post.category === category);
+    console.log(`Found ${filtered.length} posts for category: ${category}`);
+    return filtered;
+  } catch (error) {
+    console.error(`Error in fetchBlogPostsByCategory for category ${category}:`, error);
+    return [];
+  }
+};
+
+/**
  * Fetch blog posts filtered by tag
  */
 export const fetchBlogPostsByTag = async (tag: string): Promise<BlogPost[]> => {

@@ -17,9 +17,9 @@ const RelatedPosts = ({ posts }: RelatedPostsProps) => {
             Related Articles
           </h2>
         </div>        <div className="flex flex-col gap-6">
-          {posts.map(post => (
-            <BlogCard 
-              key={post.id} 
+          {posts.map((post, idx) => (
+            <BlogCard
+              key={post.id || post.slug || idx}
               post={post}
               className="flex flex-col md:flex-row w-full"
             />

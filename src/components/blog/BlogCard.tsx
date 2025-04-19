@@ -20,7 +20,7 @@ const BlogCard = ({ post, className, style }: BlogCardProps) => {
     const title = post.title;
     const url = `/blog/${post.slug}`;
     const published = new Date(post.publishedAt);
-    const tags = post.tags || [];
+    const tags = post.tags?.filter(Boolean) || [];  // remove null/undefined entries
     const category = post.category;
     const image = post.coverImage;
     const description = post.excerpt;
@@ -88,9 +88,9 @@ const BlogCard = ({ post, className, style }: BlogCardProps) => {
                     {/* Tags */}
                     {tags && tags.length > 0 && (
                         <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1">
-                            {tags.slice(0, 3).map(tag => (
+                            {tags.slice(0, 3).map((tag, idx) => (
                                 <span
-                                    key={tag}
+                                    key={tag ?? idx}
                                     // Added group-hover styles to make tags react to card hover
                                     className="relative z-20 inline-block px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 hover:bg-primary/10 hover:text-primary group-hover:bg-primary/10 group-hover:text-primary transition-colors duration-150 text-xs font-medium cursor-pointer"
                                     onClick={(e) => handleTagClick(tag, e)}

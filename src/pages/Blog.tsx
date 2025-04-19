@@ -1,11 +1,10 @@
-
 import React, { useCallback, useMemo, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
-import { fetchBlogPosts, fetchBlogPostsByTag, clearBlogCaches } from '@/lib/blog';
+import { fetchBlogPosts, fetchBlogPostsByTag, fetchBlogPostsByCategory, clearBlogCaches } from '@/lib/blog';
 import BlogCard from '@/components/blog/BlogCard';
 import { Button } from '@/components/ui/button';
 import { Heading } from '@/components/ui/typography';
@@ -18,6 +17,7 @@ const Blog = () => {
   const { toast } = useToast();
   const searchParams = new URLSearchParams(location.search);
   const tagFilter = searchParams.get('tag');
+  const categoryFilter = searchParams.get('category');
   
   // Clear caches on initial load to ensure fresh data
   useEffect(() => {
@@ -26,20 +26,18 @@ const Blog = () => {
   
   // Query for blog posts with better error handling
   const { data: blogPosts, isLoading, isError, refetch } = useQuery({
-    queryKey: ['blogPosts', tagFilter || 'all'],
+    queryKey: ['blogPosts', categoryFilter || tagFilter || 'all'],
     queryFn: async () => {
-      console.log(`Fetching blog posts with tag: ${tagFilter || 'none'}`);
-      try {
-        const posts = tagFilter 
-          ? await fetchBlogPostsByTag(tagFilter) 
-          : await fetchBlogPosts();
-        
-        console.log(`Successfully fetched ${posts.length} posts`);
-        return posts;
-      } catch (error) {
-        console.error('Failed to fetch blog posts:', error);
-        throw error;
+      if (categoryFilter) {
+        console.log(`Fetching blog posts in category: ${categoryFilter}`);
+        return await fetchBlogPostsByCategory(categoryFilter);
       }
+      if (tagFilter) {
+        console.log(`Fetching blog posts with tag: ${tagFilter}`);
+        return await fetchBlogPostsByTag(tagFilter);
+      }
+      console.log('Fetching all blog posts');
+      return await fetchBlogPosts();
     },
     staleTime: 0, // Set to 0 to always fetch fresh data
     retry: 2,
@@ -82,9 +80,12 @@ const Blog = () => {
   return (
     <div className="min-h-screen bg-white">
       <SEO 
-        title={tagFilter 
-          ? `AutoYield Blog - Posts about ${tagFilter}` 
-          : "AutoYield Blog - DeFi Insights & Liquidity Management"
+        title={
+          categoryFilter
+            ? `AutoYield Blog - ${categoryFilter}`
+            : tagFilter
+            ? `AutoYield Blog - Posts about ${tagFilter}`
+            : 'AutoYield Blog - DeFi Insights & Liquidity Management'
         }
         description="Explore in-depth articles on DeFi, Solana ecosystem, liquidity management, and yield optimization strategies from the AutoYield team."
         keywords="DeFi blog, liquidity blog, Solana DeFi, AutoYield blog, cryptocurrency articles, yield optimization"
@@ -97,7 +98,16 @@ const Blog = () => {
           <Heading as="h1" size="4xl" className="mb-4">
             AutoYield Blog
           </Heading>
-          {tagFilter ? (
+          {categoryFilter ? (
+            <div className="space-y-4">
+              <p className="text-xl text-muted-foreground">
+                Showing posts in category <span className="text-primary font-medium">{categoryFilter}</span>
+              </p>
+              <Button variant="outline" size="sm" onClick={handleClearFilter}>
+                Clear filter
+              </Button>
+            </div>
+          ) : tagFilter ? (
             <div className="space-y-4">
               <p className="text-xl text-muted-foreground">
                 Showing posts tagged with <span className="text-primary font-medium">#{tagFilter}</span>
@@ -139,23 +149,33 @@ const Blog = () => {
             <div className="mb-10 max-w-5xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-sans font-bold mb-8">
                 {posts && posts.length > 0 
-                  ? (tagFilter ? `Posts tagged with #${tagFilter}` : "Latest Articles") 
-                  : "No articles found"
+                  ? (categoryFilter
+                      ? `Posts in ${categoryFilter}`
+                      : tagFilter
+                      ? `Posts tagged with #${tagFilter}`
+                      : 'Latest Articles'
+                    )
+                  : 'No articles found'
                 }
               </h2>
               
               {posts && posts.length > 0 ? (
                 <div className="grid grid-cols-1 gap-x-8 gap-y-12">
-                  {posts.map(post => (
-                    <BlogCard key={post.id} post={post} />
+                  {posts.map((post, idx) => (
+                    <BlogCard key={post.id ?? post.slug ?? idx} post={post} />
                   ))}
                 </div>
               ) : (
                 <div className="text-center py-12 border rounded-lg">
                   <p className="text-lg text-muted-foreground">
-                    {tagFilter ? `No articles found for tag "${tagFilter}".` : "No articles found."}
+                    {categoryFilter 
+                      ? `No articles found for category "${categoryFilter}".`
+                      : tagFilter 
+                      ? `No articles found for tag "${tagFilter}".`
+                      : "No articles found."
+                    }
                   </p>
-                  {tagFilter && (
+                  {(categoryFilter || tagFilter) && (
                     <Button variant="outline" className="mt-4" onClick={handleClearFilter}>
                       View all articles
                     </Button>
@@ -167,9 +187,7 @@ const Blog = () => {
             {posts && posts.length > 9 && (
               <div className="flex justify-center mt-12">
                 <Button asChild variant="outline" size="lg">
-                  <Link to="/blog/archive">
-                    See more articles
-                  </Link>
+                  <Link to="/blog/archive">See more articles</Link>
                 </Button>
               </div>
             )}
