@@ -98,25 +98,41 @@ export const fetchBlogPostsByTag = async (tag: string): Promise<BlogPost[]> => {
       return Promise.resolve(cachedResult);
     }
     
-    // Get all posts first (possibly from cache)
-    const allPosts = await fetchBlogPosts();
-    if (!allPosts || allPosts.length === 0) {
-      console.log('No posts found to filter by tag');
-      return [];
-    }
-    
-    // Filter by tag (case insensitive)
+    // Fetch posts directly filtered by tag using Sanity query
     const tagLower = tag.toLowerCase();
-    const filtered = allPosts.filter(post => 
-      post.tags && post.tags.some(t => t.toLowerCase() === tagLower)
-    );
+    const query = `*[_type == "post" && references(*[_type=="tag" && lower(title) == $tagLower]._id)] | order(publishedAt desc){
+      _id,
+      title,
+      "id": _id,
+      "slug": slug.current,
+      excerpt,
+      "content": body,
+      publishedAt,
+      category,
+      "tags": tags[]->title,
+      readingTime,
+      seoDescription,
+      "coverImage": coverImage.asset->url,
+      author->{
+        name,
+        title,
+        bio,
+        "avatar": avatar.asset->url
+      }
+    }`;
     
-    console.log(`Found ${filtered.length} posts for tag: ${tag}`);
-    
-    // Cache the result
-    setFilteredPostsCache(cacheKey, filtered);
-    
-    return filtered;
+    try {
+      const filteredPosts = await sanityClient.fetch(query, { tagLower });
+      console.log(`Found ${filteredPosts.length} posts for tag: ${tag}`);
+      
+      // Cache the result
+      setFilteredPostsCache(cacheKey, filteredPosts);
+      
+      return filteredPosts;
+    } catch (queryError) {
+      console.error(`Error fetching posts by tag "${tag}" from Sanity:`, queryError);
+      return []; // Return empty array on query error
+    }
   } catch (error) {
     console.error(`Error in fetchBlogPostsByTag for tag ${tag}:`, error);
     return [];
