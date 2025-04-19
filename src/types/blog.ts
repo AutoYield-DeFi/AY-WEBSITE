@@ -1,4 +1,3 @@
-
 import { PortableTextBlock } from '@portabletext/types'; // Import the type
 
 export interface Author {
@@ -24,4 +23,5 @@ export interface BlogPost {
   author: Author;
   seoDescription?: string;
   canonical?: string;
+  relatedPosts?: BlogPost[];
 }

@@ -1,4 +1,3 @@
-
 import { BlogPost } from '@/types/blog';
 import sanityClient from './sanityClient';
 import { 
@@ -107,29 +106,43 @@ export const fetchBlogPostsByTag = async (tag: string): Promise<BlogPost[]> => {
 /**
  * Fetch a single blog post by ID with type safety - optimized performance
  */
-export const fetchBlogPostById = async (id: string): Promise<BlogPost | undefined> => {
+export const fetchBlogPostById = async (id: string): Promise<BlogPost & { relatedPosts?: BlogPost[] } | undefined> => {
   if (!id) {
     console.log('No post ID provided');
     return undefined;
   }
-  
   try {
-    console.log(`Fetching blog post by id: ${id}`);
-    
-    // Try to use cached posts if available
-    let posts = getCachedPosts();
-    if (!posts || posts.length === 0) {
-      console.log('No cached posts, fetching all posts first');
-      posts = await fetchBlogPosts();
-    }
-    
-    if (!posts || posts.length === 0) {
-      console.log('No posts available to search by ID');
-      return undefined;
-    }
-    
-    const post = posts.find(post => post.id === id || post.slug === id);
-    console.log(`Post found for id ${id}:`, !!post);
+    console.log(`Fetching blog post (with related) by id/slug: ${id}`);
+    const query = `*[_type == "post" && (_id == $id || slug.current == $id)][0]{
+      _id,
+      title,
+      "id": _id,
+      "slug": slug.current,
+      excerpt,
+      "content": body,
+      publishedAt,
+      category,
+      tags,
+      readingTime,
+      seoDescription,
+      "coverImage": coverImage.asset->url,
+      author->{name,title,avatar,bio},
+      "relatedPosts": relatedPosts[]->{
+        _id,
+        title,
+        "id": _id,
+        "slug": slug.current,
+        excerpt,
+        publishedAt,
+        category,
+        tags,
+        readingTime,
+        seoDescription,
+        "coverImage": coverImage.asset->url,
+        author->{name,title,avatar,bio}
+      }
+    }`;
+    const post = await sanityClient.fetch(query, {id});
     return post;
   } catch (error) {
     console.error(`Error fetching blog post by id ${id}:`, error);

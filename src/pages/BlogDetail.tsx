@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import { Separator } from '@/components/ui/separator';
-import { fetchBlogPostById, fetchRelatedPosts } from '@/lib/blog';
+import { fetchBlogPostById } from '@/lib/blog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useToast } from '@/components/ui/use-toast';
 import BlogAuthor from '@/components/blog/BlogAuthor';
@@ -26,11 +26,8 @@ const BlogDetail = () => {
     retry: 2,
   });
 
-  const { data: relatedPosts = [] } = useQuery({
-    queryKey: ['relatedPosts', post?.category, slug],
-    queryFn: () => fetchRelatedPosts(post?.category as string, slug as string),
-    enabled: !!post && !!post.category,
-  });
+  // Use relatedPosts loaded on the post document via Sanity schema references
+  const relatedPosts = post?.relatedPosts ?? [];
 
   // Log errors for debugging
   React.useEffect(() => {
@@ -48,7 +45,7 @@ const BlogDetail = () => {
       month: 'long',
       day: 'numeric'
     }).format(publishDate);
-  }, [post?.publishedAt]);
+  }, [post]);
 
   // Generate BlogPosting structured data for SEO
   const blogPostingJsonLd = post ? {

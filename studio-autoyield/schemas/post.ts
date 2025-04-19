@@ -73,6 +73,25 @@ export default defineType({
       description: 'Relevant keywords for the post',
     }),
     defineField({
+      name: 'relatedPosts',
+      title: 'Related Posts',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{type: 'post'}],
+          options: {
+            filter: ({document}) => ({
+              filter: '_type == "post" && _id != $id',
+              params: {id: document._id}
+            })
+          }
+        }
+      ],
+      description: 'Select up to 3 related posts',
+      validation: Rule => Rule.max(3)
+    }),
+    defineField({
       name: 'excerpt',
       title: 'Excerpt',
       type: 'text',
