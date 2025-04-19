@@ -238,8 +238,7 @@ const BlogDetail = () => {
         
         {/* Related posts */}
         {relatedPosts && relatedPosts.length > 0 && (
-          <div className="mt-20">
-            <h2 className="text-2xl font-medium mb-8">More from AutoYield</h2>
+          <div className="mt-20">          
             <RelatedPosts posts={relatedPosts} />
           </div>
         )}

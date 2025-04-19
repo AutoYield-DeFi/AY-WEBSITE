@@ -9,16 +9,20 @@ interface RelatedPostsProps {
 
 const RelatedPosts = ({ posts }: RelatedPostsProps) => {
   if (posts.length === 0) return null;
-
   return (
-    <div className="mt-20 bg-gray-50 py-16">
+    <div className="mt-12 mb-6">
       <div className="container mx-auto px-4">
-        <h2 className="text-2xl font-sans font-bold mb-8 max-w-5xl mx-auto">
-          More from AutoYield Blog
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="relative block mb-6">
+          <h2 className="text-2xl font-sans font-bold">
+            Related Articles
+          </h2>
+        </div>        <div className="flex flex-col gap-6">
           {posts.map(post => (
-            <BlogCard key={post.id} post={post} />
+            <BlogCard 
+              key={post.id} 
+              post={post}
+              className="flex flex-col md:flex-row w-full"
+            />
           ))}
         </div>
       </div>
