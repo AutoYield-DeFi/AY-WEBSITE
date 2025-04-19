@@ -95,14 +95,16 @@ const BlogDetail = () => {
       <div className="min-h-screen bg-white">
         <Navbar />
         <div className="container mx-auto px-4 py-12">
-          <div className="max-w-3xl mx-auto animate-pulse space-y-6">
-            <div className="h-8 bg-gray-200 rounded w-3/4"></div>
-            <div className="h-6 bg-gray-200 rounded w-1/2"></div>
-            <div className="h-64 bg-gray-200 rounded"></div>
-            <div className="space-y-4">
+          {/* Simplified loading state to match potential new layout */}
+          <div className="max-w-3xl mx-auto animate-pulse space-y-8">
+            <div className="h-10 bg-gray-200 rounded w-3/4 mx-auto"></div> {/* Title */}
+            <div className="h-6 bg-gray-200 rounded w-1/2 mx-auto"></div> {/* Meta */}
+            <div className="h-80 bg-gray-200 rounded"></div> {/* Image */}
+            <div className="space-y-4 pt-4">
               <div className="h-4 bg-gray-200 rounded"></div>
               <div className="h-4 bg-gray-200 rounded"></div>
               <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+              <div className="h-4 bg-gray-200 rounded w-3/4"></div>
             </div>
           </div>
         </div>
@@ -140,77 +142,86 @@ const BlogDetail = () => {
       />
       <Navbar />
 
-      <article className="pt-20 pb-16">
-        {/* Breadcrumb */}
-        <div className="container mx-auto px-4 mb-6">
-          <button 
-            onClick={handleBackClick}
-            className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <ArrowLeft size={16} className="mr-2" />
-            Back to all posts
-          </button>
-        </div>
+      {/* Back Button - Minimalist */}
+      <div className="container mx-auto px-4 pt-20 mb-6 text-center sm:text-left"> {/* Centered on small screens */}
+        <button 
+          onClick={handleBackClick}
+          className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors"
+        >
+          <ArrowLeft size={16} className="mr-1.5" />
+          Back to all posts
+        </button>
+      </div>
 
-        {/* Article header */}
-        <header className="container mx-auto px-4 mb-10">
-          <div className="max-w-[800px] mx-auto">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-sans font-bold tracking-tight leading-tight mb-6">
-              {post.title}
-            </h1>
-            <h2 className="text-xl text-muted-foreground font-sans mb-8">
-              {post.excerpt}
-            </h2>
+      {/* Use max-w-3xl for the main article container */}
+      <article className="container mx-auto px-4 max-w-3xl pb-16"> 
+        {/* Article header - Centered */}
+        <header className="mb-10 text-center"> {/* Center align header text */}
+          {/* Category Link (Optional, similar to fuwari) */}
+          {post.category && (
+             <Link 
+               to={`/blog?category=${encodeURIComponent(post.category)}`} 
+               className="text-sm font-medium text-primary hover:underline mb-2 inline-block"
+             >
+               {post.category}
+             </Link>
+           )}
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-sans font-bold tracking-tight leading-tight mb-4">
+            {post.title}
+          </h1>
+          {/* Excerpt can be optional or styled differently if needed */}
+          {/* <h2 className="text-lg text-muted-foreground font-sans mb-6">
+            {post.excerpt}
+          </h2> */}
           
-            <div className="flex items-center">
-              <Avatar className="h-12 w-12 mr-4 border">
-                <AvatarImage src={post.author.avatar} alt={post.author.name} />
-                <AvatarFallback>{post.author.name.charAt(0)}</AvatarFallback>
-              </Avatar>
-              <div>
-                <div className="font-medium">{post.author.name}</div>
-                <div className="text-sm text-muted-foreground flex items-center gap-4">
-                  <span>{post.author.title}</span>
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <span className="inline-flex items-center">
-                      <Calendar size={14} className="mr-1 inline-block" />
-                      <time dateTime={post.publishedAt}>{formattedDate}</time>
-                    </span>
-                    <span className="inline-flex items-center">
-                      <Clock size={14} className="mr-1 inline-block" />
-                      {post.readingTime} min read
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* Simplified Meta Info - Centered */}
+          <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground mt-4">
+             <span className="inline-flex items-center">
+               <Calendar size={14} className="mr-1.5 inline-block" />
+               <time dateTime={post.publishedAt}>{formattedDate}</time>
+             </span>
+             <span className="inline-flex items-center">
+               <Clock size={14} className="mr-1.5 inline-block" />
+               {post.readingTime} min read
+             </span>
+             {/* Author name can be here or just rely on the bottom component */}
+             {/* <span className="inline-flex items-center">
+               <User size={14} className="mr-1.5 inline-block" /> 
+               {post.author.name}
+             </span> */}
+           </div> 
         </header>
 
-        {/* Cover image */}
+        {/* Cover image - Placed after header, potentially wider */}
         {post.coverImage && (
-          <div className="relative w-full mb-12 max-h-[600px] overflow-hidden">
+          <div className="relative w-full mb-10 rounded-lg overflow-hidden shadow-md"> {/* Added rounded corners and shadow */}
             <img 
               src={post.coverImage} 
-              alt={post.title} 
-              className="w-full object-contain" 
-              style={{ maxHeight: "600px", objectPosition: "center" }}
+              alt={`Cover image for ${post.title}`} 
+              className="w-full h-auto object-cover" // Use object-cover, remove max-height
               loading="eager"  
-              width={1600}
-              height={800}
+              width={1200} // Adjust based on typical image size/ratio
+              height={630} // Standard OG image ratio
             />
           </div>
         )}
 
-        {/* Article body */}
-        <div className="container mx-auto px-4">
-          <BlogContent content={post.content} tags={post.tags} />
-          <Separator className="my-12" />
-          <BlogAuthor author={post.author} />
+        {/* Article body - Uses the same max-w-3xl as the parent article */}
+        <div className="prose prose-lg max-w-none dark:prose-invert mx-auto"> {/* Use Tailwind typography plugin styles */}
+          <BlogContent content={post.content} tags={post.tags} /> 
         </div>
 
-        {/* Related posts */}
-        <RelatedPosts posts={relatedPosts} />
+        {/* Separator and Author - Still within max-w-3xl */}
+        <Separator className="my-12" />
+        <BlogAuthor author={post.author} />
+        
+        {/* Related posts - Still within max-w-3xl */}
+        {relatedPosts && relatedPosts.length > 0 && (
+          <>
+            <Separator className="my-12" /> 
+            <RelatedPosts posts={relatedPosts} />
+          </>
+        )}
       </article>
 
       <Footer />

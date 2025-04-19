@@ -1,4 +1,6 @@
 
+import { PortableTextBlock } from '@portabletext/types'; // Import the type
+
 export interface Author {
   name: string;
   title: string;
@@ -12,7 +14,7 @@ export interface BlogPost {
   slug: string;
   title: string;
   excerpt: string;
-  content: string;
+  content: PortableTextBlock[]; // Update the type here
   publishedAt: string;
   updatedAt?: string;
   category: string;
