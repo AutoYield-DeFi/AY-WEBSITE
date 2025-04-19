@@ -214,9 +214,9 @@ const BlogDetail = () => {
         </div>
 
         {/* Tags */}
-        {post.tags && post.tags.length > 0 && (
+{post.tags?.filter(tag => tag?.trim()).length > 0 && (
           <div className="mt-12 flex flex-wrap gap-2">
-            {post.tags.map(tag => (
+{post.tags.filter(tag => tag?.trim()).map(tag => (
               <Link 
                 key={tag}
                 to={`/blog?tag=${encodeURIComponent(tag)}`} 
