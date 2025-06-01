@@ -1,24 +1,36 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 
 const Legal = () => {
+  const [searchParams] = useSearchParams();
+  const [activeTab, setActiveTab] = useState('terms');
+
+  useEffect(() => {
+    const tab = searchParams.get('tab');
+    if (tab && ['terms', 'privacy', 'disclaimer'].includes(tab)) {
+      setActiveTab(tab);
+    }
+  }, [searchParams]);
+
   return (
     <div className="min-h-screen flex flex-col">
       <SEO 
         title="Legal Information | AutoYield"
         description="Legal information, privacy policy, terms of service, and disclaimers for AutoYield's liquidity management platform on Solana."
         keywords="legal, privacy policy, terms of service, disclaimer, AutoYield, DeFi risks"
+        canonical="https://autoyield.io/legal"
       />
       <Navbar />
       
       <main className="flex-grow container mx-auto px-4 py-12 md:py-20">
         <h1 className="text-3xl md:text-4xl font-bold mb-10">Legal Information</h1>
         
-        <Tabs defaultValue="terms" className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-3 mb-8">
             <TabsTrigger value="terms">Terms of Service</TabsTrigger>
             <TabsTrigger value="privacy">Privacy Policy</TabsTrigger>

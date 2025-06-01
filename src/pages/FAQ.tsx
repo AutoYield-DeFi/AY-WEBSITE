@@ -59,11 +59,11 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <SEO 
+    <div className="min-h-screen bg-background">      <SEO 
         title="Frequently Asked Questions | AutoYield"
         description="Find answers to common questions about AutoYield's AI-powered liquidity management platform on Solana, features, security, and how to get started."
         keywords="AutoYield FAQ, liquidity management questions, DeFi questions, Solana liquidity, DLMM, yield optimization FAQs"
+        canonical="https://autoyield.io/faq"
       />
       <Navbar />
       

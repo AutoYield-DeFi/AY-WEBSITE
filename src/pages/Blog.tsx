@@ -79,8 +79,7 @@ const Blog = () => {
   });
   
   return (
-    <div className="min-h-screen bg-white">
-      <SEO 
+    <div className="min-h-screen bg-white">      <SEO 
         title={
           categoryFilter
             ? `AutoYield Blog - ${categoryFilter}`
@@ -91,6 +90,7 @@ const Blog = () => {
         description="Explore in-depth articles on DeFi, Solana ecosystem, liquidity management, and yield optimization strategies from the AutoYield team."
         keywords="DeFi blog, liquidity blog, Solana DeFi, AutoYield blog, cryptocurrency articles, yield optimization"
         ogImage="/images/blog-og-image.png"
+        canonical="https://autoyield.io/blog"
       />
       <Navbar />
 

@@ -11,11 +11,11 @@ import { Heading, Paragraph, Label } from '@/components/ui/typography';
 
 const AboutUs = () => {
   return (
-    <div className="min-h-screen bg-white">
-      <SEO 
+    <div className="min-h-screen bg-white">      <SEO 
         title="Our Story | AutoYield" 
         description="We're a team of engineers who experienced the pain of liquidity provision firsthand and built AutoYield to make it accessible to everyone." 
-        keywords="AutoYield team, Solana DeFi, liquidity management, LP automation, DeFi solutions, AI liquidity" 
+        keywords="AutoYield team, Solana DeFi, liquidity management, LP automation, DeFi solutions, AI liquidity"
+        canonical="https://autoyield.io/about"
       />
       <Navbar />
       

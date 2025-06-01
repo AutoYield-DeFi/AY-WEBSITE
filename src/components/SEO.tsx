@@ -28,7 +28,15 @@ const SEO = ({
   const siteTitle = "AutoYield";
   const fullTitle = title.includes(siteTitle) ? title : `${title} | ${siteTitle}`;
   const baseUrl = import.meta.env.PROD ? "https://autoyield.io" : "http://localhost:8080";
-  const fullCanonical = canonical ? canonical : undefined;
+  
+  // Generate canonical URL
+  // If no canonical is provided, use the current pathname without query parameters
+  const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
+  const defaultCanonical = `${baseUrl}${currentPath}`;
+  const fullCanonical = canonical ? 
+    (canonical.startsWith('http') ? canonical : `${baseUrl}${canonical}`) : 
+    defaultCanonical;
+  
   const safeOgImage = ogImage || "/og-image.png";
   const fullOgImage = safeOgImage.startsWith("http") ? safeOgImage : `${baseUrl}${safeOgImage}`;
 
@@ -47,18 +55,16 @@ const SEO = ({
   };
 
   return (
-    <Helmet>
-      {/* Basic Meta Tags - KEEP THESE */}
+    <Helmet>      {/* Basic Meta Tags - KEEP THESE */}
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       {keywords && <meta name="keywords" content={keywords} />}
-      {canonical && <link rel="canonical" href={fullCanonical} />}
-      {noindex && <meta name="robots" content="noindex,nofollow" />}
-
-      {/* Open Graph / Facebook - KEEP THESE */}
+      {/* Always include canonical tag for better SEO */}
+      <link rel="canonical" href={fullCanonical} />
+      {noindex && <meta name="robots" content="noindex,nofollow" />}      {/* Open Graph / Facebook - KEEP THESE */}
       <meta property="og:type" content={ogType} />
       <meta property="og:site_name" content={siteTitle} />
-      {fullCanonical && <meta property="og:url" content={fullCanonical} />}
+      <meta property="og:url" content={fullCanonical} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={fullOgImage} />
@@ -66,7 +72,7 @@ const SEO = ({
       {/* Twitter - KEEP THESE */}
       <meta property="twitter:card" content={twitterCard} />
       <meta property="twitter:site" content="@AutoYield" />
-      {fullCanonical && <meta property="twitter:url" content={fullCanonical} />}
+      <meta property="twitter:url" content={fullCanonical} />
       <meta property="twitter:title" content={fullTitle} />
       <meta property="twitter:description" content={description} />
       <meta property="twitter:image" content={fullOgImage} />

@@ -1,0 +1,17 @@
+# Redirect www to non-www (301 permanent redirects)
+https://www.autoyield.io/* https://autoyield.io/:splat 301!
+
+# Force HTTPS for HTTP requests
+http://autoyield.io/* https://autoyield.io/:splat 301!
+http://www.autoyield.io/* https://autoyield.io/:splat 301!
+
+# Handle case sensitivity in URL parameters (e.g., ?Tab=privacy vs ?tab=privacy)
+# All query parameters with Tab should redirect to tab
+/legal?Tab=:tab /legal?tab=:tab 301!
+/legal?Tab=:tab* /legal?tab=:tab 301!
+
+# Ensure trailing slash consistency (remove trailing slashes)
+/*/ /:splat 301!
+
+# Fallback for SPA routing
+/* /index.html 200

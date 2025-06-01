@@ -10,11 +10,11 @@ import RoadmapCTA from '@/components/roadmap/RoadmapCTA';
 
 const Roadmap = () => {
   return (
-    <div className="min-h-screen bg-white">
-      <SEO 
+    <div className="min-h-screen bg-white">      <SEO 
         title="Product Roadmap | AutoYield"
         description="Explore AutoYield's 12-month roadmap for automated liquidity management on Solana."
         keywords="AutoYield roadmap, Solana DeFi, product timeline, liquidity management"
+        canonical="https://autoyield.io/roadmap"
       />
       <Navbar />
       
