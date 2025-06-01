@@ -1,17 +1,20 @@
-# Redirect www to non-www (301 permanent redirects)
-https://www.autoyield.io/* https://autoyield.io/:splat 301!
+# Cloudflare Pages _redirects file
+# Note: Domain-level redirects (www to non-www) should be configured in Cloudflare dashboard
 
-# Force HTTPS for HTTP requests
-http://autoyield.io/* https://autoyield.io/:splat 301!
-http://www.autoyield.io/* https://autoyield.io/:splat 301!
+# Ensure trailing slash consistency (remove trailing slashes for directories)
+/about/ /about 301
+/blog/ /blog 301
+/docs/ /docs 301
+/faq/ /faq 301
+/glossary/ /glossary 301
+/roadmap/ /roadmap 301
+/legal/ /legal 301
+/waitlist/ /waitlist 301
 
-# Handle case sensitivity in URL parameters (e.g., ?Tab=privacy vs ?tab=privacy)
-# All query parameters with Tab should redirect to tab
-/legal?Tab=:tab /legal?tab=:tab 301!
-/legal?Tab=:tab* /legal?tab=:tab 301!
+# Handle case sensitivity in Legal page parameters
+/legal?Tab=terms /legal?tab=terms 301
+/legal?Tab=privacy /legal?tab=privacy 301
+/legal?Tab=disclaimer /legal?tab=disclaimer 301
 
-# Ensure trailing slash consistency (remove trailing slashes)
-/*/ /:splat 301!
-
-# Fallback for SPA routing
+# Fallback for SPA routing (must be last)
 /* /index.html 200
